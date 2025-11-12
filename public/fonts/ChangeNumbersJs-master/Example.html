@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Example ChangeNumbers.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../fonts/ChangeNumbersJs-master/ChangeNumbers.min.js"></script>
+
+</head>
+	<body>
+		<h1>Example ChangeNumbers.js</h1>
+		<br><br>
+		<table width="500">
+			<tr>
+				<td>
+					Enter Text : 
+				</td>
+				<td>
+					<input id="number" type="text" name="number">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Choose From :
+				</td>
+				<td>
+					<select name="from" id="from">
+						<option value="auto">All Number(Auto)</option>
+						<option value="fa">Farsi(Persian)</option>
+						<option value="ar">Arabic</option>
+						<option value="en">English</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Choose Target :
+				</td>
+				<td>
+					<select name="target" id="target">
+						<option value="fa">Farsi(Persian)</option>
+						<option value="ar">Arabic</option>
+						<option value="en">English</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<button onclick="test();">Change</button>
+		<br>
+		Result :
+		<div id="result"></div>
+		<script type="text/javascript">
+		var result=document.querySelector("#result");
+		function test()
+		{
+			var text=document.querySelector("#number");
+			var value=text.value;
+			var from=document.querySelector("#from").value;
+			var target=document.querySelector("#target").value;
+			if(from == "auto")
+			{
+				value=numbers.check(value,target);
+			}
+			else
+			{
+				value=numbers.check_from(value,from,target);
+			}
+			result.innerHTML=value;
+		}
+		</script>
+		 
+	</body>
+</html>

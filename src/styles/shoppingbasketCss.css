@@ -1,0 +1,229 @@
+#headerr {
+  padding-top: 8px;
+  padding-bottom: 15px;
+}
+
+#navarbala {
+  padding-bottom: 10px;
+}
+
+#frmsearch {
+  flex: 1 1 auto;
+}
+
+.labelcreator {
+  padding: 0px 5px;
+}
+
+.labelcreator.absol {
+  position: absolute;
+  right: 10px;
+  top: -10px;
+  background-color: white;
+}
+
+input.textcreator {
+  height: 50px;
+  border: 1px solid silver;
+  border-radius: 13px;
+}
+
+input.textcreator:focus {
+  outline: none !important;
+  border: 1px solid silver;
+  box-shadow: none;
+}
+
+#chooseDeliveryTimeInSabadSafheInMobile #collapseBtnInSabadSafhe:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+#chooseDeliveryTimeInSabadSafheInMobile
+  #collapseBtnInSabadSafhe
+  .forCollapseIcon:after {
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 700;
+  font-size: 105%;
+  margin-left: 5px;
+}
+
+#chooseDeliveryTimeInSabadSafheInMobile
+  #collapseBtnInSabadSafhe.collapsed
+  .forCollapseIcon:after {
+  content: "\f106";
+}
+/* zare_nk_040522_added_st */
+@media screen and (min-width: 576px) {
+  #CurrentImg {
+    width: 180px;
+    height: 180px;
+    /* height: fit-content; */
+  }
+}
+/* zare_nk_040522_added_end */
+
+@media screen and (min-width: 768px) {
+  /* zare_nk_040522_added_st */
+  #CurrentImg {
+    width: 270px;
+    height: fit-content;
+  }
+  /* zare_nk_040522_added_end */
+
+  /*zare_nk_1219 display: none;*/
+  .tagsContInprofilesDetUp {
+    flex: 0 0 100%;
+  }
+
+  .IntagsContInprofilesDetUp {
+    /*zare_nk_1219 display: none;*/
+    flex: 1 1 auto;
+  }
+
+  #emaleBonBtn {
+    width: 200px;
+  }
+
+  /* .IntagsContInprofilesDetUp:nth-child(odd) {
+        margin-left: 10px;
+        color: red;
+   }*/
+  .IntagsContInprofilesDetUp:nth-child(1) {
+    margin-left: 10px;
+    /*color: red;*/
+  }
+
+  .IntagsContInprofilesDetUp:nth-child(2) {
+    margin-left: 10px;
+    /*color: red;*/
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #sabadSafheHeader {
+    display: flex;
+  }
+
+  #listGroupAccordionInSafhe {
+    flex-flow: row;
+    padding-left: 5px;
+    /*zare_nk_0806_commented*/
+    padding: 5px;
+    /*zare_nk_0806_added*/
+  }
+
+  #sabadHeaderAndItemsCont {
+    margin-left: 5px;
+  }
+
+  #footerInSabadSafheContent,
+  #footerInSabadSafheContent-checkout {
+    display: flex;
+  }
+
+  #chooseDeliveryTimeInSabadSafheInMobileCont,
+  #chooseDeliveryTimeInSabadSafheInMobileCont-checkout {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #sabadSafheHeader {
+    display: none;
+  }
+
+  #listGroupAccordionInSafhe {
+    flex-flow: column;
+  }
+
+  #sabadHeaderAndItemsCont {
+    margin-bottom: 10px;
+  }
+
+  #footerInSabadSafheContent,
+  #footerInSabadSafheContent-checkout {
+    display: none;
+  }
+
+  #chooseDeliveryTimeInSabadSafheInMobileCont
+
+    /*, #chooseDeliveryTimeInSabadSafheInMobileCont-checkout*/ {
+    display: flex;
+  }
+
+  #sabadSafhe {
+    padding-bottom: 50px;
+  }
+
+  #chooseDeliveryTimeInSabadSafheInMobileCont,
+  #chooseDeliveryTimeInSabadSafheInMobileCont-checkout {
+    padding: 5px 5px 5px 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #chooseDeliveryTimeInSabadSafheInMobileCont,
+  #chooseDeliveryTimeInSabadSafheInMobileCont-checkout {
+    /*padding: 5px 5px 60px 5px;*/
+    /*zare_nk_0806_commented*/
+    padding: 5px;
+    /*zare_nk_0806_added*/
+  }
+
+  .tagsContInprofilesDetUp {
+    /*zare_nk_1219 display: none;*/
+    flex: 0 0 100%;
+  }
+
+  .IntagsContInprofilesDetUp {
+    /*zare_nk_1219 display: none;*/
+    flex: 1 1 100%;
+  }
+
+  #emaleBonBtn {
+    width: 100%;
+  }
+}
+/* zare_nk_040522_added_st */
+@media screen and (max-width: 576px) {
+  #CurrentImg {
+    width: 150px;
+    height: fit-content;
+  }
+}
+/* zare_nk_040522_added_end */
+
+#LayOutFooterAndRightsReserved {
+  display: none;
+}
+
+.addressUpdateBtn {
+  border: 1px solid silver;
+}
+
+.addressUpdateBtn:hover {
+  border: 1px solid #dcdcdc;
+}
+
+.noePardakhtChoose {
+  background-color: white;
+}
+
+.buttonHover {
+  margin: 0px;
+}
+
+.dataAndWeekInZamanbandiModal {
+  margin: 10px 0px 20px 0px;
+}
+
+.slideItemsInZamanbandiModal {
+}
+
+.slideItemsInZamanbandiModal label {
+  flex: 0 0 auto;
+  height: 60px;
+  padding: 0px 10px;
+}

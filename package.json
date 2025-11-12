@@ -2,21 +2,37 @@
   "name": "next-js-example",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
+  "scripts": { 
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@tensorflow-models/mobilenet": "^2.1.1",
+    "@tensorflow/tfjs-node": "^4.22.0",
+    "@zxing/browser": "^0.1.5",
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^5.3.6",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^146.0.0",
+    "jose": "^6.0.11",
+    "jsonwebtoken": "^8.5.1",
+    "msnodesqlv8": "^4.5.0",
+    "mssql": "^11.0.1",
+    "next": "15.1.6",
+    "next-auth": "^4.24.11",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/bootstrap": "^5.2.10",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react": "^19",
-    "@types/react-dom": "^19"
+    "@types/react-dom": "^19",
+    "typescript": "^5"
   }
 }
