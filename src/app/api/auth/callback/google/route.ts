@@ -19,7 +19,8 @@ export async function GET(req: NextRequest) {
       // return NextResponse.json({ error: "No code provided: "+error }, { status: 400 }); //comment kardim ta az raveshe new NextResponse estefadeh konim ke addresse /login ra dar headere new NextResponse gharar bedim na inke az dastoore redirect estefadeh konim ke cookie ha ra pak mikoneh)
       let Location = "/login"; // پیشفرض وب
       if (state === "mobile") {
-        Location = `myapp://auth/callback`;
+        // Location = `myapp://auth/callback`;  //zare_nk_040929_commented
+        Location = `https://testotm.sarinmehr.com/mobile-redirect?error=google_login_failed`;  //zare_nk_040929_added
       }
       const nResponse = new NextResponse(null, {
         status: 302, // تنظیم وضعیت HTTP
@@ -52,7 +53,8 @@ export async function GET(req: NextRequest) {
     if (resultFromGoogleapis.id_token == undefined) { 
       let Location = "/login"; // پیشفرض وب
       if (state === "mobile") {
-        Location = `myapp://auth/callback`;
+        // Location = `myapp://auth/callback`;  //zare_nk_040929_commented
+        Location = `https://testotm.sarinmehr.com/mobile-redirect?error=google_login_failed`;  //zare_nk_040929_added
       } 
       const nResponse = new NextResponse(null, {
         status: 302, // تنظیم وضعیت HTTP
@@ -94,7 +96,8 @@ export async function GET(req: NextRequest) {
     //zare_nk_031220_rahe2_st(karbord dare inja,chon hedayat be /folder02 ra bedoone dastoore redirect va dar headers tanzim kardim)
     let redirectUrl = "/redirecting"; // پیشفرض وب
     if (state === "mobile") {
-      redirectUrl = `myapp://auth/callback?token=${token}`; // redirect به اپ موبایل
+      // redirectUrl = `myapp://auth/callback?token=${token}`; // redirect به اپ موبایل   //zare_nk_040929_commented
+      redirectUrl = `https://testotm.sarinmehr.com/redirect-mobile?token=${token}`;  //zare_nk_040929_added
     }
     const nResponse = new NextResponse(null, {
       status: 302, // تنظیم وضعیت HTTP

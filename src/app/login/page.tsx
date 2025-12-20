@@ -6,8 +6,8 @@ import Styles from "@/styles/components/login.module.css";
 import { RefObject } from "react";
 import { ReactNode } from "react";
 import { ChangeEvent } from "react";
-import jwt from "jsonwebtoken"; //zare_nk_040603_added 
-import { JwtPayload } from "jsonwebtoken";  //zare_nk_040603_added 
+import jwt from "jsonwebtoken"; //zare_nk_040603_added
+import { JwtPayload } from "jsonwebtoken";  //zare_nk_040603_added
 
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
@@ -19,7 +19,7 @@ function getCookie(name: any) {
     if (!value) throw new Error("Invalid cookie format");
     return decodeURIComponent(value);
   }
-  return null; // اگر کوکی پیدا نشد
+  return null; //اگر کوکی پیدا نشد
 }
 
 type FirstPageProps = {
@@ -471,7 +471,7 @@ export default function Toolbar() {
     }
   }
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = () => {   //zare_nk_040925_tahlilshe
     alert("handleGoogleLogin");
     window.location.href = `/api/auth/google`; // هدایت به گوگل  //zare_nk_040422_commented
     // window.location.href = `https://testotm.sarinmehr.com/api/auth/google`; //zare_nk_040422_added
@@ -533,15 +533,15 @@ export default function Toolbar() {
         // console.log("040530-03-token: " + JSON.stringify(decoded));
         ////zare_nk_040603_added_end        
 
-        try {
+        try {  
           const response = await fetch("/api/auth/verifyToken", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token }),
           });
-          const data = await response.json();
+          const data = await response.json(); 
           if (response.ok) {
-            console.log("decodedToken: " + JSON.stringify(data.decoded));
+            console.log("zare_nk_040925-decodedToken: " + JSON.stringify(data.decoded));
             // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString(); // 3 ساعت بعد //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam)   //zare_nk_040305_updated(dasti ra az 3 be 30 tagheir dadam)
             const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
             //  const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
@@ -560,7 +560,7 @@ export default function Toolbar() {
         } catch (error) {
           document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
           document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-          console.error("❌ خطااااااااااااااااااای JWT:", error);
+          console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error);
           setError("متاسفانه خطایی رخ داده است33:" + error);
         }
       } else {
@@ -569,7 +569,7 @@ export default function Toolbar() {
         setError("متاسفانه خطایی رخ داده است34:" + data.errors);
       }
     } else {
-      console.log("zare_nk_040218-!!response.ok");
+      console.log("zare_nk_040925--!!response.ok");
       document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       setError("متاسفانه خطایی رخ داده است35");
