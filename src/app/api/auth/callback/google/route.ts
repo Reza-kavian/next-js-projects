@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
       // if (state === "mobile") {  //zare_nk_041002_commented
       ////zare_nk_041002_added_st
 
-      const cookieStore = await cookies(); // ← توجه: باید await باشه
+      const cookieStore = await cookies(); // ← توجه: باید await باشه 
       const oauthStateStr = cookieStore.get("oauth_state")?.value;
 
       if (!oauthStateStr) {
@@ -39,16 +39,34 @@ export async function GET(req: NextRequest) {
 
       const oauthStateObj = JSON.parse(Buffer.from(oauthStateStr, "base64").toString("utf-8"));
       console.log(oauthStateObj.source); // "mobile" یا "web"
+cookieStore.delete("oauth_state");
+
       if (oauthStateObj.source === "mobile") {
         ////zare_nk_041002_added_end
 
         ////zare_nk_041002_added_st
         const returnedState = searchParams.get("state");
-        const cookieState = req.cookies.get("oauth_state")?.value;  //ehtemalan gheire zarooriye chon ghablan ba cookies() oono khoondim!(tahlilshe)
+        // const cookieState = req.cookies.get("oauth_state")?.value;  //ehtemalan gheire zarooriye chon ghablan ba cookies() oono khoondim!(tahlilshe)
 
-        if (!returnedState || returnedState !== cookieState) {
-          return NextResponse.redirect("/login");
-        }
+        // if (!returnedState || returnedState !== cookieState) {
+        //   return NextResponse.redirect("/login");
+        // }
+        if (!returnedState) {
+  return NextResponse.redirect("/login");
+}
+
+const returnedStateObj = JSON.parse(
+  Buffer.from(returnedState, "base64").toString("utf-8")
+);
+ const cookieStore = await cookies(); // ← توجه: باید await باشه
+const cookieStateStr = cookieStore.get("oauth_state")?.value;
+if (!cookieStateStr) {
+  return NextResponse.redirect("/login");
+}
+
+if (returnedState !== cookieStateStr) {
+  return NextResponse.redirect("/login");
+}
         ////zare_nk_041002_added_end
 
         //// Location = `myapp://auth/callback`;  //zare_nk_040929_commented
@@ -58,8 +76,8 @@ export async function GET(req: NextRequest) {
         //   error || "google_login_failed"
         // )}`;
 
-        // const redirectUrl = new URL("https://testotm.sarinmehr.com/redirect-mobile");
-        const redirectUrl = new URL("https://localhost:3000/redirect-mobile");
+        const redirectUrl = new URL("https://testotm.sarinmehr.com/redirect-mobile");
+        // const redirectUrl = new URL("https://localhost:3000/redirect-mobile");
         redirectUrl.searchParams.set("error", "google_login_failed");
         redirectUrl.searchParams.set("verified", "1");   //zare_nk_041002_added
 
@@ -70,8 +88,10 @@ export async function GET(req: NextRequest) {
         //// https://testotm.sarinmehr.com/redirect-mobile?error=access_denied  //zare_nk_040930_nokteh(dar callback/google ham be in masir miferestim)
       }
       ////zare_nk_040930_added_st_alaki
-      // else{
-      //    Location = "https://localhost:3000/redirect-mobile";
+      // else{ 
+      //   const redirectUrl = new URL("https://localhost:3000/redirect-mobile");
+      //   redirectUrl.searchParams.set("verified", "1");
+      //    Location = redirectUrl.toString();
       // }
       ////zare_nk_040930_added_end_alaki
 
@@ -122,8 +142,10 @@ export async function GET(req: NextRequest) {
         return NextResponse.redirect("/login");
       }
 
-      const oauthStateObj = JSON.parse(Buffer.from(oauthStateStr, "base64").toString("utf-8"));
+      const oauthStateObj = JSON.parse(Buffer.from(oauthStateStr, "base64").toString("utf-8")); 
+      
       console.log(oauthStateObj.source); // "mobile" یا "web"
+      cookieStore.delete("oauth_state");
       if (oauthStateObj.source === "mobile") {
         ////zare_nk_041002_added_end
         // Location = `myapp://auth/callback`;  //zare_nk_040929_commented
@@ -182,6 +204,7 @@ export async function GET(req: NextRequest) {
 
       const oauthStateObj = JSON.parse(Buffer.from(oauthStateStr, "base64").toString("utf-8"));
       console.log(oauthStateObj.source); // "mobile" یا "web"
+      cookieStore.delete("oauth_state");
       if (oauthStateObj.source === "mobile") {
         ////zare_nk_041002_added_end
       // redirectUrl = `myapp://auth/callback?token=${token}`; // redirect به اپ موبایل   //zare_nk_040929_commented

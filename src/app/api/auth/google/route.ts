@@ -10,25 +10,30 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_REDIRECT_URI
 );
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  // const source = searchParams.get("source") || "web"; // web یا mobile  //zare_nk_041002_commented
-////zare_nk_041002_added_st
+export async function GET(req: Request) {  
+////zare_nk_041002_added_st 
 // const source =
-//   searchParams.get("source") === "mobile"
+//   req.headers.get("x-client") === "mobile-app"
 //     ? "mobile"
 //     : "web";
-const source =
-  req.headers.get("x-client") === "mobile-app"
-    ? "mobile"
-    : "web";
-// state امن
+ 
+// ✅ خواندن کوکی‌ها (تشخیص موبایل یا وب)
+  const cookieStore = await cookies(); 
+  const source =
+    cookieStore.get("oauth_source")?.value === "mobile"
+      ? "mobile"
+      : "web"; 
+  // 🔐 یک‌بار مصرف
+  cookieStore.delete("oauth_source");
+
+
+ 
    const oauthState = crypto.randomUUID();  
   //   await saveOAuthState(oauthState, {
   //   source,
   //   createdAt: Date.now(),
   // });
-  const oauthStateObj = { state: oauthState, source };
+  const oauthStateObj = { state: oauthState, source:source };
   const oauthStateStr = Buffer.from(JSON.stringify(oauthStateObj)).toString("base64");
  ////zare_nk_041002_added_end
   const authUrl = oauth2Client.generateAuthUrl({
@@ -50,6 +55,7 @@ const source =
     secure: true,
     sameSite: "lax",
     maxAge: 5 * 60, // ۵ دقیقه
+      path: "/",
   });
 
   return res;
