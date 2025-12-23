@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
     return response;
   }
   try {
+    console.log('040930-b-00')
     const pool = await getConnection();
     const { username, password } = await request.json();
     // ورود با نام کاربری و رمزعبور

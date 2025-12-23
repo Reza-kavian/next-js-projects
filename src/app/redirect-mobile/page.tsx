@@ -1,24 +1,47 @@
+//\src\app\redirect-mobile\page.tsx
 "use client";
 
 import { useEffect } from "react";
+import { redirect } from "next/navigation";   //zare_nk_041001
+////zare_nk_041001_added_st
+// import { useSearchParams, useRouter } from "next/navigation";
 
-export default function MobileRedirectPage({ searchParams }: any) {
+// export default function MobileRedirectPage() {
+//   const searchParams = useSearchParams();
+//   const router = useRouter();
+////zare_nk_041001_added_end
+
+export default function MobileRedirectPage({ searchParams }: any) {  //zare_nk_041001_commented
+  ////zare_nk_041002_commented_st
+  // 🚫 اگه از گوگل نیومده → برگرد به لاگین
+  // if (searchParams?.from !== "google") {
+  //   redirect("/login");
+  // }
+  ////zare_nk_041002_commented_end
+  ////zare_nk_041002_added_st
+  if (searchParams?.verified !== "1") {
+    alert('rooo!!!');
+    redirect("/login");
+  }
+  // if (verified !== "1") {
+  //   router.replace("/login");
+  //   return;
+  // }
+  ////zare_nk_041002_added_end
   const deepLink =
     searchParams?.token
-      // ? `myapp://auth/callback?token=${encodeURIComponent(searchParams.token)}`
       ? `myapp://login?token=${encodeURIComponent(searchParams.token)}`
       : searchParams?.error
-      // ? `myapp://auth/callback?error=${encodeURIComponent(searchParams.error)}`
-      ? `myapp://login?error=${encodeURIComponent(searchParams.error)}`
-      
-      : null;
+        ? `myapp://login?error=${encodeURIComponent(searchParams.error)}`
+        : null;
 
   useEffect(() => {
-    if (!deepLink) return;
+    if (!deepLink) { alert('ddddddddddddd'); return; }
 
-    setTimeout(() => {
+    const t = setTimeout(() => {
       window.location.href = deepLink;
     }, 300);
+    return () => clearTimeout(t);
   }, [deepLink]);
 
   return (
@@ -52,11 +75,11 @@ export default function MobileRedirectPage({ searchParams }: any) {
         </a>
       )}
 
-      {!deepLink && (
+      {/* {!deepLink && (
         <p style={{ color: "red", marginTop: 16 }}>
           اطلاعات لازم برای بازگشت به اپلیکیشن یافت نشد.
         </p>
-      )}
+      )} */}
     </div>
   );
 }

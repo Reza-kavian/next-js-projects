@@ -472,7 +472,7 @@ export default function Toolbar() {
   }
 
   const handleGoogleLogin = () => {   //zare_nk_040925_tahlilshe
-    alert("handleGoogleLogin");
+    alert("handleGoogleLogin002");
     window.location.href = `/api/auth/google`; // هدایت به گوگل  //zare_nk_040422_commented
     // window.location.href = `https://testotm.sarinmehr.com/api/auth/google`; //zare_nk_040422_added
   };

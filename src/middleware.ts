@@ -18,7 +18,7 @@ const publicPaths = [
   "/discountsAndOffers",
   "/games", //zare_nk_040331_added
   "/o/oauth2", //zare_nk_040419_added
-
+  "/redirect-mobile", //zare_nk_040930_added_st_testi
   ////zare_nk_040522_added_st_movaghat(pak kardani)
   // "/ordersHistory",
   // "/shoppingbasket",
