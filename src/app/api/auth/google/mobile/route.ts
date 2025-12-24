@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const url = new URL("/api/auth/google", req.nextUrl.origin);
+  const url = "https://testotm.sarinmehr.com/api/auth/google";
 
   const res = NextResponse.redirect(url);
 
