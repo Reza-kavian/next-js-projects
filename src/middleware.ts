@@ -1,3 +1,4 @@
+////zare_nk_041008_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard,pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -57,14 +58,14 @@ export async function middleware(request: NextRequest) {
 
   console.log(
     "zare_nk_040403-00-Middleware called!!-All cookies: " +
-      request.headers.get("cookie")
+    request.headers.get("cookie")
   );
 
   console.log(
     "zare_nk_040213-Middleware called!!-request.url :" +
-      request.url +
-      "------request.nextUrl.pathname: " +
-      request.nextUrl.pathname
+    request.url +
+    "------request.nextUrl.pathname: " +
+    request.nextUrl.pathname
   );
 
   ////zare_nk_040419_added_st(and commented)
@@ -247,7 +248,7 @@ export async function middleware(request: NextRequest) {
     } catch (error) {
       console.log(
         "zare_nk_040403-02-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: " +
-          error
+        error
         //zare_nk_040403-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: TypeError: fetch failed
       );
       // return NextResponse.json({ error: "توکن نامعتبر است" }, { status: 401 });
