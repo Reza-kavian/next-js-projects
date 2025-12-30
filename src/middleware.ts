@@ -1,4 +1,4 @@
-////zare_nk_041008_okk
+////zare_nk_041009_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard,pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -35,12 +35,13 @@ async function verifyToken(token: string) {
       "base64"
     ).toString("utf-8"); //zare_nk_040219_added(baraye adame moshkel dar verify kardane secretKey vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
     console.log(
-      "zare_nk_040403-03-POST called!!-decoded secretKey: " + secretKey
+      "zare_nk_041009-03-POST called!!-decoded secretKey: " + secretKey
     );
+    
     const SECRET = new TextEncoder().encode(secretKey);
-    const { payload } = await jwtVerify(token, SECRET);
-    console.log("zare_nk_040403-04-payload: " + JSON.stringify(payload));
-    //zare_nk_040403-04-payload: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287",
+    const { payload } = await jwtVerify(token, SECRET);  //zare_nk_041009_nokteh(jwtVerify lafze payload ra barmigardooneh )
+    console.log("zare_nk_041009-04-payload: " + JSON.stringify(payload));
+    //zare_nk_041009-04-payload: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287",
     // "NameMoshtari":"","nbf":1750759349,"exp":1751364149,"iat":1750759349}
     return payload;
   } catch (error) {
@@ -57,15 +58,8 @@ export async function middleware(request: NextRequest) {
   // console.log("zare_nk_040317-fullUrl: " + kolli);
 
   console.log(
-    "zare_nk_040403-00-Middleware called!!-All cookies: " +
+    "zare_nk_041009-00-Middleware called!!-All cookies: " +
     request.headers.get("cookie")
-  );
-
-  console.log(
-    "zare_nk_040213-Middleware called!!-request.url :" +
-    request.url +
-    "------request.nextUrl.pathname: " +
-    request.nextUrl.pathname
   );
 
   ////zare_nk_040419_added_st(and commented)
@@ -104,26 +98,26 @@ export async function middleware(request: NextRequest) {
     // ست کردن header برای استفاده در layout
     response.headers.set("x-url", fullUrl);
     response.headers.set("x-pathname", pathname);
-    console.log("zare_nk_040228-fullUrl001: " + fullUrl);
+    console.log("zare_nk_041009-fullUrl001: " + fullUrl);
     return response;
   }
-  console.log("zare_nk_040418_Redirecting from:", request.nextUrl.pathname);
+  console.log("zare_nk_041009 from:", request.nextUrl.pathname);
 
   const token = request.cookies.get("token")?.value;
-  console.log("zare_nk_040110-Cookies in middleware:", request.cookies);
-  console.log("zare_nk_040110-Token from cookie:", token);
+  console.log("zare_nk_041009-Cookies in middleware:", request.cookies);
+  console.log("zare_nk_041009-Token from cookie:", token);
   if (token) {
     console.log("zare_nk_040403-01-taghiir-tempTest-inja 004-token daaarim1");
     try {
-      console.log("zare_nk_040403-02-taghiir-tempTest-inja 004-token daaarim2");
+      console.log("zare_nk_041009-02-taghiir-tempTest-inja 004-token daaarim2");
       console.log(
-        "zare_nk_040403-02-taghiir-tempTest-inja 004-token daaarim2.01"
+        "zare_nk_041009-02-taghiir-tempTest-inja 004-token daaarim2.01"
       );
       ////zare_nk_040403_added_st
       const validPayload = await verifyToken(token);
       ////zare_nk_040403_alan
       console.log(
-        "zare_nk_040403-04-validPayload is: " + JSON.stringify(validPayload)
+        "zare_nk_041009-04-validPayload is: " + JSON.stringify(validPayload)
       );
       if (!validPayload) {
         const response = NextResponse.redirect(new URL("/login", request.url));
@@ -137,9 +131,9 @@ export async function middleware(request: NextRequest) {
           });
         }
         var tempTest = response.cookies.get("redirect")?.value;
-        console.log("zare_nk_040209-taghiir-tempTest: " + tempTest);
+        console.log("zare_nk_041009-taghiir-tempTest: " + tempTest);
         console.log(
-          "zare_nk_040209-response.Cookies(not ok) in middleware:",
+          "zare_nk_041009-response.Cookies(not ok) in middleware:",
           response.cookies.get("token")?.value
         );
 
@@ -149,7 +143,7 @@ export async function middleware(request: NextRequest) {
         // ست کردن header برای استفاده در layout
         response.headers.set("x-url", fullUrl);
         response.headers.set("x-pathname", pathname);
-        console.log("zare_nk_040228-fullUrl003: " + fullUrl);
+        console.log("zare_nk_041009-fullUrl003: " + fullUrl);
         return response;
       }
       // console.log(
@@ -160,7 +154,7 @@ export async function middleware(request: NextRequest) {
       // "Mobile":"9351091287","NameMoshtari":"","nbf":1746772412,"exp":1747377212,"iat":1746772412}
 
       var unique_name = validPayload.unique_name;
-      console.log("zare_nk_040209-taghiir-unique_name: " + unique_name);
+      console.log("zare_nk_041009-taghiir-unique_name: " + unique_name);
 
       ////zare_nk_040228_added_st
       const response = NextResponse.next();
@@ -169,8 +163,7 @@ export async function middleware(request: NextRequest) {
       // ست کردن header برای استفاده در layout
       response.headers.set("x-url", fullUrl);
       response.headers.set("x-pathname", pathname);
-      console.log("zare_nk_040228-fullUrl002: " + fullUrl);
-
+      console.log("zare_nk_041009-fullUrl002: " + fullUrl);
       return response;
 
       ////zare_nk_040403_added_end
@@ -247,7 +240,7 @@ export async function middleware(request: NextRequest) {
       ////zare_nk_040403_commented_end
     } catch (error) {
       console.log(
-        "zare_nk_040403-02-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: " +
+        "zare_nk_041009-02-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: " +
         error
         //zare_nk_040403-taghiir-tempTest-inja 003-amaliate barrasiye token ba khata movajeh shod-error: TypeError: fetch failed
       );
@@ -258,18 +251,18 @@ export async function middleware(request: NextRequest) {
         httpOnly: false,
       });
       var tempTest = response.cookies.get("redirect")?.value;
-      console.log("zare_nk_040209-taghiir-tempTest: " + tempTest);
+      console.log("zare_nk_041009-taghiir-tempTest: " + tempTest);
 
       const fullUrl = request.nextUrl.href;
       const pathname = request.nextUrl.pathname;
       // ست کردن header برای استفاده در layout
       response.headers.set("x-url", fullUrl);
       response.headers.set("x-pathname", pathname);
-      console.log("zare_nk_040228-fullUrl004: " + fullUrl);
+      console.log("zare_nk_041009-fullUrl004: " + fullUrl);
       return response;
     }
   } else {
-    console.log("zare_nk_040403-01-taghiir-tempTest-inja 004-token nadarim!!!");
+    console.log("zare_nk_041009-01-taghiir-tempTest-inja 004-token nadarim!!!");
     // return NextResponse.redirect(new URL(`/login?redirect=${request.nextUrl.pathname}`, request.url));   //zare_nk_031221_added(and commented. chon khastam be jaye gharar dadane request.nextUrl.pathname dar querystring an ra dar cookie gharar bedam)
 
     const response = NextResponse.redirect(new URL("/login", request.url));
@@ -278,7 +271,7 @@ export async function middleware(request: NextRequest) {
       httpOnly: false,
     });
     var tempTest = response.cookies.get("redirect")?.value;
-    console.log("zare_nk_040209-tempTest: " + tempTest);
+    console.log("zare_nk_041009-tempTest: " + tempTest);
 
     const fullUrl = request.nextUrl.href;
     const pathname = request.nextUrl.pathname;
