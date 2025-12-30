@@ -1,5 +1,5 @@
+////zare_nk_041009_okk
 "use client";
-
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Styles from "@/styles/components/login.module.css";
@@ -24,7 +24,7 @@ function getCookie(name: any) {
 
 type FirstPageProps = {
   mobileButtonClick: () => void; //zare_nk_040527_nokteh(rooydade clicke dokmeye mobileCheckBtn)
-  mobileVal: string; //zare_nk_040527_nokteh(state shamele meghdare shomare mobile ) 
+  mobileVal: string; //zare_nk_040527_nokteh(state shamele meghdare shomare mobile) 
   mobileChanged: (
     e: ChangeEvent<HTMLInputElement> | HTMLInputElement | null
   ) => void; //zare_nk_040527_nokteh(rooydade onChange textboxe mobile)    
@@ -56,7 +56,7 @@ function FirstPageComponent({
   useEffect(() => {
     if (backBtnCliked == true) {
       if (refForMobileInput.current[0]) {
-        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke mthode mobileChanged seda zadeh mishod)
+        mobileChanged(refForMobileInput.current[0]); //zare_nk_040527_nokteh(shabihsaziye rooydade onChange textboxe mobile ke metode mobileChanged seda zadeh mishod)
       }
     }
   }, [backBtnCliked]);
