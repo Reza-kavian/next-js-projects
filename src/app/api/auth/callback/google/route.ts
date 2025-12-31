@@ -1,4 +1,4 @@
-//src\app\api\auth\callback\google
+//src\app\api\auth\callback\google  //zare_nk_041010_okk
 import { NextRequest, NextResponse } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";
@@ -54,6 +54,7 @@ export async function GET(req: NextRequest) {
     }
 
     const { source } = decodeState(cookieStateStr);
+    console.log("zare_nk_041010-source: "+source);
     // one-time usage
     cookieStore.delete("oauth_state");
 

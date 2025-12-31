@@ -1,10 +1,11 @@
+////zare_nk_041010_okk
 //src\app\about\page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import styles from "@/styles/components/home.module.css";
 import Image002 from "@/assets/images/002.jpg";
 import { metadata as layoutMetadata} from "../layout"; //zare_nk_040131_nokteh(mitavan metadata ra az layout import nakard,inja import kardam ta roosh dastkari konam)
-// metadata.title = metadata.title + '-abouuttiimm';  //zare_nk_040416_nokteh(in khat az nazare manteghi khatarnake ke metadata ye import shodeh ro dastkari konim va momkene dar builde proujeh error bedeh)
+// metadata.title = metadata.title + '-abouuttiimm';  //zare_nk_040416_nokteh(in khat az nazare manteghi khatarnake ke metadataye import shodeh ro dastkari konim va momkene dar builde proujeh error bedeh)
 export const metadata = {
     title: `${layoutMetadata.title} - About`, 
 };

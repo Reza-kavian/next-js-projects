@@ -1,4 +1,4 @@
-// src\app\api\auth\google
+// src\app\api\auth\google  //zare_nk_041010_okk
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 // import { saveOAuthState } from "@/lib/oauthState"; //zare_nk_041002_added
@@ -25,8 +25,6 @@ export async function GET(req: Request) {
       : "web";
   // 🔐 یک‌بار مصرف
   cookieStore.delete("oauth_source");
-
-
 
   const oauthState = crypto.randomUUID();
   //   await saveOAuthState(oauthState, {
