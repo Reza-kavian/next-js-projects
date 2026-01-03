@@ -1,3 +1,4 @@
+ ////zare_nk_041013_okk
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -13,7 +14,7 @@ export default function ProductsPage() {
   var searchParams = useSearchParams(); // خواندن کوئری‌های فعلی
 
   const changeCategory = () => {
-    const params = new URLSearchParams(searchParams); // ایجاد یک کپی از کوئری‌های فعلی
+    const params = new URLSearchParams(searchParams); // ایجاد یک کپی از کوئری‌های فعلی  //zare_nk_041011_nokteh(useSearchParams faghat khandani hast va niaz be URLSearchParams darim baraye set kardan dar params)
     params.set("category2", "category2Value"); // تغییر مقدار category
     params.set(fer1.current, "electronics"); // تغییر مقدار category
     alert("full: " + pathname + '---' + searchParams + '----params: ' + params);

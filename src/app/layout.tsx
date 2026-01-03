@@ -1,4 +1,4 @@
-////zare_nk_041010_okk
+////zare_nk_041013_okk
 // import { strict } from "assert";
 // import { ReactNode } from "react";
 import { headers } from "next/headers";
@@ -8,7 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css";   //zare_nk_040416_added(inja avo
 
 import "@/styles/globals.css";
 // import LogoutButton from "@/components/LogoutButton";  //zare_nk_040202_commented
-import LayoutWrapper from "@/components/LayoutWrapper";  //zare_nk_040202_added
+import LayoutWrapper from "@/components/LayoutWrapper"; 
+ //zare_nk_041011_nokteh(layout.tsx serverComponent hast va dar an nemitavani mostaghiman az hoock haye client estefadeh koni yani  
+ // neveshtane "use client" dar an manteghi nist pas az componente komaki ke "use client" dashteh bashe baraye estefadeh kardim
 
 interface RootLayoutProps {
   children: React.ReactNode;

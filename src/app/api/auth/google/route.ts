@@ -1,4 +1,4 @@
-// src\app\api\auth\google  //zare_nk_041010_okk
+// src\app\api\auth\google  //zare_nk_041013_okk
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 // import { saveOAuthState } from "@/lib/oauthState"; //zare_nk_041002_added
@@ -37,7 +37,7 @@ export async function GET(req: Request) {
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: "offline",
     prompt: "consent",
-    scope: ["profile", "email"],
+    scope: ["profile", "email"],  //zare_nk_041011_nokteh(yani man az hesabe googgle daghighan be che ettelaati dastresi mikham?)
     // state: source,     //zare_nk_041002_commented
     state: oauthStateStr,  //zare_nk_041002_added
   });

@@ -1,4 +1,4 @@
-////zare_nk_041008_okk
+////zare_nk_041013_okk
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Styles from "@/styles/components/LogoutButton.module.css";
 
 export default function LogoutButton() {
-  const [isLogout, setIsLogout] = useState<boolean | null>(null); 
+  const [isLogout, setIsLogout] = useState<boolean | null>(null);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -14,7 +14,7 @@ export default function LogoutButton() {
     const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
     const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
     if (parts.length === 2) {
-      return parts.pop()?.split(";").shift() ?? null;  
+      return parts.pop()?.split(";").shift() ?? null;
     }
     return null; //اگر کوکی پیدا نشد
   }
@@ -36,7 +36,7 @@ export default function LogoutButton() {
           } else {
             // document.getElementById("idUSer")!.innerText = data.errorMessage;
             setIsLogout(true);
-            router.push(pathname);
+            // router.push(pathname);  //zare_nk_+041013_commented(in khat bi mani bood va comment shod,chon redirect be hamin safhe ast va rerendere alaki hast!)
           }
         } catch (error) {
           // setIsLogout(true);  //zare_nk_040529_added(felan comment kardam ta age vaghean beja va karbordi bood lahaz beshe)
@@ -48,12 +48,28 @@ export default function LogoutButton() {
       }
     };
     asyncFunctionInUseEffect(); // اجرای تابع async داخل useEffect
-  });  
+  });
 
   function forlogout() {
-    document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+    document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;  //dastoore 134
     setIsLogout(true);
   }
+
+  ////zare_nk_041013_nokteh_st(pishnahade chatgpt, chon dastoore 134 kar nemikoneh age cookie: httpOnly,secure,sameSite bashe, agaram httpOnly:false bashe ke amniate cookie paein miad samte client behesh dastresi dashteh bashim)
+  //   // /api/auth/logout/route.ts
+  // import { NextResponse } from "next/server";
+
+  // export async function POST() {
+  //   const res = NextResponse.json({ ok: true });
+  //   res.cookies.delete("token");
+  //   return res;
+  // } 
+  // const logout = async () => {
+  //   await fetch("/api/auth/logout", { method: "POST" });
+  //   setIsLogout(true);
+  //   router.refresh(); // اگر layout وابسته است
+  // };
+  ////zare_nk_041013_nokteh_end(pishnahade chatgpt, chon dastoore 134 kar nemikoneh age cookie: httpOnly,secure,sameSite bashe, agaram httpOnly:false bashe ke amniate cookie paein miad samte client behesh dastresi dashteh bashim)
 
   function forlogin() {
     // router.replace("/login");  //zare_nk_040328_commented

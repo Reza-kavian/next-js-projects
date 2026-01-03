@@ -1,4 +1,4 @@
-////zare_nk_041008_okk
+////zare_nk_041011_okk
 "use client"; 
 import { memo } from 'react'
 
@@ -8,7 +8,7 @@ interface TodosProps {
 }
 
 const Todos = ({ todos, addTodo }: TodosProps) => {  //1 zare_nk_040424_nokteh(in khatte 1 dorosteh chon kollan ye parametre props darim ke dar inja shamele do ozve todos, addTodo hast)
-// const Todos = ( todos: string[], addTodo: () => void  ) => {  //2 zare_nk_040424_nokteh(in khatte 2 eshtebahe chon do parametere voroodi dare ne yek props va barnameh oono be onvane tabee mamooli dar nazar migire na componene reacti va age dar componente digeei oono be soorate ye component seda bezanim errore(ya ni in errore: <Todos todos={todos} addTodo={addTodo} />))
+// const Todos = ( todos: string[], addTodo: () => void  ) => {  //2 zare_nk_040424_nokteh(in khatte 2 eshtebahe chon do parametere voroodi dare ne yek props va barnameh oono be onvane tabee mamooli dar nazar migire na componene reacti va age dar componente digeei oono be soorate ye component seda bezanim errore(yani in errore: <Todos todos={todos} addTodo={addTodo} />))
     console.log("child render");
     return (
       <>

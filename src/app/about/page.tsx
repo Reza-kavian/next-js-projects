@@ -1,4 +1,4 @@
-////zare_nk_041010_okk
+////zare_nk_041013_okk
 //src\app\about\page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import styles from "@/styles/components/home.module.css";
 import Image002 from "@/assets/images/002.jpg";
 import { metadata as layoutMetadata} from "../layout"; //zare_nk_040131_nokteh(mitavan metadata ra az layout import nakard,inja import kardam ta roosh dastkari konam)
 // metadata.title = metadata.title + '-abouuttiimm';  //zare_nk_040416_nokteh(in khat az nazare manteghi khatarnake ke metadataye import shodeh ro dastkari konim va momkene dar builde proujeh error bedeh)
-export const metadata = {
+export const metadata = { //zare_nk_041013_nokteh(be khatere in dastkari majboor shodim metadata ra az layout import konim vagarnah barnameh automat metadata ra dar tage html title gharar midad)
     title: `${layoutMetadata.title} - About`, 
 };
 
@@ -20,7 +20,7 @@ export default function Page() {
   return (
     <>
       {/* <title>{metadata.title}</title> */}  {/*zare_nk_040507_nokteh(neveshtane metadata dakhle tage title osooli nist va pishnahad nemishe,barnameh ham automat metadata ro beonvane mohtavaye tage title safhe dar nazar migire)*/} 
-      <h1 className={styles.shape}>salam</h1>
+      <h1 className={styles.shape}>salam 002</h1>
       <img src="./images/002.jpg" style={{ border: "4px dashed silver" }} />
       <br />
       <Image alt="ggg" src={Image002} style={{ border: "4px dashed yellow" }} />

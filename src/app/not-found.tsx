@@ -1,7 +1,6 @@
-// src/app/not-found.tsx
+// src/app/not-found.tsx  //zare_nk_041011_okk
 "use client";
 import { useEffect } from "react";
-
 import Link from "next/link";
 
 export default function NotFound() {
@@ -9,7 +8,6 @@ export default function NotFound() {
 //    const mymodalForWarning = new bootstrap.Modal(document.getElementById("mymodalForWarning"))
   },[]);
 
-    
   return (
     <div style={{ padding: "3rem", textAlign: "center" }}>
       <h1 style={{ fontSize: "3rem", color: "crimson" }}>صفحه پیدا نشد 😢</h1>

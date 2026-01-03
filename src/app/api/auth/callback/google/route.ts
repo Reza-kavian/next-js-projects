@@ -1,7 +1,7 @@
-//src\app\api\auth\callback\google  //zare_nk_041010_okk
-import { NextRequest, NextResponse } from "next/server";
+//src\app\api\auth\callback\google  //zare_nk_041013_okk
+import { NextRequest, NextResponse } from "next/server";;  //zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { cookies } from "next/headers";
+import { cookies } from "next/headers";  //zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot ne cooki haei ke az samte karbar ba request mian)
 
 ////zare_nk_041003_added_st
 function decodeState(stateStr: string) {
@@ -10,7 +10,7 @@ function decodeState(stateStr: string) {
   ) as { state: string; source: "web" | "mobile" };
 }
 
-function redirect(location: string) {
+function NextResponseRedirect(location: string) {
   return new NextResponse(null, {
     status: 302,
     headers: {
@@ -24,17 +24,20 @@ function redirect(location: string) {
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
+    ////zare_nk_041013_nokteh_st(Params haye tooye url)
+    const { searchParams } = new URL(req.url); 
     const code = searchParams.get("code");
-    ////zare_nk_041003_added_st
-    const error = searchParams.get("error");
+    const error = searchParams.get("error"); 
     const returnedState = searchParams.get("state");
+    ////zare_nk_041013_nokteh_end(Params haye tooye url)
+    ////zare_nk_041013_nokteh_st(cooki haye zakhireh shodeh)
     const cookieStore = await cookies();
     const cookieStateStr = cookieStore.get("oauth_state")?.value;
+    ////zare_nk_041013_nokteh_end(cooki haye zakhireh shodeh)
     // state must exist
     if (!cookieStateStr || !returnedState) {
-      // return redirect("/login");
-      const res = redirect("/login");
+      // return NextResponseRedirect("/login");
+      const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
       res.cookies.set("google_Invalid_credentials", "yes", {
         httpOnly: false,
@@ -44,8 +47,8 @@ export async function GET(req: NextRequest) {
     // validate state
     if (returnedState !== cookieStateStr) {
       cookieStore.delete("oauth_state");
-      // return redirect("/login");
-      const res = redirect("/login");
+      // return NextResponseRedirect("/login");
+      const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
       res.cookies.set("google_Invalid_credentials", "yes", {
         httpOnly: false,
@@ -54,7 +57,7 @@ export async function GET(req: NextRequest) {
     }
 
     const { source } = decodeState(cookieStateStr);
-    console.log("zare_nk_041010-source: "+source);
+    console.log("zare_nk_041010-source: " + source);
     // one-time usage
     cookieStore.delete("oauth_state");
 
@@ -64,16 +67,16 @@ export async function GET(req: NextRequest) {
         const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
         url.searchParams.set("error", error ?? "google_login_failed");
         url.searchParams.set("verified", "1");
-        // return redirect(url.toString());
-        const res = redirect(url.toString());
+        // return NextResponseRedirect(url.toString());
+        const res = NextResponseRedirect(url.toString());
         res.cookies.delete("token");
         res.cookies.set("google_Invalid_credentials", "yes", {
           httpOnly: false,
         });
         return res;
       }
-      // return redirect("/login");
-      const res = redirect("/login");
+      // return NextResponseRedirect("/login");
+      const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
       res.cookies.set("google_Invalid_credentials", "yes", {
         httpOnly: false,
@@ -97,171 +100,28 @@ export async function GET(req: NextRequest) {
     const tokenData = await tokenRes.json();
 
     if (!tokenData.id_token) {
-      // return redirect("/login");
-      const res = redirect("/login");
+      ////zare_nk_041011_added_st
+      if (source === "mobile") {
+        const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
+        url.searchParams.set("error", error ?? "google_login_failed");
+        url.searchParams.set("verified", "1");
+        // return NextResponseRedirect(url.toString());
+        const res = NextResponseRedirect(url.toString());
+        res.cookies.delete("token");
+        res.cookies.set("google_Invalid_credentials", "yes", {
+          httpOnly: false,
+        });
+        return res;
+      }
+      ////zare_nk_041011_added_end
+      // return NextResponseRedirect("/login");
+      const res = NextResponseRedirect("/login");
       res.cookies.delete("token");
       res.cookies.set("google_Invalid_credentials", "yes", {
         httpOnly: false,
       });
       return res;
-    }
-
-    ////zare_nk_041003_added_end 
-    ////zare_nk_041003_commented_st
-    // if (!code) {  
-    // return NextResponse.json({ error: "No code provided: "+error }, { status: 400 }); //comment kardim ta az raveshe new NextResponse estefadeh konim ke addresse /login ra dar headere new NextResponse gharar bedim na inke az dastoore redirect estefadeh konim ke cookie ha ra pak mikoneh)
-    // let Location = "/login"; // پیشفرض وب    
-
-    // if (state === "mobile") {    
-    // const cookieStore = await cookies(); 
-    // const oauthStateStr = cookieStore.get("oauth_state")?.value;
-    // if (!oauthStateStr) {
-    //   console.log("oauth_state موجود نیست!");
-    //   // می‌تونی کاربر رو ری‌دایرکت کنی یا ارور بدهی
-    //   return NextResponse.redirect("/login");
-    // }
-
-    // const oauthStateObj = JSON.parse(Buffer.from(oauthStateStr, "base64").toString("utf-8"));
-    // console.log(oauthStateObj.source); // "mobile" یا "web"
-    // cookieStore.delete("oauth_state");
-
-    // if (oauthStateObj.source === "mobile") {
-    //   ////zare_nk_041002_added_end
-
-    //   ////zare_nk_041002_added_st
-    //   const returnedState = searchParams.get("state");
-    //   // const cookieState = req.cookies.get("oauth_state")?.value;  //ehtemalan gheire zarooriye chon ghablan ba cookies() oono khoondim!(tahlilshe)
-
-    //   // if (!returnedState || returnedState !== cookieState) {
-    //   //   return NextResponse.redirect("/login");
-    //   // }
-    //   ////zare_nk_041003_commented_st
-    //   // if (!returnedState) {
-    //   //   return NextResponse.redirect("/login");
-    //   // }       
-    //   // const returnedStateObj = JSON.parse(
-    //   //   Buffer.from(returnedState, "base64").toString("utf-8")
-    //   // );
-
-    //   // const cookieStore = await cookies(); // ← توجه: باید await باشه
-    //   // const cookieStateStr = cookieStore.get("oauth_state")?.value;
-    //   // if (!cookieStateStr) {
-    //   //   return NextResponse.redirect("/login");
-    //   // }
-
-    //   // if (returnedState !== cookieStateStr) {
-    //   //   return NextResponse.redirect("/login");
-    //   // }
-    //   ////zare_nk_041003_commented_end
-
-    //   ////zare_nk_041002_added_end
-
-    //   //// Location = `myapp://auth/callback`;  //zare_nk_040929_commented
-    //   // Location = `https://testotm.sarinmehr.com/redirect-mobile?error=google_login_failed`;  //zare_nk_040929_added(and zare_nk_040930_commented)
-    //   ////zare_nk_040930__added_st
-    //   // Location = `https://testotm.sarinmehr.com/redirect-mobile?error=${encodeURIComponent(
-    //   //   error || "google_login_failed"
-    //   // )}`;
-
-    //   const redirectUrl = new URL("https://testotm.sarinmehr.com/redirect-mobile");
-    //   // const redirectUrl = new URL("https://localhost:3000/redirect-mobile");
-    //   redirectUrl.searchParams.set("error", "google_login_failed");
-    //   redirectUrl.searchParams.set("verified", "1");   //zare_nk_041002_added
-
-    //   // redirectUrl.searchParams.set("from", "google"); //zare_nk_041001_added(and zare_nk_041002_commented)
-    //   Location = redirectUrl.toString(); // <<< همین رو تغییر بده
-    //   ////zare_nk_040930__added_end
-    //   //// /api/auth/callback/google?error=access_denied&state=mobile  //zare_nk_040930_nokteh(dar halate laghv ke code nadarim google be in masir hedayat mikoneh)
-    //   //// https://testotm.sarinmehr.com/redirect-mobile?error=access_denied  //zare_nk_040930_nokteh(dar callback/google ham be in masir miferestim)
-    // }
-    ////zare_nk_040930_added_st_alaki
-    // else{ 
-    //   const redirectUrl = new URL("https://localhost:3000/redirect-mobile");
-    //   redirectUrl.searchParams.set("verified", "1");
-    //    Location = redirectUrl.toString();
-    // }
-    ////zare_nk_040930_added_end_alaki
-
-    // const nResponse = new NextResponse(null, {
-    //   status: 302, // تنظیم وضعیت HTTP
-    //   headers: {
-    //     Location: Location,
-    //     ////zare_nk_040930_added_st 
-    //     "Cache-Control": "no-store",  //zare_nk_040930_nokteh(jahate jologiri az cash kardane parametrhaye ghabli tavassote moroorgar, va ferestadane anha be jaye parametrhaye feli)
-    //     Pragma: "no-cache",   //zare_nk_040930_nokteh(kare Cache-Control ra mikoneh vali baraye moroorgarhaye ghadimitare)
-    //     ////zare_nk_040930_added_end 
-    //   },
-    // });
-    ////
-    //   nResponse.cookies.delete("token");
-    //   nResponse.cookies.set("google_Invalid_credentials", "yes", {
-    //     httpOnly: false,
-    //   });
-    //   return nResponse;
-    // }
-
-
-    // const tokenUrl = "https://oauth2.googleapis.com/token";
-    // const response = await fetch(tokenUrl, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //   // headers: { 'Content-Type': 'application/json' },  //zare_nk_031226_nokteh(noe application/json baraye parametrhaye voroodiye api ham javab dad,vali osooli noe application/x-www-form-urlencoded ast)
-    //   body: new URLSearchParams({
-    //     code,
-    //     client_id: process.env.GOOGLE_CLIENT_ID || "",
-    //     client_secret: process.env.GOOGLE_CLIENT_SECRET || "",
-    //     redirect_uri:
-    //       process.env.GOOGLE_REDIRECT_URI ||
-    //       "http://localhost:3000/api/auth/callback/google",
-    //     grant_type: "authorization_code",
-    //   }),
-    // });
-    // const resultFromGoogleapis = await response.json();
-    // if (resultFromGoogleapis.id_token == undefined) {
-    //   let Location = "/login"; // پیشفرض وب
-    //   // if (state === "mobile") { //zare_nk_041002_commented
-    //   ////zare_nk_041002_added_st
-
-    //   const cookieStore = await cookies(); // ← توجه: باید await باشه
-    //   const oauthStateStr = cookieStore.get("oauth_state")?.value;
-
-    //   if (!oauthStateStr) {
-    //     console.log("oauth_state موجود نیست!");
-    //     // می‌تونی کاربر رو ری‌دایرکت کنی یا ارور بدهی
-    //     return NextResponse.redirect("/login");
-    //   }
-
-    //   const oauthStateObj = JSON.parse(Buffer.from(oauthStateStr, "base64").toString("utf-8"));
-
-    //   console.log(oauthStateObj.source); // "mobile" یا "web"
-    //   cookieStore.delete("oauth_state");
-    //   if (oauthStateObj.source === "mobile") {
-    //     ////zare_nk_041002_added_end
-    //     // Location = `myapp://auth/callback`;  //zare_nk_040929_commented
-    //     Location = `https://testotm.sarinmehr.com/redirect-mobile?error=google_login_failed`;  //zare_nk_040929_added
-    //   }
-    //   const nResponse = new NextResponse(null, {
-    //     status: 302, // تنظیم وضعیت HTTP
-    //     headers: {
-    //       Location: Location,
-    //     },
-    //   });
-    //   nResponse.cookies.delete("token");
-    //   nResponse.cookies.set("google_Invalid_credentials", "yes", {
-    //     httpOnly: false,
-    //   });
-    //   return nResponse;
-    // }
-
-    //  const decoded = jwt.decode(
-    //   resultFromGoogleapis.id_token
-    // ) as JwtPayload | null;
-    //  const secretKey = Buffer.from(
-    //   process.env.JWT_SECRET_BASE64!,
-    //   "base64"
-    // ).toString("utf-8");
-    ////zare_nk_041003_commented_end
-
+    } 
     /* ---------------- Create JWT ---------------- */
     const decoded = jwt.decode(tokenData.id_token) as JwtPayload;
     const secretKey = Buffer.from(
@@ -319,7 +179,7 @@ export async function GET(req: NextRequest) {
     /* ---------------- Redirect ---------------- */
     let redirectPath = ''; //zare_nk_041003_added_manBishtarAzChatgpt
     if (source === "mobile") {
-      const url = new URL("https://testotm.sarinmehr.com/redirect-mobile"); 
+      const url = new URL("https://testotm.sarinmehr.com/redirect-mobile");
       url.searchParams.set("token", token);
       url.searchParams.set("verified", "1");
       // return redirect(url.toString());
@@ -328,8 +188,8 @@ export async function GET(req: NextRequest) {
     else {
       redirectPath = "/redirecting";  //zare_nk_041003_added_manBishtarAzChatgpt
     }
-    // const res = redirect("/redirecting");
-    const res =redirect(redirectPath);
+    // const res = NextResponseRedirect("/redirecting");
+    const res = NextResponseRedirect(redirectPath);
 
     // تنظیم کوکی برای کاربر
     res.cookies.set("token", token, {
@@ -345,7 +205,7 @@ export async function GET(req: NextRequest) {
     return res;
   } catch (error) {
     console.error("040930-a-04-Callback error:", error);
-    // return NextResponse.redirect("/login");  //zare_nk_041001_commented
-    return redirect("/login");  //zare_nk_041001_added
+    // return NextResponse.NextResponseRedirect("/login");  //zare_nk_041001_commented
+    return NextResponseRedirect("/login");  //zare_nk_041001_added
   }
 }

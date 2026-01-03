@@ -1,9 +1,8 @@
-// src/app/api/auth/google/mobile/route.ts  //zare_nk_041010_okk
+// src/app/api/auth/google/mobile/route.ts  //zare_nk_041013_okk
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const url = "https://testotm.sarinmehr.com/api/auth/google";
-
   const res = NextResponse.redirect(url);
 
   res.cookies.set("oauth_source", "mobile", {
