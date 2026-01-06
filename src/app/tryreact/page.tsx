@@ -78,7 +78,7 @@ function Board({
   sToString,
   setSToString,
 }: BoardProps) {
-  // alert('Board called!!');
+  console.log('Board called!!');
   const [lastButton, setLastButton] = useState<number | null>(  //zare_nk_040528_nokteh(state ke andise dokmeh ra dar arayeye Squares midahad,va dar har handleClick ke haman rooydade clicke dokmehaye dooz ast meghdar migireh)
     localStorage.getItem("lastButton") != null
       ? JSON.parse(localStorage.getItem("lastButton")!)
@@ -529,7 +529,7 @@ function Board({
 ) //zare_nk_041016_added(for useMemo)
 
 export default function Game() {
-  // alert("zare_nk_040317-Game called!!");
+  console.log("zare_nk_040317-Game called!!");
   const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null)); //zare_nk_041015_nokteh(refForBtn yek useref ast ke arayeei az dokmehaye dooz ast)
   const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);  //zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
   const storedHistory = localStorage.getItem("history");
@@ -569,8 +569,7 @@ export default function Game() {
   const [sToString, setSToString] = useState<string | null>(null);
   const handlePlay = useCallback(   
     ////zare_nk_041016_nokteh(dar har render Game age rooydade clike dokmeye dooz mongar be render shodeh bashe angah age history ya currentMove tagheir konand amal mikonad in method va history va currentMove ra meghdare jadid mideh, vali age history, currentMove tagheir kardeh bashand bedoone rooydade clicke dokmeye dooz useCallback amal nemikoneh,chon midoonim useCallback chizi sede nemizaneh,faghat age chizi bekhad seda zadeh beshe mitooneh age dar [] nabashe az seda zadanesh jologiri koneh, darvaghe useCallback ghabeliate seda zadan nadare,barakse useEffect ke seda mizaneh)
-    (nextSquares: any) => {
-      // alert("zare_nk_040109-handlePlay called!!");
+    (nextSquares: any) => { 
       console.log("zare_nk_040109-handlePlay called!!");
       const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
       setHistory(nextHistory);
@@ -591,12 +590,7 @@ export default function Game() {
     setTimer(5000);
     localStorage.setItem("timer", JSON.stringify(5000));
     setCurrentMove(nextMove);
-    localStorage.setItem("currentMove", JSON.stringify(nextMove));
-
-    ////zare_nk_041016_added_testi_st
-    const storedCurrentMoveTesti = localStorage.getItem("currentMove");
-    // alert('1-nextMove: ' + nextMove + '-storedCurrentMoveTesti: ' + storedCurrentMoveTesti);
-    ////zare_nk_041016_added_testi_end
+    localStorage.setItem("currentMove", JSON.stringify(nextMove)); 
 
     [...Array(9)].map((_, index) => {
       refForBtn.current[index]?.classList.add(Styles.mohreh);
@@ -615,7 +609,7 @@ export default function Game() {
       JSON.stringify(history[nextMove][history[nextMove]])
     );
     // setXIsNextState(history[nextMove][history[nextMove].length - 1]);   //zare_nk_040424_commented
-    ////zare_nk_040424_added__st
+    ////zare_nk_040424_added__st 
     if (history[nextMove][history[nextMove].length - 1] == "X") {
       setXIsNextState(false);
       localStorage.setItem("xIsNextState", JSON.stringify(false));
