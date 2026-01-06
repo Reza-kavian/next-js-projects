@@ -25,7 +25,35 @@ interface TodosProps {
 ////zare_nk_041016_added_end(rahe 1)
 
 ////zare_nk_041016_added_st(rahe 2 ke khanatar az nazare chatGpt)
-export default memo( function Todos  ({ todos, addTodo }: TodosProps)   {   
+// export default memo( function Todos  ({ todos, addTodo }: TodosProps)   {   
+//   console.log("child render");
+//     return (
+//       <>
+//         <h2>My Todos</h2>
+//         {todos.map((todo, index) => {
+//           return <p key={index}>{todo}</p>;
+//         })}
+//         <button onClick={addTodo}>add todo</button>
+//       </>
+//     );
+//   }); 
+  ////zare_nk_041016_added_end(rahe 2 ke khanatar az nazare chatGpt)
+
+
+  // export const Todos= memo( function Todos  ({ todos, addTodo }: TodosProps)   {   
+  // console.log("child render");
+  //   return (
+  //     <>
+  //       <h2>My Todos</h2>
+  //       {todos.map((todo, index) => {
+  //         return <p key={index}>{todo}</p>;
+  //       })}
+  //       <button onClick={addTodo}>add todo</button>
+  //     </>
+  //   );
+  // }); 
+
+    export const Todos= memo( function    ({ todos, addTodo }: TodosProps)   {   
   console.log("child render");
     return (
       <>
@@ -37,4 +65,3 @@ export default memo( function Todos  ({ todos, addTodo }: TodosProps)   {
       </>
     );
   }); 
-  ////zare_nk_041016_added_end(rahe 2 ke khanatar az nazare chatGpt)

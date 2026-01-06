@@ -2,8 +2,7 @@
 "use client";
 import { memo } from 'react' //zare_nk_041016_added
 import { useEffect, useState, useRef, useCallback } from "react";
-import Styles from "@/styles/components/dooz.module.css";
-// import { json } from "node:stream/consumers";  //zare_nk_040201_commented_felan(ta motmaen sham)
+import Styles from "@/styles/components/dooz.module.css"; 
 
 type SquareProps = {
   value: string | null;
@@ -32,8 +31,7 @@ function Square({ value, onSquareClick, andis, refForBtn }: SquareProps) {
 }
 
 type SquareValue = "X" | "O" | null;   //zare_nk_041015_nokteh(SquareValue yek type ast ke ya X ya O ya null hast)
-type Squares = SquareValue[];   //zare_nk_041015_nokteh(Squares yek type ast ke arayeh ei az noe SquareValue hast,yani maghadiresh faghat X ya O ya null hast)
-// type Squares = [SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue];
+type Squares = SquareValue[];   //zare_nk_041015_nokteh(Squares yek type ast ke arayeh ei az noe SquareValue hast,yani maghadiresh faghat X ya O ya null hast) 
 type BtnColor = string | null;   //zare_nk_041015_nokteh(BtnColor range dokmeh ra moshakhas mikoneh ke noe reshtei ast)
 
 type BoardProps = {
@@ -241,11 +239,11 @@ function Board({
       return !cur;
     });
     //zare_nk_040225_commented_end(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolea barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
-    // //zare_nk_040225_added_st(rahe2-rahe1 ham javabe)
+    // //zare_nk_040225_added_st(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
     // setXIsNextState(!xIsNextRef.current); //ok
     // localStorage.setItem("xIsNextState", JSON.stringify(!xIsNextRef.current)); //ok
-    // squares[squares.length - 1] = !xIsNextRef.current; //ok
-    // //zare_nk_040225_added_end(rahe2-rahe1 ham javabe)
+    // squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O; //ok
+    // //zare_nk_040225_added_end(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
     setTimer(5000);
     localStorage.setItem("timer", JSON.stringify(5000));
     [...Array(9)].map((_, index) => {
@@ -732,12 +730,9 @@ export default function Game() {
   );
 }
 
-type WinnerResult = [SquareValue, number, number, number]; //zare_nk_040412_added
+type WinnerResult = [SquareValue, number, number, number]; 
 
-// function calculateWinner(squares: Squares) {  //zare_nk_040412_commented
 function calculateWinner(squares: Squares): WinnerResult | null {
-  //zare_nk_040412_added
-
   console.log("zare_nk_040109-calculateWinner called!!");
   const lines = [
     [0, 1, 2],
