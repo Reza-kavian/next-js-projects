@@ -112,12 +112,8 @@ function Board({
     }
   }, []);
 
-  // useEffect(() => {
-  //   // xIsNextRef.current = xIsNextState; //zare_nk_040120_nokteh(haminja ro hazf konim va dar useEffecte paeini benevisim)
-  // }, [xIsNextState]);
-
   useEffect(() => {
-    xIsNextRef.current = xIsNextState;  //zare_nk_040120_nokteh(mitoonim useEffecte bala ro hazf konim va haminja benevisim)
+    xIsNextRef.current = xIsNextState; 
     intervalRef.current = setInterval(function () {
       if (calculateWinner(squares)) {
         setTimerDisplay("none");
