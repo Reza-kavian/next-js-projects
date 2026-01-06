@@ -369,15 +369,7 @@ function Board({
             display: timerDisplay,
             flexFlow: "row",
           }}
-        >
-          {/* zare_nk_040331_commented_st */}
-          {/* <div
-            ref={refForTimer}
-            id="timermoveOpportunity"
-            style={{ display: "flex", flexFlow: "row", color: "red" }}
-          ></div> */}
-          {/* zare_nk_040331_commented_end */}
-          {/* zare_nk_040331_added_end */}
+        >        
           <div
             ref={refForTimer}
             id="timermoveOpportunity"
@@ -466,8 +458,7 @@ function Board({
             sToString
           </span> */}
           </div>
-          {/* zare_nk_040331_added_st */}
-
+          
           <span
             style={{
               display: "flex",
@@ -602,16 +593,14 @@ export default function Game() {
       "zare_nk_040225-currentSquareee???: " +
       JSON.stringify(history[nextMove][history[nextMove]])
     );
-    // setXIsNextState(history[nextMove][history[nextMove].length - 1]);   //zare_nk_040424_commented
-    ////zare_nk_040424_added__st 
+    
     if (history[nextMove][history[nextMove].length - 1] == "X") {
       setXIsNextState(false);
       localStorage.setItem("xIsNextState", JSON.stringify(false));
     } else {
       setXIsNextState(true);
       localStorage.setItem("xIsNextState", JSON.stringify(true));
-    }
-    ////zare_nk_040424_added_end
+    } 
   }
     
   const moves = history.map((squares: string, move: number) => {
