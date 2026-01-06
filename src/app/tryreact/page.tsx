@@ -1,3 +1,4 @@
+////zare_nk_041015_okk
 "use client";
 import { useEffect, useState, useRef, useCallback } from "react";
 import Styles from "@/styles/components/dooz.module.css";
@@ -7,8 +8,8 @@ type SquareProps = {
   value: string | null;
   onSquareClick: () => void;
   andis: number;
-  refForBtn: React.RefObject<(HTMLButtonElement | null)[]>; 
-  className?: string; 
+  refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
+  className?: string;
 };
 
 function Square({ value, onSquareClick, andis, refForBtn }: SquareProps) {
@@ -29,10 +30,10 @@ function Square({ value, onSquareClick, andis, refForBtn }: SquareProps) {
   );
 }
 
-type SquareValue = "X" | "O" | null;
-type Squares = SquareValue[];
+type SquareValue = "X" | "O" | null;   //zare_nk_041015_nokteh(SquareValue yek type ast ke ya X ya O ya null hast)
+type Squares = SquareValue[];   //zare_nk_041015_nokteh(Squares yek type ast ke arayeh ei az noe SquareValue hast,yani maghadiresh faghat X ya O ya null hast)
 // type Squares = [SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue, SquareValue];
-type BtnColor = string | null;
+type BtnColor = string | null;   //zare_nk_041015_nokteh(BtnColor range dokmeh ra moshakhas mikoneh ke noe reshtei ast)
 
 type BoardProps = {
   squares: Squares; //zare_nk_040528_nokteh(arayeye 9 khanehiye haviye vaziate feliye chineshe dooz(ba clicke dokmehaye dooz ya ba clicke dokmehaye archiv in vaziat avaz misheh))
@@ -89,7 +90,7 @@ function Board({
     if (localStorage.getItem("BtnsColor")) {
       console.log(
         "zare_nk_040225-Board called!!-localStorage.BtnsColor: " +
-          localStorage.getItem("BtnsColor")
+        localStorage.getItem("BtnsColor")
       );
       const storedBtnsColor = localStorage.getItem("BtnsColor");
       let jsonedBtnsColor;
@@ -97,14 +98,14 @@ function Board({
         jsonedBtnsColor = JSON.parse(storedBtnsColor);
       } else {
         jsonedBtnsColor = null; // یا مقدار پیش‌فرض دیگه
-      } 
-      if (jsonedBtnsColor) {
+      }
+      if (jsonedBtnsColor) {  //zare_nk_041015_nokteh(jsonedBtnsColor arrayeei az ranghaye dokmeh ha hast)
         jsonedBtnsColor.map((item_: string, index: number) => {
-          if (refForBtn.current[index]) {
+          if (refForBtn.current[index]) {    //zare_nk_041015_nokteh(age dokmeye khaneye index vojood dasht dakhle if rangesh ro taein mikonim
             refForBtn.current[index].classList.add(jsonedBtnsColor[index]);
           }
         });
-      } 
+      }
     }
   }, []);
 
@@ -134,10 +135,10 @@ function Board({
           if (intervalRef.current !== null) {
             clearInterval(intervalRef.current);
           }
-          setXIsNextState(!xIsNextRef.current); 
+          setXIsNextState(!xIsNextRef.current);
           // setXIsNextState(!xIsNextState);   
-          // setXIsNextState((cur) =>{return !cur} );  //not ok//zare_nk_040528_nokteh(nadorost hast,ehtemalan chon yek setState booleani dakhele setState dige mokhtal mishe)
-          squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O";            
+          // setXIsNextState((cur) =>{return !cur} );  //not ok //zare_nk_040528_nokteh(nadorost hast,ehtemalan chon yek setState booleani dakhele setState dige mokhtal mishe)
+          squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O";
           localStorage.setItem(
             "xIsNextState",
             JSON.stringify(!xIsNextRef.current)
@@ -219,11 +220,11 @@ function Board({
     };
   }, [timer, xIsNextState]);
 
-  function handleClick(i: number) { 
+  function handleClick(i: number) {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    setLastButton(() => { 
+    setLastButton(() => {
       return i;
     });
     localStorage.setItem("lastButton", JSON.stringify(i));
@@ -232,11 +233,11 @@ function Board({
       nextSquares[i] = "X";
     } else {
       nextSquares[i] = "O";
-    } 
+    }
     //zare_nk_040225_commented_st(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolea barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
     setXIsNextState((cur) => {
-      localStorage.setItem("xIsNextState", JSON.stringify(!cur)); 
-      squares[squares.length - 1] = !cur ? "X" : "O";  
+      localStorage.setItem("xIsNextState", JSON.stringify(!cur));
+      squares[squares.length - 1] = !cur ? "X" : "O";
       return !cur;
     });
     //zare_nk_040225_commented_end(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolea barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
@@ -249,7 +250,7 @@ function Board({
     localStorage.setItem("timer", JSON.stringify(5000));
     [...Array(9)].map((_, index) => {
       if (index == i) {
-        refForBtn.current[index]?.classList.add(Styles.mohrehCliked); 
+        refForBtn.current[index]?.classList.add(Styles.mohrehCliked);
         refForBtn.current[index]?.classList.remove(
           Styles.mohreh,
           Styles.mohrehWined,
@@ -269,7 +270,7 @@ function Board({
     });
     localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
     setLastMove(true);
-    localStorage.setItem("lastMove", JSON.stringify(true));   
+    localStorage.setItem("lastMove", JSON.stringify(true));
     onPlay(nextSquares);
   }
 
@@ -279,14 +280,14 @@ function Board({
     status = winner[0] + " : برنده";
     console.log(
       "winner not nul-typeof(winner):" +
-        typeof winner +
-        "-winner.lenght: " +
-        winner.length +
-        "-winner: " +
-        JSON.stringify(winner) +
-        "---status: " +
-        status
-    );    
+      typeof winner +
+      "-winner.lenght: " +
+      winner.length +
+      "-winner: " +
+      JSON.stringify(winner) +
+      "---status: " +
+      status
+    );
     const stored = localStorage.getItem("BtnsColor");
     const jsonedBtnsColor = stored !== null ? JSON.parse(stored) : null;
     winner.map((_, index) => {
@@ -302,13 +303,13 @@ function Board({
         refForBtn.current[winner[index]]?.classList.add(Styles.lineWined);
         BtnsColor[winner[index]] = Styles.lineWined;
       } else if (
-        typeof winner[index] === "number" && 
+        typeof winner[index] === "number" &&
         winner[index] != lastButton &&
         jsonedBtnsColor != null
       ) {
         BtnsColor[winner[index]] = Styles.lineWined;
       } else if (
-        typeof winner[index] === "number" && 
+        typeof winner[index] === "number" &&
         winner[index] == lastButton &&
         refForBtn.current[winner[index]] != null
       ) {
@@ -320,7 +321,7 @@ function Board({
         refForBtn.current[winner[index]]?.classList.add(Styles.mohrehWined);
         BtnsColor[winner[index]] = Styles.mohrehWined;
       } else if (
-        typeof winner[index] === "number" && 
+        typeof winner[index] === "number" &&
         winner[index] == lastButton &&
         jsonedBtnsColor != null
       ) {
@@ -524,7 +525,7 @@ function Board({
 
 export default function Game() {
   console.log("zare_nk_040317-Game called!!");
-  const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null)); 
+  const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null)); //zare_nk_041015_nokteh(refForBtn yek useref ast ke arayeei az dokmehaye dooz ast)
   const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);  //zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
   const storedHistory = localStorage.getItem("history");
   const [history, setHistory] = useState(
@@ -532,9 +533,9 @@ export default function Game() {
   );
   console.log(
     "zare_nk_040131-BtnsColor.len: " +
-      BtnsColor.length +
-      "-history.len: " +
-      history.length
+    BtnsColor.length +
+    "-history.len: " +
+    history.length
   );
   const storedCurrentMove = localStorage.getItem("currentMove");
   const [currentMove, setCurrentMove] = useState(  //zare_nk_040528_nokteh(shamele andise akhare arayeye history ast ke be vaziate feliye chineshe mohrehaye dooz eshare mikoneh)
@@ -542,7 +543,7 @@ export default function Game() {
   );
   const currentSquares = history[currentMove];
   const storedxIsNextState = localStorage.getItem("xIsNextState");
-  const [xIsNextState, setXIsNextState] = useState( 
+  const [xIsNextState, setXIsNextState] = useState(
     storedxIsNextState !== null ? JSON.parse(storedxIsNextState) : true
   );
   const storedTimer = localStorage.getItem("timer");
@@ -554,21 +555,22 @@ export default function Game() {
   const [lastMove, setLastMove] = useState(  //zare_nk_040525_nokteh(state ke mige dokmehaye dooz click shodeh ya dokmehaye archiv)(baraye dokmeh boodan ya h6 boodane akharin dikmeye arshiv karbord dareh)
     storedLastMove !== null ? JSON.parse(storedLastMove) : false
   );
-  
+
   const intervalRef = useRef(null);
   const [timerDisplay, setTimerDisplay] = useState("flex");
 
-  const [hToString, setHToString] = useState<string | null>(null); 
-  const [mToString, setMToString] = useState<string | null>(null); 
-  const [sToString, setSToString] = useState<string | null>(null); 
-  const handlePlay = useCallback(  //zare_nk_040528_nokteh(dar har render Game age history ya currentMove tagheir konand amal mikonad in method va history va currentMove ra meghdare jadid mideh
-  // ,masalan ba clicke dokmehaye dooz va clicke archiv vaghti Game render shod in useCalback amal mikoneh, va hamin method attribute onPlaye componente board ra meghdar mideh)
+  const [hToString, setHToString] = useState<string | null>(null);
+  const [mToString, setMToString] = useState<string | null>(null);
+  const [sToString, setSToString] = useState<string | null>(null);
+  const handlePlay = useCallback(   
+    ////zare_nk_041016_nokteh(dar har render Game age rooydade clike dokmeye dooz mongar be render shodeh bashe angah age history ya currentMove tagheir konand amal mikonad in method va history va currentMove ra meghdare jadid mideh, vali age history, currentMove tagheir kardeh bashand bedoone rooydade clicke dokmeye dooz useCallback amal nemikoneh,chon midoonim useCallback chizi sede nemizaneh,faghat age chizi bekhad seda zadeh beshe mitooneh age dar [] nabashe az seda zadanesh jologiri koneh, darvaghe useCallback ghabeliate seda zadan nadare,barakse useEffect ke seda mizaneh)
     (nextSquares: any) => {
+      alert("zare_nk_040109-handlePlay called!!");
       console.log("zare_nk_040109-handlePlay called!!");
       const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
       setHistory(nextHistory);
       localStorage.setItem("history", JSON.stringify(nextHistory));
-      setCurrentMove(nextHistory.length - 1);  
+      setCurrentMove(nextHistory.length - 1);
       localStorage.setItem(
         "currentMove",
         JSON.stringify(nextHistory.length - 1)
@@ -586,6 +588,11 @@ export default function Game() {
     setCurrentMove(nextMove);
     localStorage.setItem("currentMove", JSON.stringify(nextMove));
 
+    ////zare_nk_041016_added_testi_st
+    const storedCurrentMoveTesti = localStorage.getItem("currentMove");
+    alert('1-nextMove: ' + nextMove + '-storedCurrentMoveTesti: ' + storedCurrentMoveTesti);
+    ////zare_nk_041016_added_testi_end
+
     [...Array(9)].map((_, index) => {
       refForBtn.current[index]?.classList.add(Styles.mohreh);
       refForBtn.current[index]?.classList.remove(
@@ -600,7 +607,7 @@ export default function Game() {
     localStorage.setItem("lastMove", JSON.stringify(false));
     console.log(
       "zare_nk_040225-currentSquareee???: " +
-        JSON.stringify(history[nextMove][history[nextMove]])
+      JSON.stringify(history[nextMove][history[nextMove]])
     );
     // setXIsNextState(history[nextMove][history[nextMove].length - 1]);   //zare_nk_040424_commented
     ////zare_nk_040424_added__st
@@ -613,7 +620,8 @@ export default function Game() {
     }
     ////zare_nk_040424_added_end
   }
-
+  ////zare_nk_041016_tahlilshe
+  // alert('2-storedCurrentMove: '+storedCurrentMove);
   const moves = history.map((squares: string, move: number) => {
     //item_: string, index: number
     let mokhtasatInDescription = " ترتیب مهره های آرشیو : ";
@@ -622,25 +630,49 @@ export default function Game() {
       if (index == SquareInHistory.length - 1) {
         return;
       }
-      if (SquareInHistory[index] != null) {
+      ////zare_nk_041016_commented_st
+      // if (SquareInHistory[index] != null) {
+      //   if (mokhtasatInDescription != " ترتیب مهره های آرشیو : ") {
+      //     mokhtasatInDescription += " - ";
+      //   }
+      //   mokhtasatInDescription += index;
+      // }
+      ////zare_nk_041016_commented_end
+      ////zare_nk_041016_added_st
+      if (move == 0) {
+        mokhtasatInDescription = "";
+      }
+      else if (SquareInHistory[index] != null) {
         if (mokhtasatInDescription != " ترتیب مهره های آرشیو : ") {
           mokhtasatInDescription += " - ";
         }
         mokhtasatInDescription += index;
       }
+      ////zare_nk_041016_added_end  
     });
 
     let description;
-    if (move > 0) {
-      if (move == history.length - 1) {
-        description = "شما در آرشیو " + (move + 1) + " هستید "; // + " هستید - ";
-      } else {
-        description = "برو به آرشیو " + (move + 1);
-      }
+    ////zare_nk_041016_commented_st
+    // if (move > 0) { 
+    //   if (move == history.length - 1) {
+    //     description = "شما در آرشیو " + (move + 1) + " هستید "; // + " هستید - ";
+    //   } else {
+    //     description = "برو به آرشیو " + (move + 1);
+    //   }  
+    // } else {
+    //   description = "آرشیو اول";
+    //   mokhtasatInDescription = "";
+    // }
+    ////zare_nk_041016_commented_end 
+    ////zare_nk_041016_added_st
+    const parsedStoredCurrentMove = storedCurrentMove !== null ? JSON.parse(storedCurrentMove) : 0
+    if (move == parsedStoredCurrentMove) {
+      description = "شما در آرشیو " + (move + 1) + " هستید "; // + " هستید - ";
     } else {
-      description = "آرشیو اول";
-      mokhtasatInDescription = "";
+      description = "بروهه به آرشیو " + (move + 1);
     }
+    ////zare_nk_041016_added_end   
+
     return history.length <= 1 ? (
       <li key={move} className={Styles.historyItem}>
         <h5 style={{ color: "red" }}>
@@ -669,8 +701,7 @@ export default function Game() {
       </li>
     ) : (
       <li key={move} className={Styles.historyItem}>
-        <span style={{ color: "red" }}> {description}</span>
-        <span style={{ color: "red" }}> ، </span>
+        <span style={{ color: "red" }}> {description}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
         <span>{mokhtasatInDescription}</span>
       </li>
     );
