@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 
 // import Todos from "../../components/Todos";
-import Todos from "@/components/Todos";
+import {Todos} from "@/components/Todos";
 import { notFound } from "next/navigation";
 
 export default function () {
