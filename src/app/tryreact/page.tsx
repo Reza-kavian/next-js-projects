@@ -1,4 +1,4 @@
-////zare_nk_041015_okk
+////zare_nk_041108_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback } from "react";
 import Styles from "@/styles/components/dooz.module.css"; 
@@ -100,7 +100,7 @@ function Board({
       }
       if (jsonedBtnsColor) {  //zare_nk_041015_nokteh(jsonedBtnsColor arrayeei az ranghaye dokmeh ha hast)
         jsonedBtnsColor.map((item_: string, index: number) => {
-          if (refForBtn.current[index]) {    //zare_nk_041015_nokteh(age dokmeye khaneye index vojood dasht dakhle if rangesh ro taein mikonim
+          if (refForBtn.current[index]) {    //zare_nk_041015_nokteh(age dokmeye khaneye index vojood dasht dakhele if rangesh ro taein mikonim
             refForBtn.current[index].classList.add(jsonedBtnsColor[index]);
           }
         });
@@ -139,7 +139,7 @@ function Board({
             JSON.stringify(!xIsNextRef.current)
           );
           localStorage.setItem("timer", JSON.stringify(5000));
-          return 5000;
+          return 5000;  
         }
         let h = Math.floor(timer / (1000 * 60 * 60));
         let hToString = h.toString();
@@ -608,15 +608,6 @@ export default function Game() {
       if (index == SquareInHistory.length - 1) {
         return;
       }
-      ////zare_nk_041016_commented_st
-      // if (SquareInHistory[index] != null) {
-      //   if (mokhtasatInDescription != " ترتیب مهره های آرشیو : ") {
-      //     mokhtasatInDescription += " - ";
-      //   }
-      //   mokhtasatInDescription += index;
-      // }
-      ////zare_nk_041016_commented_end
-      ////zare_nk_041016_added_st
       if (move == 0) {
         mokhtasatInDescription = "";
       }
@@ -626,30 +617,15 @@ export default function Game() {
         }
         mokhtasatInDescription += index;
       }
-      ////zare_nk_041016_added_end  
     });
 
     let description;
-    ////zare_nk_041016_commented_st
-    // if (move > 0) { 
-    //   if (move == history.length - 1) {
-    //     description = "شما در آرشیو " + (move + 1) + " هستید "; // + " هستید - ";
-    //   } else {
-    //     description = "برو به آرشیو " + (move + 1);
-    //   }  
-    // } else {
-    //   description = "آرشیو اول";
-    //   mokhtasatInDescription = "";
-    // }
-    ////zare_nk_041016_commented_end 
-    ////zare_nk_041016_added_st
     const parsedStoredCurrentMove = storedCurrentMove !== null ? JSON.parse(storedCurrentMove) : 0
     if (move == parsedStoredCurrentMove) {
-      description = "شما در آرشیو " + (move + 1) + " هستید "; // + " هستید - ";
+      description = "شما در آرشیو " + (move + 1) + " هستید "; 
     } else {
       description = "بروهه به آرشیو " + (move + 1);
-    }
-    ////zare_nk_041016_added_end   
+    } 
 
     return history.length <= 1 ? (
       <li key={move} className={Styles.historyItem}>

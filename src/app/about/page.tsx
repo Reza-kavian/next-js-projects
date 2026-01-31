@@ -1,9 +1,10 @@
-////zare_nk_041015_okk
+////zare_nk_041108_okk
 //src\app\about\page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import styles from "@/styles/components/home.module.css";
-import Image002 from "@/assets/images/002.jpg";
+import Image002 from "../../../public/images/002.jpg";  //zare_nk_041105_nokteh(albateh migan import Image faghat bayad baraye file haye dakhele /src bashe. va baraye file haye dakhele public bayad 
+// az tage img mostaghiman estefadeh kard va baraye atribute src ham az / be onvane poosheye public estefadeh mikonim,masalan <img src="/Images/..." /> yani masire /public/Images/...)
 import { metadata as layoutMetadata} from "../layout"; //zare_nk_040131_nokteh(mitavan metadata ra az layout import nakard,inja import kardam ta roosh dastkari konam)
 // metadata.title = metadata.title + '-abouuttiimm';  //zare_nk_040416_nokteh(in khat az nazare manteghi khatarnake ke metadataye import shodeh ro dastkari konim va momkene dar builde proujeh error bedeh)
 export const metadata = { //zare_nk_041013_nokteh(be khatere in dastkari majboor shodim metadata ra az layout import konim vagarnah barnameh automat metadata ra dar tage html title gharar midad)

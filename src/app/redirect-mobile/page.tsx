@@ -1,4 +1,4 @@
-//\src\app\redirect-mobile\page.tsx  //zare_nk_041015_okk
+//\src\app\redirect-mobile\page.tsx  //zare_nk_041108_okk
 "use client";
 import { useEffect } from "react";
 import { redirect } from "next/navigation";

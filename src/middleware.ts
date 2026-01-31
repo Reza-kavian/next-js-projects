@@ -1,10 +1,11 @@
-////zare_nk_041015_okk
+////zare_nk_041108_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard,pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
 // va natijeh ra be middleware.ts pasokh dadim.
 import { jwtVerify } from "jose"; ////zare_nk_040403_added
 const publicPaths = [
+   "/about",
   "/folder02",
   "/folder03",
   "/login",
@@ -34,6 +35,7 @@ async function verifyToken(token: string) {
       process.env.JWT_SECRET_BASE64!,
       "base64"
     ).toString("utf-8"); //zare_nk_040219_added(baraye adame moshkel dar verify kardane secretKey vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
+    
     console.log(
       "zare_nk_041009-03-POST called!!-decoded secretKey: " + secretKey
     );

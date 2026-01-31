@@ -1,4 +1,4 @@
-////zare_nk_041015_okk
+////zare_nk_041108_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -218,23 +218,23 @@ function SecondPageComponent({
             refForTimer.current.innerHTML =
               hToString != "00"
                 ? '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
-                  hToString +
-                  "</span>" +
-                  '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
-                  '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
-                  mToString +
-                  "</span>" +
-                  '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
-                  '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
-                  sToString +
-                  "</span>"
+                hToString +
+                "</span>" +
+                '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
+                '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+                mToString +
+                "</span>" +
+                '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
+                '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+                sToString +
+                "</span>"
                 : '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
-                  mToString +
-                  "</span>" +
-                  '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
-                  '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
-                  sToString +
-                  "</span>";
+                mToString +
+                "</span>" +
+                '<span style="color:red;padding:0px 5px;display:flex;justify-content:center;align-items:center;">:</span>' +
+                '<span style="border-radius:5px;width:30px;height:30px;background-color:red;color:white;display:flex;justify-content:center;align-items:center;">' +
+                sToString +
+                "</span>";
           }
         } catch (error) {
           if (error instanceof Error) {
@@ -452,8 +452,10 @@ export default function Toolbar() {
     });
     const data = await response.json();
     if (response.ok) {
-      console.log("zare_nk_040218-data: " + JSON.stringify(data));
-      //zare_nk_040218-data: {"status":0,"message":"","data":1,"errors":[]}
+      console.log("zare_nk_040218-data: " + JSON.stringify(data) + '-response.status: ' + response.status);
+      //zare_nk_040218-data: {"status":0,"message":"","data":1,"errors":[]}-response.status: 200
+      //zare_nk_040218-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
+      //zare_nk_040218-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
       if (data.status == 0) {
         setCurrentPage("secondPage");
         setBackBtnCliked(false);
@@ -461,16 +463,16 @@ export default function Toolbar() {
       } else {
         document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        setError("متاسفانه خطایی رخ داده است:" + data.errors);
+        setError("متاسفانه 77 خطایی رخ داده است:" + data.errors);
         //zare_nk_040218-data: {"status":-2,"message":"","data":1,"errors":["6 ثانیه ی دیگر مجددا تلاش کنید"]}
       }
     } else {
       document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
       document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      setError("متاسفانه  خطایی رخ داده است");
+      setError("متاسفانه 22 خطایی رخ داده است");
     }
   }
-
+ 
   const handleGoogleLogin = () => {   //zare_nk_040925_tahlilshe
     alert("handleGoogleLogin002");
     window.location.href = `/api/auth/google`; // هدایت به گوگل  //zare_nk_040422_commented
@@ -522,7 +524,7 @@ export default function Toolbar() {
       // },"errors":[]}
       if (data.status == 0) {
         let token = data.data.token;
-       
+
         ////zare_nk_040603_added_st 
         // // const secretKey = Buffer.from(
         // //   process.env.JWT_SECRET_BASE64!,
@@ -533,13 +535,13 @@ export default function Toolbar() {
         // console.log("040530-03-token: " + JSON.stringify(decoded));
         ////zare_nk_040603_added_end        
 
-        try {  
+        try {
           const response = await fetch("/api/auth/verifyToken", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token }),
           });
-          const data = await response.json(); 
+          const data = await response.json();
           if (response.ok) {
             console.log("zare_nk_040925-decodedToken: " + JSON.stringify(data.decoded));
             // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString(); // 3 ساعت بعد //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam)   //zare_nk_040305_updated(dasti ra az 3 be 30 tagheir dadam)
@@ -556,12 +558,20 @@ export default function Toolbar() {
           } else {
             document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
             document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+            setError("متاسفانه خطایی رخ داده است33:" + (data?.errorMessage? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
           }
         } catch (error) {
           document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
           document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
           console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error);
-          setError("متاسفانه خطایی رخ داده است33:" + error);
+          // setError("متاسفانه خطایی رخ داده است33:" + error);  //zare_nk_041107_commented
+          ////zare_nk_041107_added_st
+          if (error instanceof Error) {
+            setError("متاسفانه خطایی رخ داده است33:" + error.message);
+          } else {
+            setError("متاسفانه خطایی رخ داده است33:" + String(error));
+          }
+          ////zare_nk_041107_added_end
         }
       } else {
         document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -652,7 +662,7 @@ export default function Toolbar() {
       // }
       setMobileError("ورود شماره تماس الزامی است"); //zare_nk_040224_added(rahe3-ba useState-reactpasandtarine)
 
-      // refForMobileCheckBtn.current.disabled = true;  //zare_nk_040222_commented(javab nadad chon meghdare ebtedaeiye disabled ra dar khate tarife MobileCheckBtn ba lafze ,ostaghime false dadim va ref dige tavanaeiye tagheiresho nadare,va olaviat ba tarife atribute html hast )
+      // refForMobileCheckBtn.current.disabled = true;  //zare_nk_040222_commented(javab nadad chon meghdare ebtedaeiye disabled ra dar khate tarife MobileCheckBtn ba lafze mostaghime false dadim va ref dige tavanaeiye tagheiresho nadare,va olaviat ba tarife atribute html hast )
       setIsDisabledMobileCheckBtn(true); //zare_nk_04022_added(javab dad chon meghdare ebtedaeiye disabled ra dar khate tarife MobileCheckBtn ba meghdare isDisabledMobileCheckBtn dadim va setIsDisabledMobileCheckBtn tavanaeiye tagheiresho dare )
       if (refForMobileCheckBtn.current) {
         refForMobileCheckBtn.current.classList.add(Styles.disabledBtn);
@@ -696,6 +706,7 @@ export default function Toolbar() {
   }
 
   function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) {
+    alert('4.smsTxtChanged called!!');
     setError("");
     var input = null;
     var vall = null;
@@ -748,6 +759,7 @@ export default function Toolbar() {
     setMobileCheckBtn(false);
     // setIsDisabledMobileCheckBtn(false);//zare_nk_040224_added(ehtemalan niazi nist chon alanam false hast.chon unmount ke nashodim az in component)
   }
+
   return (
     <div
       style={{

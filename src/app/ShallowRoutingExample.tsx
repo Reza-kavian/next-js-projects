@@ -1,4 +1,4 @@
-"use client";
+"use client";  //zare_nk_041021_okk
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
@@ -8,7 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import * as bootstrap from "bootstrap";  //zare_nk_040417_commented
 let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_added
 
-//// import Modal from "bootstrap/js/dist/modal";   //age faghat in ra begzaram va kolle bootstarp ra import nakonam kami be sabok boodane barname komak mishe,vali dar terminal errore <<document is not defined>> mideh ke badan tahlilesh mikonam
+//// import Modal from "bootstrap/js/dist/modal";   //age faghat in ra begzaram va kolle bootstarp ra import nakonam kami be sabok boodane barname komak mishe
+// ,vali dar terminal errore <<document is not defined>> mideh ke badan tahlilesh mikonam
 // import { BrowserMultiFormatReader } from "@zxing/browser";   //zare_nk_040417_commented
 // import { NotFoundException } from "@zxing/library";    //zare_nk_040417_commented
 // import "@/styles/ProductDetailsCss.css";   //zare_nk_040228_commented_movaghat
@@ -95,6 +96,7 @@ export function MiddleCountTedadSefr({
       }
     }
   }, [ForCartContInProdDetVal]);
+
   if (ForCartContentsDesignType == 0) {
     return (
       <div
@@ -610,8 +612,10 @@ export function MiddleCountTedadSefr({
     );
   }
 }
+
 // var BarcodeKala = null; //zare_nk_040410_commented
 let BarcodeKala: string | null = null; //zare_nk_040410_added
+
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
   const parts = value.split(`; ${name}=`); // تفکیک کوکی‌ها
@@ -621,17 +625,21 @@ function getCookie(name: any) {
   }
   return null; // اگر کوکی پیدا نشد
 }
+
 type ParsedItemType = {
   IdKala: number;
   NameKala: string;
   [key: string]: any;
 };
+
 type SabadRowType = {
   IdKala: number;
   NameKala: string;
   MM: string;
-  [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast
+  [key: string]: any; //zare_nk_041021_nokteh(yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va 
+  // timi kar nakonim, pas [key: string]: any; gozashtam ke kolli hast)
 };
+
 export default function ShallowRoutingExample() {
   const router = useRouter();
   type CartData = {
@@ -672,9 +680,7 @@ export default function ShallowRoutingExample() {
           if (result) {
             // console.log("zare_nk_0730-result.text: " + result.text);
             // متوقف کردن اسکن پس از شناسایی
-
             const text = result.getText(); //zare_nk_040410_added
-
             control.stop();
             const bootstrap = await getBootstrap(); //zare_nk_040417_added
             const modal = new bootstrap.Modal(
@@ -704,8 +710,7 @@ export default function ShallowRoutingExample() {
         input.value = "";
       }
       ShowCamera();
-    };
-     
+    };     
     if (seePricesModal) {
       seePricesModal.addEventListener(
         "shown.bs.modal",
@@ -714,7 +719,6 @@ export default function ShallowRoutingExample() {
     } 
 
     const mymodalForWarning = document.getElementById("mymodalForWarning");
-
     const handlerForMymodalForWarning = () => {
       router.refresh(); //zare_nk_040312_added-kolle safhe refresh nemishe va saritar va behtare
       //  window.location.reload();  //zare_nk_040312_added-faghat dar sourate niaz vaghti ke router.refresh() javab nadad
@@ -734,7 +738,6 @@ export default function ShallowRoutingExample() {
         ImageColectionInDetails.style.display = "none";
       // ShowDetails();  //zare_nk_040609_commented
     };
-
     const prodDetModal = document.getElementById("prodDetModal"); 
     if (prodDetModal) {
       prodDetModal.addEventListener("shown.bs.modal", handlerForProdDetModal);      
@@ -748,12 +751,14 @@ export default function ShallowRoutingExample() {
           handlerForSeePricesModal
         ); //zare_nk_040526_added
       }
+      
       if (mymodalForWarning) {
         mymodalForWarning.removeEventListener(
           "hidden.bs.modal",
           handlerForMymodalForWarning
         );
       }
+
       if (prodDetModal) {
         prodDetModal.removeEventListener(
           "shown.bs.modal",
@@ -1303,7 +1308,7 @@ export default function ShallowRoutingExample() {
         if (gheimatForooshInDetailsInfoCont instanceof HTMLElement) {
           gheimatForooshInDetailsInfoCont.innerHTML =
             parsedList[0].FeeForoosh.toLocaleString();
-        }
+        }``
         const forDiscountInDetails = document.getElementById(
           "forDiscountInDetails"
         );

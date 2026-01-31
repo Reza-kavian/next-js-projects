@@ -1,4 +1,4 @@
-////zare_nk_041015_okk
+////zare_nk_041108_okk
 "use client";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -17,7 +17,9 @@ function AlertButton(props: AlertButtonProps) {
     // <button onClick={() => {return alert(messaged+'5')} }>
     //   {children}
     // </button>
-    <button onClick={() => alert(props.messaged)}>{props.children}</button>
+    <button onClick={() => alert(props.messaged)}>
+      {props.children}
+    </button>
   );
 }
 
@@ -27,7 +29,7 @@ export default function Toolbar() {
     // یا redirect("/") // به صفحه اصلی بفرست
     return null;
   }
-  
+
   return (
     <div>
       <AlertButton messaged="Playing!">

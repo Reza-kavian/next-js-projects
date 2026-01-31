@@ -1,4 +1,4 @@
-// src/app/not-found.tsx  //zare_nk_041015_okk
+// src/app/not-found.tsx  //zare_nk_041107_okk
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";

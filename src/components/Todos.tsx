@@ -1,5 +1,5 @@
-////zare_nk_041015_okk
-"use client"; 
+////zare_nk_041108_okk
+"use client";
 import { memo } from 'react'
 
 interface TodosProps {
@@ -20,7 +20,7 @@ interface TodosProps {
 //       </>
 //     );
 //   };
-  
+
 //   export default memo(Todos);
 ////zare_nk_041016_added_end(rahe 1)
 
@@ -37,31 +37,31 @@ interface TodosProps {
 //       </>
 //     );
 //   }); 
-  ////zare_nk_041016_added_end(rahe 2 ke khanatar az nazare chatGpt)
+////zare_nk_041016_added_end(rahe 2 ke khanatar az nazare chatGpt)
 
 
-  // export const Todos= memo( function Todos  ({ todos, addTodo }: TodosProps)   {   
-  // console.log("child render");
-  //   return (
-  //     <>
-  //       <h2>My Todos</h2>
-  //       {todos.map((todo, index) => {
-  //         return <p key={index}>{todo}</p>;
-  //       })}
-  //       <button onClick={addTodo}>add todo</button>
-  //     </>
-  //   );
-  // }); 
+// export const Todos= memo( function Todos  ({ todos, addTodo }: TodosProps)   {   
+// console.log("child render");
+//   return (
+//     <>
+//       <h2>My Todos</h2>
+//       {todos.map((todo, index) => {
+//         return <p key={index}>{todo}</p>;
+//       })}
+//       <button onClick={addTodo}>add todo</button>
+//     </>
+//   );
+// }); 
 
-    export const Todos= memo( function    ({ todos, addTodo }: TodosProps)   {   
+export const Todos = memo(function ({ todos, addTodo }: TodosProps) {
   console.log("child render");
-    return (
-      <>
-        <h2>My Todos</h2>
-        {todos.map((todo, index) => {
-          return <p key={index}>{todo}</p>;
-        })}
-        <button onClick={addTodo}>add todo</button>
-      </>
-    );
-  }); 
+  return (
+    <>
+      <h2>My Todos</h2>
+      {todos.map((todo, index) => {
+        return <p key={index}>{todo}</p>;
+      })}
+      <button onClick={addTodo}>add todo</button>
+    </>
+  );
+}); 

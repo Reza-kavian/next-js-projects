@@ -1,4 +1,4 @@
-////zare_nk_041015_okk
+////zare_nk_041108_okk
 "use client";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 
@@ -22,7 +22,7 @@ export default function () {
     for (let i = 0; i < 1000000000; i++) {
       x++;
     }
-    return x; //zare_nk_040131_nokteh(age chizi return nakonim darvaghe engar maksi ke tavabei dar render shodanha ijad mikonan
+    return x; //zare_nk_041021_nokteh(age chizi return nakonim darvaghe engar maksi ke tavabei dar render shodanha ijad mikonan
     //  ra nemitavan ba useMemo midiriat kard, va chareye kar mitavanad estefadeye useEffect bejaye useMemo bashad)
   }, [count]);
 

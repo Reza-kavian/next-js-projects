@@ -697,8 +697,8 @@ export function SabadSatrComponent({
             className="card-img-top"
             alt={NameKala}
             style={{ width: "100%", backgroundColor: "#EFEFEF" }}
-            //  onError={this.onerror=null;this.src=\'https://img.tochikala.com/Logo/tochi.png\';$(this).css(\'height\',\'auto\') }}
-            //  onLoad="$(this).css(\'background-color\',\'inherit\');$(this).css(\'height\',\'auto\');"
+          //  onError={this.onerror=null;this.src=\'https://img.tochikala.com/Logo/tochi.png\';$(this).css(\'height\',\'auto\') }}
+          //  onLoad="$(this).css(\'background-color\',\'inherit\');$(this).css(\'height\',\'auto\');"
           />
         </div>
       </div>
@@ -943,8 +943,10 @@ export default function ShallowRoutingExample() {
   //  function ShowDetails() {  //zare_nk_040601_commented
   async function ShowDetails(barcodeKala: any) {
     // alert("ShowDetails-ShowDetails-ShowDetails");
-    const token = getCookie("token");
-    if (token == null) {
+    const token = getCookie("token"); 
+       // if (token == null) {//zare_nk_041022_commented_movaghat(paqkkardani_chon sms nemiad bekhatere sharayete siasiye keshver login ra bikhial mishim baraye moroor)
+      if (token != null) {  //zare_nk_041022_added_movaghat(paqkkardani_chon sms nemiad bekhatere sharayete siasiye keshver login ra bikhial mishim baraye moroor)
+
       const bootstrap = await getBootstrap();
       const mymodalForWarning = new bootstrap.Modal(
         document.getElementById("mymodalForWarning")
@@ -1148,7 +1150,7 @@ export default function ShallowRoutingExample() {
 
     // }
     ////zare_nk_040612_commented_end
-   
+
     const groupsInDetailsPageCont = document.getElementById(
       "groupsInDetailsPageCont"
     );
@@ -1156,13 +1158,13 @@ export default function ShallowRoutingExample() {
       groupsInDetailsPageCont.style.display = "none";
     }
 
-    const handlerForProdDetModal = () => { 
+    const handlerForProdDetModal = () => {
       const ImageColectionInDetails = document.getElementById(
         "ImageColectionInDetails"
       );
       if (ImageColectionInDetails instanceof HTMLElement) {
         ImageColectionInDetails.style.display = "none";
-      } 
+      }
     };
     const hiddenHandlerForProdDetModal = () => {
       setIsOpenedProdDetModal(false);
@@ -1217,7 +1219,8 @@ export default function ShallowRoutingExample() {
     }
     async function tempFuncForAsync() {
       const token = getCookie("token");
-      if (token == null) {
+      // if (token == null) {//zare_nk_041022_commented_movaghat(paqkkardani_chon sms nemiad bekhatere sharayete siasiye keshver login ra bikhial mishim baraye moroor)
+      if (token != null) {  //zare_nk_041022_added_movaghat(paqkkardani_chon sms nemiad bekhatere sharayete siasiye keshver login ra bikhial mishim baraye moroor)
         const bootstrap = await getBootstrap();
         const mymodalForWarning = new bootstrap.Modal(
           document.getElementById("mymodalForWarning")
@@ -1230,7 +1233,7 @@ export default function ShallowRoutingExample() {
           span.innerText = "لطفا ابتدا آنلاین شوید";
         }
         return;
-      } else {
+      } else {        
         type InputDataType = {
           IdShobeh: number;
           IsJashnvareh: number;
@@ -1289,7 +1292,7 @@ export default function ShallowRoutingExample() {
           const data = await response.json();
           //zare_nk_040326-result in SelectKalaShobeh is:
           // {"status":-1000,"message":"","data":null,"errors":["متاسفانه عملیات با خطا مواجه شد. لطفا مجددا تلاش کنید"]}
-          if (data.status != 0) {
+          if (data.status != 0) { 
             const bootstrap = await getBootstrap();
             const mymodalForWarning = new bootstrap.Modal(
               document.getElementById("mymodalForWarning")
@@ -1302,11 +1305,14 @@ export default function ShallowRoutingExample() {
               span.innerText = data.errors[0];
             }
           } else if (data.status == 0) {
+            alert('1');
             var result = JSON.parse(data.data.list);
             if (result.length == 0) {
+              alert('2.0');
               setBisatr(true);
               return;
             }
+            alert('2.1');
             setBisatr(false);
             setSabadRows(result);
             for (var j = 0; j < result.length; j++) {
@@ -1998,7 +2004,7 @@ export default function ShallowRoutingExample() {
                               style={{ height: "fit-content" }}
                               src={`https://img.tochikala.com/Product/${ForCartContInProdDetVal.IdKala}.webp`}
                               alt={ForCartContInProdDetVal.NameKala ?? ""}
-                              ////zare_nk_040522_commented_end
+                            ////zare_nk_040522_commented_end
                             />
                           )}
                         </div>
@@ -2220,7 +2226,7 @@ export default function ShallowRoutingExample() {
                                       justifyContent: "center",
                                     }}
                                   >
-                                    
+
                                     <div
                                       id="darsadTakhfifInDetails"
                                       className="darsadTakhfifInDetails"
@@ -2260,7 +2266,7 @@ export default function ShallowRoutingExample() {
                                       </span>
                                       {/* )} */}
                                     </div>
-                                    
+
                                   </div>
                                 </div>
                               )}
@@ -2300,7 +2306,7 @@ export default function ShallowRoutingExample() {
                                     handlerForAddClick(
                                       ForCartContInProdDetVal
                                         ? (ForCartContInProdDetVal as any)
-                                            .TedadOut
+                                          .TedadOut
                                         : null,
 
                                       0,
@@ -2312,7 +2318,7 @@ export default function ShallowRoutingExample() {
                                     return handlerForRemClick(
                                       ForCartContInProdDetVal
                                         ? (ForCartContInProdDetVal as any)
-                                            .TedadOut
+                                          .TedadOut
                                         : null,
                                       BarcodeKala,
                                       e
@@ -2322,13 +2328,13 @@ export default function ShallowRoutingExample() {
                                   ForCartContentsDesignType={
                                     ForCartContInProdDetVal
                                       ? (ForCartContInProdDetVal as any)
-                                          .ForCartContentsDesignType
+                                        .ForCartContentsDesignType
                                       : null
                                   }
                                   tedad={
                                     ForCartContInProdDetVal
                                       ? (ForCartContInProdDetVal as any)
-                                          .TedadOut
+                                        .TedadOut
                                       : null
                                   }
                                   idTag={

@@ -1,4 +1,4 @@
-////zare_nk_041015_okk
+////zare_nk_041108_okk
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getConnection, sql } from "../../../../../lib/db";
@@ -56,7 +56,8 @@ export async function POST(request: NextRequest) {
         message: "Login successful001",
         token: token,
       },
-      { status: 200 } //zare_nk_040120_nokteh(mitoonim { status: 200 }  racomment konim chon age status ra nafrestim be soorate pishfarz vaziate 200 ersal mishe be darkhaste api client,va samte client dar pasokhe api automat meghdar 200 migirad)
+      { status: 200 } //zare_nk_040120_nokteh(mitoonim { status: 200 }  ra comment konim chon age status ra nafrestim be soorate 
+      // pishfarz vaziate 200 ersal mishe be darkhaste api client,va samte client dar pasokhe api automat meghdar 200 migirad)
     );
 
     response.cookies.set("token", token, {
