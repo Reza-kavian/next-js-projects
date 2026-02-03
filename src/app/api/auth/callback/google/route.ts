@@ -1,4 +1,4 @@
-//src\app\api\auth\callback\google  //zare_nk_041108_okk
+//src\app\api\auth\callback\google  //zare_nk_041113_okk
 import { NextRequest, NextResponse } from "next/server";  //zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";  //zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot ne cooki haei ke az samte karbar ba request mian)
@@ -26,14 +26,14 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get("code");
     const error = searchParams.get("error");
-    const returnedState = searchParams.get("state");  //zare_nk_041106_nokteh(dar masire src\app\api\auth\google dar be khasiate state dar
+    const returnedParamState = searchParams.get("state");  //zare_nk_041106_nokteh(dar masire src\app\api\auth\google dar be khasiate state dar
     // oauth2Client.generateAuthUrl ezafeh kardim ke google hefzesh kard va dar calback bargardoond)
     ////zare_nk_041013_nokteh_end(Params haye tooye url)
     ////zare_nk_041013_nokteh_st(cooki haye zakhireh shodeh)
     const cookieStore = await cookies();
     const cookieStateStr = cookieStore.get("oauth_state")?.value;
     ////zare_nk_041013_nokteh_end(cooki haye zakhireh shodeh)
-    if (!cookieStateStr || !returnedState) {
+    if (!cookieStateStr || !returnedParamState) {
       ////zare_nk_041105_added_st
       cookieStore.delete("oauth_state");
       // let { source } = decodeState(cookieStateStr); //zare_nk_041105_commented
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
       return res;
     }
  
-    if (returnedState !== cookieStateStr) {
+    if (returnedParamState !== cookieStateStr) {
       cookieStore.delete("oauth_state");
       ////zare_nk_041105_added_st
       // let { source } = decodeState(cookieStateStr); //zare_nk_041105_commented

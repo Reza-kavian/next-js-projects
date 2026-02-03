@@ -1,33 +1,48 @@
-////zare_nk_041108_okk
+////zare_nk_041113_okk
 "use client";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 function getCookie(name: any) {
-  const value = `; ${document.cookie}`; 
-  const parts = value.split(`; ${name}=`); 
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
   if (parts.length === 2) {
-    return parts.pop()?.split(";").shift() ?? null; 
+    return parts.pop()?.split(";").shift() ?? null;
   }
   return null; // اگر کوکی پیدا نشد
 }
 
 export default function ProductPage() {
-  const idUSerRef = useRef<HTMLHeadingElement | null>(null); 
+  const idUSerRef = useRef<HTMLHeadingElement | null>(null);
   const router = useRouter();
   useEffect(() => {
     const asyncFunctionInUseEffect = async () => {
       const token = getCookie("token");
-      console.log('040530-033-token: '+token);
+      console.log('040530-033-token: ' + token);
       if (token != null) {
         try {
           const response = await fetch("/api/auth/verifyToken", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token }),  
+            body: JSON.stringify({ token }),
           });
-          const data = await response.json();
-          if (response.ok) {  //zare_nk_041020_tahlilshe(estefadeye response.status==200 bejaye response.ok)
+
+          // const data = await response.json();  //zare_nk_041112_commented
+          ////zare_nk_041112_added_st
+          let data: any = null;
+
+          try {
+            if (response.headers.get("content-type")?.includes("application/json")) {
+              data = await response.json();
+            }
+          } catch (e) {
+            data = null;
+          }
+          ////zare_nk_041112_added_end
+
+          const decoded = data?.decoded;//zare_nk_041113_added
+          if (response.ok && decoded) {  //zare_nk_041113_added
+            // if (response.ok) {  //zare_nk_041113_commented
             var idUser = data.decoded.IdUser;  //zare_nk_041108_nokteh(update beshe be reactnative)
             var email = data.decoded.email;
             if (idUSerRef.current) {
@@ -37,11 +52,15 @@ export default function ProductPage() {
           } else {
             const idUSerRefTag = idUSerRef.current;
             if (idUSerRefTag instanceof HTMLElement) {
-              idUSerRefTag.innerText = "ffffffferer----" + data.errorMessage; //zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood)
+              idUSerRefTag.innerText = "ffffffferer----" + (data?.errorMessage ?? "خطای نامشخص از سرور");
+              //zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood)
+              //zare_nk_041112-nokteh(age ba eshtebah vared kardane voroodihaye fetch va ya name eshtebahe fetch va ... !response.ok beshe, data.errorMessage
+              // vojood nadare chon barnameh aslan be api narafteh ke dar codehaye dastiye api bekhaim errorMessage ra ijad konim,pas az alamate ?? estefadeh kardim
+              // ke age errorMessage vojood nadasht pas matni ra benevisim
             }
           }
         } catch (error) { //mamoolan mavarede ghtiye shabakeh va net va adame dastrasi be api be catch miad(vali mavarede eshtebah vared kardane name api va paramethaye naghes dadan be api va ... barnameh dar try 
-        // mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
+          // mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
           console.error("❌ خطااااااااااااااااااای JWT:", error);
           if (error instanceof Error) {
             idUSerRef.current!.innerText = error.message;
@@ -55,12 +74,12 @@ export default function ProductPage() {
         }
       }
     };
-    asyncFunctionInUseEffect();  
+    asyncFunctionInUseEffect();
   });
   // const params = useParams();  //zare_nk_040224_comment(chon makhsoose safahate dynamic hast va inja kar nemikoneh)
-  const params = useSearchParams();  
-  const id = params.get("id") || "Unknown"; 
-  const name = params.get("name") || "Unknown";  
+  const params = useSearchParams();
+  const id = params.get("id") || "Unknown";
+  const name = params.get("name") || "Unknown";
   const handleClick = () => {
     router.push("/folder03?tab=comments2");
   };

@@ -1,4 +1,4 @@
-////zare_nk_041108_okk
+////zare_nk_041113_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback } from "react";
 import Styles from "@/styles/components/dooz.module.css"; 
@@ -74,7 +74,7 @@ function Board({
   sToString,
   setSToString,
 }: BoardProps) {
-  console.log('Board called!!');
+  console.log('Board called!!-squares: '+squares);
   const [lastButton, setLastButton] = useState<number | null>(  //zare_nk_040528_nokteh(state ke andise dokmeh ra dar arayeye Squares midahad,va dar har handleClick ke haman rooydade clicke dokmehaye dooz ast meghdar migireh)
     localStorage.getItem("lastButton") != null
       ? JSON.parse(localStorage.getItem("lastButton")!)
@@ -522,7 +522,9 @@ export default function Game() {
     "zare_nk_040131-BtnsColor.len: " +
     BtnsColor.length +
     "-history.len: " +
-    history.length
+    history.length+
+     "-history: " +
+    history
   );
   const storedCurrentMove = localStorage.getItem("currentMove");
   const [currentMove, setCurrentMove] = useState(  //zare_nk_040528_nokteh(shamele andise akhare arayeye history ast ke be vaziate feliye chineshe mohrehaye dooz eshare mikoneh)
@@ -557,6 +559,7 @@ export default function Game() {
       setHistory(nextHistory);
       localStorage.setItem("history", JSON.stringify(nextHistory));
       setCurrentMove(nextHistory.length - 1);
+      console.log("currentMove iss: "+currentMove);
       localStorage.setItem(
         "currentMove",
         JSON.stringify(nextHistory.length - 1)

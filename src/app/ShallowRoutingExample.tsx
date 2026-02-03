@@ -1,4 +1,4 @@
-"use client";  //zare_nk_041021_okk
+"use client";  //zare_nk_041114_okk
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
@@ -42,7 +42,7 @@ type MiddleCountTedadSefrProps = {
 
   // refForInputGroupTedadSefr: RefObject<HTMLInputElement | null>;
   refForInputGroup: RefObject<HTMLInputElement | null>;
-};
+}
 
 export function MiddleCountTedadSefr({ 
   refForMiddleCount,
@@ -1308,7 +1308,7 @@ export default function ShallowRoutingExample() {
         if (gheimatForooshInDetailsInfoCont instanceof HTMLElement) {
           gheimatForooshInDetailsInfoCont.innerHTML =
             parsedList[0].FeeForoosh.toLocaleString();
-        }``
+        } 
         const forDiscountInDetails = document.getElementById(
           "forDiscountInDetails"
         );

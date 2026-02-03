@@ -1,4 +1,4 @@
-////zare_nk_041108_okk
+////zare_nk_041113_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard,pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
@@ -15,7 +15,9 @@ const publicPaths = [
   "/static",
   "/favicon.ico",
   "/tryreact",
+  "/tryreact2",  //zare_nk_041113_added
   "/tryreact3",
+  "/tryreact5",  //zare_nk_041113_added
   "/.well-known",
   // "/.well-known/appspecific/com.chrome.devtools.json"//zare_nk_040220_commented(/.well-known/ neveshtam ke zirshakhehaye digarash ye vaght seda zadeh shodand ham dar in araye begonjand)
   "/images", //zare_nk_040311_nokteh(age in ro nagzarim tamame akshaye ba src="/images/..." ra barname be onvane masir dar nazar migire)

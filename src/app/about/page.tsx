@@ -1,4 +1,4 @@
-////zare_nk_041108_okk
+////zare_nk_041113_okk
 //src\app\about\page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -24,7 +24,9 @@ export default function Page() {
       <h1 className={styles.shape}>salam 002</h1>
       <img src="./images/002.jpg" style={{ border: "4px dashed silver" }} />
       <br />
-      <Image alt="ggg" src={Image002} style={{ border: "4px dashed yellow" }} />
+      <Image alt="ggg" src={Image002} style={{ border: "4px dashed yellow" }} />   {/* zare_nk_041112_nokteh(albateh estefadeh az Image mamoolan makhsoos masir haye dakhele /src 
+      hast va baraye masire /public tosiyeh nemishe az nazare standarde nextJs va hatta momkene error ham mideh va javab nadeh,baraye tasavire masire /public behtare az estafadeye
+      mostaghime tage <img /> ba src="./..." estefadeh shavad ke ./ neshanaye mohtavaye dakhele public ast ) */}
       <br />
       <img
         src="https://www.tutorialspoint.com/market/public/assets/newDesign/img/heroSliderItem6.svg"
@@ -36,6 +38,7 @@ export default function Page() {
         style={{ border: "6px dotted blue" }}
       />
       <br />
+      {/* zare_nk_041112_nokteh(age masire src be damanaye khareji eshare koneh masir ra manade paein mostaghim dar src minevisim va dar bala import nemikonim ) */}
       <Image
         alt="Image003"
         width="300"

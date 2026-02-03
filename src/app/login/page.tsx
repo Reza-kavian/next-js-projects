@@ -1,4 +1,4 @@
-////zare_nk_041108_okk
+////zare_nk_041113_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -439,42 +439,69 @@ export default function Toolbar() {
       return;
     }
 
-    const token = getCookie("token");
-    // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-    const response = await fetch(ApiUrl + "Api_SendCode", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({ Mobile: mobileVal }),
-    });
-    const data = await response.json();
-    if (response.ok) {
-      console.log("zare_nk_040218-data: " + JSON.stringify(data) + '-response.status: ' + response.status);
-      //zare_nk_040218-data: {"status":0,"message":"","data":1,"errors":[]}-response.status: 200
-      //zare_nk_040218-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
-      //zare_nk_040218-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
-      if (data.status == 0) {
-        setCurrentPage("secondPage");
-        setBackBtnCliked(false);
-        setMobileCheckBtn(true);
+    try {
+      // const token = getCookie("token");   //zare_nk_041114_commented
+      //// let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
+      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";   //zare_nk_041114_commented
+      // const response = await fetch(ApiUrl + "Api_SendCode", {   //zare_nk_041114_commented
+      var ApiUrl = "https://api.tochikala.com/api/";    //zare_nk_041114_added 
+      const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({ Mobile: mobileVal }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("zare_nk_040218-data: " + JSON.stringify(data) + '-response.status: ' + response.status);
+        //zare_nk_040218-data: {"status":0,"message":"","data":1,"errors":[]}-response.status: 200
+        //zare_nk_040218-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
+        //zare_nk_040218-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
+
+        ////zare_nk_041114_added_st
+        //  console.log("zare_nk_040218-data: " + JSON.stringify(data) + '-response.status: ' + response.status);
+        //       //zare_nk_040218-data: {"status":0,"message":"","data":1,"errors":[]}-response.status: 200
+        //       //zare_nk_040218-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
+        //       //zare_nk_040218-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
+        ////zare_nk_041114_added_end
+
+
+        if (data.status == 0) {
+          setCurrentPage("secondPage");
+          setBackBtnCliked(false);
+          setMobileCheckBtn(true);
+        } else {
+          document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+          document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+          setError("متاسفانه 77 خطایی رخ داده است:" + data.errors);
+          //zare_nk_040218-data: {"status":-2,"message":"","data":1,"errors":["6 ثانیه ی دیگر مجددا تلاش کنید"]}
+        }
       } else {
         document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
         document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-        setError("متاسفانه 77 خطایی رخ داده است:" + data.errors);
-        //zare_nk_040218-data: {"status":-2,"message":"","data":1,"errors":["6 ثانیه ی دیگر مجددا تلاش کنید"]}
+        setError("متاسفانه 22 خطایی رخ داده است");
       }
-    } else {
-      document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-      setError("متاسفانه 22 خطایی رخ داده است");
+    } catch (error) {
+      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      console.error("zare_nk_040218-resendcode-in catch:", error);
+      // setError("متاسفانه خطایی رخ داده است33:" + error);  //zare_nk_041107_commented
+      ////zare_nk_041107_added_st
+      if (error instanceof Error) {
+        console.error("zare_nk_040218-resendcode-in catch-2:", error.message);
+        setError("متاسفانه خطایی رخ داده است222:" + error.message);
+      } else {
+        console.error("zare_nk_040218-resendcode-in catch-3:", String(error));
+        setError("متاسفانه خطایی رخ داده است333:" + String(error));
+      }
+      ////zare_nk_041107_added_end
     }
   }
- 
+
   const handleGoogleLogin = () => {   //zare_nk_040925_tahlilshe
-    alert("handleGoogleLogin002");
+    // alert("handleGoogleLogin002");
     window.location.href = `/api/auth/google`; // هدایت به گوگل  //zare_nk_040422_commented
     // window.location.href = `https://testotm.sarinmehr.com/api/auth/google`; //zare_nk_040422_added
   };
@@ -504,14 +531,20 @@ export default function Toolbar() {
     }
     const token = getCookie("token");
     // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-    const response = await fetch(ApiUrl + "Api_LoginUser2", {
+    // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";  //zare_nk_041114_commented
+    // const response = await fetch(ApiUrl + "Api_LoginUser2", {   //zare_nk_041114_commented
+    let ApiUrl = "https://api.tochikala.com/api/";  //zare_nk_041114_added
+    const response = await fetch(ApiUrl + "User/Api_LoginUser2", {   //zare_nk_041114_added 
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
+        // Authorization: "Bearer " + token,  //zare_nk_04114_
       },
-      body: JSON.stringify({ Mobile: mobileVal, SmsCode: smsVal }),
+      body: JSON.stringify({
+        Mobile: mobileVal,
+        SmsCode: smsVal,
+        Password: ""
+      }),
       // credentials: "include", //zare_nk_040202_commented
     });
     const data = await response.json();
@@ -536,6 +569,24 @@ export default function Toolbar() {
         ////zare_nk_040603_added_end        
 
         try {
+          ////zare_nk_041114_added_st(and commented. chon methode HttpContext.SignInAsync rp anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
+          // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
+          // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated)baraye estelame online boodan estefadeh konim!
+          // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
+          //va in kar ra dar methode verifyToken gonjandim)
+
+          //           let ApiUrl = "https://api.tochikala.com/api/";
+          // const responseValidationPost = await fetch(ApiUrl +"/User/ValidationPost", {
+          //             method: "POST",
+          //             headers: { "Content-Type": "application/json" },
+          //             body: JSON.stringify({ token }),
+          //           });
+          ////zare_nk_041114_added_end(and commented. chon methode HttpContext.SignInAsync rp anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
+          // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
+          // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated)baraye estelame online boodan estefadeh konim!
+          // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
+          //va in kar ra dar methode verifyToken gonjandim)
+
           const response = await fetch("/api/auth/verifyToken", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -558,7 +609,7 @@ export default function Toolbar() {
           } else {
             document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
             document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-            setError("متاسفانه خطایی رخ داده است33:" + (data?.errorMessage? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
+            setError("متاسفانه خطایی رخ داده است33:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
           }
         } catch (error) {
           document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -587,41 +638,68 @@ export default function Toolbar() {
   }
 
   async function ResendCodefunc() {
+    alert('ResendCodefunc called!!');
     let token = "";
     if (typeof window !== "undefined") {
       token = localStorage.getItem("Token") || "";
     }
-    // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-    const response = await fetch(ApiUrl + "Api_SendCode", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: "Bearer " + localStorage.getItem("Token"), //zare_nk_040421_commented
-        Authorization: "Bearer " + token, //zare_nk_040421_added
-      },
-      body: JSON.stringify({ Mobile: mobileVal }),
-      // credentials: "include", //zare_nk_040202_commented
-    });
-    const data = await response.json();
-    if (response.ok) {
-      console.log("zare_nk_040218-data: " + JSON.stringify(data));
-      //zare_nk_040218-data: {"status":0,"message":"","data":null,"errors":[]}
-      //zare_nk_040218-data: {"status":-1,"message":"","data":null,"errors":["12 ثانیه ی دیگر مجددا تلاش کنید"]}
-      if (data.status == 0) {
-        console.log("data.status == 0");
-        setTimer(40000);
-        setError("");
-        setIsDisabledResendCode(true);
-        setIsDisabledRemovTimerBtn(false);
+
+    try {
+
+
+      //// let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
+      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";   //zare_nk_041114_commented
+      // const response = await fetch(ApiUrl + "Api_SendCode", {   //zare_nk_041114_commented
+      var ApiUrl = "https://api.tochikala.com/api/";    //zare_nk_041114_added 
+      const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: "Bearer " + localStorage.getItem("Token"), //zare_nk_040421_commented
+          Authorization: "Bearer " + token, //zare_nk_040421_added
+        },
+        body: JSON.stringify({ Mobile: mobileVal }),
+        // credentials: "include", //zare_nk_040202_commented
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("zare_nk_040218-resendcode-data: " + JSON.stringify(data));
+        ////zare_nk_041114_added_st
+        //zare_nk_040218-resendcode-data: {"status":0,"message":"","data":1,"errors":[]}-response.status: 200
+        //zare_nk_040218-resendcode-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
+        //zare_nk_040218-resendcode-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
+        ////zare_nk_041114_added_end
+
+        if (data.status == 0) {
+          console.log("data.status == 0");
+          setTimer(40000);
+          setError("");
+          setIsDisabledResendCode(true);
+          setIsDisabledRemovTimerBtn(false);
+        } else {
+          setError("تتتتتتتمتاسفانه خطایی رخ داده است:" + data.errors);
+          //zare_nk_040218-resendcode-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
+        }
       } else {
-        setError("تتتتتتتمتاسفانه خطایی رخ داده است:" + data.errors);
-        //zare_nk_040218-data: {"status":-2,"message":"","data":1,"errors":["6 ثانیه ی دیگر مجددا تلاش کنید"]}
+        console.log("zare_nk_040218-resendcode-response not ok");
+        setError("متاسفانه  خطایی رخ داده است11");
       }
-    } else {
-      console.log("zare_nk_040218-!!response not ok");
-      setError("متاسفانه  خطایی رخ داده است");
+    } catch (error) {
+      // document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      // document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      console.error("zare_nk_040218-resendcode-in catch:", error);
+      // setError("متاسفانه خطایی رخ داده است33:" + error);  //zare_nk_041107_commented
+      ////zare_nk_041107_added_st
+      if (error instanceof Error) {
+        console.error("zare_nk_040218-resendcode-in catch-2:", error.message);
+        setError("متاسفانه خطایی رخ داده است22:" + error.message);
+      } else {
+        console.error("zare_nk_040218-resendcode-in catch-3:", String(error));
+        setError("متاسفانه خطایی رخ داده است33:" + String(error));
+      }
+      ////zare_nk_041107_added_end
     }
+
   }
 
   function mobileChanged(
@@ -706,7 +784,7 @@ export default function Toolbar() {
   }
 
   function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) {
-    alert('4.smsTxtChanged called!!');
+    // alert('4.smsTxtChanged called!!');
     setError("");
     var input = null;
     var vall = null;
