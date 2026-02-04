@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_041114_okk
 //src\app\api\auth\verifyToken\  
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
@@ -15,8 +15,9 @@ export async function POST(req: NextRequest) {
   try {
     // const decoded = jwt.verify(token, process.env.JWT_SECRET as string);//zare_nk_040219_commented
     const decoded = jwt.verify(token, secretKey); //zare_nk_040219_added(chon estefadeye mostaghime secretKey dar verify kardan moshkel ijad kard vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
-    //zare_nk_040403-POST called!!-decoded: {"unique_name":"20109","CodeMoshtari":"20109",
-    // "Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}
+    ////zare_nk_040925-decoded: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
+    ////zare_nk_040925-decoded: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
+
     return NextResponse.json({ decoded }, { status: 200 });
     ////zare_nk_041106_nokteh(ehtemalan revale NextResponse.json intoriye ke dar darkhasth zadanha baraye response.json dar fetch va response.data dar axios pasokhi ke az in api daryaft mikonan barabare akoolade avval khahad bood) 
     // , hamchenin response.status ra az akoolade dovvom mikhoonan)
@@ -32,18 +33,18 @@ export async function POST(req: NextRequest) {
     // vali ma inja dasti dar akoolade dovvom sakhtim mesle { status: 200 }
   } catch (error: any) {
     let tokenErroeMessage = "";
-    let errorCode= "";  //zare_nk_041108_added(ijadesh kardam vali estefadehi nakardam azash, mitooneh beonvane code sakhtegiye tekyekalam haye man baraye tafkike tasmimgiri dar request estefadeh beshe,
+    let errorCode = "";  //zare_nk_041108_added(ijadesh kardam vali estefadehi nakardam azash, mitooneh beonvane code sakhtegiye tekyekalam haye man baraye tafkike tasmimgiri dar request estefadeh beshe,
     // masalan age token monghazi shod che konim ya age token token namotabar ast che konim)
     if (error.name == "TokenExpiredError") {
       tokenErroeMessage = "token monghazi shodeh ast";
-      errorCode="TOKEN_EXPIRED";//zare_nk_041108_added
+      errorCode = "TOKEN_EXPIRED";//zare_nk_041108_added
     } else {
       tokenErroeMessage = "token namotabar ast";
-       errorCode="TOKEN_INVALID";//zare_nk_041108_added
+      errorCode = "TOKEN_INVALID";//zare_nk_041108_added
     }
     return NextResponse.json(
-      {         
-        errorCode:errorCode,     //zare_nk_041108_added      
+      {
+        errorCode: errorCode,     //zare_nk_041108_added      
         errorMessage: tokenErroeMessage
       },
       { status: 401 }

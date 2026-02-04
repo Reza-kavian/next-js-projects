@@ -68,9 +68,9 @@ export function MiddleCountTedadSefr({
       if (refForParsedList.current) {
         const ForCartWidth = document.querySelector(
           refForfather.current +
-            " #ForCart-" +
-            refForParsedList.current.IdKala +
-            " .input-group"
+          " #ForCart-" +
+          refForParsedList.current.IdKala +
+          " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
           ForCartWidth.style.width = "35px";
@@ -80,9 +80,9 @@ export function MiddleCountTedadSefr({
       if (refForParsedList.current) {
         const ForCartWidth = document.querySelector(
           refForfather.current +
-            " #ForCart-" +
-            refForParsedList.current.IdKala +
-            " .input-group"
+          " #ForCart-" +
+          refForParsedList.current.IdKala +
+          " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
           ForCartWidth.style.width = "auto";
@@ -92,9 +92,9 @@ export function MiddleCountTedadSefr({
       if (refForParsedList.current) {
         const ForCartWidth = document.querySelector(
           refForfather.current +
-            " #ForCart-" +
-            refForParsedList.current.IdKala +
-            " .input-group"
+          " #ForCart-" +
+          refForParsedList.current.IdKala +
+          " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
           ForCartWidth.style.width = "auto";
@@ -627,7 +627,7 @@ type SabadSatrProps = {
   refForfather: RefObject<string | null>;
   refForParsedList: RefObject<ParsedItemType | null>;
   refForInputGroup: RefObject<HTMLInputElement | null>;
-  JamKolSatr: number;
+  MasrafSatr: number;
   handlerForAddClick: (
     TedadOut: number | null | undefined,
     addQuota: number,
@@ -658,7 +658,7 @@ export function SabadSatrComponent({
   refForfather,
   refForParsedList,
   refForInputGroup,
-  JamKolSatr,
+  MasrafSatr,
   handlerForAddClick,
   handlerForRemClick,
   openprodDetModal,
@@ -918,7 +918,7 @@ export function SabadSatrComponent({
                     marginLeft: "5px",
                   }}
                 >
-                  {JamKolSatr ? JamKolSatr.toLocaleString() : 0}
+                  {MasrafSatr ? MasrafSatr.toLocaleString() : 0}
                 </div>
                 <div
                   className="rialInsabad valueStyle"
@@ -970,7 +970,8 @@ export default function ShallowRoutingExample() {
     hadaksar: string;
     idTag: string;
     NameKala: string | null;
-    MM: string | null;
+    // DarsadTakhfif: string | null;  //zare_nk_041115_commented
+    DarsadTakhfif: number | null;   //zare_nk_041115_added
     NameBerand: string | null;
     FeeForoosh: number; //zare_nk_040602_added
     FeeMasraf: number; //zare_nk_040602_added
@@ -982,17 +983,35 @@ export default function ShallowRoutingExample() {
   const refForfather = useRef<string | null>(null);
   const refForParsedList = useRef<ParsedItemType | null>(null);
   const refForBishAzMaxTedadYaMojoodi = useRef<number | null>(null);
+  ////zare_nk_041115_added_st(albate felan niazam nemisheh)
+  const [sabadTitr, setSabadTitr] = useState<SabadRowType[] | null>(null);
+  type SabadTitrType = {
+    IdSabadKharidTitr: number;
+    SumFeeMasraf: number;
+    soodAzKharid: number;
+    MablaghNahaee: number;
+    [key: string]: any;
+  };
+  ////zare_nk_041115_added_end(albate felan niazam nemisheh)
+
+
+
   const [bisatr, setBisatr] = useState(true);
   const [sabadRows, setSabadRows] = useState<SabadRowType[] | null>(null);
   type SabadRowType = {
     IdKala: number;
     NameKala: string;
-    MM: string;
+    // DarsadTakhfif: string;   //zare_nk_041115_commented
+    DarsadTakhfif: number;   //zare_nk_041115_added
     [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast
   };
   const [addOrRemChanged, setAddOrRemChanged] = useState<string | null>(null);
   const [jamKol, setJamKol] = useState<number | null>(null);
   const [jamKolTakhfif, setJamKolTakhfif] = useState<number | null>(null);
+  const [jamKolNahaei, setJamKolNahaei] = useState<number | null>(null);  //zare_nk_041115_added
+
+
+
   const [isOpenedProdDetModal, setIsOpenedProdDetModal] = useState(false);
   const [isOpenedSeePricesModal, setIsOpenedSeePricesModal] = useState(false);
   const [BarcodeKala, setBarcodeKala] = useState<string | null>(null);
@@ -1050,9 +1069,15 @@ export default function ShallowRoutingExample() {
         span.innerText = "لطفا ابتدا آنلاین شوید";
       }
     }
-    // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-    var urlApi_SelectShobehJashnvareh = ApiUrl + "Api_SelectKala";
+    ////zare_nk_041115_commented_st
+    // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
+    // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+    // var urlApi_SelectShobehJashnvareh = ApiUrl + "Api_SelectKala";
+    ////zare_nk_041115_commented_end
+    ////zare_nk_041115_added_st
+    let ApiUrl = "https://api.tochikala.com/api/";
+    var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
+    ////zare_nk_041115_added_end
     const response = await fetch(urlApi_SelectShobehJashnvareh, {
       method: "POST",
       headers: {
@@ -1062,6 +1087,9 @@ export default function ShallowRoutingExample() {
       body: JSON.stringify({
         // BarcodeKala: BarcodeKala,//zare_nk_040601_commented
         BarcodeKala: barcodeKala, //zare_nk_040601_added
+        IdShobeh: 7,   //zare_nk_041115_added 
+        // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
+        //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)
       }),
       // credentials: "include", //zare_nk_040402_commented
     });
@@ -1224,7 +1252,9 @@ export default function ShallowRoutingExample() {
         //   groupsInDetailsPageCont.style.display = "none";
         // }
         ////zare_nk_040602_commented_end
-        var isChange = parsedList[0].IsChangeTedad;
+
+        // var isChange = parsedList[0].IsChangeTedad;  //zare_nk_041115_commented
+        var isChange = null;  //zare_nk_041115_added
         fillRefsAndfillForCartTagsInDetails(
           "#DetailsInfoCont",
           parsedList[0],
@@ -1406,6 +1436,88 @@ export default function ShallowRoutingExample() {
     tempFuncForAsyncGetBootstrap();
   }, [isOpenedSeePricesModal]);
 
+  ////zare_nk_041115_added_st
+  async function getSabadItems(IdSabadKharidTitr: number, token: string) {
+
+
+    ////zare_nk_041115_commented_st
+    // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
+    // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+    // var urlSelectSabad = ApiUrl + "Api_SelectSabad";
+    ////zare_nk_041115_commented_end
+    ////zare_nk_041115_added_st
+    let ApiUrl = "https://api.tochikala.com/api/";
+    var urlSelectSabad = ApiUrl + "User/Api_SelectSabadKharidSatr";
+    ////zare_nk_041115_added_end
+    const response = await fetch(urlSelectSabad, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      // body: JSON.stringify({}),  //zare_nk_041115_commented
+      ////zare_nk_041115_added_st
+      body: JSON.stringify({
+        IdShobe: 7,  //zare_nk_041115_nokteh(dar api tochikala hast.vali dar api testotmapi nemiferestim va pishfarz IdShobe kerfu ra parsafar dar samte api lahaz mikard. IdShobe marboot be shobe 7 ra behesh dadam)
+        IdSabadKharidTitr: IdSabadKharidTitr,//zare_nk_041115_nokteh(dar api tochikala hast chon chand sabad az chand shobe mishe dasht. vali dar api testotmapi IdSabadKharidTitr nadarim chon ye sabad ke bishtar nist)
+      }),
+      ////zare_nk_041115_added_end
+    });
+    const data = await response.json();
+    if (response.ok) {
+      var result = JSON.parse(data.data.list);
+      if (data.status != 0) {
+        const bootstrap = await getBootstrap();
+        const mymodalForWarning = new bootstrap.Modal(
+          document.getElementById("mymodalForWarning")
+        );
+        mymodalForWarning.show();
+        const span = document.querySelector(
+          "#mymodalForWarning .errorInMymodalForWarning"
+        );
+        if (span instanceof HTMLElement) {
+          span.innerText = data.errors[0];
+        }
+      } else if (data.status == 0) {
+        if (result.length == 0) {
+          setBisatr(true);
+          return;
+        }
+        setBisatr(false);
+        setSabadRows(result);
+        ////zare_nk_041115_commented_st
+        // var jamKol = JSON.parse(data.data.jamKol);
+        // var jamKolTakhfif = JSON.parse(data.data.jamKolTakhfif);
+        // setJamKol(jamKol);
+        // setJamKolTakhfif(jamKolTakhfif);
+        ////zare_nk_041115_commented_end
+        for (var j = 0; j < result.length; j++) {
+          fillRefsAndfillForCartTagsInDetails(
+            "#sabadItemsContInSafhe",
+            result[j],
+            null
+          );
+        }
+      }
+    } else {
+      if (response.status == 401) {
+        const bootstrap = await getBootstrap();
+        const mymodalForWarning = new bootstrap.Modal(
+          document.getElementById("mymodalForWarning")
+        );
+        mymodalForWarning.show();
+        const span = document.querySelector(
+          "#mymodalForWarning .errorInMymodalForWarning"
+        );
+        if (span instanceof HTMLElement) {
+          span.innerText = "لطفا ابتدا آنلاین شوید";
+        }
+      }
+    }
+
+  }
+  ////zare_nk_041115_added_end
+
   useEffect(() => {
     if (isOpenedProdDetModal == true) {
       return;
@@ -1426,21 +1538,31 @@ export default function ShallowRoutingExample() {
         }
         return;
       } else {
-        const token = getCookie("token");
-        // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-        let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-        var urlSelectSabad = ApiUrl + "Api_SelectSabad";
-        const response = await fetch(urlSelectSabad, {
+
+        let ApiUrl = "https://api.tochikala.com/api/";
+        var urlSelectSabadTitr = ApiUrl + "User/Api_SelectSabadKharidTitr";
+        const response = await fetch(urlSelectSabadTitr, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
           },
-          body: JSON.stringify({}),
-          // credentials: "include", //zare_nk_040402_commented
+          body: JSON.stringify({
+            IdShobe: 7,
+          }),
         });
         const data = await response.json();
         if (response.ok) {
+
+          ////zare_nk_041115_added_st
+          var majmooeKharidMasraf = 0;
+          var soodAzKharid = 0;
+          var Kerayeh = 0;
+          var MablaghNahaee = 0;
+          var KafKharid = 0;
+          var IdSabadKharidTitr = 0;
+          ////zare_nk_041115_added_end
+
           var result = JSON.parse(data.data.list);
           if (data.status != 0) {
             const bootstrap = await getBootstrap();
@@ -1456,22 +1578,21 @@ export default function ShallowRoutingExample() {
             }
           } else if (data.status == 0) {
             if (result.length == 0) {
-              setBisatr(true);
               return;
             }
-            setBisatr(false);
-            setSabadRows(result);
-            var jamKol = JSON.parse(data.data.jamKol);
-            var jamKolTakhfif = JSON.parse(data.data.jamKolTakhfif);
-            setJamKol(jamKol);
-            setJamKolTakhfif(jamKolTakhfif);
-            for (var j = 0; j < result.length; j++) {
-              fillRefsAndfillForCartTagsInDetails(
-                "#sabadItemsContInSafhe",
-                result[j],
-                null
-              );
-            }
+            setSabadTitr(result);  //zare_nk_041115_added
+
+            IdSabadKharidTitr = result[0].IdSabadKharidTitr;
+            majmooeKharidMasraf = result[0].SumFeeMasraf;
+            soodAzKharid = result[0].Sood;
+            Kerayeh = result[0].HazineErsal;
+            MablaghNahaee = result[0].MablaghNahaee;
+            KafKharid = result[0].KafKharid;
+
+            setJamKol(majmooeKharidMasraf);
+            setJamKolTakhfif(soodAzKharid);
+            setJamKolNahaei(MablaghNahaee);  //zare_nk_041115_added  
+            getSabadItems(IdSabadKharidTitr, token);
           }
         } else {
           if (response.status == 401) {
@@ -1488,6 +1609,8 @@ export default function ShallowRoutingExample() {
             }
           }
         }
+
+
       }
     }
     tempFuncForAsync();
@@ -1508,9 +1631,17 @@ export default function ShallowRoutingExample() {
         span.innerText = "لطفا ابتدا آنلاین شوید";
       }
     }
-    // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-    var urlApi_SelectShobehJashnvareh = ApiUrl + "Api_SelectKala";
+
+    ////zare_nk_041115_commented_st
+    // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
+    // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+    // var urlApi_SelectShobehJashnvareh = ApiUrl + "Api_SelectKala";
+    ////zare_nk_041115_commented_end
+    ////zare_nk_041115_added_st
+    let ApiUrl = "https://api.tochikala.com/api/";
+    var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
+    ////zare_nk_041115_added_end
+
     const response = await fetch(urlApi_SelectShobehJashnvareh, {
       method: "POST",
       headers: {
@@ -1519,6 +1650,10 @@ export default function ShallowRoutingExample() {
       },
       body: JSON.stringify({
         BarcodeKala: BarcodeKala,
+
+        IdShobeh: 7,   //zare_nk_041115_added 
+        // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
+        //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)
       }),
       // credentials: "include", //zare_nk_040402_commented
     });
@@ -1647,9 +1782,25 @@ export default function ShallowRoutingExample() {
       TedadOut = tedad + zarib;
       TedadOuttoAjax = parseFloat(currentRow.ZaribForoosh);
       const token = getCookie("token");
-      // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-      let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-      var urlInsertToSabad = ApiUrl + "Api_InsertToSabad";
+       ////zare_nk_041114_commented_st
+      // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
+      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+      // var urlInsertToSabad = ApiUrl + "Api_InsertToSabad";
+      // const response = await fetch(urlInsertToSabad, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: "Bearer " + token,
+      //   },
+      //   body: JSON.stringify({
+      //     BarcodeKala: BarcodeKala,
+      //     Tedad: TedadOuttoAjax,
+      //   }), 
+      // });
+      ////zare_nk_041114_commented_end
+      ////zare_nk_041114_added_st 
+      let ApiUrl = "https://api.tochikala.com/api/";
+      var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
       const response = await fetch(urlInsertToSabad, {
         method: "POST",
         headers: {
@@ -1658,10 +1809,13 @@ export default function ShallowRoutingExample() {
         },
         body: JSON.stringify({
           BarcodeKala: BarcodeKala,
-          Tedad: TedadOuttoAjax,
+          Tedad: TedadOut,// TedadOuttoAjax,  //zare_nk_041115_nokteh(dar api testotmapi az TedadOuttoAjax estefadeh mishod vali dar api tochikala az TedadOut estefadeh mikonim)
+          IdKala: currentRow.IdKala,  //zare_nk_041114_added
+          IdShobeh: 7,  //zare_nk_041114_added
+          IdAddress: 23990  //zare_nk_041114_added
         }),
-        // credentials: "include", //zare_nk_040402_commented
       });
+      ////zare_nk_041114_added_end
       const data = await response.json();
       if (response.ok) {
         setAddOrRemChanged(BarcodeKala + "-" + TedadOut);
@@ -1693,7 +1847,7 @@ export default function ShallowRoutingExample() {
                   hadaksar: "",
                   idTag: idTag,
                   NameKala: currentRow.NameKala,
-                  MM: currentRow.MM,
+                  DarsadTakhfif: currentRow.DarsadTakhfif,
                   NameBerand: currentRow.NameBerand, //zare_nk_040602_added
                   FeeForoosh: currentRow.FeeForoosh, //zare_nk_040602_added
                   FeeMasraf: currentRow.FeeMasraf, //zare_nk_040602_added
@@ -1713,7 +1867,7 @@ export default function ShallowRoutingExample() {
                   hadaksar: "",
                   idTag: idTag,
                   NameKala: currentRow.NameKala,
-                  MM: currentRow.MM,
+                  DarsadTakhfif: currentRow.DarsadTakhfif,
                   NameBerand: currentRow.NameBerand, //zare_nk_040602_added
                   FeeForoosh: currentRow.FeeForoosh, //zare_nk_040602_added
                   FeeMasraf: currentRow.FeeMasraf, //zare_nk_040602_added
@@ -1733,7 +1887,7 @@ export default function ShallowRoutingExample() {
                   hadaksar: "",
                   idTag: idTag,
                   NameKala: currentRow.NameKala,
-                  MM: currentRow.MM,
+                  DarsadTakhfif: currentRow.DarsadTakhfif,
                   NameBerand: currentRow.NameBerand, //zare_nk_040602_added
                   FeeForoosh: currentRow.FeeForoosh, //zare_nk_040602_added
                   FeeMasraf: currentRow.FeeMasraf, //zare_nk_040602_added
@@ -1787,15 +1941,33 @@ export default function ShallowRoutingExample() {
       } else {
         IdKala = eventCurrentTargetTag.className.substring(4);
       }
-      // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-      let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-      var urlInsertToSabad = ApiUrl + "Api_InsertToSabad";
+      
       var TedadOut = 0;
       var TedadOuttoAjax = 0;
       const tedad = parseFloat(String(Tedad ?? 0));
       const zarib = parseFloat(String(currentRow.ZaribForoosh ?? 0));
       TedadOut = tedad - zarib;
       TedadOuttoAjax = -parseFloat(currentRow.ZaribForoosh);
+      ////zare_nk_041114_commented_st
+      // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
+      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+      // var urlInsertToSabad = ApiUrl + "Api_InsertToSabad";
+      // const response = await fetch(urlInsertToSabad, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: "Bearer " + token,
+      //   },
+      //   body: JSON.stringify({
+      //     BarcodeKala: BarcodeKala,
+      //     Tedad: TedadOuttoAjax,
+      //   }),
+      //   // credentials: "include", //zare_nk_040402_commented
+      // });
+      ////zare_nk_041114_commented_end
+      ////zare_nk_041114_added_st 
+      let ApiUrl = "https://api.tochikala.com/api/";
+      var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
       const response = await fetch(urlInsertToSabad, {
         method: "POST",
         headers: {
@@ -1804,10 +1976,13 @@ export default function ShallowRoutingExample() {
         },
         body: JSON.stringify({
           BarcodeKala: BarcodeKala,
-          Tedad: TedadOuttoAjax,
+          Tedad: TedadOut,// TedadOuttoAjax,  //zare_nk_041115_nokteh(dar api testotmapi az TedadOuttoAjax estefadeh mishod vali dar api tochikala az TedadOut estefadeh mikonim)
+          IdKala: currentRow.IdKala,  //zare_nk_041114_added
+          IdShobeh: 7,  //zare_nk_041114_added
+          IdAddress: 23990  //zare_nk_041114_added
         }),
-        // credentials: "include", //zare_nk_040402_commented
       });
+      ////zare_nk_041114_added_end
       const data = await response.json();
       if (response.ok) {
         var result = data;
@@ -1841,7 +2016,7 @@ export default function ShallowRoutingExample() {
                 hadaksar: "",
                 idTag: idTag,
                 NameKala: refForParsedList.current!.NameKala,
-                MM: refForParsedList.current!.MM,
+                DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
                 NameBerand: refForParsedList.current!.NameBerand, //zare_nk_040602_added
                 FeeForoosh: refForParsedList.current!.FeeForoosh, //zare_nk_040602_added
                 FeeMasraf: refForParsedList.current!.FeeMasraf, //zare_nk_040602_added
@@ -1902,7 +2077,7 @@ export default function ShallowRoutingExample() {
                   hadaksar: "",
                   idTag: idTag,
                   NameKala: refForParsedList.current!.NameKala,
-                  MM: refForParsedList.current!.MM,
+                  DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
                   NameBerand: refForParsedList.current!.NameBerand, //zare_nk_040602_added
                   FeeForoosh: refForParsedList.current!.FeeForoosh, //zare_nk_040602_added
                   FeeMasraf: refForParsedList.current!.FeeMasraf, //zare_nk_040602_added
@@ -1922,7 +2097,7 @@ export default function ShallowRoutingExample() {
                   hadaksar: "",
                   idTag: idTag,
                   NameKala: refForParsedList.current!.NameKala,
-                  MM: refForParsedList.current!.MM,
+                  DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
                   NameBerand: refForParsedList.current!.NameBerand, //zare_nk_040602_added
                   FeeForoosh: refForParsedList.current!.FeeForoosh, //zare_nk_040602_added
                   FeeMasraf: refForParsedList.current!.FeeMasraf, //zare_nk_040602_added
@@ -1949,7 +2124,7 @@ export default function ShallowRoutingExample() {
                   hadaksar: "",
                   idTag: idTag,
                   NameKala: refForParsedList.current!.NameKala,
-                  MM: refForParsedList.current!.MM,
+                  DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
                   NameBerand: refForParsedList.current!.NameBerand, //zare_nk_040602_added
                   FeeForoosh: refForParsedList.current!.FeeForoosh, //zare_nk_040602_added
                   FeeMasraf: refForParsedList.current!.FeeMasraf, //zare_nk_040602_added
@@ -2040,7 +2215,7 @@ export default function ShallowRoutingExample() {
           hadaksar: "",
           idTag: idTag,
           NameKala: parsedList.NameKala,
-          MM: parsedList.MM,
+          DarsadTakhfif: parsedList.DarsadTakhfif,
           NameBerand: parsedList.NameBerand, //zare_nk_040602_added
           FeeForoosh: parsedList.FeeForoosh, //zare_nk_040602_added
           FeeMasraf: parsedList.FeeMasraf, //zare_nk_040602_added
@@ -2056,7 +2231,7 @@ export default function ShallowRoutingExample() {
           hadaksar: "",
           idTag: idTag,
           NameKala: parsedList.NameKala,
-          MM: parsedList.MM,
+          DarsadTakhfif: parsedList.DarsadTakhfif,
           NameBerand: parsedList.NameBerand, //zare_nk_040602_added
           FeeForoosh: parsedList.FeeForoosh, //zare_nk_040602_added
           FeeMasraf: parsedList.FeeMasraf, //zare_nk_040602_added
@@ -2072,7 +2247,7 @@ export default function ShallowRoutingExample() {
           hadaksar: "",
           idTag: idTag,
           NameKala: parsedList.NameKala,
-          MM: parsedList.MM,
+          DarsadTakhfif: parsedList.DarsadTakhfif,
           NameBerand: parsedList.NameBerand, //zare_nk_040602_added
           FeeForoosh: parsedList.FeeForoosh, //zare_nk_040602_added
           FeeMasraf: parsedList.FeeMasraf, //zare_nk_040602_added
@@ -2280,7 +2455,7 @@ export default function ShallowRoutingExample() {
                               style={{ height: "fit-content" }}
                               src={`https://img.tochikala.com/Product/${ForCartContInProdDetVal.IdKala}.webp`}
                               alt={ForCartContInProdDetVal.NameKala ?? ""}
-                              ////zare_nk_040522_commented_end
+                            ////zare_nk_040522_commented_end
                             />
                           )}
                         </div>
@@ -2329,6 +2504,7 @@ export default function ShallowRoutingExample() {
                           )}
 
                           <div style={{ display: "flex", flexFlow: "row" }}>
+
                             <div
                               style={{
                                 flex: "1 1 30%",
@@ -2400,7 +2576,7 @@ export default function ShallowRoutingExample() {
                                 }}
                               >
                                 {ForCartContInProdDetVal != null &&
-                                  ForCartContInProdDetVal.MM != "0" && (
+                                  ForCartContInProdDetVal.DarsadTakhfif != 0 && (
                                     <div
                                       id="gheimatMasrafInDetailsInfoCont"
                                       className="gheimatMasrafInsabad"
@@ -2462,7 +2638,7 @@ export default function ShallowRoutingExample() {
                             </div>
 
                             {ForCartContInProdDetVal != null &&
-                              ForCartContInProdDetVal.MM != "0" && (
+                              ForCartContInProdDetVal.DarsadTakhfif != 0 && (
                                 <div
                                   id="lastDividerInDetails"
                                   style={{
@@ -2483,7 +2659,7 @@ export default function ShallowRoutingExample() {
                                 </div>
                               )}
                             {ForCartContInProdDetVal != null &&
-                              ForCartContInProdDetVal.MM != "0" && (
+                              ForCartContInProdDetVal.DarsadTakhfif != 0 && (
                                 <div
                                   id="DiscountContInDetails"
                                   style={{
@@ -2539,7 +2715,7 @@ export default function ShallowRoutingExample() {
                                           fontSize: "18px",
                                         }}
                                       >
-                                        {ForCartContInProdDetVal.MM}
+                                        {ForCartContInProdDetVal.DarsadTakhfif}
                                       </span>
                                       {/* )} */}
                                     </div>
@@ -2603,13 +2779,13 @@ export default function ShallowRoutingExample() {
                                   ForCartContentsDesignType={
                                     ForCartContInProdDetVal
                                       ? (ForCartContInProdDetVal as any)
-                                          .ForCartContentsDesignType
+                                        .ForCartContentsDesignType
                                       : null
                                   }
                                   tedad={
                                     ForCartContInProdDetVal
                                       ? (ForCartContInProdDetVal as any)
-                                          .TedadOut
+                                        .TedadOut
                                       : null
                                   }
                                   idTag={
@@ -3162,7 +3338,7 @@ export default function ShallowRoutingExample() {
                       refForParsedList={refForParsedList}
                       // refForInputGroupTedadSefr={refForInputGroupTedadSefr}
                       refForInputGroup={refForInputGroup}
-                      JamKolSatr={item.JamKolSatr}
+                      MasrafSatr={item.MasrafSatr}
                       handlerForAddClick={handlerForAddClick}
                       handlerForRemClick={handlerForRemClick}
                       openprodDetModal={openprodDetModal}
@@ -3284,7 +3460,7 @@ export default function ShallowRoutingExample() {
                 <button
                   className="btn btn-success"
                   style={{ width: "100%", borderRadius: "10px" }}
-                  // onClick={(e) => payForSabad(e)}   //zare_nk_040411_commented(felan dar tochi ghasde pardakht dar app nadarim)
+                // onClick={(e) => payForSabad(e)}   //zare_nk_040411_commented(felan dar tochi ghasde pardakht dar app nadarim)
                 >
                   پرداخت
                 </button>

@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_041114_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -587,7 +587,9 @@ export default function Toolbar() {
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
           //va in kar ra dar methode verifyToken gonjandim)
 
-          const response = await fetch("/api/auth/verifyToken", {
+          const response = await fetch("/api/auth/verifyToken", {  //zare_nk_041115_nokteh(methode Api_LoginUser2 tavassote aghaye parsafar chek mishe da morede dorostiye sms va zamane monghazi shodanesh,
+            //vali man mikham bedoonam tokeni ke methode Api_LoginUser2 be man mideh ba secretKey amn shodeh bashe,va projeye samte cllient hatman bayad kelide dastresi ro dashteh bashe ta kasi 
+            //ba sooeestefade token ro natooneh vakeshi koneh(masalan dar proje haye haker ha),pas az methode verifyToken ke ba dastoore jwt.verify az ma secretKey mikhad estefadeh kardam)
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token }),
@@ -595,6 +597,9 @@ export default function Toolbar() {
           const data = await response.json();
           if (response.ok) {
             console.log("zare_nk_040925-decodedToken: " + JSON.stringify(data.decoded));
+            ////zare_nk_040925-decodedToken: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
+            ////zare_nk_040403-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
+
             // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString(); // 3 ساعت بعد //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam)   //zare_nk_040305_updated(dasti ra az 3 be 30 tagheir dadam)
             const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
             //  const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
@@ -609,7 +614,7 @@ export default function Toolbar() {
           } else {
             document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
             document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-            setError("متاسفانه خطایی رخ داده است33:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
+            setError("متاسفانه خطایی رخ داده است313:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
           }
         } catch (error) {
           document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
@@ -618,9 +623,9 @@ export default function Toolbar() {
           // setError("متاسفانه خطایی رخ داده است33:" + error);  //zare_nk_041107_commented
           ////zare_nk_041107_added_st
           if (error instanceof Error) {
-            setError("متاسفانه خطایی رخ داده است33:" + error.message);
+            setError("متاسفانه خطایی رخ داده است323:" + error.message);
           } else {
-            setError("متاسفانه خطایی رخ داده است33:" + String(error));
+            setError("متاسفانه خطایی رخ داده است343:" + String(error));
           }
           ////zare_nk_041107_added_end
         }

@@ -43,11 +43,21 @@ export default function ProductPage() {
           const decoded = data?.decoded;//zare_nk_041113_added
           if (response.ok && decoded) {  //zare_nk_041113_added
             // if (response.ok) {  //zare_nk_041113_commented
-            var idUser = data.decoded.IdUser;  //zare_nk_041108_nokteh(update beshe be reactnative)
-            var email = data.decoded.email;
+            ////zare_nk_041115_commented_st
+            // var idUser = data.decoded.IdUser;
+            // var email = data.decoded.email;
+            ////zare_nk_041115_commented_send
+            ////zare_nk_041115_added_st
+            var FullName = data.decoded.FullName;
+            var Mobile = data.decoded.Mobile;
+            var name = data.decoded.name;
+            ////zare_nk_041115_added_end       
             if (idUSerRef.current) {
               document.getElementById("idUSer")!.innerText =
-                idUser != null ? idUser : email;
+                // idUser != null ? idUser : email;  //zare_nk_041115_commented
+                FullName ? FullName :
+                  (Mobile ? Mobile : name
+                  )
             }
           } else {
             const idUSerRefTag = idUSerRef.current;
