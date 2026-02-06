@@ -659,12 +659,16 @@ export default function ShallowRoutingExample() {
   const refForParsedList = useRef<ParsedItemType | null>(null);
   const refForBishAzMaxTedadYaMojoodi = useRef<number | null>(null);
 
+  var modal: bootstrap.Modal;  //zare_nk_041115_added
   async function openprodDetModal(barcodeKala: string) {
-    await ShowDetails(barcodeKala);  //zare_nk_040609_added
+    // await ShowDetails(barcodeKala);  //zare_nk_041115_commented
     BarcodeKala = barcodeKala;
     const bootstrap = await getBootstrap();
-    const modal = new bootstrap.Modal(document.getElementById("prodDetModal"));
+    // const modal = new bootstrap.Modal(document.getElementById("prodDetModal"));  //zare_nk_041115_commented
+    modal = new bootstrap.Modal(document.getElementById("prodDetModal"));  //zare_nk_041115_added
     modal.show();
+    await ShowDetails(barcodeKala);  //zare_nk_041115_added
+
   }
 
   async function ShowCamera() {
@@ -1235,6 +1239,7 @@ export default function ShallowRoutingExample() {
     const token = getCookie("token");
     if (token == null) {
       const bootstrap = await getBootstrap();
+      modal?.hide();  //zare_nk_041115_added
       const mymodalForWarning = new bootstrap.Modal(
         document.getElementById("mymodalForWarning")
       );
@@ -1255,39 +1260,29 @@ export default function ShallowRoutingExample() {
     let ApiUrl = "https://api.tochikala.com/api/";
     var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
     ////zare_nk_041115_added_end
-    const response = await fetch(urlApi_SelectShobehJashnvareh, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({
-        // BarcodeKala: BarcodeKala,//zare_nk_040609_commented
-        BarcodeKala: barcodeKala, //zare_nk_040609_added
-        IdShobeh: 7,   //zare_nk_041115_added 
-        // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
-        //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)        
-      }),
-      // credentials: "include", //zare_nk_040402_commented
-    });
-    if (response.ok) {
-      const data = await response.json();
-      var result = data;
-      if (result.status != 0) {
-        const bootstrap = await getBootstrap();
-        const mymodalForWarning = new bootstrap.Modal(
-          document.getElementById("mymodalForWarning")
-        );
-        mymodalForWarning.show();
-        const span = document.querySelector(
-          "#mymodalForWarning .modal-body span"
-        );
-        if (span instanceof HTMLElement) {
-          span.innerText = result.errors[0];
-        }
-      } else if (result.status == 0) {
-        if (result.data.list == undefined) {
+    try {
+      const response = await fetch(urlApi_SelectShobehJashnvareh, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          // BarcodeKala: BarcodeKala,//zare_nk_040609_commented
+          BarcodeKala: barcodeKala, //zare_nk_040609_added
+          IdShobeh: 7,   //zare_nk_041115_added 
+          // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
+          //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)        
+        }),
+        // credentials: "include", //zare_nk_040402_commented
+      });
+      if (response.ok) {
+        const data = await response.json();
+        var result = data;
+        alert('result: ' + JSON.stringify(result));
+        if (result.status != 0) {
           const bootstrap = await getBootstrap();
+          modal?.hide();  //zare_nk_041115_added
           const mymodalForWarning = new bootstrap.Modal(
             document.getElementById("mymodalForWarning")
           );
@@ -1296,166 +1291,207 @@ export default function ShallowRoutingExample() {
             "#mymodalForWarning .modal-body span"
           );
           if (span instanceof HTMLElement) {
-            span.innerText =
-              result.message.length == 0
-                ? "ارتباط با سرور برقرار نشد"
-                : result.message;
+            span.innerText = result.errors[0];
           }
-          return;
-        }
-        var parsedList = JSON.parse(result.data.list);
-        if (parsedList.length == 0) {
+        } else if (result.status == 0) {
+          if (result.data.list == undefined) {
+            const bootstrap = await getBootstrap();
+            modal?.hide();  //zare_nk_041115_added
+            const mymodalForWarning = new bootstrap.Modal(
+              document.getElementById("mymodalForWarning")
+            );
+            mymodalForWarning.show();
+            const span = document.querySelector(
+              "#mymodalForWarning .modal-body span"
+            );
+            if (span instanceof HTMLElement) {
+              span.innerText =
+                result.message.length == 0
+                  ? "ارتباط با سرور برقرار نشد"
+                  : result.message;
+            }
+            return;
+          }
+          var parsedList = JSON.parse(result.data.list);
+          if (parsedList.length == 0) {
+            alert('parsedList.length == 0');
+            const productExist = document.getElementById("productExist");
+            if (productExist instanceof HTMLElement) {
+              productExist.style.display = "none";
+            }
+            const productNotExist = document.getElementById("productNotExist");
+            if (productNotExist instanceof HTMLElement) {
+              productNotExist.style.display = "flex";
+            }
+            return;
+          }
           const productExist = document.getElementById("productExist");
           if (productExist instanceof HTMLElement) {
-            productExist.style.display = "none";
+            productExist.style.display = "flex";
           }
           const productNotExist = document.getElementById("productNotExist");
           if (productNotExist instanceof HTMLElement) {
-            productNotExist.style.display = "flex";
+            productNotExist.style.display = "none";
           }
-          return;
-        }
-        const productExist = document.getElementById("productExist");
-        if (productExist instanceof HTMLElement) {
-          productExist.style.display = "flex";
-        }
-        const productNotExist = document.getElementById("productNotExist");
-        if (productNotExist instanceof HTMLElement) {
-          productNotExist.style.display = "none";
-        }
-        const CurrentImg = document.getElementById("CurrentImg");
-        if (CurrentImg instanceof HTMLElement) {
-          CurrentImg.setAttribute("onLoad", 'event.target.style.height="auto"');
-          CurrentImg.setAttribute("alt", parsedList[0].NameKala);
-          CurrentImg.setAttribute(
-            "src",
-            `https://img.tochikala.com/Product/${parsedList[0].IdKala}.webp`
+          const CurrentImg = document.getElementById("CurrentImg");
+          if (CurrentImg instanceof HTMLElement) {
+            CurrentImg.setAttribute("onLoad", 'event.target.style.height="auto"');
+            CurrentImg.setAttribute("alt", parsedList[0].NameKala);
+            CurrentImg.setAttribute(
+              "src",
+              `https://img.tochikala.com/Product/${parsedList[0].IdKala}.webp`
+            );
+          }
+          const nameKalaInDetailsInfoCont = document.getElementById(
+            "nameKalaInDetailsInfoCont"
           );
-        }
-        const nameKalaInDetailsInfoCont = document.getElementById(
-          "nameKalaInDetailsInfoCont"
-        );
-        if (nameKalaInDetailsInfoCont instanceof HTMLElement) {
-          nameKalaInDetailsInfoCont.innerText = parsedList[0].NameKala;
-        }
-        const nameBerandInDetailsInfoCont = document.getElementById(
-          "nameBerandInDetailsInfoCont"
-        );
-        if (nameBerandInDetailsInfoCont) {
-          nameBerandInDetailsInfoCont.innerText = parsedList[0].NameBerand;
-        }
-        const gheimatMasrafInDetailsInfoCont = document.getElementById(
-          "gheimatMasrafInDetailsInfoCont"
-        );
-        if (gheimatMasrafInDetailsInfoCont instanceof HTMLElement) {
-          gheimatMasrafInDetailsInfoCont.innerHTML =
-            parsedList[0].FeeMasraf.toLocaleString();
-        }
-        const gheimatForooshInDetailsInfoCont = document.getElementById(
-          "gheimatForooshInDetailsInfoCont"
-        );
-        if (gheimatForooshInDetailsInfoCont instanceof HTMLElement) {
-          gheimatForooshInDetailsInfoCont.innerHTML =
-            parsedList[0].FeeForoosh.toLocaleString();
-        }
-        const forDiscountInDetails = document.getElementById(
-          "forDiscountInDetails"
-        );
-        if (forDiscountInDetails) {
-          forDiscountInDetails.innerHTML = parsedList[0].DarsadTakhfif;
-        }
-        if (parsedList[0].DarsadTakhfif == 0) {
-          const darsadTakhfifInDetails = document.getElementById(
-            "darsadTakhfifInDetails"
+          if (nameKalaInDetailsInfoCont instanceof HTMLElement) {
+            nameKalaInDetailsInfoCont.innerText = parsedList[0].NameKala;
+          }
+          const nameBerandInDetailsInfoCont = document.getElementById(
+            "nameBerandInDetailsInfoCont"
           );
-          if (darsadTakhfifInDetails instanceof HTMLElement) {
-            darsadTakhfifInDetails.style.display = "none";
+          alert('parsedList[0].NameBerand: ' + parsedList[0].NameBerand);
+          if (nameBerandInDetailsInfoCont) {
+            nameBerandInDetailsInfoCont.innerText = parsedList[0].NameBerand;
           }
           const gheimatMasrafInDetailsInfoCont = document.getElementById(
             "gheimatMasrafInDetailsInfoCont"
           );
           if (gheimatMasrafInDetailsInfoCont instanceof HTMLElement) {
-            gheimatMasrafInDetailsInfoCont.style.display = "none";
+            gheimatMasrafInDetailsInfoCont.innerHTML =
+              parsedList[0].FeeMasraf.toLocaleString();
           }
-          const lastDividerInDetails = document.getElementById(
-            "lastDividerInDetails"
+          const gheimatForooshInDetailsInfoCont = document.getElementById(
+            "gheimatForooshInDetailsInfoCont"
           );
-          if (lastDividerInDetails instanceof HTMLElement) {
-            lastDividerInDetails.style.display = "none";
+          if (gheimatForooshInDetailsInfoCont instanceof HTMLElement) {
+            gheimatForooshInDetailsInfoCont.innerHTML =
+              parsedList[0].FeeForoosh.toLocaleString();
           }
-          const DiscountContInDetails = document.getElementById(
-            "DiscountContInDetails"
-          );
-          if (DiscountContInDetails instanceof HTMLElement) {
-            DiscountContInDetails.style.display = "none";
-          }
-        } else {
-          const darsadTakhfifInDetails = document.getElementById(
-            "darsadTakhfifInDetails"
-          );
-          if (darsadTakhfifInDetails instanceof HTMLElement) {
-            darsadTakhfifInDetails.style.display = "flex";
-          }
-          ////zare_nk_040525_added_st
           const forDiscountInDetails = document.getElementById(
             "forDiscountInDetails"
           );
-          if (forDiscountInDetails instanceof HTMLSpanElement) {
-            forDiscountInDetails.innerText = parsedList[0].DarsadTakhfif;
+          if (forDiscountInDetails) {
+            forDiscountInDetails.innerHTML = parsedList[0].DarsadTakhfif;
           }
-          ////zare_nk_040525_added_end
-          const gheimatMasrafInDetailsInfoCont = document.getElementById(
-            "gheimatMasrafInDetailsInfoCont"
+          if (parsedList[0].DarsadTakhfif == 0) {
+            const darsadTakhfifInDetails = document.getElementById(
+              "darsadTakhfifInDetails"
+            );
+            if (darsadTakhfifInDetails instanceof HTMLElement) {
+              darsadTakhfifInDetails.style.display = "none";
+            }
+            const gheimatMasrafInDetailsInfoCont = document.getElementById(
+              "gheimatMasrafInDetailsInfoCont"
+            );
+            if (gheimatMasrafInDetailsInfoCont instanceof HTMLElement) {
+              gheimatMasrafInDetailsInfoCont.style.display = "none";
+            }
+            const lastDividerInDetails = document.getElementById(
+              "lastDividerInDetails"
+            );
+            if (lastDividerInDetails instanceof HTMLElement) {
+              lastDividerInDetails.style.display = "none";
+            }
+            const DiscountContInDetails = document.getElementById(
+              "DiscountContInDetails"
+            );
+            if (DiscountContInDetails instanceof HTMLElement) {
+              DiscountContInDetails.style.display = "none";
+            }
+          } else {
+            const darsadTakhfifInDetails = document.getElementById(
+              "darsadTakhfifInDetails"
+            );
+            if (darsadTakhfifInDetails instanceof HTMLElement) {
+              darsadTakhfifInDetails.style.display = "flex";
+            }
+            ////zare_nk_040525_added_st
+            const forDiscountInDetails = document.getElementById(
+              "forDiscountInDetails"
+            );
+            if (forDiscountInDetails instanceof HTMLSpanElement) {
+              forDiscountInDetails.innerText = parsedList[0].DarsadTakhfif;
+            }
+            ////zare_nk_040525_added_end
+            const gheimatMasrafInDetailsInfoCont = document.getElementById(
+              "gheimatMasrafInDetailsInfoCont"
+            );
+            if (gheimatMasrafInDetailsInfoCont instanceof HTMLElement) {
+              gheimatMasrafInDetailsInfoCont.style.display = "flex";
+            }
+            const lastDividerInDetails = document.getElementById(
+              "lastDividerInDetails"
+            );
+            if (lastDividerInDetails instanceof HTMLElement) {
+              lastDividerInDetails.style.display = "flex";
+            }
+            const DiscountContInDetails = document.getElementById(
+              "DiscountContInDetails"
+            );
+            if (DiscountContInDetails instanceof HTMLElement) {
+              DiscountContInDetails.style.display = "flex";
+            }
+          }
+          const groupsInDetailsPageCont = document.getElementById(
+            "groupsInDetailsPageCont"
           );
-          if (gheimatMasrafInDetailsInfoCont instanceof HTMLElement) {
-            gheimatMasrafInDetailsInfoCont.style.display = "flex";
+          if (groupsInDetailsPageCont instanceof HTMLElement) {
+            groupsInDetailsPageCont.style.display = "none";
           }
-          const lastDividerInDetails = document.getElementById(
-            "lastDividerInDetails"
-          );
-          if (lastDividerInDetails instanceof HTMLElement) {
-            lastDividerInDetails.style.display = "flex";
-          }
-          const DiscountContInDetails = document.getElementById(
-            "DiscountContInDetails"
-          );
-          if (DiscountContInDetails instanceof HTMLElement) {
-            DiscountContInDetails.style.display = "flex";
-          }
+          ////zare_nk_041115_commented_st
+          // var isChange = parsedList[0].IsChangeTedad;
+          // fillForCartTagsInDetails("#DetailsInfoCont", parsedList[0], isChange);
+          ////zare_nk_041115_commented_end
+          ////zare_nk_041115_added_st
+          var isChange = null;
+          fillForCartTagsInDetails("#DetailsInfoCont", parsedList[0], isChange);
+          ////zare_nk_041115_added_end
         }
-        const groupsInDetailsPageCont = document.getElementById(
-          "groupsInDetailsPageCont"
+      } else {
+        alert(
+          "zare_nk_040218-response is notOk-response.status: " + response.status
         );
-        if (groupsInDetailsPageCont instanceof HTMLElement) {
-          groupsInDetailsPageCont.style.display = "none";
+        if (response.status == 401) {
+          alert("zare_nk_040218-response.status == 401");
+          modal?.hide();  //zare_nk_041115_added
+          const bootstrap = await getBootstrap(); //zare_nk_040417_added
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "لطفا ابتدا آنلاین شوید001";
+          }
         }
-        ////zare_nk_041115_commented_st
-        // var isChange = parsedList[0].IsChangeTedad;
-        // fillForCartTagsInDetails("#DetailsInfoCont", parsedList[0], isChange);
-        ////zare_nk_041115_commented_end
-        ////zare_nk_041115_added_st
-        var isChange = null;
-        fillForCartTagsInDetails("#DetailsInfoCont", parsedList[0], isChange);
-        ////zare_nk_041115_added_end
       }
-    } else {
-      alert(
-        "zare_nk_040218-response is notOk-response.status: " + response.status
+    } catch (error) {
+      alert('catch: ' + error + 'modal: ' + modal)
+      const bootstrap = await getBootstrap();
+      modal?.hide();  //zare_nk_041115_added 
+      const mymodalForWarning = new bootstrap.Modal(
+        document.getElementById("mymodalForWarning")
       );
-      if (response.status == 401) {
-        alert("zare_nk_040218-response.status == 401");
-        const bootstrap = await getBootstrap(); //zare_nk_040417_added
-        const mymodalForWarning = new bootstrap.Modal(
-          document.getElementById("mymodalForWarning")
-        );
-        mymodalForWarning.show();
-        const span = document.querySelector(
-          "#mymodalForWarning .errorInMymodalForWarning"
-        );
-        if (span instanceof HTMLElement) {
-          span.innerText = "لطفا ابتدا آنلاین شوید001";
+      mymodalForWarning.show();
+      const span = document.querySelector(
+        "#mymodalForWarning .modal-body span"
+      );
+      if (span instanceof HTMLElement) {
+        if (error instanceof Error) {
+          span.innerText = error.message //zare_nk_041115_commented 
+          if (error.message === "Failed to fetch") {//zare_nk_041115_added
+            span.innerText = "❌ اتصال اینترنت برقرار نیست یا سرور در دسترس نمی‌باشد";
+          }
+        } else {
+          alert('2')
+          span.innerText = String(error);
         }
       }
+
     }
   }
   //DarsadTakhfif
@@ -1944,9 +1980,7 @@ export default function ShallowRoutingExample() {
                                     alignItems: "center",
                                   }}
                                 >
-                                  <span id="nameBerandInDetailsInfoCont">
-                                    {" "}
-                                    @*parsedList[0].NameBerand*@{" "}
+                                  <span id="nameBerandInDetailsInfoCont"> 
                                   </span>
                                 </div>
                               </div>
