@@ -22,8 +22,15 @@ async function getBootstrap() {
   return cachedBootstrap;
 }
 
-type MiddleCountTedadSefrProps = {
-  SabadRow: SabadRowType | ForCartContInProdDetValType;
+type MiddleCountTedadSefrType = {
+  // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_commented
+  ////zare_nk_041120_added_st
+  refForfather: RefObject<string | null>;
+  fromShowDetails: boolean;
+  IdKala: number;
+  idTag: string;
+  tedadInSabadOrDet: number;
+  ////zare_nk_041120_added_end
   handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
   handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
   ForCartContentsDesignType: number;
@@ -31,12 +38,21 @@ type MiddleCountTedadSefrProps = {
 };
 
 export function MiddleCountTedadSefr({
-  SabadRow,
+  // SabadRow,  //zare_nk_041120_commented
+  ////zare_nk_041120_added_st
+  refForfather,
+  fromShowDetails,
+  IdKala,
+  idTag,
+  tedadInSabadOrDet,
+  ////zare_nk_041120_added_end
   handlerForAddClick,
   handlerForRemClick,
   ForCartContentsDesignType,
   bishAzMaxTedadYaMojoodi,
-}: MiddleCountTedadSefrProps) {
+  ///////////////////////////////////zare_nk_041120_added_end
+}: MiddleCountTedadSefrType) {
+  console.log('ShallowRoutingExample called-MiddleCountTedadSefr');
   useEffect(() => {
     ////zare_nk_041120_commented_st
     // console.log('2-041119-SabadRow: ' + JSON.stringify(SabadRow));
@@ -46,18 +62,21 @@ export function MiddleCountTedadSefr({
   });
 
   useEffect(() => {
-    if ("refForfather" in SabadRow) {
-      SabadRow.refForfather.current = SabadRow.fromShowDetails
-        ? "#DetailsInfoCont"
-        : "#sabadItemsContInSafhe";
-    }
+    // if ("refForfather" in SabadRow) {
+    //   SabadRow.refForfather.current = SabadRow.fromShowDetails
+    //     ? "#DetailsInfoCont"
+    //     : "#sabadItemsContInSafhe";
+    // }
+    refForfather.current = fromShowDetails
+      ? "#DetailsInfoCont"
+      : "#sabadItemsContInSafhe";
 
     if (ForCartContentsDesignType == 0) {
-      if (SabadRow.IdKala) {
+      if (IdKala) {
         const ForCartWidth = document.querySelector(
-          SabadRow.refForfather.current +
+          refForfather.current +
           " #ForCart-" +
-          SabadRow.IdKala +
+          IdKala +
           " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
@@ -65,11 +84,11 @@ export function MiddleCountTedadSefr({
         }
       }
     } else if (ForCartContentsDesignType == 1) {
-      if (SabadRow.IdKala) {
+      if (IdKala) {
         const ForCartWidth = document.querySelector(
-          SabadRow.refForfather.current +
+          refForfather.current +
           " #ForCart-" +
-          SabadRow.IdKala +
+          IdKala +
           " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
@@ -77,11 +96,11 @@ export function MiddleCountTedadSefr({
         }
       }
     } else if (ForCartContentsDesignType == 2) {
-      if (SabadRow.IdKala) {
+      if (IdKala) {
         const ForCartWidth = document.querySelector(
-          SabadRow.refForfather.current +
+          refForfather.current +
           " #ForCart-" +
-          SabadRow.IdKala +
+          IdKala +
           " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
@@ -94,8 +113,8 @@ export function MiddleCountTedadSefr({
   if (ForCartContentsDesignType == 0) {
     return (
       <div
-        className={`text-center align-items-center justify-content-center ForCart ${SabadRow.idTag}`}
-        id={`${SabadRow.idTag}`}
+        className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+        id={`${idTag}`}
         style={{ width: "100%", display: "flex" }}
       >
         <div
@@ -115,7 +134,7 @@ export function MiddleCountTedadSefr({
         >
           <div
             className="addremmCont"
-            id={`removeCont-${SabadRow.IdKala}`}
+            id={`removeCont-${IdKala}`}
             style={{ height: "100%", flex: "1 1 auto", display: "none" }}
           >
             <div
@@ -140,7 +159,7 @@ export function MiddleCountTedadSefr({
                   textDecoration: "none",
                   borderRadius: "50%",
                 }}
-                className={`rem-${SabadRow.IdKala}`}
+                className={`rem-${IdKala}`}
                 href="/login"
               >
                 <button
@@ -167,7 +186,7 @@ export function MiddleCountTedadSefr({
           </div>
 
           <div
-            className={`middleCount-${SabadRow.IdKala}`}
+            className={`middleCount-${IdKala}`}
             style={{
               height: "100",
               flex: "1 1 auto",
@@ -197,7 +216,7 @@ export function MiddleCountTedadSefr({
                   textDecoration: "none",
                   borderRadius: "50%",
                 }}
-                className={`add-${SabadRow.IdKala}`}
+                className={`add-${IdKala}`}
                 href="/login"
                 onClick={(e) => {
                   e.preventDefault();
@@ -205,7 +224,7 @@ export function MiddleCountTedadSefr({
                 }}
               >
                 <button
-                  id={`inp-${SabadRow.IdKala}`}
+                  id={`inp-${IdKala}`}
                   style={{
                     color: "red",
                     fontSize: "14px",
@@ -225,7 +244,7 @@ export function MiddleCountTedadSefr({
 
           <div
             className="addremmCont"
-            id={`addCont-${SabadRow.IdKala}`}
+            id={`addCont-${IdKala}`}
             style={{ height: "100%", flex: "1 1 auto", display: "none" }}
           >
             <div
@@ -250,7 +269,7 @@ export function MiddleCountTedadSefr({
                   textDecoration: "none",
                   borderRadius: "50%",
                 }}
-                className={`add-${SabadRow.IdKala}`}
+                className={`add-${IdKala}`}
                 href="/login"
               >
                 <button
@@ -281,8 +300,8 @@ export function MiddleCountTedadSefr({
   } else if (ForCartContentsDesignType == 1) {
     return (
       <div
-        className={`text-center align-items-center justify-content-center ForCart ${SabadRow.idTag}`}
-        id={`${SabadRow.idTag}`}
+        className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+        id={`${idTag}`}
         style={{ width: "100%", display: "flex" }}
       >
         <div
@@ -302,7 +321,7 @@ export function MiddleCountTedadSefr({
         >
           <div
             className="addremmCont"
-            id={`removeCont-${SabadRow.IdKala}`}
+            id={`removeCont-${IdKala}`}
             style={{ height: "100%", flex: "1 1 auto" }}
           >
             <div
@@ -326,7 +345,7 @@ export function MiddleCountTedadSefr({
                   alignItems: "center",
                   borderRadius: "50%",
                 }}
-                className={`rem-${SabadRow.IdKala}`}
+                className={`rem-${IdKala}`}
                 href="/login"
                 onClick={(e) => {
                   e.preventDefault();
@@ -357,11 +376,11 @@ export function MiddleCountTedadSefr({
           </div>
 
           <div
-            className={`middleCount-${SabadRow.IdKala}`}
+            className={`middleCount-${IdKala}`}
             style={{ height: "100", display: "flex", flexFlow: "column" }}
           >
             <span
-              id={`inp-${SabadRow.IdKala}`}
+              id={`inp-${IdKala}`}
               className="text-center titleStyle"
               style={{
                 backgroundColor: "white",
@@ -374,14 +393,14 @@ export function MiddleCountTedadSefr({
                 alignContent: "center",
               }}
             >
-              {SabadRow.tedadInSabadOrDet}
+              {tedadInSabadOrDet}
             </span>
             <span style={{ border: "none" }}> </span>
           </div>
 
           <div
             className="addremmCont"
-            id={`addCont-${SabadRow.IdKala}`}
+            id={`addCont-${IdKala}`}
             style={{ height: "100%", flex: "1 1 auto" }}
           >
             <div
@@ -405,7 +424,7 @@ export function MiddleCountTedadSefr({
                   alignItems: "center",
                   borderRadius: "50%",
                 }}
-                className={`add-${SabadRow.IdKala}`}
+                className={`add-${IdKala}`}
                 href="/login"
                 onClick={(e) => {
                   e.preventDefault();
@@ -413,6 +432,7 @@ export function MiddleCountTedadSefr({
                 }}
               >
                 <button
+                  title={Number(bishAzMaxTedadYaMojoodi) === 1 ? "موجودی کافی نیست" : ""}
                   style={{
                     height: "80%",
                     backgroundColor: "white",
@@ -421,8 +441,10 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
                   }}
                   className="plussMinus"
+                  disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
                 >
                   <img
                     src="https://img.tochikala.com/tochikala/add-to-cart.svg"
@@ -440,8 +462,8 @@ export function MiddleCountTedadSefr({
   } else if (ForCartContentsDesignType == 2) {
     return (
       <div
-        className={`text-center align-items-center justify-content-center ForCart ${SabadRow.idTag}`}
-        id={`${SabadRow.idTag}`}
+        className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+        id={`${idTag}`}
         style={{ width: "100%", display: "flex" }}
       >
         <div
@@ -461,7 +483,7 @@ export function MiddleCountTedadSefr({
         >
           <div
             className="addremmCont"
-            id={`removeCont-${SabadRow.IdKala}`}
+            id={`removeCont-${IdKala}`}
             style={{ height: "100%", flex: "1 1 auto" }}
           >
             <div
@@ -485,7 +507,7 @@ export function MiddleCountTedadSefr({
                   alignItems: "center",
                   borderRadius: "50%",
                 }}
-                className={`rem-${SabadRow.IdKala}`}
+                className={`rem-${IdKala}`}
                 href="/login"
                 onClick={(e) => {
                   e.preventDefault();
@@ -516,11 +538,11 @@ export function MiddleCountTedadSefr({
           </div>
 
           <div
-            className={`middleCount-${SabadRow.IdKala}`}
+            className={`middleCount-${IdKala}`}
             style={{ height: "100", display: "flex", flexFlow: "column" }}
           >
             <span
-              id={`inp-${SabadRow.IdKala}`}
+              id={`inp-${IdKala}`}
               className="text-center titleStyle"
               style={{
                 backgroundColor: "white",
@@ -533,14 +555,14 @@ export function MiddleCountTedadSefr({
                 alignContent: "center",
               }}
             >
-              {SabadRow.tedadInSabadOrDet}
+              {tedadInSabadOrDet}
             </span>
             <span style={{ border: "none" }}> </span>
           </div>
 
           <div
             className="addremmCont"
-            id={`addCont-${SabadRow.IdKala}`}
+            id={`addCont-${IdKala}`}
             style={{ height: "100%", flex: "1 1 auto" }}
           >
             <div
@@ -564,7 +586,7 @@ export function MiddleCountTedadSefr({
                   alignItems: "center",
                   borderRadius: "50%",
                 }}
-                className={`add-${SabadRow.IdKala}`}
+                className={`add-${IdKala}`}
                 href="/login"
                 onClick={(e) => {
                   e.preventDefault();
@@ -602,7 +624,7 @@ export function MiddleCountTedadSefr({
   }
 }
 
-type addRemParamType = {  //041120_okk
+type addRemParamType = {
   tedadInSabadOrDet: number;
   ZaribForoosh: number;
   IdKala: number;
@@ -685,28 +707,10 @@ type SabadSatrProps = {
 
 export function SabadSatrComponent({
   SabadRow,
-  // IdKala,
-  // NameKala,
-  // j,
-  // DarsadTakhfif,
-  // FeeForoosh,
-  // refForMiddleCount,
-  // refForfather,
-  // refForInputGroup,
-  // MasrafSatr,
   handlerForAddClick,
   handlerForRemClick,
   openprodDetModal,
-  // ForCartContentsDesignType,
-  // tedad,
-  // idTag,
-  // BarcodeKala,
-  // isOpenedProdDetModal,
-
-  // bishAzMaxTedadYaMojoodi,  //zare_nk_041118_added
-
 }: SabadSatrProps) {
-  ////zare_nk_041119_added_st
   var Tedad = SabadRow.tedadInSabadOrDet;
   var bishAzMaxTedadYaMojoodi = 0;
   if (SabadRow.MaxTedad != null) {
@@ -730,15 +734,6 @@ export function SabadSatrComponent({
           0;
   // }, [SabadRow]);  
 
-  // alert('1-ForCartContentsDesignTypeLet: ' + ForCartContentsDesignTypeLet + '-bishAzMaxTedadYaMojoodi: ' + bishAzMaxTedadYaMojoodi);
-  ////zare_nk_041119_added_end
-
-  ////zare_nk_041117_added_st_testi
-  useEffect(() => {
-    // console.log('1-041119-SabadRow: ' + JSON.stringify(SabadRow));  //zare_nk_041120_commented
-    // alert('2-ForCartContentsDesignTypeLet: ' + ForCartContentsDesignTypeLet + '-bishAzMaxTedadYaMojoodi: ' + bishAzMaxTedadYaMojoodi);
-  }, [SabadRow]);
-  ////zare_nk_041117_added_end_testi
 
   return (
     <div
@@ -899,10 +894,14 @@ export function SabadSatrComponent({
               }}
             >
               <MiddleCountTedadSefr
-                SabadRow={SabadRow}
-                // refForMiddleCount={refForMiddleCount}
-                // refForfather={refForfather}
-
+                // SabadRow={SabadRow}  //zare_nk_041120_commented
+                ////zare_nk_041120_added_st
+                refForfather={SabadRow.refForfather}
+                fromShowDetails={SabadRow.fromShowDetails}
+                IdKala={SabadRow.IdKala}
+                idTag={SabadRow.idTag}
+                tedadInSabadOrDet={SabadRow.tedadInSabadOrDet}
+                ////zare_nk_041120_added_end
                 handlerForAddClick={(e) => {
                   return handlerForAddClick(
                     {
@@ -1057,6 +1056,7 @@ function getCookie(name: any) {
 }
 
 export default function ShallowRoutingExample() {
+  console.log('ShallowRoutingExample called!!');
   const router = useRouter();
   const [ForCartContInProdDetVal, setForCartContInProdDetVal] =
     useState<ForCartContInProdDetValType>();
@@ -1076,6 +1076,7 @@ export default function ShallowRoutingExample() {
   const [isOpenedProdDetModal, setIsOpenedProdDetModal] = useState(false);
   const [isOpenedSeePricesModal, setIsOpenedSeePricesModal] = useState(false);
   async function openprodDetModal(barcodeKala: string) {
+    console.log('ShallowRoutingExample called-openprodDetModal called!!');
     await ShowDetails(barcodeKala);
     setIsOpenedProdDetModal(true);
     setAddOrRemChanged(null);
@@ -1127,12 +1128,7 @@ export default function ShallowRoutingExample() {
         span.innerText = "لطفا ابتدا آنلاین شوید";
       }
     }
-    ////zare_nk_041115_commented_st
-    // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-    // var urlApi_SelectShobehJashnvareh = ApiUrl + "Api_SelectKala";
-    ////zare_nk_041115_commented_end
-    ////zare_nk_041115_added_st
+
     let ApiUrl = "https://api.tochikala.com/api/";
     var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
     const response = await fetch(urlApi_SelectShobehJashnvareh, {
@@ -1233,20 +1229,7 @@ export default function ShallowRoutingExample() {
         }
         else if (parsedList[0].TedadDarSabad == parsedList[0].ZaribForoosh) {
           ForCartContentsDesignTypeLet = 1;
-        }
-        // const tedadInSabadOrDetToNumber = Number(SabadRow.tedadInSabadOrDet);
-        // const ZaribForooshToNumber = Number(SabadRow.ZaribForoosh);
-
-        // const ForCartContentsDesignTypeLet =
-        //   tedadInSabadOrDetToNumber === 0 ? 0 :
-        //   tedadInSabadOrDetToNumber > ZaribForooshToNumber ? 2 :
-        //   tedadInSabadOrDetToNumber === ZaribForooshToNumber ? 1 :
-        //   0;
-
-        console.log(
-          "parsedList[0].Tedad: ", parsedList[0].tedadInSabadOrDet,
-          "parsedList[0].ZaribForoosh: ", parsedList[0].ZaribForoosh
-        );
+        } 
 
         const idTag = "ForCart-" + parsedList[0].IdKala;
         setForCartContInProdDetVal(() => {
@@ -1764,7 +1747,7 @@ export default function ShallowRoutingExample() {
   async function addToCartInIndex(
     addRemParam: addRemParamType,
   ) {
-    console.log('041120-addToCartInIndex called!-addRemParam: ' + addRemParam.FeeForoosh );
+    console.log('041120-addToCartInIndex called!-addRemParam: ' + addRemParam.FeeForoosh);
     // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented(error mideh:    // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented_tahlilshe(error mideh:TypeError: Converting circular structure to JSON)
     if (addRemParam.event != null) {
       addRemParam.event.stopPropagation();
@@ -2582,9 +2565,15 @@ export default function ShallowRoutingExample() {
                               }}
                             >
                               {ForCartContInProdDetVal != null && (
-
                                 <MiddleCountTedadSefr
-                                  SabadRow={ForCartContInProdDetVal}
+                                  // SabadRow={ForCartContInProdDetVal}  //zare_nk_041120_commented
+                                  ////zare_nk_041120_added_st
+                                  refForfather={ForCartContInProdDetVal.refForfather}
+                                  fromShowDetails={ForCartContInProdDetVal.fromShowDetails}
+                                  IdKala={ForCartContInProdDetVal.IdKala}
+                                  idTag={ForCartContInProdDetVal.idTag}
+                                  tedadInSabadOrDet={ForCartContInProdDetVal.tedadInSabadOrDet}
+                                  ////zare_nk_041120_added_end
                                   handlerForAddClick={(e) => {
                                     return handlerForAddClick(
                                       {
