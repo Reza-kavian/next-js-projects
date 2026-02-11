@@ -52,7 +52,7 @@ export function MiddleCountTedadSefr({
   bishAzMaxTedadYaMojoodi,
   ///////////////////////////////////zare_nk_041120_added_end
 }: MiddleCountTedadSefrType) {
-  console.log('ShallowRoutingExample called-MiddleCountTedadSefr');
+  console.log('ShallowRoutingExample called-MiddleCountTedadSefr-ForCartContentsDesignType: '+ForCartContentsDesignType);
   useEffect(() => {
     ////zare_nk_041120_commented_st
     // console.log('2-041119-SabadRow: ' + JSON.stringify(SabadRow));
