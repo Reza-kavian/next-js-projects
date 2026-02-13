@@ -70,9 +70,9 @@ function FirstPageComponent({
         className={`${Styles.lablAndInputCont}  `}
         style={{ marginBottom: "15px" }}
       >
-        <label style={{ marginLeft: "15px", marginBottom: "10px" }}>
+        <span style={{ marginLeft: "15px", marginBottom: "10px" }}>
           شماره تماس
-        </label>
+        </span>
         <input
           style={{ textAlign: "center" }}
           className={Styles.txtBox}
@@ -320,9 +320,9 @@ function SecondPageComponent({
         className={`${Styles.lablAndInputCont}  `}
         style={{ marginBottom: "15px" }}
       >
-        <label style={{ marginLeft: "15px", marginBottom: "10px" }}>
+        <span style={{ marginLeft: "15px", marginBottom: "10px" }}>
           کد تایید
-        </label>
+        </span>
         <input
           className={Styles.txtBox}
           id="smsValTxt"
@@ -852,6 +852,7 @@ export default function Toolbar() {
         justifyContent: "center",
         minHeight: "100vh",
         alignItems: "center",
+        backgroundColor:'white',
       }}
     >
       <form
@@ -859,7 +860,7 @@ export default function Toolbar() {
         onSubmit={(event) => {
           event.preventDefault();
         }}
-        className={`${Styles.loginForm} ${Styles.valueStyle}`}
+        className={`${Styles.loginForm} ${Styles.valueStyle}`} 
       >
         <div
           className={Styles.formsRow}

@@ -133,7 +133,7 @@
 
 .valueStyle {
   font-family: "IRANSansWeb_Medium(adad_fa)";
-  color: #6a6a6a;
+  /* color: #6a6a6a; */
 }
 
 .titleInsabad {
@@ -145,8 +145,11 @@
 body {
   font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
     "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; 
-
-  background-color: #fcfcfc !important; 
+/* zarezank_041122_nokteh(backgroud tochi) */
+  /* background-color: #fcfcfc !important;  */
+  /* zarezank_041122_nokteh(backgroud okala) */
+  background-color: #f6f6f6 !important; 
+  
 }
 
 .loginOutBtn {
@@ -379,10 +382,7 @@ button {
 }
 
 @media screen and (min-width: 768px) {
-  #MyOrdersCont {
-    margin-top: 10px;
-    padding: 0px 25px;
-  }
+
 
   #accordion {
     position: sticky;
@@ -1261,10 +1261,7 @@ li#proinf > #dropdownflex {
 }
 
 @media screen and (max-width: 768px) {
-  #MyOrdersCont {
-    margin-top: 10px;
-    padding: 0px 10px;
-  }
+  
 
   .imgAndTextInSubprograms {
     flex-flow: column;

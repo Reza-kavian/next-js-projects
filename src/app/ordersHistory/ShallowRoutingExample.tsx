@@ -12,7 +12,7 @@ let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_
 import "@/styles/ordersHistoryCss.css";
 
 import { RefObject } from "react";
-import { MouseEvent } from "react"; 
+import { MouseEvent } from "react";
 
 async function getBootstrap() {
   if (!cachedBootstrap) {
@@ -36,13 +36,14 @@ export default function ShallowRoutingExample() {
   type ForoshStateType = {
     ShomarehFaktorForoosh: number;
     IdFaktorForoosh: number;
-    TarikhShamsi: string;
-    MablaghKolMasraf: number;
-    TakhfifTitr: number;
+    TarikhSefaresh: string;
+    MablaghMasraf: number;
+    JamTakhfifTitr: number;
+    JamTakhfifSatr: number;
     MablaghKhales: number;
     orderRowsLength: number;
   };
-  
+
   const [ForooshSatrHideForooshTitr, setForooshSatrHideForooshTitr] =
     useState<ForoshStateType | null>(null);
   const [bisatr, setBisatr] = useState(true);
@@ -63,11 +64,11 @@ export default function ShallowRoutingExample() {
     NameSobe: string;
     // VaziatFactor
     // NameMoshtari
-    // TarikhShamsi
+    // TarikhSefaresh
     // MablaghKhales
     // ShomarehFaktorForoosh
-    // TarikhShamsi
-    // MablaghKolMasraf
+    // TarikhSefaresh
+    // MablaghMasraf
     // TakhfifTitr
     // MablaghKhales
     [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast
@@ -86,46 +87,50 @@ export default function ShallowRoutingExample() {
   //zare_nk_040410_added_end
 
   type ShowForooshSatrHideForooshTitrProps = {
-    ShomarehFaktorForoosh: number; 
-    IdFaktorForoosh: number; 
-    TarikhShamsi: string; 
-    MablaghKolMasraf: number; 
-    TakhfifTitr: number; 
-    MablaghKhales: number; 
-    orderRowsLength: number; 
+    ShomarehFaktorForoosh: number;
+    IdFaktorForoosh: number;
+    TarikhSefaresh: string;
+    MablaghMasraf: number;
+    JamTakhfifTitr: number;
+    JamTakhfifSatr: number;
+    MablaghKhales: number;
+    orderRowsLength: number;
   };
 
   async function ShowForooshSatrHideForooshTitr({
     ShomarehFaktorForoosh,
     IdFaktorForoosh,
-    TarikhShamsi,
-    MablaghKolMasraf,
-    TakhfifTitr,
+    TarikhSefaresh,
+    MablaghMasraf,
+    JamTakhfifTitr,
+    JamTakhfifSatr,
     MablaghKhales,
     orderRowsLength,
-  }:  
-  ShowForooshSatrHideForooshTitrProps) {
+  }:
+    ShowForooshSatrHideForooshTitrProps) {
     setIsShowFaktorForooshSatr(true);
     setIsShowFaktorForooshTitr(null);
     setForooshSatrHideForooshTitr(() => {
       return {
         ShomarehFaktorForoosh: ShomarehFaktorForoosh,
         IdFaktorForoosh: IdFaktorForoosh,
-        TarikhShamsi: TarikhShamsi,
-        MablaghKolMasraf: MablaghKolMasraf,
-        TakhfifTitr: TakhfifTitr,
+        TarikhSefaresh: TarikhSefaresh,
+        MablaghMasraf: MablaghMasraf,
+        JamTakhfifTitr: JamTakhfifTitr,
+        JamTakhfifSatr: JamTakhfifSatr,
         MablaghKhales: MablaghKhales,
         orderRowsLength: orderRowsLength,
       };
     });
     const token = getCookie("token");
-    if (token == null) { 
+    if (token == null) {
       return;
-    } else { 
+    } else {
       const token = getCookie("token");
-      // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-      let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-      var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectFaktorForooshSatr";
+      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+      // var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectFaktorForooshSatr";
+      let ApiUrl = "https://api.tochikala.com/api/";
+      var urlSelectFaktorForooshSatr = ApiUrl + "User/Api_SelectForooshSatr";
       const response = await fetch(urlSelectFaktorForooshSatr, {
         method: "POST",
         headers: {
@@ -133,14 +138,14 @@ export default function ShallowRoutingExample() {
           Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
-          ShomarehFaktorForoosh: ShomarehFaktorForoosh,
+          IdForooshTitr: IdFaktorForoosh,
         }),
         // credentials: "include", //zare_nk_040402_commented
       });
       const data = await response.json();
       if (response.ok) {
         if (data.status != 0) {
-          const bootstrap = await getBootstrap();  
+          const bootstrap = await getBootstrap();
           const mymodalForWarning = new bootstrap.Modal(
             document.getElementById("mymodalForWarning")
           );
@@ -153,6 +158,8 @@ export default function ShallowRoutingExample() {
           }
         } else if (data.status == 0) {
           var result = JSON.parse(data.data.list);
+          console.log('zare_nk_041123-resultSatr: ' + JSON.stringify(result));
+          console.log('zare_nk_041123-resultSatr.length: ' + result.length);
           if (result.length == 0) {
             setBisatrDarSatr(true);
             return;
@@ -190,16 +197,16 @@ export default function ShallowRoutingExample() {
         handlerForMymodalForWarning
       );
     }
-    return () => {      
+    return () => {
       // پاکسازی رویداد در unmount
       if (mymodalForWarning) {
         mymodalForWarning.removeEventListener(
           "hidden.bs.modal",
           handlerForMymodalForWarning
         );
-      } 
+      }
     };
-  }, []);  
+  }, []);
 
   useEffect(() => {
     if (ForooshSatrHideForooshTitr != null) {
@@ -211,22 +218,29 @@ export default function ShallowRoutingExample() {
         return;
       } else {
         const token = getCookie("token");
-        // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-        let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-        var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectFaktorForooshTitr";
+        // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+        // var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectFaktorForooshTitr";
+        let ApiUrl = "https://api.tochikala.com/api/";
+        var urlSelectFaktorForooshTitr = ApiUrl + "User/Api_SelectForooshTitr";
         const response = await fetch(urlSelectFaktorForooshTitr, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
           },
-          body: JSON.stringify({}),
+          // body: JSON.stringify({}),  //zare_nk_0411123_commented
+          ////zare_nk_0411123_added_st
+          body: JSON.stringify({
+            'Sort': 'IdFaktorForoosh',
+            'SortDir': 'DESC',
+          }),
+          ////zare_nk_0411123_added_end
           // credentials: "include", //zare_nk_040402_commented
         });
         const data = await response.json();
         if (response.ok) {
           if (data.status != 0) {
-            const bootstrap = await getBootstrap();  
+            const bootstrap = await getBootstrap();
             const mymodalForWarning = new bootstrap.Modal(
               document.getElementById("mymodalForWarning")
             );
@@ -239,6 +253,8 @@ export default function ShallowRoutingExample() {
             }
           } else if (data.status == 0) {
             var result = JSON.parse(data.data.list);
+            console.log('zare_nk_041123-result: ' + JSON.stringify(result));
+            console.log('zare_nk_041123-resresult.lengthult: ' + result.length);
             if (result.length == 0) {
               setBisatr(true);
               return;
@@ -248,7 +264,7 @@ export default function ShallowRoutingExample() {
           }
         } else {
           if (response.status == 401) {
-            const bootstrap = await getBootstrap();  
+            const bootstrap = await getBootstrap();
             const mymodalForWarning = new bootstrap.Modal(
               document.getElementById("mymodalForWarning")
             );
@@ -378,19 +394,20 @@ export default function ShallowRoutingExample() {
             style={{
               display: "flex",
               flexFlow: "column",
-              // border: "1px solid #E7E7E7",  //zare_nk_040410_commented
+              border: "1px solid #a9a9a9",
               borderRadius: 10,
               padding: 16,
-              border: "none",
-              boxShadow: "0px 0px 3px 0px silver",
+              marginLeft: '0px',
+              boxShadow: "#5e5e5e 0px 0px 3px 0px",
+              backgroundColor: "#f6f6f6",
             }}
           >
             <div style={{ display: "flex", flexFlow: "row", fontSize: 14 }}>
               <span className="titleStyle">تاریخ سفارش</span>
-              <span style={{ margin: "0 5px" }}>:</span> 
+              <span style={{ margin: "0 5px" }}>:</span>
               {ForooshSatrHideForooshTitr != null && (
                 <span className="valueStyle" style={{ marginLeft: 5 }}>
-                  {ForooshSatrHideForooshTitr.TarikhShamsi ?? ""}
+                  {ForooshSatrHideForooshTitr.TarikhSefaresh ?? ""}
                 </span>
               )}
             </div>
@@ -406,12 +423,13 @@ export default function ShallowRoutingExample() {
           <div
             className="productContInMyOrderDet valueStyle"
             style={{
-              border: "1px solid #E7E7E7",
+              border: "1px solid #a9a9a9",
               borderRadius: 10,
               display: "flex",
               flexFlow: "column",
               padding: 16,
-              backgroundColor: "white",
+              backgroundColor: "#f6f6f6",
+              boxShadow: "#5e5e5e 0px 0px 3px 0px",
             }}
           >
             <div
@@ -426,12 +444,21 @@ export default function ShallowRoutingExample() {
                   محصولات
                 </h6>
               </div>
-              <div style={{ display: "flex", flexFlow: "row", fontSize: 14 }}> 
-                {ForooshSatrHideForooshTitr != null && (
+              <div style={{ display: "flex", flexFlow: "row", fontSize: 14 }}>
+                {/* zare_nk_041123_commented_st */}
+                {/* {ForooshSatrHideForooshTitr != null && (
                   <span style={{ marginLeft: 7 }}>
                     {ForooshSatrHideForooshTitr.orderRowsLength}
                   </span>
+                )} */}
+                {/* zare_nk_041123_commented_end */}
+                {/* zare_nk_041123_added_st */}
+                {sabadRows != null && (
+                  <span style={{ marginLeft: 7 }}>
+                    {sabadRows.length}
+                  </span>
                 )}
+                {/* zare_nk_041123_added_end */}
                 <span>کالا</span>
               </div>
             </div>
@@ -458,14 +485,14 @@ export default function ShallowRoutingExample() {
                       >
                         <img
                           loading="lazy"
-                          src={`https://img.tochikala.com/Product/${item.IdKala}.jpg`}
+                          src={`https://img.tochikala.com/Product/${item.IdKala}.webp`}
                           alt={item.NameKala || ""}
                           style={{ width: "64px", height: "64px" }}
-                          // onError={(e) => {
-                          //   e.target.onerror = null;
-                          //   e.target.src =
-                          //     "https://img.tochikala.com/Logo/photo14359415832-Copy.jpg";
-                          // }}
+                        // onError={(e) => {
+                        //   e.target.onerror = null;
+                        //   e.target.src =
+                        //     "https://img.tochikala.com/Logo/photo14359415832-Copy.webp";
+                        // }}
                         />
                       </div>
 
@@ -498,7 +525,7 @@ export default function ShallowRoutingExample() {
                             {item.Tedad ?? ""}
                           </span>
                           <span>
-                            {item.IdNoeVazni === 0 ? "عدد" : "کیلوگرم"}
+                            {item.IsVazni === 0 ? "عدد" : "کیلوگرم"}
                           </span>
 
                           <span
@@ -512,8 +539,8 @@ export default function ShallowRoutingExample() {
 
                           <div style={{ display: "flex", flexFlow: "row" }}>
                             <span style={{ marginLeft: "5px" }}>
-                              {item.MablaghKhalesSatr != null
-                                ? item.MablaghKhalesSatr.toLocaleString()
+                              {item.ForooshSatr != null
+                                ? item.ForooshSatr.toLocaleString()
                                 : ""}
                             </span>
                             <span>ریال</span>
@@ -531,14 +558,15 @@ export default function ShallowRoutingExample() {
           <div
             className="joziatFaktorCont valueStyle"
             style={{
-              border: "1px solid #E7E7E7",
+              border: "1px solid #a9a9a9",
               borderRadius: 10,
               display: "flex",
               flexFlow: "column",
               padding: 16,
               fontSize: 14,
-              backgroundColor: "white",
-              height: "fit-content",
+              backgroundColor: "#f6f6f6",
+              // height: "fit-content",
+              boxShadow: "#5e5e5e 0px 0px 3px 0px",
             }}
           >
             <div
@@ -567,11 +595,11 @@ export default function ShallowRoutingExample() {
               <div style={{ display: "flex", flexFlow: "row" }}>
                 {ForooshSatrHideForooshTitr != null && (
                   <span style={{ marginLeft: 10, fontSize: 16 }}>
-                    {ForooshSatrHideForooshTitr.MablaghKolMasraf?.toLocaleString() ??
+                    {ForooshSatrHideForooshTitr.MablaghMasraf?.toLocaleString() ??
                       ""}
                   </span>
                 )}
-                {/* <span style={{ marginLeft: 10, fontSize: 16 }}>{MablaghKolMasraf?.toLocaleString() ?? ''}</span> */}
+                {/* <span style={{ marginLeft: 10, fontSize: 16 }}>{MablaghMasraf?.toLocaleString() ?? ''}</span> */}
                 <span>ریال</span>
               </div>
             </div>
@@ -591,14 +619,40 @@ export default function ShallowRoutingExample() {
               <div style={{ display: "flex", flexFlow: "row" }}>
                 {ForooshSatrHideForooshTitr != null && (
                   <span style={{ marginLeft: 10, fontSize: 16 }}>
-                    {ForooshSatrHideForooshTitr.TakhfifTitr?.toLocaleString() ??
-                      ""}
+                    {ForooshSatrHideForooshTitr.JamTakhfifSatr?.toLocaleString() ??
+                      0}
                   </span>
                 )}
-                {/* <span style={{ marginLeft: 10, fontSize: 16 }}>{TakhfifTitr?.toLocaleString() ?? ''}</span> */}
+                {/* <span style={{ marginLeft: 10, fontSize: 16 }}>{jamTakhfifSatr?.toLocaleString() ?? ''}</span> */}
                 <span>ریال</span>
               </div>
             </div>
+
+            {/* zare_nk_041123_added_st(codeTakhfif zirmajmooeye JamTakhfifTitr hast) */}
+            <div
+              style={{
+                display: "flex",
+                flexFlow: "row",
+                justifyContent: "space-between",
+                borderBottom: "1px solid #F5F5F5",
+                padding: "12px 0",
+              }}
+            >
+              <div style={{ display: "flex", flexFlow: "row" }}>
+                <span>کد تخفیف</span>
+              </div>
+              <div style={{ display: "flex", flexFlow: "row" }}>
+                {ForooshSatrHideForooshTitr != null && (
+                  <span style={{ marginLeft: 10, fontSize: 16 }}>
+                    {ForooshSatrHideForooshTitr.JamTakhfifTitr?.toLocaleString() ??
+                      0}
+                  </span>
+                )}
+                {/* <span style={{ marginLeft: 10, fontSize: 16 }}>{JamTakhfifTitr?.toLocaleString() ?? ''}</span> */}
+                <span>ریال</span>
+              </div>
+            </div>
+            {/* zare_nk_041123_added_end(codeTakhfif zirmajmooeye JamTakhfifTitr hast) */}
 
             <div
               style={{
@@ -650,11 +704,12 @@ export default function ShallowRoutingExample() {
                   display: "flex",
                   flexFlow: "column",
                   width: "100%",
-                  border: "1px solid #E7E7E7",
+                  border: "1px solid #a9a9a9",
                   borderRadius: "10px",
-                  color: "#4B4949",
+                  color: "#adadad",
                   marginBottom: "15px",
-                  boxShadow: "0px 0px 3px 0px silver",
+                  boxShadow: "#5e5e5e 0px 0px 3px 0px",
+                  backgroundColor: "#f6f6f6",
                 }}
               >
                 <div
@@ -784,7 +839,7 @@ export default function ShallowRoutingExample() {
                           نام شخص{" "}
                         </span>
                         <span style={{ margin: "0px 5px" }}>:</span>
-                        {/* <span  style={{textOverflow: 'ellipsis',overflow: 'hidden',display: '-webkit-box',-webkit-line-clamp: '2',lineClamp: '2',-webkit-box-orient: 'vertical'}}>{ item.NameMoshtari} </span> */}
+                        {/* <span  style={{textOverflow: 'ellipsis',overflow: 'hidden',display: '-webkit-box',-webkit-line-clamp: '2',lineClamp: '2',-webkit-box-orient: 'vertical'}}>{ item.UserFullName} </span> */}
                         <span
                           className="valueStyle"
                           style={{
@@ -794,7 +849,7 @@ export default function ShallowRoutingExample() {
                             lineClamp: "2",
                           }}
                         >
-                          {item.NameMoshtari}{" "}
+                          {item.UserFullName}{" "}
                         </span>
                       </div>
 
@@ -816,7 +871,7 @@ export default function ShallowRoutingExample() {
                           تاریخ سفارش{" "}
                         </span>
                         <span style={{ margin: "0px 5px" }}>: </span>
-                        <span className="valueStyle">{item.TarikhShamsi}</span>
+                        <span className="valueStyle">{item.TarikhSefaresh}</span>
                       </div>
                     </div>
                     <div
@@ -848,21 +903,22 @@ export default function ShallowRoutingExample() {
                         className="valueStyle"
                         style={{ marginLeft: "5px" }}
                       >
-                        {item.MablaghKhales.toLocaleString()}{" "}
+                        {item.JamKhales.toLocaleString()}{" "}
                       </span>
                       <span className="valueStyle" style={{ fontSize: "14px" }}>
                         ریال
                       </span>
                     </div>
                     <button
-                      onClick={(e) => { 
+                      onClick={(e) => {
                         ShowForooshSatrHideForooshTitr({
-                          ShomarehFaktorForoosh: item.ShomarehFaktorForoosh,
+                          ShomarehFaktorForoosh: item.ShomareFaktor,
                           IdFaktorForoosh: item.IdFaktorForoosh,
-                          TarikhShamsi: item.TarikhShamsi,
-                          MablaghKolMasraf: item.MablaghKolMasraf,
-                          TakhfifTitr: item.TakhfifTitr,
-                          MablaghKhales: item.MablaghKhales,
+                          TarikhSefaresh: item.TarikhSefaresh,
+                          MablaghMasraf: item.JamMasraf,
+                          JamTakhfifTitr: item.JamTakhfifTitr,
+                          JamTakhfifSatr: item.JamTakhfifSatr,
+                          MablaghKhales: item.JamKhales,
                           orderRowsLength: orderRows.length,
                         });
                       }}

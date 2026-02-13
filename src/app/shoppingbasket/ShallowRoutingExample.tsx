@@ -1230,7 +1230,7 @@ export default function ShallowRoutingExample() {
         else if (parsedList[0].TedadDarSabad == parsedList[0].ZaribForoosh) {
           ForCartContentsDesignTypeLet = 1;
         } 
-
+ 
         const idTag = "ForCart-" + parsedList[0].IdKala;
         setForCartContInProdDetVal(() => {
           return {
@@ -1484,7 +1484,6 @@ export default function ShallowRoutingExample() {
         }
       }
     }
-
   }
 
   useEffect(() => {
@@ -1507,7 +1506,6 @@ export default function ShallowRoutingExample() {
         }
         return;
       } else {
-
         let ApiUrl = "https://api.tochikala.com/api/";
         var urlSelectSabadTitr = ApiUrl + "User/Api_SelectSabadKharidTitr";
 
@@ -3001,12 +2999,13 @@ export default function ShallowRoutingExample() {
         className="list-groupp"
         id="listGroupAccordionInSafhe"
         style={{
-          marginTop: "5px",
-          paddingTop: "5px",
+          // marginTop: "5px",
+          // paddingTop: "5px",
           direction: "rtl",
           position: "relative",
           display: "flex",
           width: "100%",
+          backgroundColor:'white'
         }}
       >
         <div
@@ -3014,10 +3013,11 @@ export default function ShallowRoutingExample() {
           className="sabadHeaderAndItems"
           style={{
             flex: "1 1 auto",
-            border: "2px solid #F0F0F0",
+            border: "2px solid #a9a9a9",
             borderRadius: "10px",
             padding: "7px",
-            backgroundColor: "white",
+            backgroundColor: "#f6f6f6",
+            boxShadow: "#5e5e5e 0px 0px 3px 0px",
           }}
         >
           <div
@@ -3147,9 +3147,10 @@ export default function ShallowRoutingExample() {
             flex: "0 1 30%",
             display: "flex",
             flexFlow: "column",
-            border: "1px solid #F0F0F0",
+            border: "1px solid #a9a9a9",
             borderRadius: "10px",
-            backgroundColor: "white",
+            backgroundColor: "#f6f6f6",
+            boxShadow: "#5e5e5e 0px 0px 3px 0px",
           }}
         >
           <div

@@ -64,14 +64,10 @@
  } 
  
 @media screen and (min-width: 992px) {
-  /*zare_nk_030823_added_st*/
   #cardcontainer2 {
-    padding: 0px 50px;
-    margin-top: 60px; /*zare_nk_030901_added*/
+    padding: 12px 7px;
   }
-  /*zare_nk_030823_added_end*/
 
-  /*zare_nk_0402_added_st*/
   #GroupDescription {
     display: flex;
   }
@@ -106,7 +102,7 @@
 
 @media screen and (max-width: 992px) { 
   #cardcontainer2 {
-    margin-top: 10px;
+    padding: 7px 2px;
   } 
  
   #GroupDescription {

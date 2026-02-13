@@ -26,44 +26,628 @@ async function getBootstrap() {
 import { RefObject } from "react";
 import { MouseEvent } from "react";
 
-type MiddleCountTedadSefrProps = {
-  refForMiddleCount: RefObject<HTMLInputElement | null>;
-  IdKala: string | number;
-  ForCartContentsDesignType: number;
-  refForfather: RefObject<string | null>;
-  refForParsedList: RefObject<ParsedItemType | null>; //zare_nk_040410_tahlilshe
+// type MiddleCountTedadSefrProps = {
+//   refForMiddleCount: RefObject<HTMLInputElement | null>;
+//   IdKala: string | number;
+//   ForCartContentsDesignType: number;
+//   refForfather: RefObject<string | null>;
+//   refForParsedList: RefObject<ParsedItemType | null>;    
+//   handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
+//   handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void; 
+//   TedadOut: number; 
+//   ForCartContInProdDetVal: any; 
+//   idTag: string; 
+//   refForInputGroup: RefObject<HTMLInputElement | null>;
+// }
 
+// export function MiddleCountTedadSefr({
+//   refForMiddleCount,
+//   IdKala,
+//   ForCartContentsDesignType,
+//   refForfather,
+//   refForParsedList,
+//   handlerForAddClick,
+//   handlerForRemClick,
+//   TedadOut,
+//   ForCartContInProdDetVal,
+//   idTag,
+//   refForInputGroup,
+// }: MiddleCountTedadSefrProps) {
+//   useEffect(() => {
+//     if (ForCartContentsDesignType == 0) {
+//       if (refForParsedList.current) {
+//         const ForCartWidth = document.querySelector(
+//           refForfather.current +
+//           " #ForCart-" +
+//           refForParsedList.current.IdKala +
+//           " .input-group"
+//         );
+//         if (ForCartWidth instanceof HTMLElement) {
+//           ForCartWidth.style.width = "35px";
+//         }
+//       }
+//     } else if (ForCartContentsDesignType == 1) {
+//       if (refForParsedList.current) {
+//         const ForCartWidth = document.querySelector(
+//           refForfather.current +
+//           " #ForCart-" +
+//           refForParsedList.current.IdKala +
+//           " .input-group"
+//         );
+//         if (ForCartWidth instanceof HTMLElement) {
+//           ForCartWidth.style.width = "auto";
+//         }
+//       }
+//     } else if (ForCartContentsDesignType == 2) {
+//       if (refForParsedList.current) {
+//         const ForCartWidth = document.querySelector(
+//           refForfather.current +
+//           " #ForCart-" +
+//           refForParsedList.current.IdKala +
+//           " .input-group"
+//         );
+//         if (ForCartWidth instanceof HTMLElement) {
+//           ForCartWidth.style.width = "auto";
+//         }
+//       }
+//     }
+//   }, [ForCartContInProdDetVal]);
+
+//   if (ForCartContentsDesignType == 0) {
+//     return (
+//       <div
+//         className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+//         id={`${idTag}`}
+//         style={{ width: "100%", display: "flex" }}
+//       >
+//         <div
+//           ref={refForInputGroup}
+//           className="input-group rounded-pill"
+//           style={{
+//             backgroundColor: "white",
+//             height: "35px",
+//             display: "flex",
+//             flexWrap: "nowrap",
+//             justifyContent: "center",
+//             alignItems: "center",
+//             alignContent: "center",
+//             border: "1px solid red",
+//             overflow: "hidden",
+//           }}
+//           dir="ltr"
+//         >
+//           <div
+//             className="addremmCont"
+//             id={`removeCont-${IdKala}`}
+//             style={{ height: "100%", flex: "1 1 auto", display: "none" }}
+//           >
+//             <div
+//               style={{
+//                 height: "100%",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <a
+//                 data-baz="0"
+//                 style={{
+//                   flex: "1 1 auto",
+//                   height: "100%",
+//                   padding: "0px 2px",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                   textDecoration: "none",
+//                   borderRadius: "50%",
+//                 }}
+//                 className={`rem-${IdKala}`}
+//                 href="/login"
+//               >
+//                 <button
+//                   style={{
+//                     height: "80%",
+//                     backgroundColor: "white",
+//                     border: "none",
+//                     padding: "0",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                   }}
+//                   className="plussMinus"
+//                 >
+//                   <img
+//                     src="https://img.tochikala.com/tochikala/remove-icon.svg"
+//                     alt="حذف از سبد"
+//                     className="d-inline-block"
+//                     style={{ objectFit: "contain", width: "20px" }}
+//                   />
+//                 </button>
+//               </a>
+//             </div>
+//           </div>
+
+//           <div
+//             ref={refForMiddleCount}
+//             className={`middleCount-${IdKala}`}
+//             style={{
+//               height: "100",
+//               flex: "1 1 auto",
+//               display: "flex",
+//               flexFlow: "column",
+//             }}
+//           >
+//             <span
+//               style={{
+//                 height: "100%",
+//                 border: "none",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <a
+//                 data-baz="1"
+//                 style={{
+//                   flex: "1 1 auto",
+//                   height: "100",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                   textDecoration: "none",
+//                   borderRadius: "50%",
+//                 }}
+//                 className={`add-${IdKala}`}
+//                 href="/login"
+//                 onClick={(e) => {
+//                   e.preventDefault();
+//                   handlerForAddClick(e);
+//                 }}
+//               >
+//                 <button
+//                   id={`inp-${IdKala}`}
+//                   style={{
+//                     color: "red",
+//                     fontSize: "14px",
+//                     height: "80%",
+//                     backgroundColor: "white",
+//                     border: "none",
+//                     padding: "0",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                   }}
+//                   className="plussMinus card-linkk text-dangerr fa fa-plus"
+//                 ></button>
+//               </a>
+//             </span>
+//           </div>
+
+//           <div
+//             className="addremmCont"
+//             id={`addCont-${IdKala}`}
+//             style={{ height: "100%", flex: "1 1 auto", display: "none" }}
+//           >
+//             <div
+//               style={{
+//                 height: "100%",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <a
+//                 data-baz="0"
+//                 style={{
+//                   flex: "1 1 auto",
+//                   height: "100%",
+//                   padding: "0px 2px",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                   textDecoration: "none",
+//                   borderRadius: "50%",
+//                 }}
+//                 className={`add-${IdKala}`}
+//                 href="/login"
+//               >
+//                 <button
+//                   style={{
+//                     height: "80%",
+//                     backgroundColor: "white",
+//                     border: "none",
+//                     padding: "0",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                   }}
+//                   className="plussMinus"
+//                 >
+//                   <img
+//                     src="https://img.tochikala.com/tochikala/add-to-cart.svg"
+//                     alt="اضافه به سبد"
+//                     className="d-inline-block"
+//                     style={{ objectFit: "contain", width: "20px" }}
+//                   />
+//                 </button>
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   } else if (ForCartContentsDesignType == 1) {
+//     return (
+//       <div
+//         className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+//         id={`${idTag}`}
+//         style={{ width: "100%", display: "flex" }}
+//       >
+//         <div
+//           ref={refForInputGroup}
+//           className="input-group rounded-pill"
+//           style={{
+//             backgroundColor: "white",
+//             height: "35px",
+//             display: "flex",
+//             flexWrap: "nowrap",
+//             justifyContent: "center",
+//             alignItems: "center",
+//             alignContent: "center",
+//             border: "1px solid red",
+//             overflow: "hidden",
+//           }}
+//           dir="ltr"
+//         >
+//           <div
+//             className="addremmCont"
+//             id={`removeCont-${IdKala}`}
+//             style={{ height: "100%", flex: "1 1 auto" }}
+//           >
+//             <div
+//               style={{
+//                 height: "100%",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <a
+//                 data-baz="1"
+//                 style={{
+//                   flex: "1 1 auto",
+//                   height: "100%",
+//                   padding: "0px 2px",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                   borderRadius: "50%",
+//                 }}
+//                 className={`rem-${IdKala}`}
+//                 href="/login"
+//                 onClick={(e) => {
+//                   e.preventDefault();
+//                   handlerForRemClick(e);
+//                 }}
+//               >
+//                 <button
+//                   style={{
+//                     height: "80%",
+//                     backgroundColor: "white",
+//                     border: "none",
+//                     padding: "0",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                   }}
+//                   className="plussMinus"
+//                 >
+//                   <img
+//                     src="https://img.tochikala.com/tochikala/remove-icon.svg"
+//                     alt="حذف از سبد"
+//                     className="d-inline-block"
+//                     style={{ objectFit: "contain", width: "20px" }}
+//                   />
+//                 </button>
+//               </a>
+//             </div>
+//           </div>
+
+//           <div
+//             ref={refForMiddleCount}
+//             className={`middleCount-${IdKala}`}
+//             style={{ height: "100", display: "flex", flexFlow: "column" }}
+//           >
+//             <span
+//               id={`inp-${IdKala}`}
+//               className="text-center"
+//               style={{
+//                 backgroundColor: "white",
+//                 border: "none",
+//                 flex: "1 0 40%",
+//                 width: "40px",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//               }}
+//             >
+//               {TedadOut}
+//             </span>
+//             <span style={{ border: "none" }}> </span>
+//           </div>
+
+//           <div
+//             className="addremmCont"
+//             id={`addCont-${IdKala}`}
+//             style={{ height: "100%", flex: "1 1 auto" }}
+//           >
+//             <div
+//               style={{
+//                 height: "100%",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <a
+//                 data-baz="1"
+//                 style={{
+//                   flex: "1 1 auto",
+//                   height: "100%",
+//                   padding: "0px 2px",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                   borderRadius: "50%",
+//                 }}
+//                 className={`add-${IdKala}`}
+//                 href="/login"
+//                 onClick={(e) => {
+//                   e.preventDefault();
+//                   handlerForAddClick(e);
+//                 }}
+//               >
+//                 <button
+//                   style={{
+//                     height: "80%",
+//                     backgroundColor: "white",
+//                     border: "none",
+//                     padding: "0",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                   }}
+//                   className="plussMinus"
+//                 >
+//                   <img
+//                     src="https://img.tochikala.com/tochikala/add-to-cart.svg"
+//                     alt="اضافه به سبد"
+//                     className="d-inline-block"
+//                     style={{ objectFit: "contain", width: "20px" }}
+//                   />
+//                 </button>
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   } else if (ForCartContentsDesignType == 2) {
+//     return (
+//       <div
+//         className={`text-center align-items-center justify-content-center ForCart ${idTag}`}
+//         id={`${idTag}`}
+//         style={{ width: "100%", display: "flex" }}
+//       >
+//         <div
+//           ref={refForInputGroup}
+//           className="input-group rounded-pill"
+//           style={{
+//             backgroundColor: "white",
+//             height: "35px",
+//             display: "flex",
+//             flexWrap: "nowrap",
+//             justifyContent: "center",
+//             alignItems: "center",
+//             alignContent: "center",
+//             border: "1px solid red",
+//             overflow: "hidden",
+//           }}
+//           dir="ltr"
+//         >
+//           <div
+//             className="addremmCont"
+//             id={`removeCont-${IdKala}`}
+//             style={{ height: "100%", flex: "1 1 auto" }}
+//           >
+//             <div
+//               style={{
+//                 height: "100%",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <a
+//                 data-baz="1"
+//                 style={{
+//                   flex: "1 1 auto",
+//                   height: "100%",
+//                   padding: "0px 2px",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                   borderRadius: "50%",
+//                 }}
+//                 className={`rem-${IdKala}`}
+//                 href="/login"
+//                 onClick={(e) => {
+//                   e.preventDefault();
+//                   handlerForRemClick(e);
+//                 }}
+//               >
+//                 <button
+//                   style={{
+//                     height: "80%",
+//                     backgroundColor: "white",
+//                     border: "none",
+//                     padding: "0",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                   }}
+//                   className="plussMinus"
+//                 >
+//                   <img
+//                     src="https://img.tochikala.com/tochikala/remove-from-cart.svg"
+//                     alt="حذف از سبد"
+//                     className="d-inline-block"
+//                     style={{ objectFit: "contain", width: "20px" }}
+//                   />
+//                 </button>
+//               </a>
+//             </div>
+//           </div>
+
+//           <div
+//             ref={refForMiddleCount}
+//             className={`middleCount-${IdKala}`}
+//             style={{ height: "100", display: "flex", flexFlow: "column" }}
+//           >
+//             <span
+//               id={`inp-${IdKala}`}
+//               className="text-center"
+//               style={{
+//                 backgroundColor: "white",
+//                 border: "none",
+//                 flex: "1 0 40%",
+//                 width: "40px",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//               }}
+//             >
+//               {TedadOut}
+//             </span>
+//             <span style={{ border: "none" }}> </span>
+//           </div>
+
+//           <div
+//             className="addremmCont"
+//             id={`addCont-${IdKala}`}
+//             style={{ height: "100%", flex: "1 1 auto" }}
+//           >
+//             <div
+//               style={{
+//                 height: "100%",
+//                 display: "flex",
+//                 justifyContent: "center",
+//                 alignItems: "center",
+//                 alignContent: "center",
+//                 overflow: "hidden",
+//               }}
+//             >
+//               <a
+//                 data-baz="1"
+//                 style={{
+//                   flex: "1 1 auto",
+//                   height: "100%",
+//                   padding: "0px 2px",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                   borderRadius: "50%",
+//                 }}
+//                 className={`add-${IdKala}`}
+//                 href="/login"
+//                 // onClick={handlerForAddClick}    ////zare_nk_040405_commented
+//                 onClick={(e) => {
+//                   e.preventDefault(); //zare_nk_040417_added
+//                   // handlerForAddClick;//zare_nk_040417_commented_alan
+//                   handlerForAddClick(e); //zare_nk_040417_added_alan
+//                 }}
+//               >
+//                 <button
+//                   style={{
+//                     height: "80%",
+//                     backgroundColor: "white",
+//                     border: "none",
+//                     padding: "0",
+//                     display: "flex",
+//                     alignItems: "center",
+//                     justifyContent: "center",
+//                   }}
+//                   className="plussMinus"
+//                 >
+//                   <img
+//                     src="https://img.tochikala.com/tochikala/add-to-cart.svg"
+//                     alt="اضافه به سبد"
+//                     className="d-inline-block"
+//                     style={{ objectFit: "contain", width: "20px" }}
+//                   />
+//                 </button>
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+// var BarcodeKala = null; //zare_nk_040410_commented
+
+type MiddleCountTedadSefrType = {
+  refForfather: RefObject<string | null>;
+  fromShowDetails: boolean;
+  IdKala: number;
+  idTag: string;
+  tedadInSabadOrDet: number;
   handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
   handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
-
-  TedadOut: number; // اگر نوع مشخصی داره اینجا مشخص کن
-  ForCartContInProdDetVal: any; //zare_nk_040410_tahlilshe
-  idTag: string;
-
-  // refForInputGroupTedadSefr: RefObject<HTMLInputElement | null>;
-  refForInputGroup: RefObject<HTMLInputElement | null>;
-}
+  ForCartContentsDesignType: number;
+  bishAzMaxTedadYaMojoodi: number | null;
+};
 
 export function MiddleCountTedadSefr({
-  refForMiddleCount,
-  IdKala,
-  ForCartContentsDesignType,
   refForfather,
-  refForParsedList,
+  fromShowDetails,
+  IdKala,
+  idTag,
+  tedadInSabadOrDet,
   handlerForAddClick,
   handlerForRemClick,
-  TedadOut,
-  ForCartContInProdDetVal,
-  idTag,
-  refForInputGroup,
-}: MiddleCountTedadSefrProps) {
+  ForCartContentsDesignType,
+  bishAzMaxTedadYaMojoodi,
+}: MiddleCountTedadSefrType) {
+
   useEffect(() => {
+    refForfather.current = fromShowDetails
+      ? "#DetailsInfoCont"
+      : "#sabadItemsContInSafhe";
+      console.log('041123-MiddleCountTedadSefr called!-refForfather.current: '+refForfather.current+'-fromShowDetails: '+
+        fromShowDetails+'-ForCartContentsDesignType: '+ForCartContentsDesignType+'-bishAzMaxTedadYaMojoodi: '+bishAzMaxTedadYaMojoodi);
+
     if (ForCartContentsDesignType == 0) {
-      if (refForParsedList.current) {
+      if (IdKala) {
         const ForCartWidth = document.querySelector(
           refForfather.current +
           " #ForCart-" +
-          refForParsedList.current.IdKala +
+          IdKala +
           " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
@@ -71,11 +655,11 @@ export function MiddleCountTedadSefr({
         }
       }
     } else if (ForCartContentsDesignType == 1) {
-      if (refForParsedList.current) {
+      if (IdKala) {
         const ForCartWidth = document.querySelector(
           refForfather.current +
           " #ForCart-" +
-          refForParsedList.current.IdKala +
+          IdKala +
           " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
@@ -83,11 +667,11 @@ export function MiddleCountTedadSefr({
         }
       }
     } else if (ForCartContentsDesignType == 2) {
-      if (refForParsedList.current) {
+      if (IdKala) {
         const ForCartWidth = document.querySelector(
           refForfather.current +
           " #ForCart-" +
-          refForParsedList.current.IdKala +
+          IdKala +
           " .input-group"
         );
         if (ForCartWidth instanceof HTMLElement) {
@@ -95,7 +679,7 @@ export function MiddleCountTedadSefr({
         }
       }
     }
-  }, [ForCartContInProdDetVal]);
+  });
 
   if (ForCartContentsDesignType == 0) {
     return (
@@ -105,7 +689,6 @@ export function MiddleCountTedadSefr({
         style={{ width: "100%", display: "flex" }}
       >
         <div
-          ref={refForInputGroup}
           className="input-group rounded-pill"
           style={{
             backgroundColor: "white",
@@ -174,7 +757,6 @@ export function MiddleCountTedadSefr({
           </div>
 
           <div
-            ref={refForMiddleCount}
             className={`middleCount-${IdKala}`}
             style={{
               height: "100",
@@ -294,7 +876,6 @@ export function MiddleCountTedadSefr({
         style={{ width: "100%", display: "flex" }}
       >
         <div
-          ref={refForInputGroup}
           className="input-group rounded-pill"
           style={{
             backgroundColor: "white",
@@ -366,13 +947,12 @@ export function MiddleCountTedadSefr({
           </div>
 
           <div
-            ref={refForMiddleCount}
             className={`middleCount-${IdKala}`}
             style={{ height: "100", display: "flex", flexFlow: "column" }}
           >
             <span
               id={`inp-${IdKala}`}
-              className="text-center"
+              className="text-center titleStyle"
               style={{
                 backgroundColor: "white",
                 border: "none",
@@ -384,7 +964,7 @@ export function MiddleCountTedadSefr({
                 alignContent: "center",
               }}
             >
-              {TedadOut}
+              {tedadInSabadOrDet}
             </span>
             <span style={{ border: "none" }}> </span>
           </div>
@@ -423,6 +1003,7 @@ export function MiddleCountTedadSefr({
                 }}
               >
                 <button
+                  title={Number(bishAzMaxTedadYaMojoodi) === 1 ? "موجودی کافی نیست" : ""}
                   style={{
                     height: "80%",
                     backgroundColor: "white",
@@ -431,8 +1012,10 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
                   }}
                   className="plussMinus"
+                  disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
                 >
                   <img
                     src="https://img.tochikala.com/tochikala/add-to-cart.svg"
@@ -455,7 +1038,6 @@ export function MiddleCountTedadSefr({
         style={{ width: "100%", display: "flex" }}
       >
         <div
-          ref={refForInputGroup}
           className="input-group rounded-pill"
           style={{
             backgroundColor: "white",
@@ -527,13 +1109,12 @@ export function MiddleCountTedadSefr({
           </div>
 
           <div
-            ref={refForMiddleCount}
             className={`middleCount-${IdKala}`}
             style={{ height: "100", display: "flex", flexFlow: "column" }}
           >
             <span
               id={`inp-${IdKala}`}
-              className="text-center"
+              className="text-center titleStyle"
               style={{
                 backgroundColor: "white",
                 border: "none",
@@ -545,7 +1126,7 @@ export function MiddleCountTedadSefr({
                 alignContent: "center",
               }}
             >
-              {TedadOut}
+              {tedadInSabadOrDet}
             </span>
             <span style={{ border: "none" }}> </span>
           </div>
@@ -578,14 +1159,13 @@ export function MiddleCountTedadSefr({
                 }}
                 className={`add-${IdKala}`}
                 href="/login"
-                // onClick={handlerForAddClick}    ////zare_nk_040405_commented
                 onClick={(e) => {
-                  e.preventDefault(); //zare_nk_040417_added
-                  // handlerForAddClick;//zare_nk_040417_commented_alan
-                  handlerForAddClick(e); //zare_nk_040417_added_alan
+                  e.preventDefault();
+                  handlerForAddClick(e);
                 }}
               >
                 <button
+                  title={Number(bishAzMaxTedadYaMojoodi) === 1 ? "موجودی کافی نیست" : ""}
                   style={{
                     height: "80%",
                     backgroundColor: "white",
@@ -594,8 +1174,10 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
                   }}
                   className="plussMinus"
+                  disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
                 >
                   <img
                     src="https://img.tochikala.com/tochikala/add-to-cart.svg"
@@ -613,8 +1195,7 @@ export function MiddleCountTedadSefr({
   }
 }
 
-// var BarcodeKala = null; //zare_nk_040410_commented
-let BarcodeKala: string | null = null; //zare_nk_040410_added
+// let BarcodeKala: string | null = null; //zare_nk_041123_commented
 
 function getCookie(name: any) {
   const value = `; ${document.cookie}`; // برای اطمینان از یافتن کوکی‌ها
@@ -626,10 +1207,51 @@ function getCookie(name: any) {
   return null; // اگر کوکی پیدا نشد
 }
 
-type ParsedItemType = {
+////zare_nk_041123_commented_st
+// type ParsedItemType = {
+//   IdKala: number;
+//   NameKala: string;
+//   [key: string]: any;
+// };
+////zare_nk_041123_commented_end
+
+////zare_nk_041123_added_st
+type addRemParamType = {
+  tedadInSabadOrDet: number;
+  ZaribForoosh: number;
   IdKala: number;
-  NameKala: string;
-  [key: string]: any;
+  NameKala: string | null;
+  DarsadTakhfif: number | null;
+  NameBerand: string | null;
+  FeeForoosh: number;
+  FeeMasraf: number;
+  BarcodeKala: string;
+  Mojoodi: number;
+  MaxTedad: number;
+  father: any;
+  bishAzMaxTedadYaMojoodi: number | null;
+  fromShowDetails: boolean;
+  event?: MouseEvent<HTMLAnchorElement> | null | undefined;
+};
+
+type ForCartContInProdDetValType = {
+  tedadInSabadOrDet: number;
+  ZaribForoosh: number;
+  IdKala: number;
+  NameKala: string | null;
+  DarsadTakhfif: number | null;
+  NameBerand: string | null;
+  FeeForoosh: number;
+  FeeMasraf: number;
+  BarcodeKala: string;
+  Mojoodi: number;
+  MaxTedad: number;
+  father: any;
+  refForfather: RefObject<string | null>;
+  bishAzMaxTedadYaMojoodi: number | null;
+  fromShowDetails: boolean;
+  ForCartContentsDesignType: number;
+  idTag: string;
 };
 
 type SabadRowType = {
@@ -639,36 +1261,38 @@ type SabadRowType = {
   [key: string]: any; //zare_nk_041021_nokteh(yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va 
   // timi kar nakonim, pas [key: string]: any; gozashtam ke kolli hast)
 };
+////zare_nk_041123_added_end
 
 export default function ShallowRoutingExample() {
+   console.log('041123-ShallowRoutingExample called!!');
   const router = useRouter();
-  type CartData = {
-    IdKala: number;
-    ForCartContentsDesignType: number;
-    TedadOut: number;
-    hadaksar: string;
-    idTag: string;
-    NameKala: string | null;
-    DarsadTakhfif: string | null;
-  };
+  // type CartData = {
+  //   IdKala: number;
+  //   ForCartContentsDesignType: number;
+  //   TedadOut: number;
+  //   hadaksar: string;
+  //   idTag: string;
+  //   NameKala: string | null;
+  //   DarsadTakhfif: string | null;
+  // };
+
   const [ForCartContInProdDetVal, setForCartContInProdDetVal] =
-    useState<CartData | null>(null);
-  var refForInputGroup = useRef(null);
-  var refForMiddleCount = useRef(null);
+    // useState<CartData | null>(null);
+    useState<ForCartContInProdDetValType>();
+
+  // var refForInputGroup = useRef(null);  //zare_nk_041123_commented
+  // var refForMiddleCount = useRef(null);  //zare_nk_041123_commented
   const refForfather = useRef<string | null>(null);
-  const refForParsedList = useRef<ParsedItemType | null>(null);
-  const refForBishAzMaxTedadYaMojoodi = useRef<number | null>(null);
+  // const refForParsedList = useRef<ParsedItemType | null>(null);  //zare_nk_041123_commented
+  // const refForBishAzMaxTedadYaMojoodi = useRef<number | null>(null);  //zare_nk_041123_commented
 
   var modal: bootstrap.Modal;  //zare_nk_041115_added
   async function openprodDetModal(barcodeKala: string) {
-    // await ShowDetails(barcodeKala);  //zare_nk_041115_commented
-    BarcodeKala = barcodeKala;
+    // BarcodeKala = barcodeKala;  //zare_nk_041123_commented
     const bootstrap = await getBootstrap();
-    // const modal = new bootstrap.Modal(document.getElementById("prodDetModal"));  //zare_nk_041115_commented
-    modal = new bootstrap.Modal(document.getElementById("prodDetModal"));  //zare_nk_041115_added
+    modal = new bootstrap.Modal(document.getElementById("prodDetModal"));
     modal.show();
-    await ShowDetails(barcodeKala);  //zare_nk_041115_added
-
+    await ShowDetails(barcodeKala);
   }
 
   async function ShowCamera() {
@@ -740,7 +1364,6 @@ export default function ShallowRoutingExample() {
       );
       if (ImageColectionInDetails instanceof HTMLElement)
         ImageColectionInDetails.style.display = "none";
-      // ShowDetails();  //zare_nk_040609_commented
     };
     const prodDetModal = document.getElementById("prodDetModal");
     if (prodDetModal) {
@@ -773,51 +1396,27 @@ export default function ShallowRoutingExample() {
   }, []);
 
   async function addToCartInIndex(
-    father: any,
-    Tedad: number,
-    bishAzMaxTedadYaMojoodi: number,
-    currentRow: any,
-    addQuota: number,
-    BarcodeKala: string | null,
-    event?: MouseEvent<HTMLAnchorElement> | null | undefined
+    addRemParam: addRemParamType,
   ) {
-    if (event != null) {
-      event.stopPropagation();
+    console.log('041120-addToCartInIndex called!-addRemParam: ' + addRemParam.FeeForoosh);
+    // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented(error mideh:    // console.log('041120-addToCartInIndex called!-addRemParam: ' + JSON.stringify(addRemParam)); //zare_nk_041120_commented_tahlilshe(error mideh:TypeError: Converting circular structure to JSON)
+    if (addRemParam.event != null) {
+      addRemParam.event.stopPropagation();
+      addRemParam.event.preventDefault();
     }
     const token = getCookie("token");
     if (token == null) {
       return;
     } else {
-      if (event != null) {
-        event.preventDefault();
-      }
+      console.log('041120-addToCartInIndex-else 1');
       var TedadOut = 0;
       var TedadOuttoAjax = 0;
-      if (currentRow == null) {
-        return;
-      }
-      const tedad = parseFloat(String(Tedad ?? 0));
-      const zarib = parseFloat(String(currentRow.ZaribForoosh ?? 0));
-      TedadOut = tedad + zarib;
-      TedadOuttoAjax = parseFloat(currentRow.ZaribForoosh);
+      const zarib = parseFloat(String(addRemParam.ZaribForoosh ?? 0));
+      TedadOut = addRemParam.tedadInSabadOrDet + zarib;
+      TedadOuttoAjax = addRemParam.ZaribForoosh;
       const token = getCookie("token");
-      ////zare_nk_041114_commented_st
-      // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-      // var urlInsertToSabad = ApiUrl + "Api_InsertToSabad";
-      // const response = await fetch(urlInsertToSabad, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: "Bearer " + token,
-      //   },
-      //   body: JSON.stringify({
-      //     BarcodeKala: BarcodeKala,
-      //     Tedad: TedadOuttoAjax,
-      //   }), 
-      // });
-      ////zare_nk_041114_commented_end
-      ////zare_nk_041114_added_st 
+      console.log('041120-addToCartInIndex-tedad: ' + addRemParam.tedadInSabadOrDet + '-zarib: ' + addRemParam.ZaribForoosh + '-TedadOut: ' + TedadOut);
+
       let ApiUrl = "https://api.tochikala.com/api/";
       var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
       const response = await fetch(urlInsertToSabad, {
@@ -827,16 +1426,17 @@ export default function ShallowRoutingExample() {
           Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
-          BarcodeKala: BarcodeKala,
-          Tedad: TedadOut,// TedadOuttoAjax,  //zare_nk_041115_nokteh(dar api testotmapi az TedadOuttoAjax estefadeh mishod vali dar api tochikala az TedadOut estefadeh mikonim)
-          IdKala: currentRow.IdKala,  //zare_nk_041114_added
-          IdShobeh: 7,  //zare_nk_041114_added
-          IdAddress: 23990  //zare_nk_041114_added
+          BarcodeKala: addRemParam.BarcodeKala,
+          Tedad: TedadOut,
+          IdKala: addRemParam.IdKala,
+          IdShobeh: 7,
+          IdAddress: 23990
         }),
       });
-      ////zare_nk_041114_added_end
       const data = await response.json();
       if (response.ok) {
+        console.log('041120-addToCartInIndex-else 5 IdKala response.ok-data: ' + JSON.stringify(data));
+        // setAddOrRemChanged(addRemParam.BarcodeKala + "-" + TedadOut);  //zare_nk_041123_commented
         var result = data;
         if (result.status != 0) {
           const bootstrap = await getBootstrap();
@@ -851,59 +1451,58 @@ export default function ShallowRoutingExample() {
             span.innerText = result.errors[0];
           }
         } else if (result.status == 0) {
-          var hadaksar = "";
-          if (TedadOut == 0) {
-            refForfather.current = father;
-            refForParsedList.current = currentRow;
+          var Tedad = addRemParam.tedadInSabadOrDet;
+          var bishAzMaxTedadYaMojoodi = 0;
+          if (addRemParam.MaxTedad != null) {
+            if (addRemParam.MaxTedad <= Tedad) {
+              bishAzMaxTedadYaMojoodi = 1;
+            }
+          } else {
+            if (addRemParam.Mojoodi <= Tedad) {
+              bishAzMaxTedadYaMojoodi = 1;
+            }
+          }
+
+          refForfather.current = addRemParam.father;
+
+          let ForCartContentsDesignTypeLet = 0
+
+          if (addRemParam.tedadInSabadOrDet == 0) {
+            ForCartContentsDesignTypeLet = 0;
+          }
+          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+            ForCartContentsDesignTypeLet = 2;
+          }
+          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+            ForCartContentsDesignTypeLet = 1;
+          }
+          if (addRemParam.fromShowDetails) {
             setForCartContInProdDetVal(() => {
-              const idTag = "ForCart-" + currentRow.IdKala;
+              const idTag = "ForCart-" + addRemParam.IdKala;
               return {
-                IdKala: currentRow.IdKala,
-                ForCartContentsDesignType: 0,
-                TedadOut: TedadOut,
-                hadaksar: "",
+                tedadInSabadOrDet: TedadOut,
+                ZaribForoosh: addRemParam.ZaribForoosh,
+                IdKala: addRemParam.IdKala,
+                NameKala: addRemParam.NameKala,
+                DarsadTakhfif: addRemParam.DarsadTakhfif,
+                NameBerand: addRemParam.NameBerand,
+                FeeForoosh: addRemParam.FeeForoosh,
+                FeeMasraf: addRemParam.FeeMasraf,
+                BarcodeKala: addRemParam.BarcodeKala,
+                Mojoodi: addRemParam.Mojoodi,
+                MaxTedad: addRemParam.MaxTedad,
+                father: "#DetailsInfoCont",
+                refForfather: refForfather,
+                bishAzMaxTedadYaMojoodi: bishAzMaxTedadYaMojoodi,
+                fromShowDetails: addRemParam.fromShowDetails,
+                ForCartContentsDesignType: ForCartContentsDesignTypeLet,
                 idTag: idTag,
-                NameKala: currentRow.NameKala,
-                DarsadTakhfif: currentRow.DarsadTakhfif,
-              };
-            });
-          } else if (TedadOut > currentRow.ZaribForoosh) {
-            refForfather.current = father;
-            refForParsedList.current = currentRow;
-            setForCartContInProdDetVal(() => {
-              const idTag = "ForCart-" + currentRow.IdKala;
-              return {
-                IdKala: currentRow.IdKala,
-                ForCartContentsDesignType: 2,
-                TedadOut: TedadOut,
-                hadaksar: "",
-                idTag: idTag,
-                NameKala: currentRow.NameKala,
-                DarsadTakhfif: currentRow.DarsadTakhfif,
-              };
-            });
-          } else if (TedadOut == currentRow.ZaribForoosh) {
-            refForfather.current = father;
-            refForParsedList.current = currentRow;
-            setForCartContInProdDetVal(() => {
-              const idTag = "ForCart-" + currentRow.IdKala;
-              return {
-                IdKala: currentRow.IdKala,
-                ForCartContentsDesignType: 1,
-                TedadOut: TedadOut,
-                hadaksar: "",
-                idTag: idTag,
-                NameKala: currentRow.NameKala,
-                DarsadTakhfif: currentRow.DarsadTakhfif,
               };
             });
           }
         }
       } else {
-        alert(
-          "040312-response not ok in https://localhost:7265/api/v1/Hyper/Api_InsertToSabad-002-response.status: " +
-          response.status
-        );
+        console.log('041120-addToCartInIndex-else 6 IdKala !!!!response.ok');
         if (response.status == 401) {
           const bootstrap = await getBootstrap();
           const mymodalForWarning = new bootstrap.Modal(
@@ -914,7 +1513,7 @@ export default function ShallowRoutingExample() {
             "#mymodalForWarning .errorInMymodalForWarning"
           );
           if (span instanceof HTMLElement) {
-            span.innerText = "لطفا ابتدا آنلاین شوید002";
+            span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
       }
@@ -922,56 +1521,24 @@ export default function ShallowRoutingExample() {
   }
 
   async function remveFromCartInIndex(
-    father: any,
-    Tedad: number | null | undefined,
-    bishAzMaxTedadYaMojoodi: number,
-    currentRow: any,
-    BarcodeKala: string | null,
-    event?: MouseEvent<HTMLAnchorElement> | null | undefined
+    addRemParam: addRemParamType,
   ) {
-    if (event != null) {
-      event.stopPropagation();
+    if (addRemParam.event != null) {
+      addRemParam.event.stopPropagation();
+      addRemParam.event.preventDefault();
     }
     const token = getCookie("token");
     if (token == null) {
       return;
     } else {
-      let IdKala: string | null = null;
-      if (!event) {
-        return;
-      }
-      event.preventDefault();
-      const eventCurrentTargetTag = event.currentTarget as HTMLElement;
-      if (eventCurrentTargetTag.classList.contains("updateTedad")) {
-        IdKala = eventCurrentTargetTag.id.substring(12);
-      } else {
-        IdKala = eventCurrentTargetTag.className.substring(4);
-      }
-
+      console.log('041116-001');
       var TedadOut = 0;
       var TedadOuttoAjax = 0;
-      const tedad = parseFloat(String(Tedad ?? 0));
-      const zarib = parseFloat(String(currentRow.ZaribForoosh ?? 0));
-      TedadOut = tedad - zarib;
-      TedadOuttoAjax = -parseFloat(currentRow.ZaribForoosh);
-      ////zare_nk_041114_commented_st
-      // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-      // var urlInsertToSabad = ApiUrl + "Api_InsertToSabad";
-      // const response = await fetch(urlInsertToSabad, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: "Bearer " + token,
-      //   },
-      //   body: JSON.stringify({
-      //     BarcodeKala: BarcodeKala,
-      //     Tedad: TedadOuttoAjax,
-      //   }),
-      //   // credentials: "include", //zare_nk_040402_commented
-      // });
-      ////zare_nk_041114_commented_end
-      ////zare_nk_041114_added_st 
+      const zarib = parseFloat(String(addRemParam.ZaribForoosh ?? 0));
+      TedadOut = addRemParam.tedadInSabadOrDet - zarib;
+      TedadOuttoAjax = -(addRemParam.ZaribForoosh);
+      const token = getCookie("token");
+
       let ApiUrl = "https://api.tochikala.com/api/";
       var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
       const response = await fetch(urlInsertToSabad, {
@@ -981,20 +1548,20 @@ export default function ShallowRoutingExample() {
           Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
-          BarcodeKala: BarcodeKala,
-          Tedad: TedadOut,// TedadOuttoAjax,  //zare_nk_041115_nokteh(dar api testotmapi az TedadOuttoAjax estefadeh mishod vali dar api tochikala az TedadOut estefadeh mikonim)
-          IdKala: currentRow.IdKala,  //zare_nk_041114_added
-          IdShobeh: 7,  //zare_nk_041114_added
-          IdAddress: 23990  //zare_nk_041114_added
+          BarcodeKala: addRemParam.BarcodeKala,
+          Tedad: TedadOut,
+          IdKala: addRemParam.IdKala,
+          IdShobeh: 7,
+          IdAddress: 23990
         }),
       });
-      ////zare_nk_041114_added_end
+
       const data = await response.json();
       if (response.ok) {
         var result = data;
         if (result.status == -1000) {
           const inputGroup = document.querySelector(
-            ".ForCart-" + IdKala + " .input-group"
+            ".ForCart-" + addRemParam.IdKala + " .input-group"
           );
           if (inputGroup) {
             let parent = inputGroup.closest(".flxpedar2_new");
@@ -1003,30 +1570,21 @@ export default function ShallowRoutingExample() {
             }
           }
           var hisFather = null;
-          const hisFatherTag = eventCurrentTargetTag.closest(".gfForAddRemm");
+          let eventCurrentTargetTag;
+          if (addRemParam.event) {
+            eventCurrentTargetTag = addRemParam.event.currentTarget as HTMLElement;
+          }
+
+          const hisFatherTag = eventCurrentTargetTag?.closest(".gfForAddRemm");
           if (hisFatherTag) {
             hisFather = hisFatherTag.id;
           }
-          refForfather.current = father;
-          refForParsedList.current = currentRow;
-          setForCartContInProdDetVal(() => {
-            const idTag = "ForCart-" + refForParsedList.current!.IdKala;
-            return {
-              IdKala: refForParsedList.current!.IdKala,
-              ForCartContentsDesignType: 0,
-              TedadOut: TedadOut,
-              hadaksar: "",
-              idTag: idTag,
-              NameKala: refForParsedList.current!.NameKala,
-              DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
-            };
-          });
+          refForfather.current = addRemParam.father;
           const bootstrap = await getBootstrap();
           const adameSabteNahaeiModal = new bootstrap.Modal(
             document.getElementById("adameSabteNahaeiModal")
           );
           adameSabteNahaeiModal.show();
-
           const HoshdarInAdameSabteNahaeiModalTag = document.getElementById(
             "HoshdarInAdameSabteNahaeiModal"
           );
@@ -1047,78 +1605,85 @@ export default function ShallowRoutingExample() {
             span.innerText = result.errors[0];
           }
         } else if (result.status == 0) {
-          var hadaksar = "";
+          console.log('041116-result.status == 0');
+          // setAddOrRemChanged(addRemParam.BarcodeKala + "-" + TedadOut);  //zare_nk_041123_commented
+          var bishAzMaxTedadYaMojoodi = 0;
+          if (addRemParam.MaxTedad != null) {
+            if (addRemParam.MaxTedad <= addRemParam.tedadInSabadOrDet) {
+              bishAzMaxTedadYaMojoodi = 1;
+            }
+          } else {
+            if (addRemParam.Mojoodi <= addRemParam.tedadInSabadOrDet) {
+              bishAzMaxTedadYaMojoodi = 1;
+            }
+          }
+          refForfather.current = addRemParam.father;
+
+          let ForCartContentsDesignTypeLet = 0
+
+          if (addRemParam.tedadInSabadOrDet == 0) {
+            ForCartContentsDesignTypeLet = 0;
+          }
+          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+            ForCartContentsDesignTypeLet = 2;
+          }
+          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+            ForCartContentsDesignTypeLet = 1;
+          }
+          if (addRemParam.fromShowDetails) { 
+            setForCartContInProdDetVal(() => {
+              const idTag = "ForCart-" + addRemParam.IdKala;
+              return {
+                tedadInSabadOrDet: TedadOut,
+                ZaribForoosh: addRemParam.ZaribForoosh,
+                IdKala: addRemParam.IdKala,
+                NameKala: addRemParam.NameKala,
+                DarsadTakhfif: addRemParam.DarsadTakhfif,
+                NameBerand: addRemParam.NameBerand,
+                FeeForoosh: addRemParam.FeeForoosh,
+                FeeMasraf: addRemParam.FeeMasraf,
+                BarcodeKala: addRemParam.BarcodeKala,
+                Mojoodi: addRemParam.Mojoodi,
+                MaxTedad: addRemParam.MaxTedad,
+                father: "#DetailsInfoCont",
+                refForfather: refForfather,
+                bishAzMaxTedadYaMojoodi: bishAzMaxTedadYaMojoodi,
+                fromShowDetails: addRemParam.fromShowDetails,
+                ForCartContentsDesignType: ForCartContentsDesignTypeLet,
+                idTag: idTag,
+              };
+            });
+          }
+
           if (TedadOut == 0) {
             const inputGroup = document.querySelector(
-              ".ForCart-" + IdKala + " .input-group"
+              ".ForCart-" + addRemParam.IdKala + " .input-group"
             );
             if (inputGroup) {
               let parent = inputGroup.closest(".flxpedar2_new");
               if (parent) {
-                parent.remove();
+                if (JSON.parse(result.data.titr).length == 0) {
+                  parent.remove();
+                }
               }
             }
-
-            var hisFather = null;
-            const hisFatherTag = event.target;
-            if (hisFatherTag instanceof HTMLElement) {
-              hisFather = hisFatherTag.closest(".gfForAddRemm");
+          }
+          else if (TedadOut == addRemParam.ZaribForoosh) {
+            let htmlTag;
+            if (addRemParam.event) {
+              htmlTag = addRemParam.event.target as HTMLElement;
             }
-            refForfather.current = father;
-            refForParsedList.current = currentRow;
-            setForCartContInProdDetVal(() => {
-              const idTag = "ForCart-" + refForParsedList.current!.IdKala;
-              return {
-                IdKala: refForParsedList.current!.IdKala,
-                ForCartContentsDesignType: 0,
-                TedadOut: TedadOut,
-                hadaksar: "",
-                idTag: idTag,
-                NameKala: refForParsedList.current!.NameKala,
-                DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
-              };
-            });
-          } else if (TedadOut > currentRow.ZaribForoosh) {
-            refForfather.current = father;
-            refForParsedList.current = currentRow;
-            setForCartContInProdDetVal(() => {
-              const idTag = "ForCart-" + refForParsedList.current!.IdKala;
-              return {
-                IdKala: refForParsedList.current!.IdKala,
-                ForCartContentsDesignType: 2,
-                TedadOut: TedadOut,
-                hadaksar: "",
-                idTag: idTag,
-                NameKala: refForParsedList.current!.NameKala,
-                DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
-              };
-            });
-          } else {
-            const htmlTag = event.target as HTMLElement;
-            const wrapper = htmlTag.closest(
+
+            const wrapper = htmlTag?.closest(
               ".flxpedar2_new"
             ) as HTMLElement | null;
-
             if (wrapper) {
               wrapper.style.backgroundColor = "inherit";
             }
-            refForfather.current = father;
-            refForParsedList.current = currentRow;
-            setForCartContInProdDetVal(() => {
-              const idTag = "ForCart-" + refForParsedList.current!.IdKala;
-              return {
-                IdKala: refForParsedList.current!.IdKala,
-                ForCartContentsDesignType: 1,
-                TedadOut: TedadOut,
-                hadaksar: "",
-                idTag: idTag,
-                NameKala: refForParsedList.current!.NameKala,
-                DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
-              };
-            });
           }
         }
       } else {
+        console.log('041116-!!response.ok');
         if (response.status == 401) {
           const bootstrap = await getBootstrap();
           const mymodalForWarning = new bootstrap.Modal(
@@ -1129,7 +1694,7 @@ export default function ShallowRoutingExample() {
             "#mymodalForWarning .errorInMymodalForWarning"
           );
           if (span instanceof HTMLElement) {
-            span.innerText = "لطفا ابتدا آنلاین شوید003";
+            span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
       }
@@ -1137,105 +1702,450 @@ export default function ShallowRoutingExample() {
   }
 
   const handlerForAddClick: (
-    TedadOut: number | null | undefined,
-    addQuota: number,
-    BarcodeKala: string | null,
-    // e?: MouseEvent<HTMLElement> | null | undefined //zare_nk_040525_commented)
-    e?: MouseEvent<HTMLAnchorElement> | null | undefined //zare_nk_040525_added
-  ) => void = (TedadOut, addQuota, BarcodeKala, e) => {
-    e && e.stopPropagation();
+    addRemParam: addRemParamType,
+  ) => void = (addRemParam) => {
+    addRemParam.event && addRemParam.event.stopPropagation();
     addToCartInIndex(
-      refForfather.current,
-      TedadOut!,
-      refForBishAzMaxTedadYaMojoodi.current!,
-      refForParsedList.current,
-      addQuota,
-      BarcodeKala,
-      e
+      addRemParam
     );
   };
 
   const handlerForRemClick: (
-    TedadOut: number | null | undefined,
-    BarcodeKala: string | null,
-    // e?: MouseEvent<HTMLElement> | null | undefined //zare_nk_040525_commented)
-    e?: MouseEvent<HTMLAnchorElement> | null | undefined //zare_nk_040525_added
-  ) => void = (TedadOut, BarcodeKala, e) => {
+    addRemParam: addRemParamType,
+  ) => void = (addRemParam) => {
     remveFromCartInIndex(
-      refForfather.current,
-      TedadOut,
-      refForBishAzMaxTedadYaMojoodi.current!,
-      refForParsedList.current,
-      BarcodeKala,
-      e
+      addRemParam
     );
   };
 
-  function fillForCartTagsInDetails(
-    father: string,
-    parsedList: SabadRowType,
-    isChange: number | null
-  ) {
-    refForfather.current = father;
-    refForParsedList.current = parsedList;
-    var Tedad = parsedList.Tedad ? parsedList.Tedad : parsedList.TedadDarSabad;
-    var bishAzMaxTedadYaMojoodi = 0;
-    if (parsedList.MaxTedad != null) {
-      if (parsedList.MaxTedad <= Tedad) {
-        bishAzMaxTedadYaMojoodi = 1;
-      }
-    } else {
-      if (parsedList.Mojoodi <= Tedad) {
-        bishAzMaxTedadYaMojoodi = 1;
-      }
-    }
-    refForBishAzMaxTedadYaMojoodi.current = bishAzMaxTedadYaMojoodi;
-    const namayesheprodDetModal =
-      parsedList.TedadDarSabad != undefined ? true : false;
-    if (Tedad == 0 && namayesheprodDetModal) {
-      setForCartContInProdDetVal(() => {
-        const idTag = "ForCart-" + parsedList.IdKala;
-        return {
-          IdKala: parsedList.IdKala,
-          ForCartContentsDesignType: 0,
-          TedadOut: Tedad,
-          hadaksar: "",
-          idTag: idTag,
-          NameKala: parsedList.NameKala,
-          DarsadTakhfif: parsedList.DarsadTakhfif,
-        };
-      });
-    } else if (Tedad > parsedList.ZaribForoosh) {
-      setForCartContInProdDetVal(() => {
-        const idTag = "ForCart-" + parsedList.IdKala;
-        return {
-          IdKala: parsedList.IdKala,
-          ForCartContentsDesignType: 2,
-          TedadOut: Tedad,
-          hadaksar: "",
-          idTag: idTag,
-          NameKala: parsedList.NameKala,
-          DarsadTakhfif: parsedList.DarsadTakhfif,
-        };
-      });
-    } else {
-      setForCartContInProdDetVal(() => {
-        const idTag = "ForCart-" + parsedList.IdKala;
-        return {
-          IdKala: parsedList.IdKala,
-          ForCartContentsDesignType: 1,
-          TedadOut: Tedad,
-          hadaksar: "",
-          idTag: idTag,
-          NameKala: parsedList.NameKala,
-          DarsadTakhfif: parsedList.DarsadTakhfif,
-        };
-      });
-    }
-  }
+  ////zare_nk_041123_commented_st
+  // async function addToCartInIndex(
+  //   father: any,
+  //   Tedad: number,
+  //   bishAzMaxTedadYaMojoodi: number,
+  //   currentRow: any,
+  //   addQuota: number,
+  //   BarcodeKala: string | null,
+  //   event?: MouseEvent<HTMLAnchorElement> | null | undefined
+  // ) {
+  //   if (event != null) {
+  //     event.stopPropagation();
+  //   }
+  //   const token = getCookie("token");
+  //   if (token == null) {
+  //     return;
+  //   } else {
+  //     if (event != null) {
+  //       event.preventDefault();
+  //     }
+  //     var TedadOut = 0;
+  //     var TedadOuttoAjax = 0;
+  //     if (currentRow == null) {
+  //       return;
+  //     }
+  //     const tedad = parseFloat(String(Tedad ?? 0));
+  //     const zarib = parseFloat(String(currentRow.ZaribForoosh ?? 0));
+  //     TedadOut = tedad + zarib;
+  //     TedadOuttoAjax = parseFloat(currentRow.ZaribForoosh);
+  //     const token = getCookie("token"); 
+  //     let ApiUrl = "https://api.tochikala.com/api/";
+  //     var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
+  //     const response = await fetch(urlInsertToSabad, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Bearer " + token,
+  //       },
+  //       body: JSON.stringify({
+  //         BarcodeKala: BarcodeKala,
+  //         Tedad: TedadOut, 
+  //         IdKala: currentRow.IdKala,   
+  //         IdShobeh: 7,   
+  //         IdAddress: 23990   
+  //       }),
+  //     });
 
-  //  function ShowDetails() {  //zare_nk_040609_commented
-  async function ShowDetails(barcodeKala: any) {//zare_nk_040609_added
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       var result = data;
+  //       if (result.status != 0) {
+  //         const bootstrap = await getBootstrap();
+  //         const mymodalForWarning = new bootstrap.Modal(
+  //           document.getElementById("mymodalForWarning")
+  //         );
+  //         mymodalForWarning.show();
+  //         const span = document.querySelector(
+  //           "#mymodalForWarning .modal-body span"
+  //         );
+  //         if (span instanceof HTMLElement) {
+  //           span.innerText = result.errors[0];
+  //         }
+  //       } else if (result.status == 0) {
+  //         var hadaksar = "";
+  //         if (TedadOut == 0) {
+  //           refForfather.current = father;
+  //           refForParsedList.current = currentRow;
+  //           setForCartContInProdDetVal(() => {
+  //             const idTag = "ForCart-" + currentRow.IdKala;
+  //             return {
+  //               IdKala: currentRow.IdKala,
+  //               ForCartContentsDesignType: 0,
+  //               TedadOut: TedadOut,
+  //               hadaksar: "",
+  //               idTag: idTag,
+  //               NameKala: currentRow.NameKala,
+  //               DarsadTakhfif: currentRow.DarsadTakhfif,
+  //             };
+  //           });
+  //         } else if (TedadOut > currentRow.ZaribForoosh) {
+  //           refForfather.current = father;
+  //           refForParsedList.current = currentRow;
+  //           setForCartContInProdDetVal(() => {
+  //             const idTag = "ForCart-" + currentRow.IdKala;
+  //             return {
+  //               IdKala: currentRow.IdKala,
+  //               ForCartContentsDesignType: 2,
+  //               TedadOut: TedadOut,
+  //               hadaksar: "",
+  //               idTag: idTag,
+  //               NameKala: currentRow.NameKala,
+  //               DarsadTakhfif: currentRow.DarsadTakhfif,
+  //             };
+  //           });
+  //         } else if (TedadOut == currentRow.ZaribForoosh) {
+  //           refForfather.current = father;
+  //           refForParsedList.current = currentRow;
+  //           setForCartContInProdDetVal(() => {
+  //             const idTag = "ForCart-" + currentRow.IdKala;
+  //             return {
+  //               IdKala: currentRow.IdKala,
+  //               ForCartContentsDesignType: 1,
+  //               TedadOut: TedadOut,
+  //               hadaksar: "",
+  //               idTag: idTag,
+  //               NameKala: currentRow.NameKala,
+  //               DarsadTakhfif: currentRow.DarsadTakhfif,
+  //             };
+  //           });
+  //         }
+  //       }
+  //     } else {
+  //       alert(
+  //         "040312-response not ok in https://localhost:7265/api/v1/Hyper/Api_InsertToSabad-002-response.status: " +
+  //         response.status
+  //       );
+  //       if (response.status == 401) {
+  //         const bootstrap = await getBootstrap();
+  //         const mymodalForWarning = new bootstrap.Modal(
+  //           document.getElementById("mymodalForWarning")
+  //         );
+  //         mymodalForWarning.show();
+  //         const span = document.querySelector(
+  //           "#mymodalForWarning .errorInMymodalForWarning"
+  //         );
+  //         if (span instanceof HTMLElement) {
+  //           span.innerText = "لطفا ابتدا آنلاین شوید002";
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // const handlerForAddClick: (
+  //   TedadOut: number | null | undefined,
+  //   addQuota: number,
+  //   BarcodeKala: string | null, 
+  //   e?: MouseEvent<HTMLAnchorElement> | null | undefined  
+  // ) => void = (TedadOut, addQuota, BarcodeKala, e) => {
+  //   e && e.stopPropagation();
+  //   addToCartInIndex(
+  //     refForfather.current,
+  //     TedadOut!,
+  //     refForBishAzMaxTedadYaMojoodi.current!,
+  //     refForParsedList.current,
+  //     addQuota,
+  //     BarcodeKala,
+  //     e
+  //   );
+  // };
+
+  // const handlerForRemClick: (
+  //   TedadOut: number | null | undefined,
+  //   BarcodeKala: string | null, 
+  //   e?: MouseEvent<HTMLAnchorElement> | null | undefined  
+  // ) => void = (TedadOut, BarcodeKala, e) => {
+  //   remveFromCartInIndex(
+  //     refForfather.current,
+  //     TedadOut,
+  //     refForBishAzMaxTedadYaMojoodi.current!,
+  //     refForParsedList.current,
+  //     BarcodeKala,
+  //     e
+  //   );
+  // };
+
+  //   async function remveFromCartInIndex(
+  //   father: any,
+  //   Tedad: number | null | undefined,
+  //   bishAzMaxTedadYaMojoodi: number,
+  //   currentRow: any,
+  //   BarcodeKala: string | null,
+  //   event?: MouseEvent<HTMLAnchorElement> | null | undefined
+  // ) {
+  //   if (event != null) {
+  //     event.stopPropagation();
+  //   }
+  //   const token = getCookie("token");
+  //   if (token == null) {
+  //     return;
+  //   } else {
+  //     let IdKala: string | null = null;
+  //     if (!event) {
+  //       return;
+  //     }
+  //     event.preventDefault();
+  //     const eventCurrentTargetTag = event.currentTarget as HTMLElement;
+  //     if (eventCurrentTargetTag.classList.contains("updateTedad")) {
+  //       IdKala = eventCurrentTargetTag.id.substring(12);
+  //     } else {
+  //       IdKala = eventCurrentTargetTag.className.substring(4);
+  //     }
+
+  //     var TedadOut = 0;
+  //     var TedadOuttoAjax = 0;
+  //     const tedad = parseFloat(String(Tedad ?? 0));
+  //     const zarib = parseFloat(String(currentRow.ZaribForoosh ?? 0));
+  //     TedadOut = tedad - zarib;
+  //     TedadOuttoAjax = -parseFloat(currentRow.ZaribForoosh);
+
+  //     let ApiUrl = "https://api.tochikala.com/api/";
+  //     var urlInsertToSabad = ApiUrl + "User/Api_AddRemoveSabadKharidSatr";
+  //     const response = await fetch(urlInsertToSabad, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Bearer " + token,
+  //       },
+  //       body: JSON.stringify({
+  //         BarcodeKala: BarcodeKala,
+  //         Tedad: TedadOut, 
+  //         IdKala: currentRow.IdKala,   
+  //         IdShobeh: 7,  
+  //         IdAddress: 23990   
+  //       }),
+  //     });
+
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       var result = data;
+  //       if (result.status == -1000) {
+  //         const inputGroup = document.querySelector(
+  //           ".ForCart-" + IdKala + " .input-group"
+  //         );
+  //         if (inputGroup) {
+  //           let parent = inputGroup.closest(".flxpedar2_new");
+  //           if (parent) {
+  //             parent.remove();
+  //           }
+  //         }
+  //         var hisFather = null;
+  //         const hisFatherTag = eventCurrentTargetTag.closest(".gfForAddRemm");
+  //         if (hisFatherTag) {
+  //           hisFather = hisFatherTag.id;
+  //         }
+  //         refForfather.current = father;
+  //         refForParsedList.current = currentRow;
+  //         setForCartContInProdDetVal(() => {
+  //           const idTag = "ForCart-" + refForParsedList.current!.IdKala;
+  //           return {
+  //             IdKala: refForParsedList.current!.IdKala,
+  //             ForCartContentsDesignType: 0,
+  //             TedadOut: TedadOut,
+  //             hadaksar: "",
+  //             idTag: idTag,
+  //             NameKala: refForParsedList.current!.NameKala,
+  //             DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
+  //           };
+  //         });
+  //         const bootstrap = await getBootstrap();
+  //         const adameSabteNahaeiModal = new bootstrap.Modal(
+  //           document.getElementById("adameSabteNahaeiModal")
+  //         );
+  //         adameSabteNahaeiModal.show();
+
+  //         const HoshdarInAdameSabteNahaeiModalTag = document.getElementById(
+  //           "HoshdarInAdameSabteNahaeiModal"
+  //         );
+  //         if (HoshdarInAdameSabteNahaeiModalTag instanceof HTMLElement) {
+  //           HoshdarInAdameSabteNahaeiModalTag.innerText = result.errors[0];
+  //         }
+  //       }
+  //       if (result.status != 0) {
+  //         const bootstrap = await getBootstrap();
+  //         const mymodalForWarning = new bootstrap.Modal(
+  //           document.getElementById("mymodalForWarning")
+  //         );
+  //         mymodalForWarning.show();
+  //         const span = document.querySelector(
+  //           "#mymodalForWarning .modal-body span"
+  //         );
+  //         if (span instanceof HTMLElement) {
+  //           span.innerText = result.errors[0];
+  //         }
+  //       } else if (result.status == 0) {
+  //         var hadaksar = "";
+  //         if (TedadOut == 0) {
+  //           const inputGroup = document.querySelector(
+  //             ".ForCart-" + IdKala + " .input-group"
+  //           );
+  //           if (inputGroup) {
+  //             let parent = inputGroup.closest(".flxpedar2_new");
+  //             if (parent) {
+  //               parent.remove();
+  //             }
+  //           }
+
+  //           var hisFather = null;
+  //           const hisFatherTag = event.target;
+  //           if (hisFatherTag instanceof HTMLElement) {
+  //             hisFather = hisFatherTag.closest(".gfForAddRemm");
+  //           }
+  //           refForfather.current = father;
+  //           refForParsedList.current = currentRow;
+  //           setForCartContInProdDetVal(() => {
+  //             const idTag = "ForCart-" + refForParsedList.current!.IdKala;
+  //             return {
+  //               IdKala: refForParsedList.current!.IdKala,
+  //               ForCartContentsDesignType: 0,
+  //               TedadOut: TedadOut,
+  //               hadaksar: "",
+  //               idTag: idTag,
+  //               NameKala: refForParsedList.current!.NameKala,
+  //               DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
+  //             };
+  //           });
+  //         } else if (TedadOut > currentRow.ZaribForoosh) {
+  //           refForfather.current = father;
+  //           refForParsedList.current = currentRow;
+  //           setForCartContInProdDetVal(() => {
+  //             const idTag = "ForCart-" + refForParsedList.current!.IdKala;
+  //             return {
+  //               IdKala: refForParsedList.current!.IdKala,
+  //               ForCartContentsDesignType: 2,
+  //               TedadOut: TedadOut,
+  //               hadaksar: "",
+  //               idTag: idTag,
+  //               NameKala: refForParsedList.current!.NameKala,
+  //               DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
+  //             };
+  //           });
+  //         } else {
+  //           const htmlTag = event.target as HTMLElement;
+  //           const wrapper = htmlTag.closest(
+  //             ".flxpedar2_new"
+  //           ) as HTMLElement | null;
+
+  //           if (wrapper) {
+  //             wrapper.style.backgroundColor = "inherit";
+  //           }
+  //           refForfather.current = father;
+  //           refForParsedList.current = currentRow;
+  //           setForCartContInProdDetVal(() => {
+  //             const idTag = "ForCart-" + refForParsedList.current!.IdKala;
+  //             return {
+  //               IdKala: refForParsedList.current!.IdKala,
+  //               ForCartContentsDesignType: 1,
+  //               TedadOut: TedadOut,
+  //               hadaksar: "",
+  //               idTag: idTag,
+  //               NameKala: refForParsedList.current!.NameKala,
+  //               DarsadTakhfif: refForParsedList.current!.DarsadTakhfif,
+  //             };
+  //           });
+  //         }
+  //       }
+  //     } else {
+  //       if (response.status == 401) {
+  //         const bootstrap = await getBootstrap();
+  //         const mymodalForWarning = new bootstrap.Modal(
+  //           document.getElementById("mymodalForWarning")
+  //         );
+  //         mymodalForWarning.show();
+  //         const span = document.querySelector(
+  //           "#mymodalForWarning .errorInMymodalForWarning"
+  //         );
+  //         if (span instanceof HTMLElement) {
+  //           span.innerText = "لطفا ابتدا آنلاین شوید003";
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  // function fillForCartTagsInDetails(
+  //   father: string,
+  //   parsedList: SabadRowType,
+  //   isChange: number | null
+  // ) {
+  //   refForfather.current = father;
+  //   refForParsedList.current = parsedList;
+  //   var Tedad = parsedList.Tedad ? parsedList.Tedad : parsedList.TedadDarSabad;
+  //   var bishAzMaxTedadYaMojoodi = 0;
+  //   if (parsedList.MaxTedad != null) {
+  //     if (parsedList.MaxTedad <= Tedad) {
+  //       bishAzMaxTedadYaMojoodi = 1;
+  //     }
+  //   } else {
+  //     if (parsedList.Mojoodi <= Tedad) {
+  //       bishAzMaxTedadYaMojoodi = 1;
+  //     }
+  //   }
+  //   refForBishAzMaxTedadYaMojoodi.current = bishAzMaxTedadYaMojoodi;
+  //   const namayesheprodDetModal =
+  //     parsedList.TedadDarSabad != undefined ? true : false;
+  //   if (Tedad == 0 && namayesheprodDetModal) {
+  //     setForCartContInProdDetVal(() => {
+  //       const idTag = "ForCart-" + parsedList.IdKala;
+  //       return {
+  //         IdKala: parsedList.IdKala,
+  //         ForCartContentsDesignType: 0,
+  //         TedadOut: Tedad,
+  //         hadaksar: "",
+  //         idTag: idTag,
+  //         NameKala: parsedList.NameKala,
+  //         DarsadTakhfif: parsedList.DarsadTakhfif,
+  //       };
+  //     });
+  //   } else if (Tedad > parsedList.ZaribForoosh) {
+  //     setForCartContInProdDetVal(() => {
+  //       const idTag = "ForCart-" + parsedList.IdKala;
+  //       return {
+  //         IdKala: parsedList.IdKala,
+  //         ForCartContentsDesignType: 2,
+  //         TedadOut: Tedad,
+  //         hadaksar: "",
+  //         idTag: idTag,
+  //         NameKala: parsedList.NameKala,
+  //         DarsadTakhfif: parsedList.DarsadTakhfif,
+  //       };
+  //     });
+  //   } else {
+  //     setForCartContInProdDetVal(() => {
+  //       const idTag = "ForCart-" + parsedList.IdKala;
+  //       return {
+  //         IdKala: parsedList.IdKala,
+  //         ForCartContentsDesignType: 1,
+  //         TedadOut: Tedad,
+  //         hadaksar: "",
+  //         idTag: idTag,
+  //         NameKala: parsedList.NameKala,
+  //         DarsadTakhfif: parsedList.DarsadTakhfif,
+  //       };
+  //     });
+  //   }
+  // }
+  ////zare_nk_041123_commented_end
+
+  async function ShowDetails(barcodeKala: any) {
     const token = getCookie("token");
     if (token == null) {
       const bootstrap = await getBootstrap();
@@ -1251,15 +2161,8 @@ export default function ShallowRoutingExample() {
         span.innerText = "لطفا ابتدا آنلاین شوید004";
       }
     }
-    ////zare_nk_041115_commented_st
-    // // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
-    // var urlApi_SelectShobehJashnvareh = ApiUrl + "Api_SelectKala";
-    ////zare_nk_041115_commented_end
-    ////zare_nk_041115_added_st
     let ApiUrl = "https://api.tochikala.com/api/";
     var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
-    ////zare_nk_041115_added_end
     try {
       const response = await fetch(urlApi_SelectShobehJashnvareh, {
         method: "POST",
@@ -1268,9 +2171,8 @@ export default function ShallowRoutingExample() {
           Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
-          // BarcodeKala: BarcodeKala,//zare_nk_040609_commented
-          BarcodeKala: barcodeKala, //zare_nk_040609_added
-          IdShobeh: 7,   //zare_nk_041115_added 
+          BarcodeKala: barcodeKala,
+          IdShobeh: 7,
           // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
           //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)        
         }),
@@ -1279,7 +2181,6 @@ export default function ShallowRoutingExample() {
       if (response.ok) {
         const data = await response.json();
         var result = data;
-        alert('result: ' + JSON.stringify(result));
         if (result.status != 0) {
           const bootstrap = await getBootstrap();
           modal?.hide();  //zare_nk_041115_added
@@ -1314,7 +2215,6 @@ export default function ShallowRoutingExample() {
           }
           var parsedList = JSON.parse(result.data.list);
           if (parsedList.length == 0) {
-            alert('parsedList.length == 0');
             const productExist = document.getElementById("productExist");
             if (productExist instanceof HTMLElement) {
               productExist.style.display = "none";
@@ -1333,6 +2233,33 @@ export default function ShallowRoutingExample() {
           if (productNotExist instanceof HTMLElement) {
             productNotExist.style.display = "none";
           }
+
+          ////zare_nk_041123_added_st
+          var bishAzMaxTedadYaMojoodi = 0;
+          if (parsedList[0].MaxTedad != null) {
+            if (parsedList[0].MaxTedad <= parsedList[0].TedadDarSabad) {
+              bishAzMaxTedadYaMojoodi = 1;
+            }
+          } else {
+            if (parsedList[0].Mojoodi <= parsedList[0].TedadDarSabad) {
+              bishAzMaxTedadYaMojoodi = 1;
+            }
+          }
+
+          refForfather.current = "#DetailsInfoCont";
+          let ForCartContentsDesignTypeLet = 0
+
+          if (parsedList[0].TedadDarSabad == 0) {
+            ForCartContentsDesignTypeLet = 0;
+          }
+          else if (parsedList[0].TedadDarSabad > parsedList[0].ZaribForoosh) {
+            ForCartContentsDesignTypeLet = 2;
+          }
+          else if (parsedList[0].TedadDarSabad == parsedList[0].ZaribForoosh) {
+            ForCartContentsDesignTypeLet = 1;
+          }
+          ////zare_nk_041123_added_end
+
           const CurrentImg = document.getElementById("CurrentImg");
           if (CurrentImg instanceof HTMLElement) {
             CurrentImg.setAttribute("onLoad", 'event.target.style.height="auto"');
@@ -1351,10 +2278,10 @@ export default function ShallowRoutingExample() {
           const nameBerandInDetailsInfoCont = document.getElementById(
             "nameBerandInDetailsInfoCont"
           );
-          alert('parsedList[0].NameBerand: ' + parsedList[0].NameBerand);
           if (nameBerandInDetailsInfoCont) {
             nameBerandInDetailsInfoCont.innerText = parsedList[0].NameBerand;
           }
+
           const gheimatMasrafInDetailsInfoCont = document.getElementById(
             "gheimatMasrafInDetailsInfoCont"
           );
@@ -1362,6 +2289,7 @@ export default function ShallowRoutingExample() {
             gheimatMasrafInDetailsInfoCont.innerHTML =
               parsedList[0].FeeMasraf.toLocaleString();
           }
+
           const gheimatForooshInDetailsInfoCont = document.getElementById(
             "gheimatForooshInDetailsInfoCont"
           );
@@ -1407,14 +2335,12 @@ export default function ShallowRoutingExample() {
             if (darsadTakhfifInDetails instanceof HTMLElement) {
               darsadTakhfifInDetails.style.display = "flex";
             }
-            ////zare_nk_040525_added_st
             const forDiscountInDetails = document.getElementById(
               "forDiscountInDetails"
             );
             if (forDiscountInDetails instanceof HTMLSpanElement) {
               forDiscountInDetails.innerText = parsedList[0].DarsadTakhfif;
             }
-            ////zare_nk_040525_added_end
             const gheimatMasrafInDetailsInfoCont = document.getElementById(
               "gheimatMasrafInDetailsInfoCont"
             );
@@ -1440,21 +2366,39 @@ export default function ShallowRoutingExample() {
           if (groupsInDetailsPageCont instanceof HTMLElement) {
             groupsInDetailsPageCont.style.display = "none";
           }
-          ////zare_nk_041115_commented_st
-          // var isChange = parsedList[0].IsChangeTedad;
-          // fillForCartTagsInDetails("#DetailsInfoCont", parsedList[0], isChange);
-          ////zare_nk_041115_commented_end
-          ////zare_nk_041115_added_st
-          var isChange = null;
-          fillForCartTagsInDetails("#DetailsInfoCont", parsedList[0], isChange);
-          ////zare_nk_041115_added_end
+
+          ////zare_nk_041123_commented_st
+          // var isChange = null;
+          // fillForCartTagsInDetails("#DetailsInfoCont", parsedList[0], isChange); 
+          ////zare_nk_041123_commented_end
+
+          ////zare_nk_041123_added_st
+          const idTag = "ForCart-" + parsedList[0].IdKala;
+          setForCartContInProdDetVal(() => {
+            return {
+              tedadInSabadOrDet: parsedList[0].TedadDarSabad,
+              ZaribForoosh: parsedList[0].ZaribForoosh,
+              IdKala: parsedList[0].IdKala,
+              NameKala: parsedList[0].NameKala,
+              DarsadTakhfif: parsedList[0].DarsadTakhfif,
+              NameBerand: parsedList[0].NameBerand,
+              FeeForoosh: parsedList[0].FeeForoosh,
+              FeeMasraf: parsedList[0].FeeMasraf,
+              BarcodeKala: parsedList[0].BarcodeKala,
+              Mojoodi: parsedList[0].Mojoodi,
+              MaxTedad: parsedList[0].MaxTedad,
+              father: "#DetailsInfoCont",
+              refForfather: refForfather,
+              bishAzMaxTedadYaMojoodi: bishAzMaxTedadYaMojoodi,
+              fromShowDetails: true,
+              ForCartContentsDesignType: ForCartContentsDesignTypeLet,
+              idTag: idTag,
+            };
+          });
+          ////zare_nk_041123_added_end
         }
       } else {
-        alert(
-          "zare_nk_040218-response is notOk-response.status: " + response.status
-        );
         if (response.status == 401) {
-          alert("zare_nk_040218-response.status == 401");
           modal?.hide();  //zare_nk_041115_added
           const bootstrap = await getBootstrap(); //zare_nk_040417_added
           const mymodalForWarning = new bootstrap.Modal(
@@ -1494,11 +2438,10 @@ export default function ShallowRoutingExample() {
 
     }
   }
-  //DarsadTakhfif
+
   async function ManualInputBarcode(
     event: React.KeyboardEvent<HTMLInputElement>
   ) {
-    // var tagVal = event.target.value; //zare_nk_040408_commented
     const inputElement = event.target as HTMLInputElement;
     const tagVal = inputElement.value;
     if (
@@ -1980,7 +2923,7 @@ export default function ShallowRoutingExample() {
                                     alignItems: "center",
                                   }}
                                 >
-                                  <span id="nameBerandInDetailsInfoCont"> 
+                                  <span id="nameBerandInDetailsInfoCont">
                                   </span>
                                 </div>
                               </div>
@@ -2166,11 +3109,8 @@ export default function ShallowRoutingExample() {
                                   justifyContent: "end",
                                 }}
                               >
-                                {/* zare_nk_040311_commented */}
-                                {/* {ForCartContInProdDetVal}-rezam */}
-                                {/* zare_nk_040311_added(bayad bashe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1)*/}
 
-                                <MiddleCountTedadSefr
+                                {/* <MiddleCountTedadSefr
                                   refForMiddleCount={refForMiddleCount}
                                   IdKala={
                                     ForCartContInProdDetVal
@@ -2184,16 +3124,7 @@ export default function ShallowRoutingExample() {
                                       : null
                                   }
                                   refForfather={refForfather}
-                                  refForParsedList={refForParsedList}
-                                  // handlerForAddClick={(e) => {
-                                  //   return handlerForAddClick(
-                                  //     ForCartContInProdDetVal
-                                  //       ? ForCartContInProdDetVal.TedadOut
-                                  //       : null,
-                                  //     0,
-                                  //     e
-                                  //   ); //zare_nk_040310_tahlilshe(hassase)
-                                  // }}
+                                  refForParsedList={refForParsedList} 
                                   handlerForAddClick={(e) => {
                                     handlerForAddClick(
                                       ForCartContInProdDetVal
@@ -2202,34 +3133,18 @@ export default function ShallowRoutingExample() {
                                         : null,
 
                                       0,
-                                      BarcodeKala, //zare_nk_040325_nokteh(motoghayer sarasar bood dar 040325 shod state)  //zare_nk_040325_commenteded_felan
-                                      ////zare_nk_040325_added_felan
-                                      // ForCartContInProdDetVal
-                                      //   ? ForCartContInProdDetVal.BarcodeKala
-                                      //   : null,
+                                      BarcodeKala,  
                                       e
                                     );
                                   }}
-                                  // handlerForRemClick={(e) => {
-                                  //   return handlerForRemClick(
-                                  //     ForCartContInProdDetVal
-                                  //       ? ForCartContInProdDetVal.TedadOut
-                                  //       : null,
-                                  //     e
-                                  //   ); //zare_nk_040310_tahlilshe(hassase)
-                                  // }}
-
+                                   
                                   handlerForRemClick={(e) => {
                                     return handlerForRemClick(
                                       ForCartContInProdDetVal
                                         ? (ForCartContInProdDetVal as any)
                                           .TedadOut
                                         : null,
-                                      BarcodeKala, //zare_nk_040325_nokteh(motoghayer sarasar bood dar 040325 shod state)  //zare_nk_040325_commenteded_felan
-                                      //// zare_nk_040325_added_felan
-                                      // ForCartContInProdDetVal
-                                      //   ? ForCartContInProdDetVal.BarcodeKala
-                                      //   : null,
+                                      BarcodeKala, 
                                       e
                                     );
                                   }}
@@ -2238,7 +3153,7 @@ export default function ShallowRoutingExample() {
                                       ? (ForCartContInProdDetVal as any)
                                         .TedadOut
                                       : null
-                                  } //zare_nk_040310_tahlilshe(hassase)
+                                  }
                                   ForCartContInProdDetVal={
                                     ForCartContInProdDetVal
                                   }
@@ -2248,7 +3163,63 @@ export default function ShallowRoutingExample() {
                                       : null
                                   }
                                   refForInputGroup={refForInputGroup}
-                                />
+                                /> */}
+
+                                {ForCartContInProdDetVal != null && (
+                                  <MiddleCountTedadSefr
+                                    refForfather={ForCartContInProdDetVal.refForfather}
+                                    fromShowDetails={ForCartContInProdDetVal.fromShowDetails}
+                                    IdKala={ForCartContInProdDetVal.IdKala}
+                                    idTag={ForCartContInProdDetVal.idTag}
+                                    tedadInSabadOrDet={ForCartContInProdDetVal.tedadInSabadOrDet}
+
+                                    handlerForAddClick={(e) => {
+                                      return handlerForAddClick(
+                                        {
+                                          tedadInSabadOrDet: ForCartContInProdDetVal.tedadInSabadOrDet,
+                                          ZaribForoosh: ForCartContInProdDetVal.ZaribForoosh,
+                                          IdKala: ForCartContInProdDetVal.IdKala,
+                                          NameKala: ForCartContInProdDetVal.NameKala,
+                                          DarsadTakhfif: ForCartContInProdDetVal.DarsadTakhfif,
+                                          NameBerand: ForCartContInProdDetVal.NameBerand,  //zare_nk_041118_nokteh(dar api selectKalaShobeh NameBerand dar pasokh hast pas ma meghdaresh ro dadim)
+                                          FeeForoosh: ForCartContInProdDetVal.FeeForoosh,
+                                          FeeMasraf: ForCartContInProdDetVal.FeeMasraf,
+                                          BarcodeKala: ForCartContInProdDetVal.BarcodeKala,
+                                          Mojoodi: ForCartContInProdDetVal.Mojoodi,
+                                          MaxTedad: ForCartContInProdDetVal.MaxTedad,
+                                          father: refForfather.current,
+                                          bishAzMaxTedadYaMojoodi: ForCartContInProdDetVal.bishAzMaxTedadYaMojoodi,
+                                          fromShowDetails: true,
+                                          event: e,
+                                        }
+                                      );
+                                    }}
+                                    handlerForRemClick={(e) => {
+                                      return handlerForRemClick(
+                                        {
+                                          tedadInSabadOrDet: ForCartContInProdDetVal.tedadInSabadOrDet,
+                                          ZaribForoosh: ForCartContInProdDetVal.ZaribForoosh,
+                                          IdKala: ForCartContInProdDetVal.IdKala,
+                                          NameKala: ForCartContInProdDetVal.NameKala,
+                                          DarsadTakhfif: ForCartContInProdDetVal.DarsadTakhfif,
+                                          NameBerand: ForCartContInProdDetVal.NameBerand,  //zare_nk_041118_nokteh(dar api selectKalaShobeh NameBerand dar pasokh hast pas ma meghdaresh ro dadim)
+                                          FeeForoosh: ForCartContInProdDetVal.FeeForoosh,
+                                          FeeMasraf: ForCartContInProdDetVal.FeeMasraf,
+                                          BarcodeKala: ForCartContInProdDetVal.BarcodeKala,
+                                          Mojoodi: ForCartContInProdDetVal.Mojoodi,
+                                          MaxTedad: ForCartContInProdDetVal.MaxTedad,
+                                          father: refForfather.current,
+                                          bishAzMaxTedadYaMojoodi: ForCartContInProdDetVal.bishAzMaxTedadYaMojoodi,
+                                          fromShowDetails: true,
+                                          event: e,
+                                        }
+                                      );
+                                    }}
+                                    ForCartContentsDesignType={ForCartContInProdDetVal.ForCartContentsDesignType}
+                                    bishAzMaxTedadYaMojoodi={ForCartContInProdDetVal.bishAzMaxTedadYaMojoodi}
+                                  />
+                                )}
+
                               </div>
                             </div>
                           </div>
@@ -2473,8 +3444,10 @@ export default function ShallowRoutingExample() {
                 padding: "15px",
                 outline: "none",
                 alignItems: "center",
-                border: "1px solid #E7E7E7",
-                boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // border: "1px solid #E7E7E7",
+                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                border: "1px solid #a9a9a9",
+                boxShadow: "#5e5e5e 0px 0px 3px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2571,8 +3544,10 @@ export default function ShallowRoutingExample() {
                 padding: "15px",
                 outline: "none",
                 alignItems: "center",
-                border: "1px solid #E7E7E7",
-                boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // border: "1px solid #E7E7E7",
+                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                border: "1px solid #a9a9a9",
+                boxShadow: "#5e5e5e 0px 0px 3px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2658,7 +3633,7 @@ export default function ShallowRoutingExample() {
             }}
           >
             <Link
-              // className="vorsab"
+              className="vorsab"
               href="/ordersHistory"
               style={{
                 width: "100%",
@@ -2668,8 +3643,10 @@ export default function ShallowRoutingExample() {
                 padding: "15px",
                 outline: "none",
                 alignItems: "center",
-                border: "1px solid #E7E7E7",
-                boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // border: "1px solid #E7E7E7",
+                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                border: "1px solid #a9a9a9",
+                boxShadow: "#5e5e5e 0px 0px 3px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2766,8 +3743,10 @@ export default function ShallowRoutingExample() {
                 padding: "15px",
                 outline: "none",
                 alignItems: "center",
-                border: "1px solid #E7E7E7",
-                boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // border: "1px solid #E7E7E7",
+                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                border: "1px solid #a9a9a9",
+                boxShadow: "#5e5e5e 0px 0px 3px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2863,10 +3842,12 @@ export default function ShallowRoutingExample() {
                 padding: "15px",
                 outline: "none",
                 alignItems: "center",
-                border: "1px solid #E7E7E7",
-                boxShadow: "#D7D6D6 0px 0px 2px 0px",
-                borderRadius: "25px",
+                // border: "1px solid #E7E7E7",
+                // boxShadow: "#D7D6D6 0px 0px 2px 0px", 
+                border: "1px solid #a9a9a9",
+                boxShadow: "#5e5e5e 0px 0px 3px 0px",
                 backgroundColor: "white",
+                borderRadius: "25px",
                 overflow: "hidden",
               }}
             >
@@ -2941,12 +3922,10 @@ export default function ShallowRoutingExample() {
             </Link>
           </div>
 
-          {/* zare_nk_040502_added_st */}
           <div
             id="Subprograms-6"
             className="Subprograms"
             style={{
-              // display: "flex",
               display: "none",
               flexFlow: "row",
             }}
@@ -2962,8 +3941,10 @@ export default function ShallowRoutingExample() {
                 padding: "15px",
                 outline: "none",
                 alignItems: "center",
-                border: "1px solid #E7E7E7",
-                boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // border: "1px solid #E7E7E7",
+                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                border: "1px solid #a9a9a9",
+                boxShadow: "#5e5e5e 0px 0px 3px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -3039,7 +4020,6 @@ export default function ShallowRoutingExample() {
               </div>
             </Link>
           </div>
-          {/* zare_nk_040502_added_end */}
 
           <div
             id="Subprograms-temp-1"
