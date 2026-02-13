@@ -33,6 +33,7 @@ function getCookie(name: any) {
 
 export default function ShallowRoutingExample() {
   const router = useRouter();
+
   type ForoshStateType = {
     ShomarehFaktorForoosh: number;
     IdFaktorForoosh: number;
@@ -41,7 +42,7 @@ export default function ShallowRoutingExample() {
     JamTakhfifTitr: number;
     JamTakhfifSatr: number;
     MablaghKhales: number;
-    orderRowsLength: number;
+    forooshTitrRowsLength: number;
   };
 
   const [ForooshSatrHideForooshTitr, setForooshSatrHideForooshTitr] =
@@ -49,31 +50,32 @@ export default function ShallowRoutingExample() {
   const [bisatr, setBisatr] = useState(true);
   const [bisatrDarSatr, setBisatrDarSatr] = useState(true);
 
-  type SabadRowType = {
+  type ForooshSatrType = {
     IdKala: number;
     NameKala: string;
-    // Tedad: number;
-    // IdNoeVazni:number;
-    // MablaghKhalesSatr:number;
-    [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast
+    Tedad: number;
+    IsVazni:number;
+    ForooshSatr:number;
+    // [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan
+    //  be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast(chon hameye fieldha ro neveshtam commentesh kardam)
   };
-  const [sabadRows, setSabadRows] = useState<SabadRowType[] | null>(null);
+  const [forooshSatrRows, setForooshSatrRows] = useState<ForooshSatrType[] | null>(null);
 
-  type OrderRowsType = {
+  type ForooshTitrType = {
     IdFaktorForoosh: number;
     NameSobe: string;
-    // VaziatFactor
-    // NameMoshtari
-    // TarikhSefaresh
-    // MablaghKhales
-    // ShomarehFaktorForoosh
-    // TarikhSefaresh
-    // MablaghMasraf
-    // TakhfifTitr
-    // MablaghKhales
-    [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast
+    VaziatFactor: string;
+    UserFullName: string;
+    TarikhSefaresh: string;
+    JamKhales: number;
+    ShomareFaktor: number;
+    JamMasraf: number;
+    JamTakhfifTitr: number;
+    JamTakhfifSatr: number;
+    // [key: string]: any; //yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan 
+    // be man nagan va timi kar nakonim,pas [key: string]: any; gozashtam ke kolli hast(chon hameye fieldha ro neveshtam commentesh kardam)
   };
-  const [orderRows, setOrderRows] = useState<OrderRowsType[] | null>(null);
+  const [forooshTitrRows, setForooshTitrRows] = useState<ForooshTitrType[] | null>(null);
   const [isShowFaktorForooshSatr, setIsShowFaktorForooshSatr] = useState(false);
 
   ////zare_nk_040410_added_st(and commented-lafze notNull ra yek no mishnase va maghadire digeye string ro ghabool nemikone,felan az in sabk estefadeh nakardam va hamoon string baram kafiteh)
@@ -86,7 +88,7 @@ export default function ShallowRoutingExample() {
   >(null);
   //zare_nk_040410_added_end
 
-  type ShowForooshSatrHideForooshTitrProps = {
+  type ShowForooshSatrHideForooshTitrType = {
     ShomarehFaktorForoosh: number;
     IdFaktorForoosh: number;
     TarikhSefaresh: string;
@@ -94,7 +96,7 @@ export default function ShallowRoutingExample() {
     JamTakhfifTitr: number;
     JamTakhfifSatr: number;
     MablaghKhales: number;
-    orderRowsLength: number;
+    forooshTitrRowsLength: number;
   };
 
   async function ShowForooshSatrHideForooshTitr({
@@ -105,9 +107,9 @@ export default function ShallowRoutingExample() {
     JamTakhfifTitr,
     JamTakhfifSatr,
     MablaghKhales,
-    orderRowsLength,
+    forooshTitrRowsLength,
   }:
-    ShowForooshSatrHideForooshTitrProps) {
+    ShowForooshSatrHideForooshTitrType) {
     setIsShowFaktorForooshSatr(true);
     setIsShowFaktorForooshTitr(null);
     setForooshSatrHideForooshTitr(() => {
@@ -119,7 +121,7 @@ export default function ShallowRoutingExample() {
         JamTakhfifTitr: JamTakhfifTitr,
         JamTakhfifSatr: JamTakhfifSatr,
         MablaghKhales: MablaghKhales,
-        orderRowsLength: orderRowsLength,
+        forooshTitrRowsLength: forooshTitrRowsLength,
       };
     });
     const token = getCookie("token");
@@ -165,7 +167,7 @@ export default function ShallowRoutingExample() {
             return;
           }
           setBisatrDarSatr(false);
-          setSabadRows(result);
+          setForooshSatrRows(result);
         }
       } else {
         if (response.status == 401) {
@@ -260,7 +262,7 @@ export default function ShallowRoutingExample() {
               return;
             }
             setBisatr(false);
-            setOrderRows(result);
+            setForooshTitrRows(result);
           }
         } else {
           if (response.status == 401) {
@@ -448,14 +450,14 @@ export default function ShallowRoutingExample() {
                 {/* zare_nk_041123_commented_st */}
                 {/* {ForooshSatrHideForooshTitr != null && (
                   <span style={{ marginLeft: 7 }}>
-                    {ForooshSatrHideForooshTitr.orderRowsLength}
+                    {ForooshSatrHideForooshTitr.forooshTitrRowsLength}
                   </span>
                 )} */}
                 {/* zare_nk_041123_commented_end */}
                 {/* zare_nk_041123_added_st */}
-                {sabadRows != null && (
+                {forooshSatrRows != null && (
                   <span style={{ marginLeft: 7 }}>
-                    {sabadRows.length}
+                    {forooshSatrRows.length}
                   </span>
                 )}
                 {/* zare_nk_041123_added_end */}
@@ -465,7 +467,7 @@ export default function ShallowRoutingExample() {
 
             {!bisatrDarSatr && (
               <>
-                {sabadRows?.map((item, index) => {
+                {forooshSatrRows?.map((item, index) => {
                   return (
                     <div
                       key={index || item.IdKala}
@@ -693,7 +695,7 @@ export default function ShallowRoutingExample() {
     >
       {!bisatr && (
         <>
-          {orderRows?.map((item, index) => {
+          {forooshTitrRows?.map((item, index) => {
             return (
               <div
                 key={item.IdFaktorForoosh}
@@ -919,7 +921,7 @@ export default function ShallowRoutingExample() {
                           JamTakhfifTitr: item.JamTakhfifTitr,
                           JamTakhfifSatr: item.JamTakhfifSatr,
                           MablaghKhales: item.JamKhales,
-                          orderRowsLength: orderRows.length,
+                          forooshTitrRowsLength: forooshTitrRows.length,
                         });
                       }}
                       className="btn btn-danger fontSizeLess768 "

@@ -237,7 +237,7 @@ export function MiddleCountTedadSefr({  //zare_nk_041121_updated(for shopToDisco
                     padding: "0",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center", 
+                    justifyContent: "center",
                   }}
                   className="plussMinus card-linkk text-dangerr fa fa-plus"
                 ></span>
@@ -386,7 +386,7 @@ export function MiddleCountTedadSefr({  //zare_nk_041121_updated(for shopToDisco
               id={`inp-${IdKala}`}
               className="text-center titleStyle"
               style={{
-                 color: "red",
+                color: "red",
                 backgroundColor: "white",
                 border: "none",
                 flex: "1 0 40%",
@@ -549,7 +549,7 @@ export function MiddleCountTedadSefr({  //zare_nk_041121_updated(for shopToDisco
               id={`inp-${IdKala}`}
               className="text-center titleStyle"
               style={{
-                 color: "red",
+                color: "red",
                 backgroundColor: "white",
                 border: "none",
                 flex: "1 0 40%",
@@ -1613,7 +1613,7 @@ export default function ShallowRoutingExample() {
     };
     const prodDetModal = document.getElementById("prodDetModal");
     async function tempFuncForAsyncGetBootstrap() {
-      if (prodDetModal!=null && isOpenedProdDetModal!=null) {
+      if (prodDetModal != null && isOpenedProdDetModal != null) {
         prodDetModal.addEventListener("shown.bs.modal", handlerForProdDetModal);
         prodDetModal.addEventListener(
           "hidden.bs.modal",
@@ -2213,7 +2213,9 @@ export default function ShallowRoutingExample() {
             span.innerText = result.errors[0];
           }
         } else if (result.status == 0) {
-          var Tedad = addRemParam.tedadInSabadOrDet;
+          let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
+          let Tedad = satrInoInResult.Tedad;
+
           var bishAzMaxTedadYaMojoodi = 0;
           if (addRemParam.MaxTedad != null) {
             if (addRemParam.MaxTedad <= Tedad) {
@@ -2229,20 +2231,20 @@ export default function ShallowRoutingExample() {
 
           let ForCartContentsDesignTypeLet = 0
 
-          if (addRemParam.tedadInSabadOrDet == 0) {
+          if (Tedad == 0) {
             ForCartContentsDesignTypeLet = 0;
           }
-          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+          else if (Tedad > addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 2;
           }
-          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 1;
           }
           if (addRemParam.fromShowDetails) {
             setForCartContInProdDetVal(() => {
               const idTag = "ForCart-" + addRemParam.IdKala;
               return {
-                tedadInSabadOrDet: TedadOut,
+                tedadInSabadOrDet: Tedad,
                 ZaribForoosh: addRemParam.ZaribForoosh,
                 IdKala: addRemParam.IdKala,
                 NameKala: addRemParam.NameKala,
@@ -2370,13 +2372,17 @@ export default function ShallowRoutingExample() {
         } else if (result.status == 0) {
           console.log('041116-result.status == 0');
           setAddOrRemChanged(addRemParam.BarcodeKala + "-" + TedadOut);
+
+          let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
+          let Tedad = satrInoInResult === undefined ? 0 : satrInoInResult.Tedad;
+
           var bishAzMaxTedadYaMojoodi = 0;
           if (addRemParam.MaxTedad != null) {
-            if (addRemParam.MaxTedad <= addRemParam.tedadInSabadOrDet) {
+            if (addRemParam.MaxTedad <= Tedad) {
               bishAzMaxTedadYaMojoodi = 1;
             }
           } else {
-            if (addRemParam.Mojoodi <= addRemParam.tedadInSabadOrDet) {
+            if (addRemParam.Mojoodi <= Tedad) {
               bishAzMaxTedadYaMojoodi = 1;
             }
           }
@@ -2384,22 +2390,20 @@ export default function ShallowRoutingExample() {
 
           let ForCartContentsDesignTypeLet = 0
 
-          if (addRemParam.tedadInSabadOrDet == 0) {
+          if (Tedad == 0) {
             ForCartContentsDesignTypeLet = 0;
           }
-          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+          else if (Tedad > addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 2;
           }
-          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 1;
           }
           if (addRemParam.fromShowDetails) {
-
-
             setForCartContInProdDetVal(() => {
               const idTag = "ForCart-" + addRemParam.IdKala;
               return {
-                tedadInSabadOrDet: TedadOut,
+                tedadInSabadOrDet: Tedad,
                 ZaribForoosh: addRemParam.ZaribForoosh,
                 IdKala: addRemParam.IdKala,
                 NameKala: addRemParam.NameKala,
@@ -2420,7 +2424,7 @@ export default function ShallowRoutingExample() {
             });
           }
 
-          if (TedadOut == 0) {
+          if (Tedad == 0) {
             const inputGroup = document.querySelector(
               ".ForCart-" + addRemParam.IdKala + " .input-group"
             );
@@ -2433,7 +2437,7 @@ export default function ShallowRoutingExample() {
               }
             }
           }
-          else if (TedadOut == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             let htmlTag;
             if (addRemParam.event) {
               htmlTag = addRemParam.event.target as HTMLElement;
@@ -2531,7 +2535,7 @@ export default function ShallowRoutingExample() {
                   fontSize: "18px",
                 }}
               >
-                <span style={{fontFamily: "IRANSansWeb_Medium(adad_fa)"}}>جزئیات محصول</span>
+                <span style={{ fontFamily: "IRANSansWeb_Medium(adad_fa)" }}>جزئیات محصول</span>
               </div>
               <div className="h4Cont"></div>
               <div

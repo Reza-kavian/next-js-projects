@@ -52,7 +52,7 @@ export function MiddleCountTedadSefr({
   bishAzMaxTedadYaMojoodi,
   ///////////////////////////////////zare_nk_041120_added_end
 }: MiddleCountTedadSefrType) {
-  console.log('ShallowRoutingExample called-MiddleCountTedadSefr-ForCartContentsDesignType: '+ForCartContentsDesignType);
+  console.log('ShallowRoutingExample called-MiddleCountTedadSefr-ForCartContentsDesignType: ' + ForCartContentsDesignType);
   useEffect(() => {
     ////zare_nk_041120_commented_st
     // console.log('2-041119-SabadRow: ' + JSON.stringify(SabadRow));
@@ -1229,8 +1229,8 @@ export default function ShallowRoutingExample() {
         }
         else if (parsedList[0].TedadDarSabad == parsedList[0].ZaribForoosh) {
           ForCartContentsDesignTypeLet = 1;
-        } 
- 
+        }
+
         const idTag = "ForCart-" + parsedList[0].IdKala;
         setForCartContInProdDetVal(() => {
           return {
@@ -1798,7 +1798,9 @@ export default function ShallowRoutingExample() {
             span.innerText = result.errors[0];
           }
         } else if (result.status == 0) {
-          var Tedad = addRemParam.tedadInSabadOrDet;
+          let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
+          let Tedad = satrInoInResult.Tedad;
+
           var bishAzMaxTedadYaMojoodi = 0;
           if (addRemParam.MaxTedad != null) {
             if (addRemParam.MaxTedad <= Tedad) {
@@ -1814,20 +1816,20 @@ export default function ShallowRoutingExample() {
 
           let ForCartContentsDesignTypeLet = 0
 
-          if (addRemParam.tedadInSabadOrDet == 0) {
+          if (Tedad == 0) {
             ForCartContentsDesignTypeLet = 0;
           }
-          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+          else if (Tedad > addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 2;
           }
-          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 1;
           }
           if (addRemParam.fromShowDetails) {
             setForCartContInProdDetVal(() => {
               const idTag = "ForCart-" + addRemParam.IdKala;
               return {
-                tedadInSabadOrDet: TedadOut,
+                tedadInSabadOrDet: Tedad,
                 ZaribForoosh: addRemParam.ZaribForoosh,
                 IdKala: addRemParam.IdKala,
                 NameKala: addRemParam.NameKala,
@@ -1955,13 +1957,17 @@ export default function ShallowRoutingExample() {
         } else if (result.status == 0) {
           console.log('041116-result.status == 0');
           setAddOrRemChanged(addRemParam.BarcodeKala + "-" + TedadOut);
+
+          let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
+          let Tedad = satrInoInResult === undefined ? 0 : satrInoInResult.Tedad;
+
           var bishAzMaxTedadYaMojoodi = 0;
           if (addRemParam.MaxTedad != null) {
-            if (addRemParam.MaxTedad <= addRemParam.tedadInSabadOrDet) {
+            if (addRemParam.MaxTedad <= Tedad) {
               bishAzMaxTedadYaMojoodi = 1;
             }
           } else {
-            if (addRemParam.Mojoodi <= addRemParam.tedadInSabadOrDet) {
+            if (addRemParam.Mojoodi <= Tedad) {
               bishAzMaxTedadYaMojoodi = 1;
             }
           }
@@ -1969,22 +1975,21 @@ export default function ShallowRoutingExample() {
 
           let ForCartContentsDesignTypeLet = 0
 
-          if (addRemParam.tedadInSabadOrDet == 0) {
+          if (Tedad == 0) {
             ForCartContentsDesignTypeLet = 0;
           }
-          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+          else if (Tedad > addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 2;
           }
-          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 1;
           }
           if (addRemParam.fromShowDetails) {
 
-
             setForCartContInProdDetVal(() => {
               const idTag = "ForCart-" + addRemParam.IdKala;
               return {
-                tedadInSabadOrDet: TedadOut,
+                tedadInSabadOrDet: Tedad,
                 ZaribForoosh: addRemParam.ZaribForoosh,
                 IdKala: addRemParam.IdKala,
                 NameKala: addRemParam.NameKala,
@@ -2005,7 +2010,7 @@ export default function ShallowRoutingExample() {
             });
           }
 
-          if (TedadOut == 0) {
+          if (Tedad == 0) {
             const inputGroup = document.querySelector(
               ".ForCart-" + addRemParam.IdKala + " .input-group"
             );
@@ -2018,7 +2023,7 @@ export default function ShallowRoutingExample() {
               }
             }
           }
-          else if (TedadOut == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             let htmlTag;
             if (addRemParam.event) {
               htmlTag = addRemParam.event.target as HTMLElement;
@@ -3005,7 +3010,7 @@ export default function ShallowRoutingExample() {
           position: "relative",
           display: "flex",
           width: "100%",
-          backgroundColor:'white'
+          backgroundColor: 'white'
         }}
       >
         <div

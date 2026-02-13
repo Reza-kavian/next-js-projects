@@ -639,8 +639,8 @@ export function MiddleCountTedadSefr({
     refForfather.current = fromShowDetails
       ? "#DetailsInfoCont"
       : "#sabadItemsContInSafhe";
-      console.log('041123-MiddleCountTedadSefr called!-refForfather.current: '+refForfather.current+'-fromShowDetails: '+
-        fromShowDetails+'-ForCartContentsDesignType: '+ForCartContentsDesignType+'-bishAzMaxTedadYaMojoodi: '+bishAzMaxTedadYaMojoodi);
+    console.log('041123-MiddleCountTedadSefr called!-refForfather.current: ' + refForfather.current + '-fromShowDetails: ' +
+      fromShowDetails + '-ForCartContentsDesignType: ' + ForCartContentsDesignType + '-bishAzMaxTedadYaMojoodi: ' + bishAzMaxTedadYaMojoodi);
 
     if (ForCartContentsDesignType == 0) {
       if (IdKala) {
@@ -1264,7 +1264,7 @@ type SabadRowType = {
 ////zare_nk_041123_added_end
 
 export default function ShallowRoutingExample() {
-   console.log('041123-ShallowRoutingExample called!!');
+  console.log('041123-ShallowRoutingExample called!!');
   const router = useRouter();
   // type CartData = {
   //   IdKala: number;
@@ -1451,7 +1451,9 @@ export default function ShallowRoutingExample() {
             span.innerText = result.errors[0];
           }
         } else if (result.status == 0) {
-          var Tedad = addRemParam.tedadInSabadOrDet;
+          let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added 
+          let Tedad = satrInoInResult.Tedad;
+          console.log('041124-result.data.satr[0]Tedad: ' + Tedad);
           var bishAzMaxTedadYaMojoodi = 0;
           if (addRemParam.MaxTedad != null) {
             if (addRemParam.MaxTedad <= Tedad) {
@@ -1467,20 +1469,20 @@ export default function ShallowRoutingExample() {
 
           let ForCartContentsDesignTypeLet = 0
 
-          if (addRemParam.tedadInSabadOrDet == 0) {
+          if (Tedad == 0) {
             ForCartContentsDesignTypeLet = 0;
           }
-          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+          else if (Tedad > addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 2;
           }
-          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 1;
           }
           if (addRemParam.fromShowDetails) {
             setForCartContInProdDetVal(() => {
               const idTag = "ForCart-" + addRemParam.IdKala;
               return {
-                tedadInSabadOrDet: TedadOut,
+                tedadInSabadOrDet: Tedad,
                 ZaribForoosh: addRemParam.ZaribForoosh,
                 IdKala: addRemParam.IdKala,
                 NameKala: addRemParam.NameKala,
@@ -1558,7 +1560,10 @@ export default function ShallowRoutingExample() {
 
       const data = await response.json();
       if (response.ok) {
+        console.log('041120-remveFromCartInIndex-else 5 IdKala response.ok-data: ' + JSON.stringify(data));
+
         var result = data;
+
         if (result.status == -1000) {
           const inputGroup = document.querySelector(
             ".ForCart-" + addRemParam.IdKala + " .input-group"
@@ -1607,34 +1612,38 @@ export default function ShallowRoutingExample() {
         } else if (result.status == 0) {
           console.log('041116-result.status == 0');
           // setAddOrRemChanged(addRemParam.BarcodeKala + "-" + TedadOut);  //zare_nk_041123_commented
+          let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
+          let Tedad = satrInoInResult === undefined ? 0 : satrInoInResult.Tedad;
+          console.log('041124-Tedad: ' + Tedad);
           var bishAzMaxTedadYaMojoodi = 0;
           if (addRemParam.MaxTedad != null) {
-            if (addRemParam.MaxTedad <= addRemParam.tedadInSabadOrDet) {
+            if (addRemParam.MaxTedad <= Tedad) {
               bishAzMaxTedadYaMojoodi = 1;
             }
           } else {
-            if (addRemParam.Mojoodi <= addRemParam.tedadInSabadOrDet) {
+            if (addRemParam.Mojoodi <= Tedad) {
               bishAzMaxTedadYaMojoodi = 1;
             }
           }
+
           refForfather.current = addRemParam.father;
 
           let ForCartContentsDesignTypeLet = 0
 
-          if (addRemParam.tedadInSabadOrDet == 0) {
+          if (Tedad == 0) {
             ForCartContentsDesignTypeLet = 0;
           }
-          else if (addRemParam.tedadInSabadOrDet > addRemParam.ZaribForoosh) {
+          else if (Tedad > addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 2;
           }
-          else if (addRemParam.tedadInSabadOrDet == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             ForCartContentsDesignTypeLet = 1;
           }
-          if (addRemParam.fromShowDetails) { 
+          if (addRemParam.fromShowDetails) {
             setForCartContInProdDetVal(() => {
               const idTag = "ForCart-" + addRemParam.IdKala;
               return {
-                tedadInSabadOrDet: TedadOut,
+                tedadInSabadOrDet: Tedad,
                 ZaribForoosh: addRemParam.ZaribForoosh,
                 IdKala: addRemParam.IdKala,
                 NameKala: addRemParam.NameKala,
@@ -1655,7 +1664,7 @@ export default function ShallowRoutingExample() {
             });
           }
 
-          if (TedadOut == 0) {
+          if (Tedad == 0) {
             const inputGroup = document.querySelector(
               ".ForCart-" + addRemParam.IdKala + " .input-group"
             );
@@ -1668,7 +1677,7 @@ export default function ShallowRoutingExample() {
               }
             }
           }
-          else if (TedadOut == addRemParam.ZaribForoosh) {
+          else if (Tedad == addRemParam.ZaribForoosh) {
             let htmlTag;
             if (addRemParam.event) {
               htmlTag = addRemParam.event.target as HTMLElement;
