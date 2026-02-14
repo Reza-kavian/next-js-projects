@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_041124_okk
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -39,7 +39,7 @@ export default function LogoutButton() {
             // router.push(pathname);  //zare_nk_+041013_commented(in khat bi mani bood va comment shod,chon redirect be hamin safhe ast va rerendere alaki hast!)
           }
         } catch (error) {
-          // setIsLogout(true);  //zare_nk_040529_added(felan comment kardam ta age vaghean beja va karbordi bood lahaz beshe)
+          // setIsLogout(true);  //zare_nk_041124_commented(chon shayad bekhatere ghatiye net ya shabake be catch oomadeh bashim pas bayad mojadad talash kard ba nete salem va alaki ghezavat nakonim ke karbar offlineh)
           console.log("❌ خطااااااااااااااااااای JWT:", error);
         }
       } else {

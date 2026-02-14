@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_041124_okk
 "use client";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -35,7 +35,9 @@ export default function Toolbar() {
       <AlertButton messaged="Playing!">
         <h1>Play Movie</h1>
       </AlertButton>
-      <AlertButton messaged="Uploading!">Upload Image</AlertButton>
+      <AlertButton messaged="Uploading!">
+        Upload Image
+      </AlertButton>
     </div>
   );
 }

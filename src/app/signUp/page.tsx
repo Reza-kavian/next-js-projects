@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_041124_okk
 'use client' 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -37,7 +37,7 @@ export default function LoginPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
-       // credentials: "include", //zare_nk_040202_commented
+      //// credentials: "include", //zare_nk_040202_commented
     });
     const data = await response.json() ;
     if (response.ok) {

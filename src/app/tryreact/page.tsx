@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_041124_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback } from "react";
 import Styles from "@/styles/components/dooz.module.css"; 
@@ -35,7 +35,8 @@ type BtnColor = string | null;   //zare_nk_041015_nokteh(BtnColor range dokmeh r
 
 type BoardProps = {
   squares: Squares; //zare_nk_040528_nokteh(arayeye 9 khanehiye haviye vaziate feliye chineshe dooz(ba clicke dokmehaye dooz ya ba clicke dokmehaye archiv in vaziat avaz misheh))
-  onPlay: (nextSquares: Squares) => void; //az methode handlePlaye componente Game meghdar migire,handlePlaye dar renderhaye Game zamani ke masalan dokmehaye dooz ya dokmehaye arshiv click beshan va vazite jadide chineshe dooz shekl begire amal mikoneh)
+  onPlay: (nextSquares: Squares) => void; //az methode handlePlaye componente Game meghdar migire,handlePlaye dar renderhaye Game zamani ke masalan dokmehaye dooz
+  // ya dokmehaye arshiv click beshan va vazite jadide chineshe dooz shekl begire amal mikoneh)
   refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;  //zare_nk_040528_nokteh(useRefe dokmehaye dooz ke harkodam tage button hastand)
   timer: number; //zare_nk_040525_nokteh(state shamele meghdare timer)
   setTimer: React.Dispatch<React.SetStateAction<number>>;  //zare_nk_040525_nokteh(setState meghdardehiye state timer)
@@ -83,7 +84,8 @@ function Board({
   var refForTimer = useRef(null);  //zare_nk_040528_nokteh(useRefe tage namayeshe timer hast)
   var refForTimerCont = useRef(null);  //zare_nk_040528_nokteh(useRefe tage pedare tage namayeshe timer hast)
   const refForWinnerOrNobat = useRef<HTMLDivElement | null>(null);   //zare_nk_040528_nokteh(useRefe tage namayeshe lafze nobat ya barandeh)
-  const xIsNextRef = useRef(xIsNextState);   //zare_nk_040528_nokteh(useRefe haviye meghdare feliye xIsNextState,xIsNextState ra dar useRef rikhtim ke dar renderhaye component meghdarash hefz shavad)
+  const xIsNextRef = useRef(xIsNextState);   //zare_nk_040528_nokteh(useRefe haviye meghdare feliye xIsNextState,xIsNextState ra dar useRef 
+  // rikhtim ke dar renderhaye component meghdarash hefz shavad)
 
   useEffect(() => {  //zare_nk_040528_nokteh(range dokmehaye dooz ra inja taein mikonim)
     if (localStorage.getItem("BtnsColor")) {
@@ -284,8 +286,8 @@ function Board({
       "---status: " +
       status
     );
-    const stored = localStorage.getItem("BtnsColor");
-    const jsonedBtnsColor = stored !== null ? JSON.parse(stored) : null;
+    const storedBtnsColor = localStorage.getItem("BtnsColor");
+    const jsonedBtnsColor = storedBtnsColor !== null ? JSON.parse(storedBtnsColor) : null;
     winner.map((_, index) => {
       if (index == 0) {
         //khaneye avvale winner nobat ra taein mikone(X ya Y)
@@ -603,11 +605,12 @@ export default function Game() {
     } 
   }
     
-  const moves = history.map((squares: string, move: number) => {
+  // const moves = history.map((squares: string, move: number) => {  //zare_nk_041124_commented
+    const moves = history.map((squares: Squares, move: number) => {  //zare_nk_041124_addeed
     //item_: string, index: number
     let mokhtasatInDescription = " ترتیب مهره های آرشیو : ";
     let SquareInHistory = history[move];
-    SquareInHistory.map((squares: string, index: number) => {
+    SquareInHistory.map((square: string| null, index: number) => {
       if (index == SquareInHistory.length - 1) {
         return;
       }

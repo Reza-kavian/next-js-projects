@@ -1,4 +1,4 @@
-////zare_nk_041113_okk
+////zare_nk_041124_okk
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ function getCookie(name:any) {
 export default function RedirectingPage() {
   const router = useRouter();
   useEffect(() => {
-    const token = getCookie("token");  //zare_nk_040118_added(inja niazi nist hamintori neveshtam)
+    // const token = getCookie("token");  //zare_nk_040118_added(inja niazi nist hamintori neveshtam)
     // //zare_nk_031221_commented_st(chon  tasmime nahaei estefadeh az cookie shod)
     // const redirect = sessionStorage.getItem("redirect") || "/";
     // sessionStorage.removeItem("redirect"); // مقدار را حذف کن تا در آینده تداخل ایجاد نکند

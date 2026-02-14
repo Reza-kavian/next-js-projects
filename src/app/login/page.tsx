@@ -1,4 +1,4 @@
-////zare_nk_041114_okk
+////zare_nk_041124_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -125,9 +125,9 @@ type SecondPageProps = {
   smsVal: string; //zare_nk_040525_nokteh(shamele meghdare sms varedehye karbar)
   smsTxtChanged: (e: ChangeEvent<HTMLInputElement>) => void; //zare_nk_040525_nokteh(rooydade onChange textboxe smsValTxt)
   smsTxtKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void; //zare_nk_040525_nokteh(rooydade onKeyDown textboxe smsValTxt)
-  backBtnClick: () => void; //zare_nk_040525_nokteh(roydade clicke dokmeye backToFirsPage)
-  checkSmsForLogin: () => void; //zare_nk_040525_nokteh(roydade clicke dokmeye vorood)
-  ResendCodefunc: () => void; //zare_nk_040525_nokteh(roydade clicke dokmeye ResendCode)
+  backBtnClick: () => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye backToFirsPage)
+  checkSmsForLogin: () => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye vorood)
+  ResendCodefunc: () => void; //zare_nk_040525_nokteh(rooydade clicke dokmeye ResendCode)
   isDisabledCheckSmsBtn: boolean; //zare_nk_040527_nokteh(state shamele meghdare booliane attribute disabled dokmeye vorood dar safheye second )
   setIsDisabledCheckSmsBtn: React.Dispatch<React.SetStateAction<boolean>>; //zare_nk_040527_nokteh(setState meghdardehiye booleane attribute disabled dokmeye vorood dar safheye second )
   refForCheckSmsBtn: RefObject<HTMLButtonElement | null>; //zare_nk_040527_nokteh(useRefe dokmeye vorood dar safheye second )
@@ -440,33 +440,24 @@ export default function Toolbar() {
     }
 
     try {
-      // const token = getCookie("token");   //zare_nk_041114_commented
-      //// let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";   //zare_nk_041114_commented
-      // const response = await fetch(ApiUrl + "Api_SendCode", {   //zare_nk_041114_commented
-      var ApiUrl = "https://api.tochikala.com/api/";    //zare_nk_041114_added 
+      var ApiUrl = "https://api.tochikala.com/api/";
       const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: "Bearer " + token,
+          //// Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ Mobile: mobileVal }),
       });
       const data = await response.json();
       if (response.ok) {
         console.log("zare_nk_040218-data: " + JSON.stringify(data) + '-response.status: ' + response.status);
-        //zare_nk_040218-data: {"status":0,"message":"","data":1,"errors":[]}-response.status: 200
-        //zare_nk_040218-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
-        //zare_nk_040218-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
-
         ////zare_nk_041114_added_st
         //  console.log("zare_nk_040218-data: " + JSON.stringify(data) + '-response.status: ' + response.status);
         //       //zare_nk_040218-data: {"status":0,"message":"","data":1,"errors":[]}-response.status: 200
         //       //zare_nk_040218-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
         //       //zare_nk_040218-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
         ////zare_nk_041114_added_end
-
 
         if (data.status == 0) {
           setCurrentPage("secondPage");
@@ -500,8 +491,7 @@ export default function Toolbar() {
     }
   }
 
-  const handleGoogleLogin = () => {   //zare_nk_040925_tahlilshe
-    // alert("handleGoogleLogin002");
+  const handleGoogleLogin = () => {
     window.location.href = `/api/auth/google`; // هدایت به گوگل  //zare_nk_040422_commented
     // window.location.href = `https://testotm.sarinmehr.com/api/auth/google`; //zare_nk_040422_added
   };
@@ -529,16 +519,13 @@ export default function Toolbar() {
     if (!errorFree) {
       return;
     }
-    const token = getCookie("token");
-    // let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-    // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";  //zare_nk_041114_commented
-    // const response = await fetch(ApiUrl + "Api_LoginUser2", {   //zare_nk_041114_commented
-    let ApiUrl = "https://api.tochikala.com/api/";  //zare_nk_041114_added
-    const response = await fetch(ApiUrl + "User/Api_LoginUser2", {   //zare_nk_041114_added 
+    // const token = getCookie("token");  //zare_nk_041125_commented(chon token null hast ke be login oomadim digeh!!) 
+    let ApiUrl = "https://api.tochikala.com/api/";
+    const response = await fetch(ApiUrl + "User/Api_LoginUser2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Authorization: "Bearer " + token,  //zare_nk_04114_
+        //// Authorization: "Bearer " + token,   
       },
       body: JSON.stringify({
         Mobile: mobileVal,
@@ -557,7 +544,6 @@ export default function Toolbar() {
       // },"errors":[]}
       if (data.status == 0) {
         let token = data.data.token;
-
         ////zare_nk_040603_added_st 
         // // const secretKey = Buffer.from(
         // //   process.env.JWT_SECRET_BASE64!,
@@ -587,7 +573,7 @@ export default function Toolbar() {
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
           //va in kar ra dar methode verifyToken gonjandim)
 
-          const response = await fetch("/api/auth/verifyToken", {  //zare_nk_041115_nokteh(methode Api_LoginUser2 tavassote aghaye parsafar chek mishe da morede dorostiye sms va zamane monghazi shodanesh,
+          const response = await fetch("/api/auth/verifyToken", {  //zare_nk_041115_nokteh(methode Api_LoginUser2 tavassote aghaye parsafar chek mishe dar morede dorostiye sms va zamane monghazi shodanesh,
             //vali man mikham bedoonam tokeni ke methode Api_LoginUser2 be man mideh ba secretKey amn shodeh bashe,va projeye samte cllient hatman bayad kelide dastresi ro dashteh bashe ta kasi 
             //ba sooeestefade token ro natooneh vakeshi koneh(masalan dar proje haye haker ha),pas az methode verifyToken ke ba dastoore jwt.verify az ma secretKey mikhad estefadeh kardam)
             method: "POST",
@@ -648,20 +634,13 @@ export default function Toolbar() {
     if (typeof window !== "undefined") {
       token = localStorage.getItem("Token") || "";
     }
-
     try {
-
-
-      //// let ApiUrl = "https://localhost:7265/api/v1/Hyper/";
-      // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";   //zare_nk_041114_commented
-      // const response = await fetch(ApiUrl + "Api_SendCode", {   //zare_nk_041114_commented
-      var ApiUrl = "https://api.tochikala.com/api/";    //zare_nk_041114_added 
+      var ApiUrl = "https://api.tochikala.com/api/";
       const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: "Bearer " + localStorage.getItem("Token"), //zare_nk_040421_commented
-          Authorization: "Bearer " + token, //zare_nk_040421_added
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({ Mobile: mobileVal }),
         // credentials: "include", //zare_nk_040202_commented
@@ -674,9 +653,7 @@ export default function Toolbar() {
         //zare_nk_040218-resendcode-data: {"status":-1,"message":"","data":null,"errors":[]}-response.status: 200
         //zare_nk_040218-resendcode-data: {"status":-2,"message":"","data":null,"errors":["کاربر یافت نشد"]}-response.status: 200
         ////zare_nk_041114_added_end
-
         if (data.status == 0) {
-          console.log("data.status == 0");
           setTimer(40000);
           setError("");
           setIsDisabledResendCode(true);
@@ -704,7 +681,6 @@ export default function Toolbar() {
       }
       ////zare_nk_041107_added_end
     }
-
   }
 
   function mobileChanged(
@@ -788,8 +764,7 @@ export default function Toolbar() {
     }
   }
 
-  function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) {
-    // alert('4.smsTxtChanged called!!');
+  function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) { 
     setError("");
     var input = null;
     var vall = null;
@@ -840,7 +815,7 @@ export default function Toolbar() {
     setCurrentPage("firstPage");
     setBackBtnCliked(true);
     setMobileCheckBtn(false);
-    // setIsDisabledMobileCheckBtn(false);//zare_nk_040224_added(ehtemalan niazi nist chon alanam false hast.chon unmount ke nashodim az in component)
+    // setIsDisabledMobileCheckBtn(false);   //zare_nk_040224_added(ehtemalan niazi nist chon alanam false hast.chon unmount ke nashodim az in component)
   }
 
   return (
@@ -852,7 +827,7 @@ export default function Toolbar() {
         justifyContent: "center",
         minHeight: "100vh",
         alignItems: "center",
-        backgroundColor:'white',
+        backgroundColor: 'white',
       }}
     >
       <form
@@ -860,7 +835,7 @@ export default function Toolbar() {
         onSubmit={(event) => {
           event.preventDefault();
         }}
-        className={`${Styles.loginForm} ${Styles.valueStyle}`} 
+        className={`${Styles.loginForm} ${Styles.valueStyle}`}
       >
         <div
           className={Styles.formsRow}

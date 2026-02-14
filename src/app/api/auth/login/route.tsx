@@ -1,4 +1,4 @@
-////src\app\api\auth\login  //zare_nk_041113_okk
+////src\app\api\auth\login  //zare_nk_041124_okk
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
