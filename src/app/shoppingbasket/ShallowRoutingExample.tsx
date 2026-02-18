@@ -37,7 +37,8 @@ type MiddleCountTedadSefrType = {
   bishAzMaxTedadYaMojoodi: number | null;
 };
 
-export function MiddleCountTedadSefr({
+// export function MiddleCountTedadSefr({  //zare_nk_041127_commented
+function MiddleCountTedadSefr({  //zare_nk_041127_added
   // SabadRow,  //zare_nk_041120_commented
   ////zare_nk_041120_added_st
   refForfather,
@@ -188,7 +189,7 @@ export function MiddleCountTedadSefr({
           <div
             className={`middleCount-${IdKala}`}
             style={{
-              height: "100",
+              height: "100%",
               flex: "1 1 auto",
               display: "flex",
               flexFlow: "column",
@@ -377,7 +378,7 @@ export function MiddleCountTedadSefr({
 
           <div
             className={`middleCount-${IdKala}`}
-            style={{ height: "100", display: "flex", flexFlow: "column" }}
+            style={{ height: "100%", display: "flex", flexFlow: "column" }}
           >
             <span
               id={`inp-${IdKala}`}
@@ -539,7 +540,7 @@ export function MiddleCountTedadSefr({
 
           <div
             className={`middleCount-${IdKala}`}
-            style={{ height: "100", display: "flex", flexFlow: "column" }}
+            style={{ height: "100%", display: "flex", flexFlow: "column" }}
           >
             <span
               id={`inp-${IdKala}`}
@@ -705,7 +706,8 @@ type SabadSatrProps = {
   openprodDetModal: (barcodeKala: string) => void;
 };
 
-export function SabadSatrComponent({
+// export function SabadSatrComponent({  //zare_nk_041127_commented
+function SabadSatrComponent({  //zare_nk_041127_added
   SabadRow,
   handlerForAddClick,
   handlerForRemClick,
@@ -853,7 +855,7 @@ export function SabadSatrComponent({
               id={`darsadTakhfifInsabad-${SabadRow.IdKala}`}
               className="darsadTakhfifInsabad rounded-pill"
               style={{
-                backgroundColor: "#dc3545",
+                backgroundColor: "#dc3545", 
                 width: "35px",
                 height: "20px",
                 flex: "0 0 auto",
@@ -1056,7 +1058,7 @@ function getCookie(name: any) {
 }
 
 export default function ShallowRoutingExample() {
-  console.log('ShallowRoutingExample called!!');
+  console.log('ShallowRoutingExample called09!!');
   const router = useRouter();
   const [ForCartContInProdDetVal, setForCartContInProdDetVal] =
     useState<ForCartContInProdDetValType>();

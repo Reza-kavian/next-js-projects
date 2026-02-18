@@ -23,28 +23,28 @@ async function getBootstrap() {
   return cachedBootstrap;
 }
 
-type MiddleCountTedadSefrType = {  
+type MiddleCountTedadSefrType = {
   refForfather: RefObject<string | null>;
   fromShowDetails: boolean;
   IdKala: number;
   idTag: string;
-  tedadInSabadOrDet: number; 
+  tedadInSabadOrDet: number;
   handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
   handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
   ForCartContentsDesignType: number;
   bishAzMaxTedadYaMojoodi: number | null;
 };
 
-export function MiddleCountTedadSefr({   
+export function MiddleCountTedadSefr({
   refForfather,
   fromShowDetails,
   IdKala,
   idTag,
-  tedadInSabadOrDet, 
+  tedadInSabadOrDet,
   handlerForAddClick,
   handlerForRemClick,
   ForCartContentsDesignType,
-  bishAzMaxTedadYaMojoodi, 
+  bishAzMaxTedadYaMojoodi,
 }: MiddleCountTedadSefrType) {
   console.log('ShallowRoutingExample called-MiddleCountTedadSefr-tedadInSabadOrDet: ' + tedadInSabadOrDet);
 
@@ -54,49 +54,51 @@ export function MiddleCountTedadSefr({
     //     ? "#DetailsInfoCont"
     //     : "#sabadItemsContInSafhe";
     // }
-    refForfather.current = fromShowDetails
-      ? "#DetailsInfoCont"
-      : "#cardcontainer2";
+    ////zare_nk_041127_commented_st
+    // refForfather.current = fromShowDetails
+    //   ? "#DetailsInfoCont"
+    //   : "#cardcontainer2";
 
-    if (ForCartContentsDesignType == 0) {
-      if (IdKala) {
-        const ForCartWidth = document.querySelector(
-          refForfather.current +
-          " #ForCart-" +
-          IdKala +
-          " .input-group"
-        );
-        if (ForCartWidth instanceof HTMLElement) {
-          ForCartWidth.style.width = "35px";
-        }
-      }
-    } else if (ForCartContentsDesignType == 1) {
-      if (IdKala) {
-        const ForCartWidth = document.querySelector(
-          refForfather.current +
-          " #ForCart-" +
-          IdKala +
-          " .input-group"
-        );
-        if (ForCartWidth instanceof HTMLElement) {
-          ForCartWidth.style.width = "auto";
-        }
-      }
-    } else if (ForCartContentsDesignType == 2) {
-      if (IdKala) {
-        const ForCartWidth = document.querySelector(
-          refForfather.current +
-          " #ForCart-" +
-          IdKala +
-          " .input-group"
-        );
-        if (ForCartWidth instanceof HTMLElement) {
-          ForCartWidth.style.width = "auto";
-        }
-      }
-    }
+    // if (ForCartContentsDesignType == 0) {
+    //   if (IdKala) {
+    //     const ForCartWidth = document.querySelector(
+    //       refForfather.current +
+    //       " #ForCart-" +
+    //       IdKala +
+    //       " .input-group"
+    //     );
+    //     if (ForCartWidth instanceof HTMLElement) {
+    //       ForCartWidth.style.width = "35px";
+    //     }
+    //   }
+    // } else if (ForCartContentsDesignType == 1) {
+    //   if (IdKala) {
+    //     const ForCartWidth = document.querySelector(
+    //       refForfather.current +
+    //       " #ForCart-" +
+    //       IdKala +
+    //       " .input-group"
+    //     );
+    //     if (ForCartWidth instanceof HTMLElement) {
+    //       ForCartWidth.style.width = "auto";
+    //     }
+    //   }
+    // } else if (ForCartContentsDesignType == 2) {
+    //   if (IdKala) {
+    //     const ForCartWidth = document.querySelector(
+    //       refForfather.current +
+    //       " #ForCart-" +
+    //       IdKala +
+    //       " .input-group"
+    //     );
+    //     if (ForCartWidth instanceof HTMLElement) {
+    //       ForCartWidth.style.width = "auto";
+    //     }
+    //   }
+    // }
+    ////zare_nk_041127_commented_end
   });
- 
+
   if (ForCartContentsDesignType == 0) {
     return (
       <div
@@ -116,6 +118,7 @@ export function MiddleCountTedadSefr({
             alignContent: "center",
             border: "1px solid red",
             overflow: "hidden",
+            width: 35,  //zare_nk_041127_added
           }}
           dir="ltr"
         >
@@ -175,7 +178,7 @@ export function MiddleCountTedadSefr({
           <div
             className={`middleCount-${IdKala}`}
             style={{
-              height: "100",
+              height: "100%",
               flex: "1 1 auto",
               display: "flex",
               flexFlow: "column",
@@ -303,6 +306,7 @@ export function MiddleCountTedadSefr({
             alignContent: "center",
             border: "1px solid red",
             overflow: "hidden",
+            width: 'auto',  //zare_nk_041127_added
           }}
           dir="ltr"
         >
@@ -364,7 +368,7 @@ export function MiddleCountTedadSefr({
 
           <div
             className={`middleCount-${IdKala}`}
-            style={{ height: "100", display: "flex", flexFlow: "column" }}
+            style={{ height: "100%", display: "flex", flexFlow: "column" }}
           >
             <span
               id={`inp-${IdKala}`}
@@ -466,6 +470,7 @@ export function MiddleCountTedadSefr({
             alignContent: "center",
             border: "1px solid red",
             overflow: "hidden",
+            width: 'auto',  //zare_nk_041127_added
           }}
           dir="ltr"
         >
@@ -527,7 +532,7 @@ export function MiddleCountTedadSefr({
 
           <div
             className={`middleCount-${IdKala}`}
-            style={{ height: "100", display: "flex", flexFlow: "column" }}
+            style={{ height: "100%", display: "flex", flexFlow: "column" }}
           >
             <span
               id={`inp-${IdKala}`}
@@ -610,10 +615,10 @@ export function MiddleCountTedadSefr({
         </div>
       </div>
     );
-  } 
+  }
 }
 
-type addRemParamType = {    
+type addRemParamType = {
   tedadInSabadOrDet: number;
   ZaribForoosh: number;
   IdKala: number;
@@ -651,7 +656,7 @@ type ForCartContInProdDetValType = {
   idTag: string;
 };
 
-type SabadRowType = {    
+type SabadRowType = {
   tedadInSabadOrDet: number;
   ZaribForoosh: number;
   IdKala: number;
@@ -678,8 +683,8 @@ type SabadTitrType = {
   [key: string]: any;
 };
 
-type SabadSatrProps = {     
-  SabadRow: ForCartContInProdDetValType  
+type SabadSatrProps = {
+  SabadRow: ForCartContInProdDetValType
   handlerForAddClick: (
     addRemParam: addRemParamType,
   ) => void;
@@ -1021,8 +1026,8 @@ export function SabadSatrComponent({
           {TozihatKala == null ? "" : TozihatKala}
         </h6>
       </div> */}
-      {/* zare_nk_041121_commented_end(felan chon fielde TozihatKala ra nagonjandim) */} 
-    </button> 
+      {/* zare_nk_041121_commented_end(felan chon fielde TozihatKala ra nagonjandim) */}
+    </button>
   );
 }
 
@@ -1063,7 +1068,7 @@ export default function ShallowRoutingExample() {
     setIsOpenedProdDetModal(true);
     setAddOrRemChanged(null);
   }
-   
+
   async function ShowDetails(barcodeKala: any) {
     const token = getCookie("token");
     if (token == null) {
@@ -1150,7 +1155,7 @@ export default function ShallowRoutingExample() {
           productNotExist.style.display = "none";
         }
         console.log("rr-parsedList: " + JSON.stringify(parsedList) + '-parsedList.length: ' + parsedList.length + '-parsedList[0].IdKala : ' + parsedList[0].IdKala);
- 
+
         var bishAzMaxTedadYaMojoodi = 0;
         if (parsedList[0].MaxTedad != null) {
           if (parsedList[0].MaxTedad <= parsedList[0].TedadDarSabad) {
@@ -1286,7 +1291,7 @@ export default function ShallowRoutingExample() {
       }
     };
   }, [isOpenedProdDetModal]);
-   
+
   useEffect(() => {
     if (isOpenedProdDetModal == true) {
       return;
@@ -1335,8 +1340,8 @@ export default function ShallowRoutingExample() {
           IsFavorite: -1,
           IdVitrin: -1,
         };
-        let ApiUrl = "https://api.tochikala.com/api/"; 
-        var urlSelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";   
+        let ApiUrl = "https://api.tochikala.com/api/";
+        var urlSelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
         const response = await fetch(urlSelectKalaShobeh, {   //zare_nk_041121_added(for shopToDiscount)
           method: "POST",
           headers: {
@@ -1358,7 +1363,7 @@ export default function ShallowRoutingExample() {
           }),
         });
         const data = await response.json();
-        if (response.ok) { 
+        if (response.ok) {
           var result = JSON.parse(data.data.list);
           console.log('result22: ' + JSON.stringify(result)); //zare_nk_041120_commented
           if (data.status != 0) {
@@ -1377,11 +1382,11 @@ export default function ShallowRoutingExample() {
           } else if (data.status == 0) {
             if (result.length == 0) {
               console.log('result.length == 0: ' + result.length)
-              setBisatr(true); 
+              setBisatr(true);
               return;
             }
-            setBisatr(false);          
-            refForfather.current = "#cardcontainer2";   
+            setBisatr(false);
+            refForfather.current = "#cardcontainer2";
 
             setSabadRows(() => {
               return (
@@ -1453,7 +1458,7 @@ export default function ShallowRoutingExample() {
     }
     tempFuncForAsync();
   }, [addOrRemChanged]);
- 
+
   async function addToCartInIndex(
     addRemParam: addRemParamType,
   ) {
@@ -1465,6 +1470,19 @@ export default function ShallowRoutingExample() {
     }
     const token = getCookie("token");
     if (token == null) {
+      ////zare_nk_041129_added_st
+      const bootstrap = await getBootstrap();
+      const mymodalForWarning = new bootstrap.Modal(
+        document.getElementById("mymodalForWarning")
+      );
+      mymodalForWarning.show();
+      const span = document.querySelector(
+        "#mymodalForWarning .errorInMymodalForWarning"
+      );
+      if (span instanceof HTMLElement) {
+        span.innerText = "لطفا ابتدا آنلاین شوید";
+      }
+      ////zare_nk_041129_added_end
       return;
     } else {
       console.log('041120-addToCartInIndex-else 1');
@@ -1591,6 +1609,19 @@ export default function ShallowRoutingExample() {
     }
     const token = getCookie("token");
     if (token == null) {
+      ////zare_nk_041129_added_st
+      const bootstrap = await getBootstrap();
+      const mymodalForWarning = new bootstrap.Modal(
+        document.getElementById("mymodalForWarning")
+      );
+      mymodalForWarning.show();
+      const span = document.querySelector(
+        "#mymodalForWarning .errorInMymodalForWarning"
+      );
+      if (span instanceof HTMLElement) {
+        span.innerText = "لطفا ابتدا آنلاین شوید";
+      }
+      ////zare_nk_041129_added_end
       return;
     } else {
       console.log('041116-001');
@@ -1622,15 +1653,17 @@ export default function ShallowRoutingExample() {
       if (response.ok) {
         var result = data;
         if (result.status == -1000) {
-          const inputGroup = document.querySelector(
-            ".ForCart-" + addRemParam.IdKala + " .input-group"
-          );
-          if (inputGroup) {
-            let parent = inputGroup.closest(".flxpedar2_new");
-            if (parent) {
-              parent.remove();
-            }
-          }
+          ////zare_nk_041129_commented_st
+          // const inputGroup = document.querySelector(
+          //   ".ForCart-" + addRemParam.IdKala + " .input-group"
+          // );
+          // if (inputGroup) {
+          //   let parent = inputGroup.closest(".flxpedar2_new");
+          //   if (parent) {
+          //     parent.remove();
+          //   }
+          // }
+          ////zare_nk_041129_commented_end
           var hisFather = null;
           let eventCurrentTargetTag;
           if (addRemParam.event) {
@@ -1722,30 +1755,35 @@ export default function ShallowRoutingExample() {
           }
 
           if (Tedad == 0) {
-            const inputGroup = document.querySelector(
-              ".ForCart-" + addRemParam.IdKala + " .input-group"
-            );
-            if (inputGroup) {
-              let parent = inputGroup.closest(".flxpedar2_new");
-              if (parent) {
-                if (JSON.parse(result.data.titr).length == 0) {
-                  parent.remove();
-                }
-              }
-            }
+            // alert('areeee');
+            ////zare_nk_041129_commented_st
+            // const inputGroup = document.querySelector(
+            //   ".ForCart-" + addRemParam.IdKala + " .input-group"
+            // );
+            // if (inputGroup) {
+            //   let parent = inputGroup.closest(".flxpedar2_new");
+            //   if (parent) {
+            //     if (JSON.parse(result.data.titr).length == 0) {
+            //       parent.remove();
+            //     }
+            //   }
+            // }
+            ////zare_nk_041129_commented_end
           }
           else if (Tedad == addRemParam.ZaribForoosh) {
-            let htmlTag;
-            if (addRemParam.event) {
-              htmlTag = addRemParam.event.target as HTMLElement;
-            }
+             ////zare_nk_041129_commented_st
+            // let htmlTag;
+            // if (addRemParam.event) {
+            //   htmlTag = addRemParam.event.target as HTMLElement;
+            // }
 
-            const wrapper = htmlTag?.closest(
-              ".flxpedar2_new"
-            ) as HTMLElement | null;
-            if (wrapper) {
-              wrapper.style.backgroundColor = "inherit";
-            }
+            // const wrapper = htmlTag?.closest(
+            //   ".flxpedar2_new"
+            // ) as HTMLElement | null;
+            // if (wrapper) {
+            //   wrapper.style.backgroundColor = "inherit";
+            // }
+            ////zare_nk_041129_commented_end
           }
         }
       } else {
@@ -2593,6 +2631,6 @@ export default function ShallowRoutingExample() {
           ))}
         </>
       )}
-    </div> 
+    </div>
   );
 }
