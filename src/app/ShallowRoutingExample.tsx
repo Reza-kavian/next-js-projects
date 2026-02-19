@@ -1085,30 +1085,34 @@ export default function ShallowRoutingExample() {
           }
 
           if (Tedad == 0) {
-            const inputGroup = document.querySelector(
-              ".ForCart-" + addRemParam.IdKala + " .input-group"
-            );
-            if (inputGroup) {
-              let parent = inputGroup.closest(".flxpedar2_new");
-              if (parent) {
-                if (JSON.parse(result.data.titr).length == 0) {
-                  parent.remove();
-                }
-              }
-            }
+            ////zare_nk_041130_commented_st
+            // const inputGroup = document.querySelector(
+            //   ".ForCart-" + addRemParam.IdKala + " .input-group"
+            // );
+            // if (inputGroup) {
+            //   let parent = inputGroup.closest(".flxpedar2_new");
+            //   if (parent) {
+            //     if (JSON.parse(result.data.titr).length == 0) {
+            //       parent.remove();
+            //     }
+            //   }
+            // }
+            ////zare_nk_041130_commented_end
           }
           else if (Tedad == addRemParam.ZaribForoosh) {
-            let htmlTag;
-            if (addRemParam.event) {
-              htmlTag = addRemParam.event.target as HTMLElement;
-            }
+            ////zare_nk_041130_commented_st
+            // let htmlTag;
+            // if (addRemParam.event) {
+            //   htmlTag = addRemParam.event.target as HTMLElement;
+            // }
 
-            const wrapper = htmlTag?.closest(
-              ".flxpedar2_new"
-            ) as HTMLElement | null;
-            if (wrapper) {
-              wrapper.style.backgroundColor = "inherit";
-            }
+            // const wrapper = htmlTag?.closest(
+            //   ".flxpedar2_new"
+            // ) as HTMLElement | null;
+            // if (wrapper) {
+            //   wrapper.style.backgroundColor = "inherit";
+            // }
+            ////zare_nk_041130_commented_end
           }
         }
       } else {
