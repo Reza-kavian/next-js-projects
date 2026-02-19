@@ -128,7 +128,7 @@ export default function ShallowRoutingExample() {
     if (token == null) {
       return;
     } else {
-      const token = getCookie("token");
+      // const token = getCookie("token");  //zare_nk_041130_commented(ezafi hast va token balatar tarif shod)
       // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
       // var urlSelectFaktorForooshSatr = ApiUrl + "Api_SelectFaktorForooshSatr";
       let ApiUrl = "https://api.tochikala.com/api/";
@@ -219,7 +219,7 @@ export default function ShallowRoutingExample() {
       if (token == null) {
         return;
       } else {
-        const token = getCookie("token");
+        // const token = getCookie("token"); //zare_nk_041130_commented(chon ezafiye va balatar tarif shode)
         // let ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
         // var urlSelectFaktorForooshTitr = ApiUrl + "Api_SelectFaktorForooshTitr";
         let ApiUrl = "https://api.tochikala.com/api/";
