@@ -1,129 +1,109 @@
 @font-face {
   font-family: "IRANSansWeb_UltraLight";
-  src: url("../../public/fonts/webfont/eot/IRANSansWeb_UltraLight.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont/woff2/IRANSansWeb_UltraLight.woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont/woff/IRANSansWeb_UltraLight.woff")
-      format("woff"),
-    url("../../public/fonts/webfont/ttf/IRANSansWeb_UltraLight.ttf");
+  src:
+    url("../../public/fonts/webfont/woff2/IRANSansWeb_UltraLight.woff2") format("woff2"),
+    url("../../public/fonts/webfont/woff/IRANSansWeb_UltraLight.woff") format("woff"),
+    url("../../public/fonts/webfont/ttf/IRANSansWeb_UltraLight.ttf"),
+    url("../../public/fonts/webfont/eot/IRANSansWeb_UltraLight.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_Light";
-  src: url("../../public/fonts/webfont/eot/IRANSansWeb_Light.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont/woff2/IRANSansWeb_Light.woff2")
-      format("woff2"),
+  src:
+    url("../../public/fonts/webfont/woff2/IRANSansWeb_Light.woff2") format("woff2"),
     url("../../public/fonts/webfont/woff/IRANSansWeb_Light.woff") format("woff"),
-    url("../../public/fonts/webfont/ttf/IRANSansWeb_Light.ttf");
+    url("../../public/fonts/webfont/ttf/IRANSansWeb_Light.ttf"),
+    url("../../public/fonts/webfont/eot/IRANSansWeb_Light.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_ms";
-  src: url("../../public/fonts/webfont/eot/IRANSansWeb.eot")
-      format("embedded-opentype"),
+  src:
     url("../../public/fonts/webfont/woff2/IRANSansWeb.woff2") format("woff2"),
     url("../../public/fonts/webfont/woff/IRANSansWeb.woff") format("woff"),
-    url("../../public/fonts/webfont/ttf/IRANSansWeb.ttf");
+    url("../../public/fonts/webfont/ttf/IRANSansWeb.ttf"),
+    url("../../public/fonts/webfont/eot/IRANSansWeb.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_Medium";
-  src: url("../../public/fonts/webfont/eot/IRANSansWeb_Medium.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont/woff2/IRANSansWeb_Medium.woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont/woff/IRANSansWeb_Medium.woff")
-      format("woff"),
-    url("../../public/fonts/webfont/ttf/IRANSansWeb_Medium.ttf");
+  src:
+    url("../../public/fonts/webfont/woff2/IRANSansWeb_Medium.woff2") format("woff2"),
+    url("../../public/fonts/webfont/woff/IRANSansWeb_Medium.woff") format("woff"),
+    url("../../public/fonts/webfont/ttf/IRANSansWeb_Medium.ttf"),
+    url("../../public/fonts/webfont/eot/IRANSansWeb_Medium.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_Bold";
-  src: url("../../public/fonts/webfont/eot/IRANSansWeb_Bold.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont/woff2/IRANSansWeb_Bold.woff2")
-      format("woff2"),
+  src:
+    url("../../public/fonts/webfont/woff2/IRANSansWeb_Bold.woff2") format("woff2"),
     url("../../public/fonts/webfont/woff/IRANSansWeb_Bold.woff") format("woff"),
-    url("../../public/fonts/webfont/ttf/IRANSansWeb_Bold.ttf");
+    url("../../public/fonts/webfont/ttf/IRANSansWeb_Bold.ttf"),
+    url("../../public/fonts/webfont/eot/IRANSansWeb_Bold.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_Black";
-  src: url("../../public/fonts/webfont/eot/IRANSansWeb_Black.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont/woff2/IRANSansWeb_Black.woff2")
-      format("woff2"),
+  src:
+    url("../../public/fonts/webfont/woff2/IRANSansWeb_Black.woff2") format("woff2"),
     url("../../public/fonts/webfont/woff/IRANSansWeb_Black.woff") format("woff"),
-    url("../../public/fonts/webfont/ttf/IRANSansWeb_Black.ttf");
+    url("../../public/fonts/webfont/ttf/IRANSansWeb_Black.ttf"),
+    url("../../public/fonts/webfont/eot/IRANSansWeb_Black.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_UltraLight(adad_fa)";
-  src: url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum)_UltraLight.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_UltraLight.woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_UltraLight.woff")
-      format("woff"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_UltraLight.ttf");
+  src:
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_UltraLight.woff2") format("woff2"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_UltraLight.woff") format("woff"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_UltraLight.ttf"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum)_UltraLight.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_Light(adad_fa)";
-  src: url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum)_Light.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_Light.woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_Light.woff")
-      format("woff"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_Light.ttf");
+  src:
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_Light.woff2") format("woff2"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_Light.woff") format("woff"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_Light.ttf"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum)_Light.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_ms(adad_fa)";
-  src: url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum).woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum).woff")
-      format("woff"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum).ttf");
+  src:
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum).woff2") format("woff2"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum).woff") format("woff"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum).ttf"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_Medium(adad_fa)";
-  src: url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSans(FaNum)_Medium.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_Medium.woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_Medium.woff")
-      format("woff"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_Medium.ttf");
+  src:
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_Medium.woff2") format("woff2"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_Medium.woff") format("woff"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_Medium.ttf"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSans(FaNum)_Medium.eot") format("embedded-opentype");
 }
 
 @font-face {
   font-family: "IRANSansWeb_Bold(adad_fa)";
-  src: url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum)_Bold.eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_Bold.woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_Bold.woff")
-      format("woff"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_Bold.ttf");
+  src:
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum)_Bold.woff2") format("woff2"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum)_Bold.woff") format("woff"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum)_Bold.ttf"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum)_Bold.eot") format("embedded-opentype");
 }
 
 @font-face {
   /*zare_nk_0421(esmi ke afzali baraye editorash dar admin gozasht 'IranSans' hast va man hamoon 'IRANSansWeb_ms(adad_fa)' ra kopi kardam.)*/
   font-family: "IranSans";
-  src: url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot")
-      format("embedded-opentype"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum).woff2")
-      format("woff2"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum).woff")
-      format("woff"),
-    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum).ttf");
+  src: url("../../public/fonts/webfont(farsi_adad_hast)/woff2/IRANSansWeb(FaNum).woff2") format("woff2"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/woff/IRANSansWeb(FaNum).woff") format("woff"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/ttf/IRANSansWeb(FaNum).ttf"),
+    url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot") format("embedded-opentype");
 }
 
 .titleStyle {
@@ -144,12 +124,12 @@
 
 body {
   font-family: "IRANSansWeb_ms(adad_fa)", "IRANSansWeb_Medium(adad_fa)",
-    "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin"; 
-/* zarezank_041122_nokteh(backgroud tochi) */
+    "IRANSansWeb_ms", "IRANSansWeb_Medium", "IranSans", "b nazanin", "IRNazanin";
+  /* zarezank_041122_nokteh(backgroud tochi) */
   /* background-color: #fcfcfc !important;  */
   /* zarezank_041122_nokteh(backgroud okala) */
-  background-color: #f6f6f6 !important; 
-  
+  background-color: #f6f6f6 !important;
+
 }
 
 .loginOutBtn {
@@ -168,7 +148,7 @@ body {
 
 /*zare_nk_040227_added_end*/
 
-.layoutHeader { 
+.layoutHeader {
   box-shadow: 0px 3px 2px -1px #d7d6d6;
   display: flex;
   flex-flow: row-reverse;
@@ -176,15 +156,15 @@ body {
   padding: 5px;
 
   /* zare_nk_040422_added_st */
-   z-index: 899;
-    background-color: white;
-    /* zare_nk_040422_added_end */
+  z-index: 899;
+  background-color: white;
+  /* zare_nk_040422_added_end */
 }
 
 .headerTitle {
   margin: 0px;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
 }
 
 #forlogoutBtnInHeader {
@@ -263,15 +243,15 @@ button {
   stroke: red;
 }
 
-#ulidfooter > .active {
+#ulidfooter>.active {
   border-bottom: 2px solid red;
   color: red;
 }
 
-#ulidfooter > .active > a.nav-link {
+#ulidfooter>.active>a.nav-link {
   color: red;
 }
- 
+
 .adadEn {
   font-family: IRANSansWeb_Medium, "b nazanin", IRNazanin;
 }
@@ -300,7 +280,7 @@ button {
   border: none;
 }
 
-#nav3 li:hover > ul.dropdown-menu {
+#nav3 li:hover>ul.dropdown-menu {
   display: block;
 }
 
@@ -352,13 +332,11 @@ button {
   direction: ltr;
 }
 
-#MenoKeshoei #listGroupAccordionInKesho2 > div.list-group-itemm {
+#MenoKeshoei #listGroupAccordionInKesho2>div.list-group-itemm {
   direction: rtl;
 }
 
-#collapsibleNavbar2
-  #listGroupAccordionIncollapsibleNavbar2
-  > div.list-group-itemm {
+#collapsibleNavbar2 #listGroupAccordionIncollapsibleNavbar2>div.list-group-itemm {
   direction: rtl;
 }
 
@@ -502,7 +480,7 @@ button {
   opacity: 0.8;
 }
 
-li#proinf > #dropdownflex {
+li#proinf>#dropdownflex {
   display: none;
   background-color: red;
   width: 100%;
@@ -510,7 +488,7 @@ li#proinf > #dropdownflex {
   right: 0px;
 }
 
-#nav2 li:hover > #dropdownflex {
+#nav2 li:hover>#dropdownflex {
   display: block;
   background-color: red;
   border: 3px dashed orange;
@@ -651,7 +629,7 @@ li#proinf > #dropdownflex {
     flex: 1 0 60%;
   }
 
-  #cardcontainerForSabad .flxpedar2 > div#sath1ImgCont2 {
+  #cardcontainerForSabad .flxpedar2>div#sath1ImgCont2 {
     flex: 0 1 40%;
   }
 
@@ -682,7 +660,7 @@ li#proinf > #dropdownflex {
     display: none;
   }
 
-  #cardcontainerForSabad .flxpedar2 > div#dflx22 {
+  #cardcontainerForSabad .flxpedar2>div#dflx22 {
     flex: 1 0 56%;
     width: 0px;
     /*gozashtam ke teke mohtava age kheyli bozorg bood arz div bozorg nashe kheili ziad*/
@@ -755,7 +733,7 @@ li#proinf > #dropdownflex {
     flex: 1 0 60%;
   }
 
-  #cardcontainerForSabad_new .flxpedar2_new > div#sath1ImgCont2 {
+  #cardcontainerForSabad_new .flxpedar2_new>div#sath1ImgCont2 {
     flex: 0 1 40%;
   }
 
@@ -786,7 +764,7 @@ li#proinf > #dropdownflex {
     display: flex;
   }
 
-  #cardcontainerForSabad .flxpedar2 > div#dflx22 {
+  #cardcontainerForSabad .flxpedar2>div#dflx22 {
     flex: 1 0 56%;
     width: 0px;
     /*gozashtam ke teke mohtava age kheyli bozorg bood arz div bozorg nashe kheili ziad*/
@@ -833,6 +811,7 @@ li#proinf > #dropdownflex {
 }
 
 @media screen and (max-width: 576px) {
+
   #swiperSearched .swiper-wrapper .swiper-slide,
   #swiperLastSearched .swiper-wrapper .swiper-slide,
   #swiperMoreSearched .swiper-wrapper .swiper-slide {
@@ -852,11 +831,11 @@ li#proinf > #dropdownflex {
     flex: 1 0 60%;
   }
 
-  #cardcontainerForSabad .flxpedar2 > div#sath1ImgCont2 {
+  #cardcontainerForSabad .flxpedar2>div#sath1ImgCont2 {
     flex: 0 1 40%;
   }
 
-  #cardcontainerForSabad .flxpedar2 > div#dflx22 {
+  #cardcontainerForSabad .flxpedar2>div#dflx22 {
     flex: 1 0 56%;
     width: 0px;
     /*gozashtam ke teke mohtava age kheyli bozorg bood arz div bozorg nashe kheili ziad*/
@@ -1041,7 +1020,7 @@ li#proinf > #dropdownflex {
     justify-content: start;
   }
 
-  #SocialNetworksCont > div {
+  #SocialNetworksCont>div {
     margin-left: 25px;
   }
 
@@ -1057,7 +1036,7 @@ li#proinf > #dropdownflex {
     justify-content: start;
   }
 
-  #TrostLogoContCont > div {
+  #TrostLogoContCont>div {
     width: 60px;
     height: 60px;
   }
@@ -1250,7 +1229,7 @@ li#proinf > #dropdownflex {
     justify-content: space-between;
   }
 
-  #TrostLogoContCont > div {
+  #TrostLogoContCont>div {
     width: 70px;
     height: 70px;
   }
@@ -1261,7 +1240,7 @@ li#proinf > #dropdownflex {
 }
 
 @media screen and (max-width: 768px) {
-  
+
 
   .imgAndTextInSubprograms {
     flex-flow: column;
@@ -1371,8 +1350,7 @@ html::-webkit-scrollbar,
 #collapsibleNavbar2 #listGroupAccordionIncollapsibleNavbar2::-webkit-scrollbar,
 #collapseExample2::-webkit-scrollbar,
 .thinScroll::-webkit-scrollbar,
-#listGroupAccordionInKeshoOfferInMobile
-  .scrolGirInBottomSlide::-webkit-scrollbar {
+#listGroupAccordionInKeshoOfferInMobile .scrolGirInBottomSlide::-webkit-scrollbar {
   /*no Firefox*/
   /*baraye paszamineh*/
   width: 4px;
@@ -1382,12 +1360,10 @@ html::-webkit-scrollbar,
 /* Track */
 html::-webkit-scrollbar-track,
 #MenoKeshoei #listGroupAccordionInKesho2::-webkit-scrollbar-track,
-#collapsibleNavbar2
-  #listGroupAccordionIncollapsibleNavbar2::-webkit-scrollbar-track,
+#collapsibleNavbar2 #listGroupAccordionIncollapsibleNavbar2::-webkit-scrollbar-track,
 #collapseExample2::-webkit-scrollbar-track,
 .thinScroll::-webkit-scrollbar-track,
-#listGroupAccordionInKeshoOfferInMobile
-  .scrolGirInBottomSlide::-webkit-scrollbar-track {
+#listGroupAccordionInKeshoOfferInMobile .scrolGirInBottomSlide::-webkit-scrollbar-track {
   /*no Firefox*/
   /*baraye paszamineh*/
   border-radius: 0px;
@@ -1397,12 +1373,10 @@ html::-webkit-scrollbar-track,
 /* Handle */
 html::-webkit-scrollbar-thumb,
 #MenoKeshoei #listGroupAccordionInKesho2::-webkit-scrollbar-thumb,
-#collapsibleNavbar2
-  #listGroupAccordionIncollapsibleNavbar2::-webkit-scrollbar-thumb,
+#collapsibleNavbar2 #listGroupAccordionIncollapsibleNavbar2::-webkit-scrollbar-thumb,
 #collapseExample2::-webkit-scrollbar-thumb,
 .thinScroll::-webkit-scrollbar-thumb,
-#listGroupAccordionInKeshoOfferInMobile
-  .scrolGirInBottomSlide::-webkit-scrollbar-thumb {
+#listGroupAccordionInKeshoOfferInMobile .scrolGirInBottomSlide::-webkit-scrollbar-thumb {
   /*no Firefox*/
   /*baraye khode scroll*/
   background: #8e8e8e;
@@ -1411,25 +1385,23 @@ html::-webkit-scrollbar-thumb,
 
 html::-webkit-scrollbar-thumb:hover,
 #MenoKeshoei #listGroupAccordionInKesho2::-webkit-scrollbar-thumb:hover,
-#collapsibleNavbar2
-  #listGroupAccordionIncollapsibleNavbar2::-webkit-scrollbar-thumb:hover,
+#collapsibleNavbar2 #listGroupAccordionIncollapsibleNavbar2::-webkit-scrollbar-thumb:hover,
 #collapseExample2::-webkit-scrollbar-thumb,
 .thinScroll::-webkit-scrollbar-thumb:hover,
-#listGroupAccordionInKeshoOfferInMobile
-  .scrolGirInBottomSlide::-webkit-scrollbar-thumb:hover {
+#listGroupAccordionInKeshoOfferInMobile .scrolGirInBottomSlide::-webkit-scrollbar-thumb:hover {
   /*no Firefox*/
   /*baraye khode scroll*/
   background: #555555;
   box-shadow: 0px 0px 3px 1px #555555 inset;
 }
 
-.sth2 > a.collapsed > .dp0,
-.sth3 > a.collapsed > .dp0,
-.sth4 > a.collapsed > .dp0 {
+.sth2>a.collapsed>.dp0,
+.sth3>a.collapsed>.dp0,
+.sth4>a.collapsed>.dp0 {
   border-bottom: none;
 }
 
-.sth2 > a:before {
+.sth2>a:before {
   content: "\f107";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -1437,11 +1409,11 @@ html::-webkit-scrollbar-thumb:hover,
   margin-left: 5px;
 }
 
-.sth2 > a.collapsed:before {
+.sth2>a.collapsed:before {
   content: "\f104";
 }
 
-.sth3 > a:before {
+.sth3>a:before {
   content: "\f107";
   font-family: "Font Awesome 5 Free";
   font-weight: 800;
@@ -1449,11 +1421,11 @@ html::-webkit-scrollbar-thumb:hover,
   margin-left: 5px;
 }
 
-.sth3 > a.collapsed:before {
+.sth3>a.collapsed:before {
   content: "\f104";
 }
 
-.sth4 > a:before {
+.sth4>a:before {
   content: "\f107";
   font-family: "Font Awesome 5 Free";
   font-weight: 700;
@@ -1461,7 +1433,7 @@ html::-webkit-scrollbar-thumb:hover,
   margin-left: 5px;
 }
 
-.sth4 > a.collapsed:before {
+.sth4>a.collapsed:before {
   content: "\f104";
 }
 
@@ -1574,12 +1546,12 @@ html::-webkit-scrollbar-thumb:hover,
 }
 
 /* Modify the slider's background color to green once the checkbox has been selected. */
-input:checked + .slider {
+input:checked+.slider {
   background-color: #ffd2d7;
 }
 
 /* When the checkbox is checked, shift the white ball towards the right within the slider. */
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(17px);
   background-color: red;
 }
