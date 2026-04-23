@@ -1,4 +1,4 @@
-////zare_nk_041124_okk
+////zare_nk_050122_okk
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -268,7 +268,7 @@ function SecondPageComponent({
         const fakeEvent = {
           target: input,
         } as React.ChangeEvent<HTMLInputElement>;
-        smsTxtChanged(fakeEvent);
+        smsTxtChanged(fakeEvent); 
       }
       setTimer(40000);
       setIsDisabledResendCode(true);
@@ -398,7 +398,7 @@ export default function Toolbar() {
   const [backBtnCliked, setBackBtnCliked] = useState(false);
   const [mobileCheckBtn, setMobileCheckBtn] = useState(false);
   let timerStr = null;
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined") {  //zare_nk_050119_tahlilshe
     timerStr = localStorage.getItem("timer");
   }
   const initialTimer = timerStr !== null ? JSON.parse(timerStr) : 40000;
@@ -544,18 +544,24 @@ export default function Toolbar() {
       // },"errors":[]}
       if (data.status == 0) {
         let token = data.data.token;
-        ////zare_nk_040603_added_st 
-        // // const secretKey = Buffer.from(
-        // //   process.env.JWT_SECRET_BASE64!,
-        // //   "base64"
-        // // ).toString("utf-8");
-        // // const decoded = jwt.verify(token, secretKey);
+        ////zare_nk_050119_added_st(rahe1_ke dar samte client javab nemideh va bayad comment she!)
+        //  console.log("040530-03-process.env.JWT_SECRET_BASE64: " + process.env.JWT_SECRET_BASE64);  //zare_nk_050119_okteh(in undefined mideh!)
+        //   const secretKey = Buffer.from(  //zare_nk_050122_nokteh(in error mideh!-chon process.env.JWT_SECRET_BASE64 undefined hast, darvagheh dar samte client
+        //   //  process.env.JWT_SECRET_BASE64 ghabele dastresi nist)
+        //     process.env.JWT_SECRET_BASE64!,
+        //     "base64"
+        //   ).toString("utf-8");
+        //   const decoded = jwt.verify(token, secretKey);
+        //  console.log("040530-03-token01: " + JSON.stringify(decoded));
+        ////zare_nk_050119_added_end(rahe1_ke dar samte client javab nemideh va bayad comment she!)
+        ////zare_nk_050119_added_st(rahe2_ke javab mideh)  //zare_nk_050122_nokteh(osooli boodanesh barrasi she,chon secretKey ra barrasi nakardim)
         // const decoded = jwt.decode(token) as JwtPayload | null;
         // console.log("040530-03-token: " + JSON.stringify(decoded));
-        ////zare_nk_040603_added_end        
+        ////040530-03-token: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1775640295,"exp":1778232295,"iat":1775640295}
+        ////zare_nk_050119_added_end(rahe2_ke javab mideh)        
 
-        try {
-          ////zare_nk_041114_added_st(and commented. chon methode HttpContext.SignInAsync rp anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
+        try { ////zare_nk_050119_added(rahe3_ke api be /api/auth/verifyToken hast va taktike mane,harchand dastoorate tooye api verifyToken ra age dar haminja yani samte client tebghe rahe2 benevisim ham javab dad)
+          ////zare_nk_041114_added_st(and commented. chon methode HttpContext.SignInAsync ra anjam mideh baraye online kardan be sabke HttpContext marboot be .net core c# 
           // vali man ino nemikham chon hamin cookie token sakhtan baram kafiye be onvane amale online kardan va amale estelame online boodane karbar. dar zemn ma dar view haye c#
           // ke nistim ba hamin emkanate HttpContext mesle(HttpContextAccessor.HttpContext!.User.Identity!.IsAuthenticated)baraye estelame online boodan estefadeh konim!
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
@@ -586,7 +592,7 @@ export default function Toolbar() {
             ////zare_nk_040925-decodedToken: {"IdUser":"10006","Mobile":"9351091287","FullName":"رضا کاویان","Type":"User","nbf":1770193087,"exp":1772785087,"iat":1770193087}  //zare_nk_041115_nokteh(from api tochikala)
             ////zare_nk_040925-decodedToken: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287","NameMoshtari":"","nbf":1750740741,"exp":1751345541,"iat":1750740741}  //zare_nk_041115_nokteh(from api testotmapi)
 
-            // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString(); // 3 ساعت بعد //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam)   //zare_nk_040305_updated(dasti ra az 3 be 30 tagheir dadam)
+            // const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString(); //zare_nk_040219-nokteh(zamane monghazi ra khodam taein kardam)   //zare_nk_040305_updated(dasti ra az 3 be 30 tagheir dadam)
             const expires = new Date(Date.now() + 60 * 60 * 1000).toUTCString();
             //  const expires = data.decoded.exp;//zare_nk_040219-nokteh(zamane monghazi ra az dadeye parsafar taein kardam)
             document.cookie = `token=${token}; path=/; expires=${expires}; secure; samesite=None`;
@@ -603,6 +609,8 @@ export default function Toolbar() {
             setError("متاسفانه خطایی رخ داده است313:" + (data?.errorMessage ? ": " + data.errorMessage : ""));  //zare_nk_041107_added_tahlilshe(niaz bood??!!)
           }
         } catch (error) {
+          ////zare_nk_050122_nokteh(shayad inja aslan manteghi nabashe token ro hazf konim va taraf offline be she,chon shayad shabakeh ghat shodeh va api amal nakardeh,vali
+          // vaghean online has karbar va net vasl she hamin api javab bedeh se min degeh!!)
           document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
           document.cookie = `google_Invalid_credentials=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
           console.error("zare_nk_040925-❌ خطااااااااااااااااااای JWT:", error);
@@ -764,16 +772,17 @@ export default function Toolbar() {
     }
   }
 
-  function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) { 
+  function smsTxtChanged(event: React.ChangeEvent<HTMLInputElement>) {
     setError("");
     var input = null;
     var vall = null;
-    if (event.target != undefined) {
+    if (event.target != undefined) { 
       //zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote karbar biaim dar methode smsTxtChanged)
       input = event.target;
       vall = input.value;
-    } else {
-      //zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote dokmeye mobileCheckBtn biaim dar methode smsTxtChanged)
+    } else { 
+      ////zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote dokmeye mobileCheckBtn biaim dar methode smsTxtChanged)
+      ////zare_nk_050119_nokteh(albateh ba estefadeh az tarfande evente fake hamvare be if balaei mirim yani event.target khahim dasht)
       input = refForSmsInput.current[0];
       vall = input?.value;
     }

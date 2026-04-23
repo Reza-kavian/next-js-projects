@@ -1,4 +1,5 @@
-"use client";  //zare_nk_041114_okk
+////zare_nk_050201_okk
+"use client";  
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
@@ -25,7 +26,7 @@ async function getBootstrap() {
 
 import { RefObject } from "react";
 import { MouseEvent } from "react";
- 
+
 type MiddleCountTedadSefrType = {
   refForfather: RefObject<string | null>;
   fromShowDetails: boolean;
@@ -52,7 +53,7 @@ export function MiddleCountTedadSefr({
 
   useEffect(() => {
     ////zare_nk_041127_commneted_st
-     console.log('refForfather.current iss: ' + refForfather.current);
+    console.log('refForfather.current iss: ' + refForfather.current);
     // refForfather.current = fromShowDetails
     //   ? "#DetailsInfoCont"
     //   : "#sabadItemsContInSafhe";
@@ -432,7 +433,14 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                    // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                    // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                    // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
                   className="plussMinus"
                   disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
@@ -595,7 +603,14 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                    // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                    // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                    // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
                   className="plussMinus"
                   disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
@@ -626,7 +641,6 @@ function getCookie(name: any) {
   return null; // اگر کوکی پیدا نشد
 }
 
- 
 type addRemParamType = {
   tedadInSabadOrDet: number;
   ZaribForoosh: number;
@@ -665,13 +679,15 @@ type ForCartContInProdDetValType = {
   idTag: string;
 };
 
+////zare_nk_050126_nokteh_st(SabadRowType inja karbordi nadare va beonvane olgu estefadeh shodeh)
 type SabadRowType = {
   IdKala: number;
   NameKala: string;
   DarsadTakhfif: string;
   [key: string]: any; //zare_nk_041021_nokteh(yani az IdKala motmaen hastim vali fildhaye digare db ra parsa ina tagheir dadan dar in peroujeh shayad aslan be man nagan va 
   // timi kar nakonim, pas [key: string]: any; gozashtam ke kolli hast)
-}; 
+};
+////zare_nk_050126_nokteh_end(SabadRowType inja karbordi nadare va beonvane olgu estefadeh shodeh)
 
 export default function ShallowRoutingExample() {
   console.log('041123-ShallowRoutingExample called!!');
@@ -679,9 +695,10 @@ export default function ShallowRoutingExample() {
 
   const [ForCartContInProdDetVal, setForCartContInProdDetVal] =
     useState<ForCartContInProdDetValType>();
+    
   const refForfather = useRef<string | null>(null);
 
-  var modal: bootstrap.Modal;  
+  var modal: bootstrap.Modal;
   async function openprodDetModal(barcodeKala: string) {
     const bootstrap = await getBootstrap();
     modal = new bootstrap.Modal(document.getElementById("prodDetModal"));
@@ -836,7 +853,7 @@ export default function ShallowRoutingExample() {
           BarcodeKala: addRemParam.BarcodeKala,
           Tedad: TedadOut,
           IdKala: addRemParam.IdKala,
-          IdShobeh: 7,
+          IdShobeh: 6,
           IdAddress: 23990
         }),
       });
@@ -858,7 +875,7 @@ export default function ShallowRoutingExample() {
             span.innerText = result.errors[0];
           }
         } else if (result.status == 0) {
-          let satrInoInResult = JSON.parse(result.data.satr)[0];  
+          let satrInoInResult = JSON.parse(result.data.satr)[0];
           let Tedad = satrInoInResult.Tedad;
           console.log('041124-result.data.satr[0]Tedad: ' + Tedad);
           var bishAzMaxTedadYaMojoodi = 0;
@@ -973,7 +990,7 @@ export default function ShallowRoutingExample() {
           BarcodeKala: addRemParam.BarcodeKala,
           Tedad: TedadOut,
           IdKala: addRemParam.IdKala,
-          IdShobeh: 7,
+          IdShobeh: 6,
           IdAddress: 23990
         }),
       });
@@ -1150,7 +1167,7 @@ export default function ShallowRoutingExample() {
       addRemParam
     );
   };
- 
+
   async function ShowDetails(barcodeKala: any) {
     const token = getCookie("token");
     if (token == null) {
@@ -1178,7 +1195,7 @@ export default function ShallowRoutingExample() {
         },
         body: JSON.stringify({
           BarcodeKala: barcodeKala,
-          IdShobeh: 7,
+          IdShobeh: 6,
           // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
           //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)        
         }),
@@ -1189,7 +1206,7 @@ export default function ShallowRoutingExample() {
         var result = data;
         if (result.status != 0) {
           const bootstrap = await getBootstrap();
-          modal?.hide();  
+          modal?.hide();
           const mymodalForWarning = new bootstrap.Modal(
             document.getElementById("mymodalForWarning")
           );
@@ -1203,7 +1220,7 @@ export default function ShallowRoutingExample() {
         } else if (result.status == 0) {
           if (result.data.list == undefined) {
             const bootstrap = await getBootstrap();
-            modal?.hide();  
+            modal?.hide();
             const mymodalForWarning = new bootstrap.Modal(
               document.getElementById("mymodalForWarning")
             );
@@ -1272,6 +1289,7 @@ export default function ShallowRoutingExample() {
               "src",
               `https://img.tochikala.com/Product/${parsedList[0].IdKala}.webp`
             );
+            CurrentImg.setAttribute("onerror", "this.src='https://img.tochikala.com/Logo/tochi.png'; this.style.backgroundColor = 'white'"); //zare_nk_041213_added
           }
           const nameKalaInDetailsInfoCont = document.getElementById(
             "nameKalaInDetailsInfoCont"
@@ -1396,8 +1414,8 @@ export default function ShallowRoutingExample() {
         }
       } else {
         if (response.status == 401) {
-          modal?.hide();  
-          const bootstrap = await getBootstrap(); 
+          modal?.hide();
+          const bootstrap = await getBootstrap();
           const mymodalForWarning = new bootstrap.Modal(
             document.getElementById("mymodalForWarning")
           );
@@ -1413,7 +1431,7 @@ export default function ShallowRoutingExample() {
     } catch (error) {
       alert('catch: ' + error + 'modal: ' + modal)
       const bootstrap = await getBootstrap();
-      modal?.hide();  
+      modal?.hide();
       const mymodalForWarning = new bootstrap.Modal(
         document.getElementById("mymodalForWarning")
       );
@@ -1423,7 +1441,7 @@ export default function ShallowRoutingExample() {
       );
       if (span instanceof HTMLElement) {
         if (error instanceof Error) {
-          span.innerText = error.message 
+          span.innerText = error.message
           if (error.message === "Failed to fetch") {
             span.innerText = "❌ اتصال اینترنت برقرار نیست یا سرور در دسترس نمی‌باشد";
           }
@@ -2415,6 +2433,7 @@ export default function ShallowRoutingExample() {
       <div style={{ display: "flex", flexFlow: "column", direction: "rtl" }}>
         <div
           id="SubprogramsCont"
+          className="SubprogramsCont"
           style={{
             display: "flex",
             flexFlow: "row",
@@ -2438,13 +2457,12 @@ export default function ShallowRoutingExample() {
                 display: "flex",
                 flexFlow: "row",
                 justifyContent: "space-between",
-                padding: "15px",
+                // padding: "15px",
+                padding: "10px",
                 outline: "none",
-                alignItems: "center",
-                // border: "1px solid #E7E7E7",
-                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // alignItems: "center", 
                 border: "1px solid #a9a9a9",
-                boxShadow: "#5e5e5e 0px 0px 3px 0px",
+                boxShadow: "#5e5e5e 0px 0px 2px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2452,14 +2470,17 @@ export default function ShallowRoutingExample() {
             >
               <div
                 className="imgAndTextInSubprograms"
-                style={{ display: "flex" }}
+                style={{
+                  display: "flex",
+                  flex: '1 1 auto',
+                }}
               >
                 <div
                   className="roundedPillsCont"
                   style={{
                     display: "flex",
-                    flexFlow: "column",
-                    width: "fit-content",
+                    flexFlow: "row",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2467,24 +2488,28 @@ export default function ShallowRoutingExample() {
                     style={{
                       display: "flex",
                       flexFlow: "row",
+                      justifyContent: 'center',
                       border: "1px solid #E7E7E7",
                       padding: "10px",
                       borderRadius: "50%",
+                      overflow: 'hidden',
+                      minHeight: 85.6,
                     }}
                   >
                     <img
-                      style={{ width: "64px" }}
+                      style={{ backgroundColor: "#efefef", width: "64px" }}
                       src="/images/Subprograms/superMarket.png"
                       alt="هایپر&zwnj;کرفو"
                     />
                   </div>
                 </div>
                 <div
+                  className="subSysTextCont"
                   style={{
                     display: "flex",
                     flexFlow: "column",
-                    justifyContent: "space-around",
-                    width: "fit-content",
+                    justifyContent: "center",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2492,16 +2517,20 @@ export default function ShallowRoutingExample() {
                       flex: "0 0 auto",
                       display: "flex",
                       flexFlow: "row",
+                      marginBottom: 7,
                     }}
                   >
-                    <span className="titleStyle">سبد خرید</span>
+                    <span className="titleStyle"
+                      style={{ color: '#4b4949', fontFamily: 'IRANSansWeb_Bold(adad_fa)', }}
+                    >سبد خرید</span>
                   </div>
                   <div
-                    style={{ flexFlow: "row", fontSize: "75%" }}
-                    className="decsInSubprograms"
+                    style={{ flexFlow: "row" }}
+                  // className="decsInSubprograms"
                   >
                     <div style={{ display: "flex", flexFlow: "row" }}>
-                      <span className="valueStyle">
+                      <span className="valueStyle"
+                        style={{ color: '#4b4949', fontSize: 14, }}>
                         امکان مشاهده و ویرایش سبد خرید
                       </span>
                     </div>
@@ -2510,7 +2539,7 @@ export default function ShallowRoutingExample() {
               </div>
               <div
                 className="leftArrowInSubprograms"
-                style={{ flexFlow: "row" }}
+                style={{ display: 'flex', flexFlow: "row", alignItems: 'center', }}
               >
                 <img
                   style={{ width: "20px" }}
@@ -2538,13 +2567,12 @@ export default function ShallowRoutingExample() {
                 display: "flex",
                 flexFlow: "row",
                 justifyContent: "space-between",
-                padding: "15px",
+                // padding: "15px",
+                padding: "10px",
                 outline: "none",
-                alignItems: "center",
-                // border: "1px solid #E7E7E7",
-                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // alignItems: "center",
                 border: "1px solid #a9a9a9",
-                boxShadow: "#5e5e5e 0px 0px 3px 0px",
+                boxShadow: "#5e5e5e 0px 0px 2px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2552,14 +2580,14 @@ export default function ShallowRoutingExample() {
             >
               <div
                 className="imgAndTextInSubprograms"
-                style={{ display: "flex" }}
+                style={{ display: "flex", flex: '1 1 auto', }}
               >
                 <div
                   className="roundedPillsCont"
                   style={{
                     display: "flex",
-                    flexFlow: "column",
-                    width: "fit-content",
+                    flexFlow: "row",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2567,24 +2595,28 @@ export default function ShallowRoutingExample() {
                     style={{
                       display: "flex",
                       flexFlow: "row",
+                      justifyContent: 'center',
                       border: "1px solid #E7E7E7",
                       padding: "10px",
                       borderRadius: "50%",
+                      overflow: 'hidden',
+                      minHeight: 85.6,
                     }}
                   >
                     <img
-                      style={{ width: "64px" }}
+                      style={{ backgroundColor: "#efefef", width: "64px" }}
                       src="/images/Subprograms/checklist.png"
                       alt="هایپر&zwnj;کرفو"
                     />
                   </div>
                 </div>
                 <div
+                  className="subSysTextCont"
                   style={{
                     display: "flex",
                     flexFlow: "column",
-                    justifyContent: "space-around",
-                    width: "fit-content",
+                    justifyContent: "center",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2592,16 +2624,20 @@ export default function ShallowRoutingExample() {
                       flex: "0 0 auto",
                       display: "flex",
                       flexFlow: "row",
+                      marginBottom: 7,
                     }}
                   >
-                    <span className="titleStyle">مشاهده قیمت ها</span>
+                    <span className="titleStyle"
+                      style={{ color: '#4b4949', fontFamily: 'IRANSansWeb_Bold(adad_fa)', }}
+                    >مشاهده قیمت ها</span>
                   </div>
                   <div
-                    style={{ flexFlow: "row", fontSize: "75%" }}
-                    className="decsInSubprograms"
+                    style={{ flexFlow: "row" }}
+                  // className="decsInSubprograms"
                   >
                     <div style={{ display: "flex", flexFlow: "row" }}>
-                      <span className="valueStyle">
+                      <span className="valueStyle"
+                        style={{ color: '#4b4949', fontSize: 14, }}>
                         مشاهده اطلاعات کالا با اسکن بارکد
                       </span>
                     </div>
@@ -2610,7 +2646,7 @@ export default function ShallowRoutingExample() {
               </div>
               <div
                 className="leftArrowInSubprograms"
-                style={{ flexFlow: "row" }}
+                style={{ display: 'flex', flexFlow: "row", alignItems: 'center', }}
               >
                 <img
                   style={{ width: "20px" }}
@@ -2637,13 +2673,12 @@ export default function ShallowRoutingExample() {
                 display: "flex",
                 flexFlow: "row",
                 justifyContent: "space-between",
-                padding: "15px",
+                // padding: "15px",
+                padding: "10px",
                 outline: "none",
-                alignItems: "center",
-                // border: "1px solid #E7E7E7",
-                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // alignItems: "center",
                 border: "1px solid #a9a9a9",
-                boxShadow: "#5e5e5e 0px 0px 3px 0px",
+                boxShadow: "#5e5e5e 0px 0px 2px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2651,14 +2686,14 @@ export default function ShallowRoutingExample() {
             >
               <div
                 className="imgAndTextInSubprograms"
-                style={{ display: "flex" }}
+                style={{ display: "flex", flex: '1 1 auto', }}
               >
                 <div
                   className="roundedPillsCont"
                   style={{
                     display: "flex",
-                    flexFlow: "column",
-                    width: "fit-content",
+                    flexFlow: "row",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2666,13 +2701,16 @@ export default function ShallowRoutingExample() {
                     style={{
                       display: "flex",
                       flexFlow: "row",
+                      justifyContent: 'center',
                       border: "1px solid #E7E7E7",
                       padding: "10px",
                       borderRadius: "50%",
+                      overflow: 'hidden',
+                      minHeight: 85.6,
                     }}
                   >
                     <img
-                      style={{ width: "64px" }}
+                      style={{ backgroundColor: "#efefef", width: "64px" }}
                       src="/images/Subprograms/order-icon.svg"
                       alt="هایپر&zwnj;کرفو"
                     />
@@ -2680,11 +2718,12 @@ export default function ShallowRoutingExample() {
                 </div>
 
                 <div
+                  className="subSysTextCont"
                   style={{
                     display: "flex",
                     flexFlow: "column",
-                    justifyContent: "space-around",
-                    width: "fit-content",
+                    justifyContent: "center",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2692,16 +2731,20 @@ export default function ShallowRoutingExample() {
                       flex: "0 0 auto",
                       display: "flex",
                       flexFlow: "row",
+                      marginBottom: 7,
                     }}
                   >
-                    <span className="titleStyle">تاریخچه سفارشات</span>
+                    <span className="titleStyle"
+                      style={{ color: '#4b4949', fontFamily: 'IRANSansWeb_Bold(adad_fa)', }}
+                    >تاریخچه سفارشات</span>
                   </div>
                   <div
-                    style={{ flexFlow: "row", fontSize: "75%" }}
-                    className="decsInSubprograms"
+                    style={{ flexFlow: "row" }}
+                  // className="decsInSubprograms"
                   >
                     <div style={{ display: "flex", flexFlow: "row" }}>
-                      <span className="valueStyle">
+                      <span className="valueStyle"
+                        style={{ color: '#4b4949', fontSize: 14, }}>
                         گزارش جزئیات سفارشات قبلی
                       </span>
                     </div>
@@ -2710,7 +2753,7 @@ export default function ShallowRoutingExample() {
               </div>
               <div
                 className="leftArrowInSubprograms"
-                style={{ flexFlow: "row" }}
+                style={{ display: 'flex', flexFlow: "row", alignItems: 'center', }}
               >
                 <img
                   style={{ width: "20px" }}
@@ -2737,13 +2780,12 @@ export default function ShallowRoutingExample() {
                 display: "flex",
                 flexFlow: "row",
                 justifyContent: "space-between",
-                padding: "15px",
+                // padding: "15px",
+                padding: "10px",
                 outline: "none",
-                alignItems: "center",
-                // border: "1px solid #E7E7E7",
-                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // alignItems: "center", 
                 border: "1px solid #a9a9a9",
-                boxShadow: "#5e5e5e 0px 0px 3px 0px",
+                boxShadow: "#5e5e5e 0px 0px 2px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2751,14 +2793,14 @@ export default function ShallowRoutingExample() {
             >
               <div
                 className="imgAndTextInSubprograms"
-                style={{ display: "flex" }}
+                style={{ display: "flex", flex: '1 1 auto', }}
               >
                 <div
                   className="roundedPillsCont"
                   style={{
                     display: "flex",
-                    flexFlow: "column",
-                    width: "fit-content",
+                    flexFlow: "row",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2766,24 +2808,28 @@ export default function ShallowRoutingExample() {
                     style={{
                       display: "flex",
                       flexFlow: "row",
+                      justifyContent: 'center',
                       border: "1px solid #E7E7E7",
                       padding: "10px",
                       borderRadius: "50%",
+                      overflow: 'hidden',
+                      minHeight: 85.6,
                     }}
                   >
                     <img
-                      style={{ width: "64px" }}
+                      style={{ backgroundColor: "#efefef", width: "64px" }}
                       src="/images/Subprograms/DiscountsAndOffers.png"
                       alt="هایپر&zwnj;کرفو"
                     />
                   </div>
                 </div>
                 <div
+                  className="subSysTextCont"
                   style={{
                     display: "flex",
                     flexFlow: "column",
-                    justifyContent: "space-around",
-                    width: "fit-content",
+                    justifyContent: "center",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2791,16 +2837,21 @@ export default function ShallowRoutingExample() {
                       flex: "0 0 auto",
                       display: "flex",
                       flexFlow: "row",
+                      marginBottom: 7,
                     }}
                   >
-                    <span className="titleStyle">تخفیفات و پیشنهادات</span>
+                    <span className="titleStyle"
+                      style={{ color: '#4b4949', fontFamily: 'IRANSansWeb_Bold(adad_fa)', }}>
+                      تخفیفات و پیشنهادات
+                    </span>
                   </div>
                   <div
-                    style={{ flexFlow: "row", fontSize: "75%" }}
-                    className="decsInSubprograms"
+                    style={{ flexFlow: "row" }}
+                  // className="decsInSubprograms"
                   >
                     <div style={{ display: "flex", flexFlow: "row" }}>
-                      <span className="valueStyle">
+                      <span className="valueStyle"
+                        style={{ color: '#4b4949', fontSize: 14, }}>
                         مشاهده کالاهای پیشنهادی و پرتخفیف
                       </span>
                     </div>
@@ -2809,7 +2860,7 @@ export default function ShallowRoutingExample() {
               </div>
               <div
                 className="leftArrowInSubprograms"
-                style={{ flexFlow: "row" }}
+                style={{ display: 'flex', flexFlow: "row", alignItems: 'center', }}
               >
                 <img
                   style={{ width: "20px" }}
@@ -2836,28 +2887,27 @@ export default function ShallowRoutingExample() {
                 display: "flex",
                 flexFlow: "row",
                 justifyContent: "space-between",
-                padding: "15px",
+                // padding: "15px",
+                padding: "10px",
                 outline: "none",
-                alignItems: "center",
-                // border: "1px solid #E7E7E7",
-                // boxShadow: "#D7D6D6 0px 0px 2px 0px", 
+                // alignItems: "center", 
                 border: "1px solid #a9a9a9",
-                boxShadow: "#5e5e5e 0px 0px 3px 0px",
-                backgroundColor: "white",
+                boxShadow: "#5e5e5e 0px 0px 2px 0px",
                 borderRadius: "25px",
+                backgroundColor: "white",
                 overflow: "hidden",
               }}
             >
               <div
                 className="imgAndTextInSubprograms"
-                style={{ display: "flex" }}
+                style={{ display: "flex", flex: '1 1 auto', }}
               >
                 <div
                   className="roundedPillsCont"
                   style={{
                     display: "flex",
-                    flexFlow: "column",
-                    width: "fit-content",
+                    flexFlow: "row",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2865,24 +2915,28 @@ export default function ShallowRoutingExample() {
                     style={{
                       display: "flex",
                       flexFlow: "row",
+                      justifyContent: 'center',
                       border: "1px solid #E7E7E7",
                       padding: "10px",
                       borderRadius: "50%",
+                      overflow: 'hidden',
+                      minHeight: 85.6,
                     }}
                   >
                     <img
-                      style={{ width: "64px" }}
+                      style={{ backgroundColor: "#efefef", width: "64px" }}
                       src="/images/Subprograms/game.png"
                       alt="هایپر&zwnj;کرفو"
                     />
                   </div>
                 </div>
                 <div
+                  className="subSysTextCont"
                   style={{
                     display: "flex",
                     flexFlow: "column",
-                    justifyContent: "space-around",
-                    width: "fit-content",
+                    justifyContent: "center",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2890,16 +2944,20 @@ export default function ShallowRoutingExample() {
                       flex: "0 0 auto",
                       display: "flex",
                       flexFlow: "row",
+                      marginBottom: 7,
                     }}
                   >
-                    <span className="titleStyle">بازی و سرگرمی</span>
+                    <span className="titleStyle"
+                      style={{ color: '#4b4949', fontFamily: 'IRANSansWeb_Bold(adad_fa)', }}
+                    >بازی و سرگرمی</span>
                   </div>
                   <div
-                    style={{ flexFlow: "row", fontSize: "75%" }}
-                    className="decsInSubprograms"
+                    style={{ flexFlow: "row", }}
+                  // className="decsInSubprograms"
                   >
                     <div style={{ display: "flex", flexFlow: "row" }}>
-                      <span className="valueStyle">
+                      <span className="valueStyle"
+                        style={{ color: '#4b4949', fontSize: 14, }}>
                         لحظات خوش کودکان در محیط هایپر!
                       </span>
                     </div>
@@ -2908,7 +2966,7 @@ export default function ShallowRoutingExample() {
               </div>
               <div
                 className="leftArrowInSubprograms"
-                style={{ flexFlow: "row" }}
+                style={{ display: 'flex', flexFlow: "row", alignItems: 'center', }}
               >
                 <img
                   style={{ width: "20px" }}
@@ -2935,13 +2993,12 @@ export default function ShallowRoutingExample() {
                 display: "flex",
                 flexFlow: "row",
                 justifyContent: "space-between",
-                padding: "15px",
+                // padding: "15px",
+                padding: "10px",
                 outline: "none",
-                alignItems: "center",
-                // border: "1px solid #E7E7E7",
-                // boxShadow: "#D7D6D6 0px 0px 2px 0px",
+                // alignItems: "center", 
                 border: "1px solid #a9a9a9",
-                boxShadow: "#5e5e5e 0px 0px 3px 0px",
+                boxShadow: "#5e5e5e 0px 0px 2px 0px",
                 borderRadius: "25px",
                 backgroundColor: "white",
                 overflow: "hidden",
@@ -2949,14 +3006,14 @@ export default function ShallowRoutingExample() {
             >
               <div
                 className="imgAndTextInSubprograms"
-                style={{ display: "flex" }}
+                style={{ display: "flex", flex: '1 1 auto', }}
               >
                 <div
                   className="roundedPillsCont"
                   style={{
                     display: "flex",
-                    flexFlow: "column",
-                    width: "fit-content",
+                    flexFlow: "row",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2964,24 +3021,28 @@ export default function ShallowRoutingExample() {
                     style={{
                       display: "flex",
                       flexFlow: "row",
+                      justifyContent: 'center',
                       border: "1px solid #E7E7E7",
                       padding: "10px",
                       borderRadius: "50%",
+                      overflow: 'hidden',
+                      minHeight: 85.6,
                     }}
                   >
                     <img
-                      style={{ width: "64px" }}
+                      style={{ backgroundColor: "#efefef", width: "64px" }}
                       src="/images/Subprograms/superMarket.png"
                       alt="هایپر&zwnj;کرفو"
                     />
                   </div>
                 </div>
                 <div
+                  className="subSysTextCont"
                   style={{
                     display: "flex",
                     flexFlow: "column",
-                    justifyContent: "space-around",
-                    width: "fit-content",
+                    justifyContent: "center",
+                    // width: "fit-content",
                   }}
                 >
                   <div
@@ -2989,16 +3050,20 @@ export default function ShallowRoutingExample() {
                       flex: "0 0 auto",
                       display: "flex",
                       flexFlow: "row",
+                      marginBottom: 7,
                     }}
                   >
-                    <span className="titleStyle">سرچ با تصویر</span>
+                    <span className="titleStyle"
+                      style={{ color: '#4b4949', fontFamily: 'IRANSansWeb_Bold(adad_fa)', }}
+                    >سرچ با تصویر</span>
                   </div>
                   <div
-                    style={{ flexFlow: "row", fontSize: "75%" }}
-                    className="decsInSubprograms"
+                    style={{ flexFlow: "row" }}
+                  // className="decsInSubprograms"
                   >
                     <div style={{ display: "flex", flexFlow: "row" }}>
-                      <span className="valueStyle">
+                      <span className="valueStyle"
+                        style={{ color: '#4b4949', fontSize: 14, }}>
                         امکان سرچ کالا با تصویر
                       </span>
                     </div>
@@ -3007,7 +3072,7 @@ export default function ShallowRoutingExample() {
               </div>
               <div
                 className="leftArrowInSubprograms"
-                style={{ flexFlow: "row" }}
+                style={{ display: 'flex', flexFlow: "row", alignItems: 'center', }}
               >
                 <img
                   style={{ width: "20px" }}

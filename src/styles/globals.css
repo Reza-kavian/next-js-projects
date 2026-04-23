@@ -106,15 +106,16 @@
     url("../../public/fonts/webfont(farsi_adad_hast)/eot/IRANSansWeb(FaNum).eot") format("embedded-opentype");
 }
 
-.titleStyle {
-  font-family: "IRANSansWeb_Bold(adad_fa)";
-  color: #4b4949;
+.titleStyle { 
+  text-align: right;
+  font-family: 'IRANSansWeb_Bold(adad_fa)';
 }
 
 .valueStyle {
   font-family: "IRANSansWeb_Medium(adad_fa)";
-  /* color: #6a6a6a; */
+  text-align: right;
 }
+
 
 .titleInsabad {
   font-family: "IRANSansWeb_Medium(adad_fa)";
@@ -360,8 +361,6 @@ button {
 }
 
 @media screen and (min-width: 768px) {
-
-
   #accordion {
     position: sticky;
     /*top: bayad bad az por shodane navbar tope acordion ra tebghe ertefaye navbar bedam,dar load ertefa nav sefre,sepas ba ajaxe GetgenreswithAlbums por mishe badesh goftam;*/
@@ -893,7 +892,121 @@ li#proinf>#dropdownflex {
   }
 }
 
-@media screen and (min-width: 990px) {
+/* ok */
+#SubprogramsCont {
+  padding: 15px 10px; 
+  /* gap:10, */
+}
+
+/* ok */
+.Subprograms { 
+  flex: 1 1 95%; 
+  padding: 5px;
+}
+
+/* ok */
+.imgAndTextInSubprograms {
+  flex-flow: row;
+  width: auto;
+}
+
+/* ok */
+.roundedPillsCont {
+  margin-left: 10px;
+  margin-bottom: 0px;
+  justify-content: flex-start;
+}
+
+/* ok */
+.subSysTextCont {
+  width: 0;
+  flex: 1 1 auto;
+  align-items: flex-start;
+}
+
+
+@media screen and (min-width: 576px) {
+  /* ok */
+  #SubprogramsCont {
+    padding: 15px 15px;
+    /* gap: 10; */
+  }
+
+  /* ok */
+.Subprograms { 
+  flex: 1 1 45%; 
+  padding: 5px;
+}
+
+  /* ok */
+  .imgAndTextInSubprograms {
+    flex-flow: column;
+    width: 100%;
+  }
+
+  /* ok */
+  .roundedPillsCont {
+    margin-left: 0px;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+
+  /* ok */
+  .subSysTextCont {
+    width: 100%;
+    flex: 1 1 auto;
+    align-items: center;
+  }
+
+  /* ok */
+  .titleStyle { 
+    text-align: center;
+    font-family: 'IRANSansWeb_Bold(adad_fa)';
+  }
+
+  /* ok */
+  .valueStyle {
+    font-family: "IRANSansWeb_Medium(adad_fa)";
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  /* ok */
+  .imgAndTextInSubprograms {
+    flex-flow: row;
+    width: auto;
+  }
+
+/* ok */
+.roundedPillsCont {
+  margin-left: 10px;
+  margin-bottom: 0px;
+  justify-content: flex-start;
+}
+
+  /* ok */
+  .subSysTextCont {
+    width: 0;
+    flex: 1 1 auto;
+    align-items: flex-start;
+  }
+
+  /* ok */
+  .titleStyle { 
+    text-align: right;
+    font-family: 'IRANSansWeb_Bold(adad_fa)';
+  }
+
+  /* ok */
+  .valueStyle {
+  font-family: "IRANSansWeb_Medium(adad_fa)";
+    text-align: right;
+}
+}
+
+@media screen and (min-width: 992px) {
   #sabadLoginContFrmCont {
     flex: 0 0 33%;
   }
@@ -914,45 +1027,36 @@ li#proinf>#dropdownflex {
     margin: 10px 50px 15px 50px;
   }
 
+  /* ok */
   #SubprogramsCont {
-    padding: 15px 0px;
-    margin: 20px 50px 15px 50px;
-    /* zare_nk_040228_added */
-    /* background-color: red; */
+    padding: 15px 50px;
+    /* gap:15; */
   }
 
-  .Subprograms {
-    flex: 1 1 31%;
-    margin-bottom: 30px;
+  /* ok */
+  .Subprograms { 
+    flex: 1 1 31%; 
+    padding: 7px;
   }
-
-  /* zare_nk_040228_commented_st */
-  /* .Subprograms:not(:nth-child(3n)) {
+ 
+  /* .Subprograms:not(:nth-child(3n)) .vorsab {
     margin-left: 30px;
   } */
-  /* zare_nk_040228_commented_end */
-  /* zare_nk_040228_added_st */
-  .Subprograms:not(:nth-child(3n)) .vorsab {
-    margin-left: 30px;
-  }
 
   /* zare_nk_040228_added_end */
 
-  .decsInSubprograms {
+  /* .decsInSubprograms {
     display: flex;
-  }
+  } */
 
-  .imgAndTextInSubprograms {
-    flex-flow: row;
-  }
 
-  .leftArrowInSubprograms {
+  /* .leftArrowInSubprograms {
     display: flex;
   }
 
   .roundedPillsCont {
     margin-left: 10px;
-  }
+  } */
 
   #sabadLoginCont {
     flex: 0 0 auto;
@@ -1051,7 +1155,8 @@ li#proinf>#dropdownflex {
     margin: 10px 200px 15px 200px;
   }
 
-  #SubprogramsCont {
+  /* ok */
+  /* #SubprogramsCont {
     padding: 15px 0px;
     margin: 20px 200px 15px 200px;
   }
@@ -1066,7 +1171,7 @@ li#proinf>#dropdownflex {
 
   .roundedPillsCont {
     margin-left: 10px;
-  }
+  } */
 }
 
 @media screen and (max-width: 990px) {
@@ -1094,45 +1199,38 @@ li#proinf>#dropdownflex {
     margin: 10px 10px 15px 10px;
   }
 
-  #SubprogramsCont {
+  /* #SubprogramsCont {
     padding: 15px 0px;
-    margin: 20px 10px 15px 10px;
-    /* zare_nk_040228_added */
-    /* background-color: green; */
+    margin: 20px 10px 15px 10px; 
   }
 
   .Subprograms {
     flex: 1 1 45%;
     margin-bottom: 30px;
-  }
+  } */
 
-  /* zare_nk_040228_commented_st */
-  /* .Subprograms:nth-child(odd) {
+  
+  /* .Subprograms:nth-child(odd) .vorsab {
     margin-left: 30px;
-  }   */
-  /* zare_nk_040228_commented_end */
-  /* zare_nk_040228_added_st */
-  .Subprograms:nth-child(odd) .vorsab {
-    margin-left: 30px;
-  }
+  } */
 
   /* zare_nk_040228_added_end */
 
-  .decsInSubprograms {
+  /* .decsInSubprograms {
     display: none;
-  }
+  } */
 
-  .imgAndTextInSubprograms {
-    flex-flow: row;
+  /* .imgAndTextInSubprograms {
+    flex-flow: row; 
   }
-
-  .leftArrowInSubprograms {
+*/
+  /* .leftArrowInSubprograms {
     display: flex;
   }
 
   .roundedPillsCont {
     margin-left: 10px;
-  }
+  } */
 
   #sabadLoginCont {
     flex: 1 0 auto;
@@ -1240,23 +1338,20 @@ li#proinf>#dropdownflex {
 }
 
 @media screen and (max-width: 768px) {
-
-
-  .imgAndTextInSubprograms {
+  /* .imgAndTextInSubprograms {
     flex-flow: column;
     flex: 1 0 auto;
     align-items: center;
-  }
+  } */
 
-  .leftArrowInSubprograms {
-    display: none;
-    /*zare_nk_0507(age doost dashtam namayesh dadesh flex mikonam)*/
-  }
+  /* .leftArrowInSubprograms {
+    display: none; 
+  } */
 
-  .roundedPillsCont {
+  /* .roundedPillsCont {
     margin-left: 0px;
     margin-bottom: 10px;
-  }
+  } */
 
   #navarbala {
     justify-content: space-between;

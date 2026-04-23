@@ -1,4 +1,4 @@
- ////zare_nk_041124_okk
+ ////zare_nk_050122_okk
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -19,7 +19,7 @@ export default function ProductsPage() {
     params.set("category2", "category2Value"); // تغییر مقدار category
     params.set(fer1.current, "electronics"); // تغییر مقدار category
     alert("full: " + pathname + '---' + searchParams + '----params: ' + params);
-     router.push(pathname + "?" + params);
+    router.push(pathname + "?" + params);
     fer1.current = fer1.current + "a";
   };
 

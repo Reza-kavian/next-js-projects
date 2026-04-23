@@ -1,4 +1,4 @@
-"use client";   ////zare_nk_041108_okk
+"use client";   ////zare_nk_050119_okk
 import "bootstrap/dist/css/bootstrap.min.css";
 // import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import * as bootstrap from "bootstrap";
@@ -109,26 +109,31 @@ export default function ShallowRoutingExample() {
             </div>
           </Link>
         </div>
+
         <div
           id="Subprograms-temp-1"
           className="Subprograms"
           style={{ display: "flex", flexFlow: "row", border: "none" }}
         ></div>
+
         <div
           id="Subprograms-temp-2"
           className="Subprograms"
           style={{ display: "flex", flexFlow: "row", border: "none" }}
         ></div>
+
         <div
           id="Subprograms-temp-3"
           className="Subprograms"
           style={{ display: "flex", flexFlow: "row", border: "none" }}
         ></div>
+
         <div
           id="Subprograms-temp-4"
           className="Subprograms"
           style={{ display: "flex", flexFlow: "row", border: "none" }}
         ></div>
+
       </div>
     </div>
   );

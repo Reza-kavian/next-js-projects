@@ -1,4 +1,4 @@
-////zare_nk_041124_okk
+////zare_nk_041220_okk
 "use client";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 
@@ -34,7 +34,7 @@ export default function () {
     setTodos((cur) => {
       return [...cur, "todo 3"];
     });
-  }, [todos]);
+  }, [todos]);  
 
   return (
     <>

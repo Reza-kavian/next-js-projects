@@ -1,5 +1,5 @@
-////zare_nk_041124_okk
-"use client";   
+////zare_nk_050201_okk
+"use client";
 import { usePathname } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
 
@@ -14,21 +14,26 @@ export default function LayoutWrapper({ children }: RootLayoutProps) {
     <body style={{ color: "#3f3f3f" }}>
       {!isLoginPage && (
         // <>
-          <div className="layoutHeader sticky-top">
-            <a
-              className="headerTitle"
-              href="/"
-              style={{
-                color: "inherit",
-                textDecoration: "none",
-                fontSize: "32px",
-              }}
-            >
-              {" "}
-              TIC-TAC-TOE
-            </a>
-            <LogoutButton />
-          </div>
+        <div className="layoutHeader sticky-top">
+          <a
+            className="headerTitle"
+            href="/"
+            style={{
+              color: "inherit",
+              textDecoration: "none",
+              fontSize: "32px",
+            }}
+          >
+            {/* {" "} */}
+            {/* TIC-TAC-TOE */}
+            <img
+              style={{ width: "40px", borderRadius: "7px" }}
+              src="https://img.tochikala.com/Logo/photo14359415832-Copy.jpg"
+              alt="هایپر‌کرفو"
+            />
+          </a>
+          <LogoutButton />
+        </div>
         // </>
       )}
       {children}

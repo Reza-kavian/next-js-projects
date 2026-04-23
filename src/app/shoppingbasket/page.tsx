@@ -1,3 +1,4 @@
+////zare_nk_050201_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
@@ -23,51 +24,31 @@ async function getBootstrap() {
 }
 
 type MiddleCountTedadSefrType = {
-  // SabadRow: SabadRowType | ForCartContInProdDetValType;  //zare_nk_041120_commented
-  ////zare_nk_041120_added_st
   refForfather: RefObject<string | null>;
   fromShowDetails: boolean;
   IdKala: number;
   idTag: string;
   tedadInSabadOrDet: number;
-  ////zare_nk_041120_added_end
   handlerForAddClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
   handlerForRemClick: (e?: MouseEvent<HTMLAnchorElement>) => void;
   ForCartContentsDesignType: number;
   bishAzMaxTedadYaMojoodi: number | null;
 };
 
-// export function MiddleCountTedadSefr({  //zare_nk_041127_commented
-function MiddleCountTedadSefr({  //zare_nk_041127_added
-  // SabadRow,  //zare_nk_041120_commented
-  ////zare_nk_041120_added_st
+function MiddleCountTedadSefr({
   refForfather,
   fromShowDetails,
   IdKala,
   idTag,
   tedadInSabadOrDet,
-  ////zare_nk_041120_added_end
   handlerForAddClick,
   handlerForRemClick,
   ForCartContentsDesignType,
   bishAzMaxTedadYaMojoodi,
-  ///////////////////////////////////zare_nk_041120_added_end
 }: MiddleCountTedadSefrType) {
   console.log('ShallowRoutingExample called-MiddleCountTedadSefr-ForCartContentsDesignType: ' + ForCartContentsDesignType);
-  useEffect(() => {
-    ////zare_nk_041120_commented_st
-    // console.log('2-041119-SabadRow: ' + JSON.stringify(SabadRow));
-    // console.log('2-041119-ForCartContentsDesignType: ' + ForCartContentsDesignType);
-    // console.log('2-041119-bishAzMaxTedadYaMojoodi: ' + bishAzMaxTedadYaMojoodi);
-    ////zare_nk_041120_commented_end
-  });
 
   useEffect(() => {
-    // if ("refForfather" in SabadRow) {
-    //   SabadRow.refForfather.current = SabadRow.fromShowDetails
-    //     ? "#DetailsInfoCont"
-    //     : "#sabadItemsContInSafhe";
-    // }
     console.log('refForfather.current iss: ' + refForfather.current);
     ////zare_nk_041127_commented_st
     // refForfather.current = fromShowDetails
@@ -447,7 +428,14 @@ function MiddleCountTedadSefr({  //zare_nk_041127_added
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                    // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                    // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                    // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))   
                   }}
                   className="plussMinus"
                   disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
@@ -610,7 +598,14 @@ function MiddleCountTedadSefr({  //zare_nk_041127_added
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
+                    // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
+
+                    // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
+                    // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
                   className="plussMinus"
                   disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
@@ -674,6 +669,14 @@ type ForCartContInProdDetValType = {
   idTag: string;
 };
 
+type SabadTitrType = {
+  IdSabadKharidTitr: number;
+  SumFeeMasraf: number;
+  soodAzKharid: number;
+  MablaghNahaee: number;
+  [key: string]: any;
+};
+
 type SabadRowType = {
   tedadInSabadOrDet: number;
   ZaribForoosh: number;
@@ -693,14 +696,6 @@ type SabadRowType = {
   idTag: string;
 };
 
-type SabadTitrType = {
-  IdSabadKharidTitr: number;
-  SumFeeMasraf: number;
-  soodAzKharid: number;
-  MablaghNahaee: number;
-  [key: string]: any;
-};
-
 type SabadSatrProps = {
   SabadRow: SabadRowType
   handlerForAddClick: (
@@ -712,8 +707,7 @@ type SabadSatrProps = {
   openprodDetModal: (barcodeKala: string) => void;
 };
 
-// export function SabadSatrComponent({  //zare_nk_041127_commented
-function SabadSatrComponent({  //zare_nk_041127_added
+function SabadSatrComponent({
   SabadRow,
   handlerForAddClick,
   handlerForRemClick,
@@ -731,7 +725,6 @@ function SabadSatrComponent({  //zare_nk_041127_added
     }
   }
 
-  // const ForCartContentsDesignTypeLet = useMemo(() => {
   const tedadInSabadOrDetToNumber = Number(SabadRow.tedadInSabadOrDet);
   const ZaribForooshToNumber = Number(SabadRow.ZaribForoosh);
 
@@ -740,7 +733,6 @@ function SabadSatrComponent({  //zare_nk_041127_added
       tedadInSabadOrDetToNumber > ZaribForooshToNumber ? 2 :
         tedadInSabadOrDetToNumber === ZaribForooshToNumber ? 1 :
           0;
-  // }, [SabadRow]);  
 
 
   return (
@@ -774,6 +766,7 @@ function SabadSatrComponent({  //zare_nk_041127_added
             display: "flex",
             flexFlow: "column",
             position: "relative",
+            marginLeft: '5px',
           }}
         >
           <button
@@ -796,6 +789,9 @@ function SabadSatrComponent({  //zare_nk_041127_added
                 display: "flex",
                 flexFlow: "column",
                 height: "min-content",
+                borderRadius: 10,
+                overflow: 'hidden',
+                boxShadow: "#5e5e5e 0px 0px 3px 0px ",
               }}
             >
               <img
@@ -804,6 +800,12 @@ function SabadSatrComponent({  //zare_nk_041127_added
                 className="sath1Img2_new"
                 alt={SabadRow.NameKala ? SabadRow.NameKala : ''}
                 style={{ backgroundColor: "#EFEFEF", width: "100%" }}
+                ////zare_nk_041213_added_st
+                onError={(e) => {
+                  e.currentTarget.src = 'https://img.tochikala.com/Logo/tochi.png';
+                  e.currentTarget.style.backgroundColor = 'white';
+                }}
+              ////zare_nk_041213_added_end
               />
             </div>
           </button>
@@ -902,15 +904,12 @@ function SabadSatrComponent({  //zare_nk_041127_added
               }}
             >
               <MiddleCountTedadSefr
-                // SabadRow={SabadRow}  //zare_nk_041120_commented
-                ////zare_nk_041120_added_st
                 refForfather={SabadRow.refForfather}
                 fromShowDetails={SabadRow.fromShowDetails}
                 IdKala={SabadRow.IdKala}
                 idTag={SabadRow.idTag}
                 tedadInSabadOrDet={SabadRow.tedadInSabadOrDet}
-                ////zare_nk_041120_added_end
-                handlerForAddClick={(e) => {
+                handlerForAddClick={(e) => {  //zare_nk_050126_nokteh(ehtemalan inja automat ba click rooye tagi ke componente MiddleCountTedadSefr return mikoneh dar dom, rooydade clickesh dar lafze delkhahe e lahaz misheh)
                   return handlerForAddClick(
                     {
                       tedadInSabadOrDet: SabadRow.tedadInSabadOrDet,
@@ -1147,7 +1146,7 @@ export default function ShallowRoutingExample() {
       },
       body: JSON.stringify({
         BarcodeKala: barcodeKala,
-        IdShobeh: 7,
+        IdShobeh: 6,
         // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
         //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)
       }),
@@ -1410,7 +1409,7 @@ export default function ShallowRoutingExample() {
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
-        IdShobe: 7,  //zare_nk_041115_nokteh(dar api tochikala hast.vali dar api testotmapi nemiferestim va pishfarz IdShobe kerfu ra parsafar dar samte api lahaz mikard. IdShobe marboot be shobe 7 ra behesh dadam)
+        IdShobe: 6,  //zare_nk_041115_nokteh(dar api tochikala hast.vali dar api testotmapi nemiferestim va pishfarz IdShobe kerfu ra parsafar dar samte api lahaz mikard. IdShobe marboot be shobe 7 ra behesh dadam)
         IdSabadKharidTitr: IdSabadKharidTitr,//zare_nk_041115_nokteh(dar api tochikala hast chon chand sabad az chand shobe mishe dasht. vali dar api testotmapi IdSabadKharidTitr nadarim chon ye sabad ke bishtar nist)
       }),
     });
@@ -1502,9 +1501,7 @@ export default function ShallowRoutingExample() {
   }
 
   useEffect(() => {
-    alert('oomad??');
     if (isOpenedProdDetModal == true) {
-      alert('oomad??2');
       return;
     }
     async function tempFuncForAsync() {
@@ -1533,12 +1530,11 @@ export default function ShallowRoutingExample() {
             Authorization: "Bearer " + token,
           },
           body: JSON.stringify({
-            IdShobeh: 7,
+            IdShobeh: 6,
           }),
         });
         const data = await response.json();
         if (response.ok) {
-          // alert('oomad??3');
           var majmooeKharidMasraf = 0;
           var soodAzKharid = 0;
           var Kerayeh = 0;
@@ -1641,7 +1637,7 @@ export default function ShallowRoutingExample() {
       },
       body: JSON.stringify({
         BarcodeKala: BarcodeKala,
-        IdShobeh: 7,
+        IdShobeh: 6,
         // IdKala: 1111 //zare_nk_041115_nokteh(api Api_SelectKalaShobeh ham BarcodeKala ro voroodi migireh ham IdKala ro.ma alan chon dar 
         //// barkode kala hanooz kala va keshi nashodeh va IdKala nadarim pas hamoon BarcodeKala ro miferestim va IdKala ro comment mikonim,meghdare 1111 ha soori neveshtam)
       }),
@@ -1822,7 +1818,7 @@ export default function ShallowRoutingExample() {
           BarcodeKala: addRemParam.BarcodeKala,
           Tedad: TedadOut,
           IdKala: addRemParam.IdKala,
-          IdShobeh: 7,
+          IdShobeh: 6,
           IdAddress: 23990
         }),
       });
@@ -1861,7 +1857,6 @@ export default function ShallowRoutingExample() {
           refForfather.current = addRemParam.father;
 
           let ForCartContentsDesignTypeLet = 0
-
           if (Tedad == 0) {
             ForCartContentsDesignTypeLet = 0;
           }
@@ -1960,7 +1955,7 @@ export default function ShallowRoutingExample() {
           BarcodeKala: addRemParam.BarcodeKala,
           Tedad: TedadOut,
           IdKala: addRemParam.IdKala,
-          IdShobeh: 7,
+          IdShobeh: 6,
           IdAddress: 23990
         }),
       });
@@ -2029,7 +2024,7 @@ export default function ShallowRoutingExample() {
           }
         } else if (result.status == 0) {
           console.log('041116-result.status == 0');
-          setAddOrRemChanged(addRemParam.BarcodeKala + "-" + TedadOut);   //zare_nk_041129_tahlilshe(vaghti sabad khli misheh)
+          setAddOrRemChanged(addRemParam.BarcodeKala + "-" + TedadOut);   //zare_nk_041129_tahlilshe(vaghti sabad khali misheh)
           alert('TedadOut: ' + TedadOut);
           let satrInoInResult = JSON.parse(result.data.satr)[0];  //zare_nk_041124_added
           let Tedad = satrInoInResult === undefined ? 0 : satrInoInResult.Tedad;
@@ -2350,6 +2345,12 @@ export default function ShallowRoutingExample() {
                               style={{ height: "fit-content" }}
                               src={`https://img.tochikala.com/Product/${ForCartContInProdDetVal.IdKala}.webp`}
                               alt={ForCartContInProdDetVal.NameKala ?? ""}
+                              ////zare_nk_041213_added_st
+                              onError={(e) => {
+                                e.currentTarget.src = 'https://img.tochikala.com/Logo/tochi.png';
+                                e.currentTarget.style.backgroundColor = 'white';
+                              }}
+                            ////zare_nk_041213_added_end
                             />
                           )}
                         </div>

@@ -1,7 +1,9 @@
-//src\app\api\auth\callback\google  //zare_nk_041124_okk
-import { NextRequest, NextResponse } from "next/server";  //zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");) ham khandani va ham neveshtani hastan )
+//src\app\api\auth\callback\google  //zare_nk_050124_okk
+import { NextRequest, NextResponse } from "next/server";  //zare_nk_041013_nokteh(cookies marboot be NextResponse(mesle res.cookies.set("token", "123");)
+//  ham khandani va ham neveshtani hastan )
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { cookies } from "next/headers";  //zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot ne cooki haei ke az samte karbar ba request mian)
+import { cookies } from "next/headers";  //zare_nk_041013_nokteh(cookies import shodeh az next/headers faghat khandani hast, va marboot be cooki haei 
+// ke az samte karbar ba request mian)   //zare_nk_050124_nokteh(faghat khandani baadane cookies ye next/headers barresi shavad)
 
 function decodeState(stateStr: string) {
   return JSON.parse(
@@ -9,7 +11,7 @@ function decodeState(stateStr: string) {
   ) as { state: string; source: "web" | "mobile" };
 }
 
-function NextResponseRedirect(location: string) {
+function NextResponseRedirect(location: string) {  //zare_nk_050122_nokteh(niaz boodan be in va nextjs.redirec nakaramad boodan(be khatere zehniate hazfe cookieha)hatman barrasi shavad!!)
   return new NextResponse(null, {
     status: 302,
     headers: {
@@ -33,7 +35,7 @@ export async function GET(req: NextRequest) {
     const cookieStore = await cookies();
     const cookieStateStr = cookieStore.get("oauth_state")?.value;
     ////zare_nk_041013_nokteh_end(cooki haye zakhireh shodeh)
-    if (!cookieStateStr || !returnedParamState) {
+    if (!cookieStateStr || !returnedParamState) {  //zare_nk_050122_nokteh(in dastoorate tekrari ra dar yek tabae berizam)
       ////zare_nk_041105_added_st
       cookieStore.delete("oauth_state");
       // let { source } = decodeState(cookieStateStr); //zare_nk_041105_commented
@@ -185,7 +187,7 @@ export async function GET(req: NextRequest) {
       ////  sameSite: 'strict',
       sameSite: "none",
       secure: true, //(secure: true bashe cookie faghat be darkhasthaye https ersal mishe,age secure:false bashe cookie be darkhasthaye http ham ersal mishe )
-      //zare_nk_040208_nokteh(vaghti az sameSite: 'none' estefadeh mikonim htman bayad secure: true bashe vagarnah shayad moroorgarha cookie ro napaziran va cookie kar nakoneh)
+      //zare_nk_040208_nokteh(vaghti az sameSite: 'none' estefadeh mikonim hatman bayad secure: true bashe vagarnah shayad moroorgarha cookie ro napaziran va cookie kar nakoneh)
     });
     res.cookies.delete("google_Invalid_credentials");  
     return res;

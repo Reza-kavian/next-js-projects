@@ -1,4 +1,4 @@
-////zare_nk_041124_okk
+////zare_nk_050119_okk
 "use client";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
@@ -24,7 +24,8 @@ export default function ProductPage() {
           const response = await fetch("/api/auth/verifyToken", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token }),
+            // body: JSON.stringify({ token }),  //zare_nk_041219_commented_movaghat
+            body: JSON.stringify({ a: 1 }),  //zare_nk_041219_added_movaghat
           });
 
           // const data = await response.json();  //zare_nk_041112_commented
@@ -62,15 +63,18 @@ export default function ProductPage() {
           } else {
             const idUSerRefTag = idUSerRef.current;
             if (idUSerRefTag instanceof HTMLElement) {
-              idUSerRefTag.innerText = "ffffffferer----" + (data?.errorMessage ?? "خطای نامشخص از سرور");
+              idUSerRefTag.innerText = "ffffffferer----" + (data?.errorMessage ?? response.statusText);  //zare_nk_041219_nokteh(midanim age data?.errorMessage 
+              // darim yani response.ok hast va be error haye dastimoon tooye verifyToken residim ke name dastiye errorMessage residim. age data?.errorMessage 
+              // nadarim yani tebghe and(&&), response.ok nist chon age bashe bayad decode nadashteh bashim ke tebghe response dastiye ma 
+              // ijad kardimesh ba statuse 200 ke maro ba response.ok mibare!(pas yani response.ok==false hast age data?.errorMessage nadarim ))
               //zare_nk_040224-nokteh(age az useState estefadeh mikardim reactpasandtar bood)
               //zare_nk_041112-nokteh(age ba eshtebah vared kardane voroodihaye fetch va ya name eshtebahe fetch va ... !response.ok beshe, data.errorMessage
               // vojood nadare chon barnameh aslan be api narafteh ke dar codehaye dastiye api bekhaim errorMessage ra ijad konim,pas az alamate ?? estefadeh kardim
               // ke age errorMessage vojood nadasht pas matni ra benevisim
             }
           }
-        } catch (error) { //mamoolan mavarede ghtiye shabakeh va net va adame dastrasi be api be catch miad(vali mavarede eshtebah vared kardane name api va paramethaye naghes dadan be api va ... barnameh dar try 
-          // mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
+        } catch (error) { //mamoolan mavarede ghtiye shabakeh va net va adame dastrasi be api be catch miad(vali mavarede eshtebah vared kardane name api
+          //  va paramethaye naghes dadan be api va ... barnameh dar try mimooneh va automat statuse 4xx ya 5xx tolid mikoneh)
           console.error("❌ خطااااااااااااااااااای JWT:", error);
           if (error instanceof Error) {
             idUSerRef.current!.innerText = error.message;
@@ -86,7 +90,7 @@ export default function ProductPage() {
     };
     asyncFunctionInUseEffect();
   });
-  // const params = useParams();  //zare_nk_040224_comment(chon makhsoose safahate dynamic hast va inja kar nemikoneh)
+  // const params = useParams();  //zare_nk_040224_comment(chon makhsoose safahate dynamic hast va inja kar nemikoneh)  //zare_nk_050122_nokteh(estefadeh az safahate dynamic barrasi beshe!!)
   const params = useSearchParams();
   const id = params.get("id") || "Unknown";
   const name = params.get("name") || "Unknown";

@@ -1,11 +1,11 @@
-////zare_nk_041113_okk
+////zare_nk_050201_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
-// va az jsonwebtoken nemishe dar middleware.ts estefadeh kard,pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
-// va natijeh ra be middleware.ts pasokh dadim.
+// va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
+// va natijeh ra be middleware.ts pasokh dadim.(albateh be api verifyToken ham nazadim va az jwtVerify estefadeh kardim ke moadele jwt hast)
 import { jwtVerify } from "jose"; ////zare_nk_040403_added
 const publicPaths = [
-   "/about",
+  "/about",
   "/folder02",
   "/folder03",
   "/login",
@@ -37,12 +37,12 @@ async function verifyToken(token: string) {
       process.env.JWT_SECRET_BASE64!,
       "base64"
     ).toString("utf-8"); //zare_nk_040219_added(baraye adame moshkel dar verify kardane secretKey vaghti az lafze $ estefadeh shod dar mohtavaye secretKey)
-    
+
     console.log(
       "zare_nk_041009-03-POST called!!-decoded secretKey: " + secretKey
     );
-    
-    const SECRET = new TextEncoder().encode(secretKey);
+
+    const SECRET = new TextEncoder().encode(secretKey);  //zare_nk_050122_nokteh(aya TextEncoder().encode niaze va nemishe mostaghim secretKeyra estefadeh kard?(ehtemalan parametre dovvome jwtVerify bayed aza noe TextEncoder().encode bashe?))
     const { payload } = await jwtVerify(token, SECRET);  //zare_nk_041009_nokteh(jwtVerify lafze payload ra barmigardooneh )
     console.log("zare_nk_041009-04-payload: " + JSON.stringify(payload));
     //zare_nk_041009-04-payload: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287",
@@ -86,13 +86,13 @@ export async function middleware(request: NextRequest) {
     // const regex = new RegExp(`^${escapedPath}(?:/.*)?$`);
     // return regex.test(request.nextUrl.pathname);
     ////zare_nk_040520_rahe1_end(pichidehtare va faghat baraye masirhaye pichide tosiye mishe)
-    ////zare_nk_040520_rahe1_st(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
+    ////zare_nk_040520_rahe2_st(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
     return (
       request.nextUrl.pathname === path || //yani daghighan khode /tryreact
       request.nextUrl.pathname.startsWith(path + "/") //yani zir majmooe haye /tryreact, masalan /tryreact/...
     );
   });
-  ////zare_nk_040520_rahe1_end(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
+  ////zare_nk_040520_rahe2_end(sadehtare va baraye masirhaye sade mesle projeye man tosiye mishe)
   ////zare_nk_040520_added_end
 
   if (isPublic || request.nextUrl.pathname == "/") {
@@ -102,7 +102,11 @@ export async function middleware(request: NextRequest) {
     // ست کردن header برای استفاده در layout
     response.headers.set("x-url", fullUrl);
     response.headers.set("x-pathname", pathname);
-    console.log("zare_nk_041009-fullUrl001: " + fullUrl);
+    console.log("zare_nk_050122-fullUrl001: " + fullUrl + '-pathname: ' + pathname);
+    ////zare_nk_050122_added_st
+    ////http://localhost:3000/folder02?id=333
+    ////zare_nk_050122-fullUrl001: http://localhost:3000/folder02?id=333-pathname: /folder02
+    ////zare_nk_050122_added_end
     return response;
   }
   console.log("zare_nk_041009 from:", request.nextUrl.pathname);
@@ -119,7 +123,7 @@ export async function middleware(request: NextRequest) {
       );
       ////zare_nk_040403_added_st
       const validPayload = await verifyToken(token);
-      ////zare_nk_040403_alan
+      
       console.log(
         "zare_nk_041009-04-validPayload is: " + JSON.stringify(validPayload)
       );
