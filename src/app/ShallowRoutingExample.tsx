@@ -1,4 +1,4 @@
-////zare_nk_050201_okk
+////zare_nk_050205_okk
 "use client";  
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
@@ -690,7 +690,7 @@ type SabadRowType = {
 ////zare_nk_050126_nokteh_end(SabadRowType inja karbordi nadare va beonvane olgu estefadeh shodeh)
 
 export default function ShallowRoutingExample() {
-  console.log('041123-ShallowRoutingExample called!!');
+  console.log('050205-ShallowRoutingExample called!!');
   const router = useRouter();
 
   const [ForCartContInProdDetVal, setForCartContInProdDetVal] =
