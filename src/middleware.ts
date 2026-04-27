@@ -1,9 +1,10 @@
-////zare_nk_050201_okk
+////zare_nk_050207_okk
 import { NextResponse, NextRequest } from "next/server";
 // import jwt from "jsonwebtoken";  //chon middleware.ts dar Edge Runtime ejra mishavad, az majoole crypto poshtibani nemikoneh 
 // va az jsonwebtoken nemishe dar middleware.ts estefadeh kard, pas api zadim be verifytoken va dar anja az jsonwebtoken estefade kardim 
 // va natijeh ra be middleware.ts pasokh dadim.(albateh be api verifyToken ham nazadim va az jwtVerify estefadeh kardim ke moadele jwt hast)
 import { jwtVerify } from "jose"; ////zare_nk_040403_added
+
 const publicPaths = [
   "/about",
   "/folder02",
@@ -41,8 +42,8 @@ async function verifyToken(token: string) {
     console.log(
       "zare_nk_041009-03-POST called!!-decoded secretKey: " + secretKey
     );
-
-    const SECRET = new TextEncoder().encode(secretKey);  //zare_nk_050122_nokteh(aya TextEncoder().encode niaze va nemishe mostaghim secretKeyra estefadeh kard?(ehtemalan parametre dovvome jwtVerify bayed aza noe TextEncoder().encode bashe?))
+ 
+    const SECRET = new TextEncoder().encode(secretKey);  //zare_nk_050122_nokteh(baraye tabee jwtVerify bayad secretKey ra ba TextEncoder().encode konim,barakse jwt.verify ke secretKey encode nashodeh ra mipaziroft)
     const { payload } = await jwtVerify(token, SECRET);  //zare_nk_041009_nokteh(jwtVerify lafze payload ra barmigardooneh )
     console.log("zare_nk_041009-04-payload: " + JSON.stringify(payload));
     //zare_nk_041009-04-payload: {"unique_name":"20109","CodeMoshtari":"20109","Mobile":"9351091287",
@@ -58,7 +59,7 @@ export async function middleware(request: NextRequest) {
   //  const path = url.searchParams.get("path");
   //  url.searchParams.set("goo",14);
   //  const goo= url.searchParams.get("goo");
-  //   const kolli= url.searchParams
+  //  const kolli= url.searchParams
   // console.log("zare_nk_040317-fullUrl: " + kolli);
 
   console.log(
