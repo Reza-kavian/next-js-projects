@@ -1,4 +1,4 @@
-////zare_nk_050122_okk
+////zare_nk_050231_okk
 //src\app\about\page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";

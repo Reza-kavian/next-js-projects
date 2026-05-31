@@ -23,7 +23,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"] 
+      "@/*": ["./src/*"]   //zare_nk_050302_nokteh(risheye addressdehi ba slash(/) ra dar nazar migirim(dar inja masire ./src/* ra dadim))
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","src/types"],

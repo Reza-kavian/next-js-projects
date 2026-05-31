@@ -1,4 +1,4 @@
-////zare_nk_050129_okk
+////zare_nk_050131_okk
 "use client"; 
 import { useEffect, useState, useRef, useCallback ,memo} from "react";
 import Styles from "@/styles/components/dooz.module.css";
@@ -514,8 +514,8 @@ function Board({
 
 export default function Game() {
   console.log("zare_nk_050126-Game called!!");
-  const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null)); //zare_nk_041015_nokteh(refForBtn yek useref ast ke arayeei az dokmehaye dooz ast)
-  const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);  //zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
+  const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null)); ////zare_nk_041015_nokteh(refForBtn yek useref ast ke arayeei az dokmehaye dooz ast)
+  const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);  ////zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
   const storedHistory = localStorage.getItem("history");
   const [history, setHistory] = useState(
     storedHistory !== null ? JSON.parse(storedHistory) : [Array(10).fill(null)]
@@ -529,7 +529,7 @@ export default function Game() {
     history
   );
   const storedCurrentMove = localStorage.getItem("currentMove");
-  const [currentMove, setCurrentMove] = useState(  //zare_nk_040528_nokteh(shamele andise akhare arayeye history ast ke be vaziate feliye chineshe mohrehaye dooz eshare mikoneh)
+  const [currentMove, setCurrentMove] = useState(  ////zare_nk_040528_nokteh(shamele andise akhare arayeye history ast ke be vaziate feliye chineshe mohrehaye dooz eshare mikoneh)
     storedCurrentMove !== null ? JSON.parse(storedCurrentMove) : 0
   );
   const currentSquares = history[currentMove];

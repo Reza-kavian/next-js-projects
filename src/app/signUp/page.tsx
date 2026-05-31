@@ -1,5 +1,5 @@
-////zare_nk_050122_okk
-'use client' 
+////zare_nk_050231_okk
+'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -29,27 +29,27 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const router = useRouter()
 
-  const handleLogin = async (event: React.FormEvent) => { 
-    event.preventDefault()
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
     setError('');
 
     const response = await fetch('/api/auth/signUp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
-      //// credentials: "include", //zare_nk_040202_commented
+      //// credentials: "include", ////zare_nk_040202_commented
     });
-    const data = await response.json() ;
+    const data = await response.json();
     if (response.ok) {
-      alert("response.status: "+response.status+"-data.message: "+data.message);
-      document.cookie = `token=${data.token}; path=/;`;  //zare_nk_040210_nokteh(in khat lazem nist chon dar api signUp cookie ye token ra meghdar dadim va alan ke be response.ok omadim meghdar dare)
+      // alert("response.status: " + response.status + "-data.message: " + data.message);
+      document.cookie = `token=${data.token}; path=/;`;  ////zare_nk_040210_nokteh(in khat lazem nist chon dar api signUp cookie ye token ra meghdar dadim va alan ke be response.ok omadim meghdar dare)
       const redirect = getCookie("redirect") || "/";
       document.cookie =
         "redirect=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC"; // حذف کوکی
       console.log("zare_nk_040107_redirect:" + redirect);
       router.replace(redirect); // هدایت به مسیر ذخیره‌شده    
-    } else {       
-      setError(data.errorMessage+'-a011111111111111'); 
+    } else {
+      setError(data.errorMessage + '-a011111111111111');
     }
   }
   return (

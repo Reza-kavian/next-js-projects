@@ -37,9 +37,9 @@ export default function ShallowRoutingExample() {
 
         const data = await response.json();
         if (response.ok) {
-          alert("decodedToken: " + JSON.stringify(data.decoded));
+          // alert("decodedToken: " + JSON.stringify(data.decoded));
           var idUser = data.decoded.IdUser;
-          alert("idUser: " + idUser);
+          // alert("idUser: " + idUser);
           document.getElementById("idUSer")!.innerText =
             idUser + "-yooohhhoooo";
         } else {

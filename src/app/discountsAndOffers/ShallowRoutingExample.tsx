@@ -1,11 +1,11 @@
-////zare_nk_050129_okk
+////zare_nk_050231_okk
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useMemo } from "react";
 
-// import "bootstrap/dist/css/bootstrap.min.css";  //zare_nk_040416_commented(chon enteghalesh dadam be layout.tsx)
+// import "bootstrap/dist/css/bootstrap.min.css";  ////zare_nk_040416_commented(chon enteghalesh dadam be layout.tsx)
 // import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
-// import * as bootstrap from "bootstrap";  //zare_nk_040417_commented
+// import * as bootstrap from "bootstrap";  ////zare_nk_040417_commented
 let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_added
 // import Modal from "bootstrap/js/dist/modal";   //age faghat in ra begzaram va kolle bootstarp ra import nakonam kami be sabok boodane 
 // barname komak mishe,vali dar terminal errore <<document is not defined>> mideh ke badan tahlilesh mikonam

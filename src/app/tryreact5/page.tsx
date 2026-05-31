@@ -1,5 +1,5 @@
 ////zare_nk_041220_okk
-"use client";
+"use client"; 
 import { useState, useEffect } from "react";
 import { ReactNode } from "react";
 
