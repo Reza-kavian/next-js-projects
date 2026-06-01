@@ -434,12 +434,12 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
                     // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -605,12 +605,12 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
                     // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -1056,21 +1056,22 @@ export default function ShallowRoutingExample() {
 
   async function ShowDetails(barcodeKala: any) {
     const token = getCookie("token");
-    if (token == null) {
-      const bootstrap = await getBootstrap();
-      const mymodalForWarning = new bootstrap.Modal(
-        document.getElementById("mymodalForWarning")
-      );
-      mymodalForWarning.show();
-      const span = document.querySelector(
-        "#mymodalForWarning .errorInMymodalForWarning"
-      );
-      if (span instanceof HTMLElement) {
-        span.innerText = "لطفا ابتدا آنلاین شوید";
-      }
-      return;  //zare_nk_041130_added
-    }
-
+    ////zare_nk_050311_commented_st
+    // if (token == null) {
+    //   const bootstrap = await getBootstrap();
+    //   const mymodalForWarning = new bootstrap.Modal(
+    //     document.getElementById("mymodalForWarning")
+    //   );
+    //   mymodalForWarning.show();
+    //   const span = document.querySelector(
+    //     "#mymodalForWarning .errorInMymodalForWarning"
+    //   );
+    //   if (span instanceof HTMLElement) {
+    //     span.innerText = "لطفا ابتدا آنلاین شوید22";
+    //   }
+    //   return;  //zare_nk_041130_added
+    // }
+    ////zare_nk_050311_commented_end
     let ApiUrl = "https://api.tochikala.com/api/";
     var urlApi_SelectShobehJashnvareh = ApiUrl + "User/Api_SelectKalaShobeh";
     const response = await fetch(urlApi_SelectShobehJashnvareh, {
@@ -1204,6 +1205,21 @@ export default function ShallowRoutingExample() {
           span.innerText = "لطفا ابتدا آنلاین شوید";
         }
       }
+      ////zare_nk_050311_added_st
+      else {
+        const bootstrap = await getBootstrap();
+        const mymodalForWarning = new bootstrap.Modal(
+          document.getElementById("mymodalForWarning")
+        );
+        mymodalForWarning.show();
+        const span = document.querySelector(
+          "#mymodalForWarning .errorInMymodalForWarning"
+        );
+        if (span instanceof HTMLElement) {
+          span.innerText = "ارتباط با سرور برقرار نشد";
+        }
+      }
+      ////zare_nk_050311_added_end
     }
   }
 
@@ -1286,164 +1302,182 @@ export default function ShallowRoutingExample() {
 
     async function tempFuncForAsync() {
       const token = getCookie("token");
-      if (token == null) {
-        const bootstrap = await getBootstrap();
-        const mymodalForWarning = new bootstrap.Modal(
-          document.getElementById("mymodalForWarning")
-        );
-        mymodalForWarning.show();
-        const span = document.querySelector(
-          "#mymodalForWarning .errorInMymodalForWarning"
-        );
-        if (span instanceof HTMLElement) {
-          span.innerText = "لطفا ابتدا آنلاین شوید";
-        }
-        return;
-      } else {
-        type InputDataType = {
-          IdShobeh: number;
-          IsJashnvareh: number;
-          NameKala: string;
-          IdG1: number;
-          IdG2: number;
-          IdG3: number;
-          IdG4: number;
-          IsMostBuy: number;
-          Sort: number;
-          IsFavorite: number;
-          IdVitrin: number;
-        };
+      ////zare_nk_050311_commented_st
+      // if (token == null) {
+      // const bootstrap = await getBootstrap();
+      // const mymodalForWarning = new bootstrap.Modal(
+      //   document.getElementById("mymodalForWarning")
+      // );
+      // mymodalForWarning.show();
+      // const span = document.querySelector(
+      //   "#mymodalForWarning .errorInMymodalForWarning"
+      // );
+      // if (span instanceof HTMLElement) {
+      //   span.innerText = "لطفا ابتدا آنلاین شوید33";
+      // }
+      // return;
+      // } else {  
+      ////zare_nk_050311_commented_end
+      type InputDataType = {
+        IdShobeh: number;
+        IsJashnvareh: number;
+        NameKala: string;
+        IdG1: number;
+        IdG2: number;
+        IdG3: number;
+        IdG4: number;
+        IsMostBuy: number;
+        Sort: number;
+        IsFavorite: number;
+        IdVitrin: number;
+      };
 
-        const inputData: InputDataType = {
-          IdShobeh: 6,
-          IsJashnvareh: 1,
-          NameKala: "",
-          IdG1: -1,
-          IdG2: -1,
-          IdG3: -1,
-          IdG4: -1,
-          IsMostBuy: -1,
-          Sort: -1,
-          IsFavorite: -1,
-          IdVitrin: -1,
-        };
-        let ApiUrl = "https://api.tochikala.com/api/";
-        var urlSelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
-        const response = await fetch(urlSelectKalaShobeh, {   //zare_nk_041121_added(for shopToDiscount)
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: JSON.stringify({
-            IdShobeh: inputData.IdShobeh,
-            IsJashnvareh: inputData.IsJashnvareh,
-            NameKala: inputData.NameKala,
-            IdG1: inputData.IdG1,
-            IdG2: inputData.IdG2,
-            IdG3: inputData.IdG3,
-            IdG4: inputData.IdG4,
-            IsMostBuy: inputData.IsMostBuy,
-            Sort: inputData.Sort,
-            IsFavorite: inputData.IsFavorite,
-            IdVitrin: inputData.IdVitrin,
-          }),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          var result = JSON.parse(data.data.list);
-          console.log('result22: ' + JSON.stringify(result)); //zare_nk_041120_commented
-          if (data.status != 0) {
-            console.log('data.status: ' + data.status)
-            const bootstrap = await getBootstrap();
-            const mymodalForWarning = new bootstrap.Modal(
-              document.getElementById("mymodalForWarning")
-            );
-            mymodalForWarning.show();
-            const span = document.querySelector(
-              "#mymodalForWarning .errorInMymodalForWarning"
-            );
-            if (span instanceof HTMLElement) {
-              span.innerText = data.errors[0];
-            }
-          } else if (data.status == 0) {
-            if (result.length == 0) {
-              console.log('result.length == 0: ' + result.length)
-              setBisatr(true);
-              return;
-            }
-            setBisatr(false);
-            refForfather.current = "#cardcontainer2";
+      const inputData: InputDataType = {
+        IdShobeh: 6,
+        IsJashnvareh: 1,
+        NameKala: "",
+        IdG1: -1,
+        IdG2: -1,
+        IdG3: -1,
+        IdG4: -1,
+        IsMostBuy: -1,
+        Sort: -1,
+        IsFavorite: -1,
+        IdVitrin: -1,
+      };
+      let ApiUrl = "https://api.tochikala.com/api/";
+      var urlSelectKalaShobeh = ApiUrl + "User/Api_SelectKalaShobeh";
+      const response = await fetch(urlSelectKalaShobeh, {   //zare_nk_041121_added(for shopToDiscount)
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          IdShobeh: inputData.IdShobeh,
+          IsJashnvareh: inputData.IsJashnvareh,
+          NameKala: inputData.NameKala,
+          IdG1: inputData.IdG1,
+          IdG2: inputData.IdG2,
+          IdG3: inputData.IdG3,
+          IdG4: inputData.IdG4,
+          IsMostBuy: inputData.IsMostBuy,
+          Sort: inputData.Sort,
+          IsFavorite: inputData.IsFavorite,
+          IdVitrin: inputData.IdVitrin,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        var result = JSON.parse(data.data.list);
+        console.log('result22: ' + JSON.stringify(result)); //zare_nk_041120_commented
+        if (data.status != 0) {
+          console.log('data.status: ' + data.status)
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = data.errors[0];
+          }
+        } else if (data.status == 0) {
+          if (result.length == 0) {
+            console.log('result.length == 0: ' + result.length)
+            setBisatr(true);
+            return;
+          }
+          setBisatr(false);
+          refForfather.current = "#cardcontainer2";
 
-            setSabadRows(() => {
-              return (
-                result.map((item: any) => {
-                  var bishAzMaxTedadYaMojoodi = 0;
-                  if (item.MaxTedad != null) {
-                    if (item.MaxTedad <= item.TedadDarSabad) {
-                      bishAzMaxTedadYaMojoodi = 1;
-                    }
-                  } else {
-                    if (item.Mojoodi <= item.TedadDarSabad) {
-                      bishAzMaxTedadYaMojoodi = 1;
-                    }
+          setSabadRows(() => {
+            return (
+              result.map((item: any) => {
+                var bishAzMaxTedadYaMojoodi = 0;
+                if (item.MaxTedad != null) {
+                  if (item.MaxTedad <= item.TedadDarSabad) {
+                    bishAzMaxTedadYaMojoodi = 1;
                   }
+                } else {
+                  if (item.Mojoodi <= item.TedadDarSabad) {
+                    bishAzMaxTedadYaMojoodi = 1;
+                  }
+                }
 
-                  let ForCartContentsDesignTypeLet = 0
+                let ForCartContentsDesignTypeLet = 0
 
-                  if (item.TedadDarSabad == 0) {
-                    ForCartContentsDesignTypeLet = 0;
-                  }
-                  else if (item.TedadDarSabad > item.ZaribForoosh) {
-                    ForCartContentsDesignTypeLet = 2;
-                  }
-                  else if (item.TedadDarSabad == item.ZaribForoosh) {
-                    ForCartContentsDesignTypeLet = 1;
-                  }
-                  return ({
-                    tedadInSabadOrDet: item.TedadDarSabad,
-                    ZaribForoosh: item.ZaribForoosh,
-                    IdKala: item.IdKala,
-                    NameKala: item.NameKala,
-                    DarsadTakhfif: item.DarsadTakhfif,
-                    NameBerand: item.NameBerand,
-                    FeeForoosh: item.FeeForoosh,
-                    FeeMasraf: item.FeeMasraf,
-                    BarcodeKala: item.BarcodeKala,
-                    Mojoodi: item.Mojoodi,
-                    MaxTedad: item.MaxTedad,
-                    MasrafSatr: item.MasrafSatr,
-                    father: "#cardcontainer2",
-                    refForfather: refForfather,
-                    bishAzMaxTedadYaMojoodi: bishAzMaxTedadYaMojoodi,  //zare_nk_041121_added(for shopToDiscount)
-                    fromShowDetails: false,
-                    ForCartContentsDesignType: ForCartContentsDesignTypeLet,  //zare_nk_041121_added(for shopToDiscount)
-                    idTag: "ForCart-" + item.IdKala,
-                  })
+                if (item.TedadDarSabad == 0) {
+                  ForCartContentsDesignTypeLet = 0;
+                }
+                else if (item.TedadDarSabad > item.ZaribForoosh) {
+                  ForCartContentsDesignTypeLet = 2;
+                }
+                else if (item.TedadDarSabad == item.ZaribForoosh) {
+                  ForCartContentsDesignTypeLet = 1;
+                }
+                return ({
+                  tedadInSabadOrDet: item.TedadDarSabad,
+                  ZaribForoosh: item.ZaribForoosh,
+                  IdKala: item.IdKala,
+                  NameKala: item.NameKala,
+                  DarsadTakhfif: item.DarsadTakhfif,
+                  NameBerand: item.NameBerand,
+                  FeeForoosh: item.FeeForoosh,
+                  FeeMasraf: item.FeeMasraf,
+                  BarcodeKala: item.BarcodeKala,
+                  Mojoodi: item.Mojoodi,
+                  MaxTedad: item.MaxTedad,
+                  MasrafSatr: item.MasrafSatr,
+                  father: "#cardcontainer2",
+                  refForfather: refForfather,
+                  bishAzMaxTedadYaMojoodi: bishAzMaxTedadYaMojoodi,  //zare_nk_041121_added(for shopToDiscount)
+                  fromShowDetails: false,
+                  ForCartContentsDesignType: ForCartContentsDesignTypeLet,  //zare_nk_041121_added(for shopToDiscount)
+                  idTag: "ForCart-" + item.IdKala,
                 })
-              )
-            });
-            ////zare_nk_041121_added_end(for shopToDiscount)
-          }
-        } else {
-          console.log('!!response.ok')
-          if (response.status == 401) {
-            const bootstrap = await getBootstrap();
-            const mymodalForWarning = new bootstrap.Modal(
-              document.getElementById("mymodalForWarning")
-            );
-            mymodalForWarning.show();
-            const span = document.querySelector(
-              "#mymodalForWarning .errorInMymodalForWarning"
-            );
-            if (span instanceof HTMLElement) {
-              span.innerText = "لطفا ابتدا آنلاین شوید";
-            }
+              })
+            )
+          });
+          ////zare_nk_041121_added_end(for shopToDiscount)
+        }
+      } else {
+        console.log('!!response.ok')
+        if (response.status == 401) {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
+      // }   ////zare_nk_050311_commented 
     }
     tempFuncForAsync();
+
   }, [addOrRemChanged]);
 
   async function addToCartInIndex(
@@ -1583,6 +1617,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     }
   }
@@ -1788,6 +1837,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "01ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     }
   }

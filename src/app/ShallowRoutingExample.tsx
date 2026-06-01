@@ -1,5 +1,5 @@
 ////zare_nk_050205_okk
-"use client";  
+"use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
@@ -11,8 +11,9 @@ let cachedBootstrap: typeof import("bootstrap") | null = null; //zare_nk_040417_
 
 //// import Modal from "bootstrap/js/dist/modal";   //age faghat in ra begzaram va kolle bootstarp ra import nakonam kami be sabok boodane barname komak mishe
 // ,vali dar terminal errore <<document is not defined>> mideh ke badan tahlilesh mikonam
-// import { BrowserMultiFormatReader } from "@zxing/browser";   //zare_nk_040417_commented
-// import { NotFoundException } from "@zxing/library";    //zare_nk_040417_commented
+import { BrowserMultiFormatReader } from "@zxing/browser";  //zare_nk_050211_nokteh(az dele code avordimesh inja impor kardim)
+import { NotFoundException } from "@zxing/library";   //zare_nk_050211_nokteh(az dele code avordimesh inja impor kardim)
+
 // import "@/styles/ProductDetailsCss.css";   //zare_nk_040228_commented_movaghat
 import "@/styles/shoppingbasketCss.css";
 import Link from "next/link"; //zare_nk_040331_added
@@ -433,12 +434,12 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
                     // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -603,12 +604,12 @@ export function MiddleCountTedadSefr({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                     // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
+                    // ...(Number(bishAzMaxTedadYaMojoodi) === 1 && { opacity: 0.3 }),  //zare_nk_050124_nokteh(y001-in eshtebahe chon { opacity: 0.3 } meghdare true 
                     // barmigardoone va ...(Number(bishAzMaxTedadYaMojoodi) === 1 ham ya true ya false barmigardoone,va darkol ba and(&&) natijeye kolli ya true 
                     // midshe ya false,pas opacity meghdare nemigireh va faghat meghdari boolean barmigardooneh!!  )
 
                     // opacity: Number(bishAzMaxTedadYaMojoodi) === 1 ? 0.3 : 1, //zare_nk_050124_nokteh(rahe1-in dastoor dorosteh va javab mideh)
-                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 }:{opacity: 1}), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
+                    ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3 } : { opacity: 1 }), //zare_nk_050124_nokteh(rahe2-in jaigozine raveshe eshtebahe y001 hast va dorosteh)
                     ////zare_nk_050124_nokteh(rahe1 age gharare hamin opacity faghat meghdar begire khanatare,vali age bakhaim chandin khasiat ra meghdar bedim rahe2
                     // tosiyeh mishe (masalan ...(Number(bishAzMaxTedadYaMojoodi) === 1 ? { opacity: 0.3,color:'silver' }:{opacity: 1,color:'red'}),))
                   }}
@@ -695,8 +696,10 @@ export default function ShallowRoutingExample() {
 
   const [ForCartContInProdDetVal, setForCartContInProdDetVal] =
     useState<ForCartContInProdDetValType>();
-    
+
   const refForfather = useRef<string | null>(null);
+
+  const refForCodeReader = useRef<BrowserMultiFormatReader | null>(null); ////zare_nk_050311_added
 
   var modal: bootstrap.Modal;
   async function openprodDetModal(barcodeKala: string) {
@@ -706,49 +709,233 @@ export default function ShallowRoutingExample() {
     await ShowDetails(barcodeKala);
   }
 
-  async function ShowCamera() {
-    // تنظیم ZXing برای پشتیبانی از QR کد و بارکدهای 1D
-    const { BrowserMultiFormatReader } = await import("@zxing/browser"); //zare_nk_040417_added
-    const codeReader = new BrowserMultiFormatReader();
-    codeReader
-      // .decodeFromVideoDevice(null, "videoForzxing", (result, err, control) => {
-      .decodeFromVideoDevice(
-        undefined,
-        "videoForzxing",
-        async (result, err, control) => {
+  ////zare_nk_050311_commented_st
+  // async function ShowCamera() {
+  //   // تنظیم ZXing برای پشتیبانی از QR کد و بارکدهای 1D
+  //   const { BrowserMultiFormatReader } = await import("@zxing/browser"); //zare_nk_040417_added
+  //   const codeReader = new BrowserMultiFormatReader();
+  //   codeReader
+  //     // .decodeFromVideoDevice(null, "videoForzxing", (result, err, control) => {
+  //     .decodeFromVideoDevice(
+  //       undefined,
+  //       "videoForzxing",
+  //       async (result, err, control) => {
+  //         if (result) {
+  //           // console.log("zare_nk_0730-result.text: " + result.text);
+  //           // متوقف کردن اسکن پس از شناسایی
+  //           const text = result.getText(); //zare_nk_040410_added
+  //           control.stop();
+  //           const bootstrap = await getBootstrap(); //zare_nk_040417_added
+  //           const modal = new bootstrap.Modal(
+  //             document.getElementById("seePricesModal")
+  //           );
+  //           modal.hide();
+  //           // openprodDetModal(/* 6262831000503 */ result.text);  //zare_nk_040410_commented
+  //           openprodDetModal(/* 6262831000503 */ text); //zare_nk_040410_added
+  //         } else {
+  //           const { NotFoundException } = await import("@zxing/library"); //zare_nk_040417_added
+  //           if (err && !(err instanceof NotFoundException)) {
+  //             console.log("zare_nk_0730-err: " + err);
+  //           }
+  //         }
+  //       }
+  //     )
+  //     .catch((err) => {
+  //       console.log("zare_nk_0730-err in catch: " + err);
+  //     });
+  // }
+  ////zare_nk_050311_commented_end
+  ////zare_nk_050311_added_st
+  async function ShowCamera(isClient: boolean) {  //zare_nk_050208_added
+    if (!isClient) return;  ////zare_nk_050208_nokteh(albateh midoonim bekhatere neveshtane "use client" ebtedaye file ma dar safheye samte client(yani moroorgare 
+    // karbar) hastim, va in shart niazi nist, baraye talangor neveshtam(talangore inke codehaye @zxing/browser makhsoose samte client hast va samte serverSide benvisim error mideh))
+    // console.log('zare_nk_050208-ShowCamera called!!001');
+
+    // // تنظیم ZXing برای پشتیبانی از QR کد و بارکدهای 1D
+    // const { BrowserMultiFormatReader } = await import("@zxing/browser");  //zare_nk_050211_commented(bordimesh dar ebtedaye file import kardim(mesle importe baghiyeye packageha))
+    // const codeReader = new BrowserMultiFormatReader();  ////zare_nk_050208_commented 
+
+    ////zare_nk_050208_added_st
+    const { DecodeHintType, BarcodeFormat } = await import("@zxing/library");
+
+    // تعریف فرمت‌هایی که می‌خوای پشتیبانی بشن
+    const formats = [
+      BarcodeFormat.EAN_13,
+      // BarcodeFormat.EAN_8,  ////zare_nk_050310_nokteh(shayad bazi kalahaye forooshgahi EAN_8 bashand, ke badan uncommentesh mikonam)
+      // BarcodeFormat.CODE_128,
+      // BarcodeFormat.QR_CODE,
+    ];
+
+    // ایجاد map مربوط به تنظیمات (hints)
+    const hints = new Map();
+    hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);  //zare_nk_050208_nokteh(ba mahdood kardane tedad anvae barcode sorate scan bala miri(pishfarz hameye barcodeha ro barrasi mikoneh))
+    hints.set(DecodeHintType.TRY_HARDER, true);   //zare_nk_050208_nokteh(ba tanzim TRY_HARDER true deghate scan bala mire vali kami kond mikoneh sorat ro(pishfarz TRY_HARDER false hast))
+
+    // ساخت Reader با تنظیمات بالا
+    const codeReader = new BrowserMultiFormatReader(hints);
+    refForCodeReader.current = codeReader; //zare_nk_050211_added
+    ////zare_nk_050208_added_end
+
+    // این لاگ را اضافه کردم:
+    console.log(
+      "BrowserMultiFormatReader prototype methods:",
+      Object.getOwnPropertyNames(Object.getPrototypeOf(codeReader))
+    );
+
+    ////zare_nk_050310_nokteh_st(rahe 1(code kamtar sorate kamtar))
+    // const devices = await BrowserMultiFormatReader.listVideoInputDevices(); 
+    // // انتخاب دوربین پشت در صورت امکان
+    // const backCam =
+    //   devices.find((d) => /back|rear|environment/i.test(d.label)) ||
+    //   devices[devices.length - 1] ||
+    //   devices[0]; 
+    // codeReader
+    //   .decodeFromVideoDevice(
+    //    backCam?.deviceId, // undefined,
+    //     "videoForzxing",
+    //     async (result, err, control) => {
+    //       // console.log('zare_nk_050208-ShowCamera called!!-002');
+    //       // console.log('Decode attempt - result:', result, 'error:', err);
+    //       if (result) {
+    //         // console.log('zare_nk_050208-ShowCamera called!!-003');
+    //         const text = result.getText();
+    //         // متوقف کردن اسکن پس از شناسایی
+    //         control.stop();
+    //         const bootstrap = await getBootstrap();
+    //         const modal = new bootstrap.Modal(
+    //           document.getElementById("seePricesModal")
+    //         );
+    //         modal.hide();
+    //         openprodDetModal(/* 6262831000503 */ text);
+    //       } else {
+    //         // console.log('zare_nk_050208-ShowCamera called!!-004');
+    //         // const { NotFoundException } = await import("@zxing/library");  //zare_nk_050211_commented(bordimesh dar ebtedaye file import kardim(mesle importe baghiyeye packageha))
+    //         if (err && !(err instanceof NotFoundException)) {
+    //           // console.log("zare_nk_040321-in zxing-err: " + err);
+    //         }
+    //       }
+    //     }
+    //   )
+    //   .catch((err) => {
+    //     // console.log('zare_nk_050208-in catch-error: ' + err);
+    //   });
+    ////zare_nk_050310_nokteh_end(rahe 1(code kamtar sorate kamtar))
+
+    ////zare_nk_050310_nokteh_st(rahe 2(code bishtar sorate bishtar))
+    const video = document.getElementById("videoForzxing") as HTMLVideoElement | null;
+    if (!video) {
+      // console.error("video element #videoForzxing not found");
+      return;
+    }
+    let stream: MediaStream | null = null;
+    try {
+      // رزولوشن پایین/متوسط برای پردازش سریع‌تر
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: {
+          facingMode: { ideal: "environment" },
+          ////zare_nk_050310_nokteh_st(baraye barcode haye bozorg)
+          // width: { ideal: 1280 },   // یا 960 / 720 برای سریع‌تر شدن
+          // height: { ideal: 720 },
+          ////zare_nk_050310_nokteh_end(baraye barcode haye bozorg)
+          ////zare_nk_050310_nokteh_st(baraye barcode haye koochak)
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+          ////zare_nk_050310_nokteh_end(baraye barcode haye koochak)
+          frameRate: { ideal: 30, max: 30 },
+        },
+      });
+
+      video.srcObject = stream;
+      video.setAttribute("playsinline", "true");
+      video.muted = true;
+      await video.play();
+
+      const track = stream.getVideoTracks()[0];
+      const caps = track.getCapabilities?.() as any;
+
+      try {
+        const advanced: any[] = [];
+
+        if (caps?.focusMode?.includes?.("continuous")) {
+          advanced.push({ focusMode: "continuous" });
+        }
+
+        // اگر خواستی بعداً torch را با دکمه فعال کنی
+        // if (caps?.torch) { 
+        //   advanced.push({ torch: true });
+        // }
+        const hasTorch =
+          caps &&
+          Object.prototype.hasOwnProperty.call(caps, "torch");
+
+        if (hasTorch) {
+          try {
+            await track.applyConstraints({ advanced: [{ torch: true }] } as any);
+          } catch (e) {
+            console.log("torch apply failed", e);
+          }
+        }
+
+        if (advanced.length) {
+          await track.applyConstraints({ advanced } as any);
+        }
+      } catch (e) {
+        // بعضی گوشی‌ها/مرورگرها قبول نمی‌کنند
+        // console.warn("applyConstraints warning:", e);
+      }
+      // codeReader.decodeFromVideoDevice(
+      await (codeReader as any).decodeFromVideoElement(
+        video,
+        // async (result, err, control) => {
+        async (result: any, err: any, control: any) => {
+          // console.log('zare_nk_050208-ShowCamera called!!-002');
+          // console.log('Decode attempt - result:', result, 'error:', err);
           if (result) {
-            // console.log("zare_nk_0730-result.text: " + result.text);
+            // console.log('zare_nk_050208-ShowCamera called!!-003');
+            const text = result.getText();
             // متوقف کردن اسکن پس از شناسایی
-            const text = result.getText(); //zare_nk_040410_added
             control.stop();
-            const bootstrap = await getBootstrap(); //zare_nk_040417_added
+            stream?.getTracks().forEach((t) => t.stop());   ////okkk
+
+            const bootstrap = await getBootstrap();
             const modal = new bootstrap.Modal(
               document.getElementById("seePricesModal")
             );
             modal.hide();
-            // openprodDetModal(/* 6262831000503 */ result.text);  //zare_nk_040410_commented
-            openprodDetModal(/* 6262831000503 */ text); //zare_nk_040410_added
+            openprodDetModal(/* 6262831000503 */ text);
+            return;   ////okkk
           } else {
-            const { NotFoundException } = await import("@zxing/library"); //zare_nk_040417_added
+            // console.log('zare_nk_050208-ShowCamera called!!-004');
+            // const { NotFoundException } = await import("@zxing/library");  //zare_nk_050211_commented(bordimesh dar ebtedaye file import kardim(mesle importe baghiyeye packageha))
             if (err && !(err instanceof NotFoundException)) {
-              console.log("zare_nk_0730-err: " + err);
+              // console.log("zare_nk_040321-in zxing-err: " + err);
             }
           }
         }
-      )
-      .catch((err) => {
-        console.log("zare_nk_0730-err in catch: " + err);
-      });
+      );
+      // .catch((err) => {
+      //   // console.log('zare_nk_050208-in catch-error: ' + err);
+      // });
+    } catch (err) {
+      console.error("Camera start error:", err);
+      stream?.getTracks().forEach((t) => t.stop());
+    }
+    ////zare_nk_050310_nokteh_end(rahe 2(code bishtar sorate bishtar))
+
   }
+  ////zare_nk_050311_added_end
 
   useEffect(() => {
+    const isClient = typeof window !== 'undefined';  //zare_nk_050208_added
     const seePricesModal = document.getElementById("seePricesModal");
     const handlerForSeePricesModal = () => {
       const input = document.getElementById("manualInputBarcode");
       if (input instanceof HTMLInputElement) {
         input.value = "";
       }
-      ShowCamera();
+      // ShowCamera();   ////zare_nk_050310_commented 
+      ShowCamera(isClient);  ////zare_nk_050208_added
     };
     if (seePricesModal) {
       seePricesModal.addEventListener(
@@ -782,6 +969,16 @@ export default function ShallowRoutingExample() {
     }
 
     return () => {
+      ////zare_nk_050310_added_st
+      if (isClient && refForCodeReader.current) {
+        // console.log('پاکسازی منابع اسکنر...');
+        // refForCodeReader.current.reset(); //zare_nk_050220_nokteh(code versione ghadimiye zxing hast va dar versione feli kar nemikoneh(dar versione feli
+        ////  hamoon control.stop(); ke dakhele codeReader.decodeFromVideoDevice(...) hast kar mikoneh))
+        refForCodeReader.current = null; // پاک کردن ref 
+        // console.log("Scanner component unmounted, cleaning up.");
+      }
+      ////zare_nk_050310_added_end
+
       // پاکسازی رویداد در unmount 
       if (seePricesModal) {
         seePricesModal.removeEventListener(
@@ -942,6 +1139,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "01ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     }
   }
@@ -1147,6 +1359,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "01ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     }
   }
@@ -1427,6 +1654,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید001";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "01ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     } catch (error) {
       // alert('catch: ' + error + 'modal: ' + modal);
@@ -1599,12 +1841,22 @@ export default function ShallowRoutingExample() {
                       marginBottom: "30px",
                     }}
                   >
-                    <video
+                    {/* <video
                       id="videoForzxing"
                       style={{
                         width: "640px",
                         maxWidth: "100%",
                         borderRadius: "10px",
+                      }}
+                    ></video> */}
+                    <video
+                      id="videoForzxing"
+                      style={{
+                        width: "280px",
+                        height: "280px",
+                        borderRadius: "10px",
+                        objectFit: 'cover',
+                        background: '#000',
                       }}
                     ></video>
                   </div>

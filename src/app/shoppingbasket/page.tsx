@@ -12,7 +12,6 @@ import { BrowserMultiFormatReader } from "@zxing/browser";  //zare_nk_050211_nok
 import { NotFoundException } from "@zxing/library";   //zare_nk_050211_nokteh(az dele code avordimesh inja impor kardim)
 // import { json } from "stream/consumers";  ////zare_nk_040417_commented(estefadeh ham nashod)
 
-
 import "@/styles/shoppingbasketCss.css";
 
 import '@zxing/browser'; // Import CSS if needed  //zare_nk_050208_added
@@ -1198,8 +1197,6 @@ export default function ShallowRoutingExample() {
     //   });
     ////zare_nk_050310_nokteh_end(rahe 1(code kamtar sorate kamtar))
 
-
-
     ////zare_nk_050310_nokteh_st(rahe 2(code bishtar sorate bishtar))
     const video = document.getElementById("videoForzxing") as HTMLVideoElement | null;
     if (!video) {
@@ -1230,7 +1227,6 @@ export default function ShallowRoutingExample() {
       video.muted = true;
       await video.play();
 
-
       const track = stream.getVideoTracks()[0];
       const caps = track.getCapabilities?.() as any;
 
@@ -1257,7 +1253,6 @@ export default function ShallowRoutingExample() {
           }
         }
 
-
         if (advanced.length) {
           await track.applyConstraints({ advanced } as any);
         }
@@ -1277,15 +1272,16 @@ export default function ShallowRoutingExample() {
             const text = result.getText();
             // متوقف کردن اسکن پس از شناسایی
             control.stop();
-            stream?.getTracks().forEach((t) => t.stop());
+            stream?.getTracks().forEach((t) => t.stop());   ////okkk
 
             const bootstrap = await getBootstrap();
             const modal = new bootstrap.Modal(
               document.getElementById("seePricesModal")
             );
             modal.hide();
-            openprodDetModal(/* 6262831000503 */ text);
-            return;
+            // openprodDetModal(text);  ////zare_nk_050311_commented(chon nemikhaim detaails bebinim va mikhaim sari be sabad bere)
+            addDetectedToCart(text.toString());  ////zare_nk_050311_added(chon nemikhaim detaails bebinim va mikhaim sari be sabad bere)
+            return;   ////okkk
           } else {
             // console.log('zare_nk_050208-ShowCamera called!!-004');
             // const { NotFoundException } = await import("@zxing/library");  //zare_nk_050211_commented(bordimesh dar ebtedaye file import kardim(mesle importe baghiyeye packageha))
@@ -1303,8 +1299,6 @@ export default function ShallowRoutingExample() {
       stream?.getTracks().forEach((t) => t.stop());
     }
     ////zare_nk_050310_nokteh_end(rahe 2(code bishtar sorate bishtar))
-
-
 
   }
 
@@ -1463,6 +1457,21 @@ export default function ShallowRoutingExample() {
           span.innerText = "لطفا ابتدا آنلاین شوید";
         }
       }
+      ////zare_nk_050311_added_st
+      else {
+        const bootstrap = await getBootstrap();
+        const mymodalForWarning = new bootstrap.Modal(
+          document.getElementById("mymodalForWarning")
+        );
+        mymodalForWarning.show();
+        const span = document.querySelector(
+          "#mymodalForWarning .errorInMymodalForWarning"
+        );
+        if (span instanceof HTMLElement) {
+          span.innerText = "01ارتباط با سرور برقرار نشد";
+        }
+      }
+      ////zare_nk_050311_added_end
     }
   }
 
@@ -1719,6 +1728,21 @@ export default function ShallowRoutingExample() {
           span.innerText = "لطفا ابتدا آنلاین شوید";
         }
       }
+      ////zare_nk_050311_added_st
+      else {
+        const bootstrap = await getBootstrap();
+        const mymodalForWarning = new bootstrap.Modal(
+          document.getElementById("mymodalForWarning")
+        );
+        mymodalForWarning.show();
+        const span = document.querySelector(
+          "#mymodalForWarning .errorInMymodalForWarning"
+        );
+        if (span instanceof HTMLElement) {
+          span.innerText = "01ارتباط با سرور برقرار نشد";
+        }
+      }
+      ////zare_nk_050311_added_end
     }
   }
 
@@ -1826,6 +1850,21 @@ export default function ShallowRoutingExample() {
               span.innerText = "لطفا ابتدا آنلاین شوید";
             }
           }
+          ////zare_nk_050311_added_st
+          else {
+            const bootstrap = await getBootstrap();
+            const mymodalForWarning = new bootstrap.Modal(
+              document.getElementById("mymodalForWarning")
+            );
+            mymodalForWarning.show();
+            const span = document.querySelector(
+              "#mymodalForWarning .errorInMymodalForWarning"
+            );
+            if (span instanceof HTMLElement) {
+              span.innerText = "01ارتباط با سرور برقرار نشد";
+            }
+          }
+          ////zare_nk_050311_added_end
         }
       }
     }
@@ -1961,6 +2000,21 @@ export default function ShallowRoutingExample() {
           span.innerText = "لطفا ابتدا آنلاین شوید";
         }
       }
+      ////zare_nk_050311_added_st
+      else {
+        const bootstrap = await getBootstrap();
+        const mymodalForWarning = new bootstrap.Modal(
+          document.getElementById("mymodalForWarning")
+        );
+        mymodalForWarning.show();
+        const span = document.querySelector(
+          "#mymodalForWarning .errorInMymodalForWarning"
+        );
+        if (span instanceof HTMLElement) {
+          span.innerText = "01ارتباط با سرور برقرار نشد";
+        }
+      }
+      ////zare_nk_050311_added_end
     }
   }
 
@@ -2130,6 +2184,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "01ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     }
   }
@@ -2349,6 +2418,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "01ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     }
   }

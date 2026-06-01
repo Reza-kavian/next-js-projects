@@ -22,7 +22,7 @@ const publicPaths = [
   "/.well-known",
   // "/.well-known/appspecific/com.chrome.devtools.json"//zare_nk_040220_commented(/.well-known/ neveshtam ke zirshakhehaye digarash ye vaght seda zadeh shodand ham dar in araye begonjand)
   "/images", //zare_nk_040311_nokteh(age in ro nagzarim tamame akshaye ba src="/images/..." ra barname be onvane masir dar nazar migire)
-  "/discountsAndOffers",
+  "/discountsAndOffers",    
   "/games", //zare_nk_040331_added
   "/o/oauth2", //zare_nk_040419_added
   "/redirect-mobile", //zare_nk_040930_added_st_testi

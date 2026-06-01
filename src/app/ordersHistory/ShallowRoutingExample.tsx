@@ -184,6 +184,21 @@ export default function ShallowRoutingExample() {
             span.innerText = "لطفا ابتدا آنلاین شوید";
           }
         }
+        ////zare_nk_050311_added_st
+        else {
+          const bootstrap = await getBootstrap();
+          const mymodalForWarning = new bootstrap.Modal(
+            document.getElementById("mymodalForWarning")
+          );
+          mymodalForWarning.show();
+          const span = document.querySelector(
+            "#mymodalForWarning .errorInMymodalForWarning"
+          );
+          if (span instanceof HTMLElement) {
+            span.innerText = "01ارتباط با سرور برقرار نشد";
+          }
+        }
+        ////zare_nk_050311_added_end
       }
     }
   }
@@ -279,6 +294,21 @@ export default function ShallowRoutingExample() {
               span.innerText = "لطفا ابتدا آنلاین شوید";
             }
           }
+          ////zare_nk_050311_added_st
+          else {
+            const bootstrap = await getBootstrap();
+            const mymodalForWarning = new bootstrap.Modal(
+              document.getElementById("mymodalForWarning")
+            );
+            mymodalForWarning.show();
+            const span = document.querySelector(
+              "#mymodalForWarning .errorInMymodalForWarning"
+            );
+            if (span instanceof HTMLElement) {
+              span.innerText = "01ارتباط با سرور برقرار نشد";
+            }
+          }
+          ////zare_nk_050311_added_end
         }
       }
     }
