@@ -1,25 +1,27 @@
 ////zare_nk_050131_okk
-"use client"; 
-import { useEffect, useState, useRef, useCallback ,memo} from "react";
+"use client";
+import { useEffect, useState, useRef, useCallback, memo } from "react";
 import Styles from "@/styles/components/dooz.module.css";
 
 type SquareProps = {
-  value: string | null;
+  // value: string | null;
+  value: string | null | number;
   onSquareClick: () => void;
   andis: number;
   refForBtn: React.RefObject<(HTMLButtonElement | null)[]>;
-  className?: string;
+  buttonContClassName?: string;
+  buttonClassName?: string;
 };
 
-function Square({ value, onSquareClick, andis, refForBtn }: SquareProps) {
-  return (  //zare_nk_050122_nokteh(tahlilshe ke be key niaz dare ya na!!)
-    <div className={Styles.tripleInRow}>
+function Square({ value, onSquareClick, andis, refForBtn, buttonContClassName, buttonClassName }: SquareProps) {
+  return (  //zare_nk_050122_nokteh(tahlilshe ke be key niaz dare ya na!!) 
+    <div className={buttonContClassName}>
       <button
         ref={(e) => {
           refForBtn.current[andis] = e;
         }}
         id={andis.toString()}
-        className={Styles.mohreh}
+        className={buttonClassName}
         onClick={onSquareClick}
         style={{ padding: "0px" }}
       >
@@ -29,7 +31,8 @@ function Square({ value, onSquareClick, andis, refForBtn }: SquareProps) {
   );
 }
 
-type SquareValue = "X" | "O" | null;   //zare_nk_041015_nokteh(SquareValue yek type ast ke ya X ya O ya null hast)
+// type SquareValue = "X" | "O" | null ;   //zare_nk_041015_nokteh(SquareValue yek type ast ke ya X ya O ya null hast)  ////zare_nk_050409_commented
+type SquareValue = "X" | "O" | null | number;   //zare_nk_041015_nokteh(SquareValue yek type ast ke ya X ya O ya null hast)  ////zare_nk_050409_added(ta andise akharin mohreh ra ham dar har archive dashteh bashim ke range mokhodi bedim beheshon(yani vaghti ke jump mizanim be archive haye ghabli akharin mohre ro nokhodi bala biare))
 type Squares = SquareValue[];   //zare_nk_041015_nokteh(Squares yek type ast ke arayeh ei az noe SquareValue hast,yani maghadiresh faghat X ya O ya null hast) 
 type BtnColor = string | null;   //zare_nk_041015_nokteh(BtnColor range dokmeh ra moshakhas mikoneh ke noe reshtei ast)
 
@@ -42,8 +45,10 @@ type BoardProps = {
   setTimer: React.Dispatch<React.SetStateAction<number>>;  //zare_nk_040525_nokteh(setState meghdardehiye state timer)
   xIsNextState: boolean;  //zare_nk_040525_nokteh(state ke mige nobate x hast ya o)
   setXIsNextState: React.Dispatch<React.SetStateAction<boolean>>;  //zare_nk_040525_nokteh(setState meghdardehiye state xIsNextState)
+  lastMove: boolean;  ////zare_nk_050410_added
   setLastMove: React.Dispatch<React.SetStateAction<boolean>>;  //zare_nk_040525_nokteh(state ke mige dokmehaye dooz click shodeh ya dokmehaye archiv) 
   BtnsColor: BtnColor[];    //zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
+  setBtnsColor: React.Dispatch<React.SetStateAction<BtnColor[]>>;  ////zare_nk_050410_added
   intervalRef: React.RefObject<NodeJS.Timeout | null>;  //zare_nk_040525(useRefe modiriate timer)
   timerDisplay: string;  //zare_nk_040528(useRefe taeine khasiate display tage namayeshe timer)
   setTimerDisplay: React.Dispatch<React.SetStateAction<string>>;   //zare_nk_040528_nokteh(setState meghdardehiye state timerDisplay)
@@ -53,6 +58,9 @@ type BoardProps = {
   setMToString: React.Dispatch<React.SetStateAction<string | null>>;   //zare_nk_040528_nokteh(setState meghdardehiye state mToString)
   sToString: string | null;  //zare_nk_040528_nokteh(state meghdare saniyeh timer)
   setSToString: React.Dispatch<React.SetStateAction<string | null>>;   //zare_nk_040528_nokteh(setState meghdardehiye state sToString)
+
+  currentMove: number;   ////zare_nk_050410_added
+  refFornextSquares: React.RefObject<SquareValue[]|null>;  ////zare_nk_050410_added
 };
 
 function Board({
@@ -63,8 +71,10 @@ function Board({
   setTimer,
   xIsNextState,
   setXIsNextState,
+  lastMove,     ////zare_nk_050410_added
   setLastMove,
   BtnsColor,
+  setBtnsColor,
   intervalRef,
   timerDisplay,
   setTimerDisplay,
@@ -74,8 +84,13 @@ function Board({
   setMToString,
   sToString,
   setSToString,
+  currentMove,    ////zare_nk_050410_added
+  refFornextSquares,  ////zare_nk_050410_added
 }: BoardProps) {
   console.log('zare_nk_050126-Board called!!-squares: ' + squares);
+  console.log(
+    "050411-BtnsColor is: " + JSON.stringify(BtnsColor)
+  );
   const [lastButton, setLastButton] = useState<number | null>(  //zare_nk_040528_nokteh(state ke andise dokmeh ra dar arayeye Squares midahad,va dar har handleClick ke haman rooydade clicke dokmehaye dooz ast meghdar migireh)
     localStorage.getItem("lastButton") != null
       ? JSON.parse(localStorage.getItem("lastButton")!)
@@ -87,38 +102,66 @@ function Board({
   const xIsNextRef = useRef(xIsNextState);   //zare_nk_040528_nokteh(useRefe haviye meghdare feliye xIsNextState,xIsNextState ra dar useRef 
   // rikhtim ke dar renderhaye component meghdarash hefz shavad)
 
-  useEffect(() => {  //zare_nk_040528_nokteh(range dokmehaye dooz ra inja taein mikonim)
-    if (localStorage.getItem("BtnsColor")) {
-      console.log(
-        "zare_nk_040225-Board called!!-localStorage.BtnsColor: " +
-        localStorage.getItem("BtnsColor")
-      );
-      const storedBtnsColor = localStorage.getItem("BtnsColor");
-      let jsonedBtnsColor;
-      if (storedBtnsColor) {
-        jsonedBtnsColor = JSON.parse(storedBtnsColor);
-      } else {
-        jsonedBtnsColor = null; // یا مقدار پیش‌فرض دیگه
-      }
-      if (jsonedBtnsColor) {  //zare_nk_041015_nokteh(jsonedBtnsColor arrayeei az ranghaye dokmeh ha hast)
-        jsonedBtnsColor.map((item_: string, index: number) => {
-          if (refForBtn.current[index]) {    //zare_nk_041015_nokteh(age dokmeye khaneye index vojood dasht dakhele if rangesh ro taein mikonim
-            refForBtn.current[index].classList.add(jsonedBtnsColor[index]);
-          }
-        });
-      }
-    }
-  }, []);
+  const [status, setStatus] = useState<string | null>(
+    localStorage.getItem("status") != null
+      ? JSON.parse(localStorage.getItem("status")!)
+      : null
+  );  ////zare_nk_050410_added
 
   useEffect(() => {
     xIsNextRef.current = xIsNextState;
     intervalRef.current = setInterval(function () {
-      if (calculateWinner(squares)) {
-        setTimerDisplay("none");
+      const winner = calculateWinner(squares);
+      if (winner) {
+        // setTimerDisplay("none");  ////zare_nk_050410_commented
         if (intervalRef.current !== null) {
           clearInterval(intervalRef.current);
         }
         setTimer(-1);
+
+        // ////zare_nk_050410_added_st
+        // let tempArray = null;
+        // tempArray = [...Array(9)].map((item1, index1) => {
+        //   let thisStyles = Styles.mohreh;
+        //   winner.map((item, index2) => {
+        //     if (index2 == 0) {
+        //       //khaneye avvale winner nobat ra taein mikone(X ya Y)
+        //       return;
+        //     }
+        //     if (
+        //       typeof item === "number" && // تضمین عدد بودن  
+        //       item == index1 &&
+        //       item != lastButton
+        //     ) {
+        //       // BtnsColor[winner[index]] = Styles.lineWined;
+        //       // return(Styles.lineWined);
+        //       thisStyles = Styles.lineWined;
+        //     } else if (
+        //       typeof item === "number" && // تضمین عدد بودن  
+        //       item == index1 &&
+        //       item == lastButton
+        //     ) {
+        //       // BtnsColor[winner[index]] = Styles.mohrehWined;
+        //       // return(Styles.mohrehWined);
+        //       thisStyles = Styles.mohrehWined;
+        //     }
+        //     // else{
+        //     //   thisStyles = Styles.mohreh;
+        //     // }                 
+        //   })
+        //   console.log("thisStyles oo: " + thisStyles);
+        //   return (thisStyles);
+        // })
+        //   setBtnsColor(() => {
+        //   return (
+        //     tempArray
+        //   )
+        // });
+
+        // console.log("1212-tempArray2: " + JSON.stringify(tempArray))
+        // localStorage.setItem("BtnsColor", JSON.stringify(tempArray));
+        // ////zare_nk_050410_added_end
+
         return;
       }
       ////  //zare_nk_040120_added_st(baraye disable kardane dokmeha baraye entezar)(and commented)
@@ -135,7 +178,8 @@ function Board({
           setXIsNextState(!xIsNextRef.current);
           // setXIsNextState(!xIsNextState);   
           // setXIsNextState((cur) =>{return !cur} );  //not ok //zare_nk_040528_nokteh(nadorost hast,ehtemalan chon yek setState booleani dakhele setState dige mokhtal mishe)
-          squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O";  //zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)
+          // squares[squares.length - 1] = !xIsNextRef.current ? "X" : "O";  //zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)  ////zare_nk_050409_commented
+          squares[squares.length - 2] = !xIsNextRef.current ? "X" : "O";  //zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)  ////zare_nk_050409_added
           localStorage.setItem(   //zare_nk_041016_nokteh(tavize nobat bekhatere etmame mohlate zamani)
             "xIsNextState",
             JSON.stringify(!xIsNextRef.current)
@@ -208,6 +252,7 @@ function Board({
         localStorage.setItem("timer", JSON.stringify(curTimer - 1000));
         return curTimer - 1000;
       });
+
     }, 1000);
 
     return () => {
@@ -217,7 +262,8 @@ function Board({
     };
   }, [timer, xIsNextState]);
 
-  function handleClick(i: number) {
+  // const refFornextSquares = useRef<SquareValue[]>(null);
+  async function handleClick(i: number) {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -226,16 +272,26 @@ function Board({
       return i;
     });
     localStorage.setItem("lastButton", JSON.stringify(i));
-    const nextSquares = squares.slice();
+    // const nextSquares = squares.slice();
+    refFornextSquares.current = squares.slice();
     if (xIsNextState == true) {
-      nextSquares[i] = "X";  //zare_nk_041016_nokteh(az null be X)
+      // nextSquares[i] = "X";  //zare_nk_041016_nokteh(az null be X)
+      refFornextSquares.current[i] = "X";  //zare_nk_041016_nokteh(az null be X)
     } else {
-      nextSquares[i] = "O";  //zare_nk_041016_nokteh(az null be O)
+      // nextSquares[i] = "O";  //zare_nk_041016_nokteh(az null be O)
+      refFornextSquares.current[i] = "O";  //zare_nk_041016_nokteh(az null be O)
     }
+    // nextSquares[nextSquares.length - 1] = i; ////zare_nk_050409_added
+    refFornextSquares.current[refFornextSquares.current.length - 1] = i; ////zare_nk_050409_added
     //zare_nk_040225_commented_st(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
     setXIsNextState((cur) => {
       localStorage.setItem("xIsNextState", JSON.stringify(!cur));
-      squares[squares.length - 1] = !cur ? "X" : "O"; ////zare_nk_050130_nokteh(engar ezafiye va bimoredeh!-hatman tahlilshe)
+      // squares[squares.length - 1] = !cur ? "X" : "O";   ////zare_nk_050409_commented
+      // squares[squares.length - 2] = cur ? "X" : "O";      ////zare_nk_050409_added(khaneye akhar marboot be akharin click va khaneye ghable akhar marboot be nobate x ya y hast)  
+      // nextSquares[squares.length - 2] = cur ? "X" : "O";      ////zare_nk_050409_added(khaneye akhar marboot be akharin click va khaneye ghable akhar marboot be nobate x ya y hast)    
+      if (refFornextSquares.current) {
+        refFornextSquares.current[refFornextSquares.current.length - 2] = cur ? "X" : "O";      ////zare_nk_050409_added(khaneye akhar marboot be akharin click va khaneye ghable akhar marboot be nobate x ya y hast)    
+      }
       return !cur;
     });
     //zare_nk_040225_commented_end(rahe1-vali dalili be comment nist,chon dakhaele yek setState digeh nabood ke chon boolean barmigardoone amal nakoneh va majboor shim az rahe2 estefadeh konim)
@@ -246,98 +302,306 @@ function Board({
     // //zare_nk_040225_added_end(rahe2-rahe1 chon biniaz az ref hast az nazare chatGpt behtare)
     setTimer(5000);
     localStorage.setItem("timer", JSON.stringify(5000));
-    [...Array(9)].map((_, index) => {
-      if (index == i) {
-        refForBtn.current[index]?.classList.add(Styles.mohrehCliked);
-        refForBtn.current[index]?.classList.remove(
-          Styles.mohreh,
-          Styles.mohrehWined,
-          Styles.lineWined
-        );
-        BtnsColor[index] = Styles.mohrehCliked;
-      } else {
-        refForBtn.current[index]?.classList.add(Styles.mohreh);
-        refForBtn.current[index]?.classList.remove(
-          Styles.mohrehCliked,
-          Styles.mohrehWined,
-          Styles.lineWined
-        );
-        BtnsColor[index] = Styles.mohreh;
-      }
-      // refForBtn.current[index].disabled="disabled";  //zare_nk_040120(baraye disable kardane dokmeha baraye entezar)  
-    });
-    localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
+
+    ////zare_nk_050410_added_st  
+    // const winner = calculateWinner(refFornextSquares.current);
+    // // let status;  ////zare_nk_050410_commented(be jaye moteghayer az useState estefadeh shod)
+
+    // if (winner) {
+    //   console
+    //   let tempArray = null;
+    //   tempArray = [...Array(9)].map((item1, index1) => {
+    //     let thisStyles = Styles.mohreh;
+    //     winner.map((item, index2) => {
+    //       if (index2 == 0) {
+    //         //khaneye avvale winner nobat ra taein mikone(X ya Y)
+    //         return;
+    //       }
+    //       if (
+    //         typeof item === "number" && // تضمین عدد بودن  
+    //         item == index1 &&
+    //         item != i// lastButton
+    //       ) {
+    //         console.log('1313-1-item: ' + item + '-lastButton: ' + lastButton + '-i: ' + i);
+    //         // BtnsColor[winner[index]] = Styles.lineWined;
+    //         // return(Styles.lineWined);
+    //         thisStyles = Styles.lineWined;
+    //       } else if (
+    //         typeof item === "number" && // تضمین عدد بودن  
+    //         item == index1 &&
+    //         item == i //lastButton
+    //       ) {
+    //         console.log('1313-2-item: ' + item + '-lastButton: ' + lastButton + '-i: ' + i);
+    //         // BtnsColor[winner[index]] = Styles.mohrehWined;
+    //         // return(Styles.mohrehWined);
+    //         thisStyles = Styles.mohrehWined;
+    //       }
+    //       // else{
+    //       //   thisStyles = Styles.mohreh;
+    //       // }                 
+    //     })
+    //     console.log("thisStyles oo: " + thisStyles);
+    //     return (thisStyles);
+    //   })
+    //   setBtnsColor(() => {
+    //     return (
+    //       tempArray
+    //     )
+    //   });
+
+    //   console.log("1212-tempArray2: " + JSON.stringify(tempArray))
+    //   localStorage.setItem("BtnsColor", JSON.stringify(tempArray));
+
+    //   // status = winner[0] + " : برنده";  ////zare_nk_050410_commented
+
+
+    //   setStatus(winner[0] + " : برنده");  ////zare_nk_050410_added
+    //   localStorage.setItem("status", JSON.stringify(winner[0] + " : برنده")); ////zare_nk_050410_added
+    //   setTimerDisplay("none");  ////zare_nk_050410_added
+    //   localStorage.setItem("timerDisplay", JSON.stringify("none"));  ////zare_nk_050410
+
+    //   console.log(
+    //     "winner not nul-typeof(winner):" +
+    //     typeof winner +
+    //     "-winner.lenght: " +
+    //     winner.length +
+    //     "-winner: " +
+    //     JSON.stringify(winner) +
+    //     "---status: " +
+    //     status
+    //   );
+
+    //   console.log(
+    //     "050411-storedBtnsColor is: " + localStorage.getItem("BtnsColor")
+    //   );
+
+    //   if (refForWinnerOrNobat.current) {
+    //     refForWinnerOrNobat.current.style.color = "blue";
+    //   }
+
+    // }
+    // else {
+    //   let tempArray = [...Array(9)].map((item, index) => {
+    //         if (index == i) {
+    //           // ////zare_nk_050410_commented_st
+    //           // // refForBtn.current[index]?.classList.add(Styles.mohrehCliked);
+    //           // // refForBtn.current[index]?.classList.remove(
+    //           // //   Styles.mohreh,
+    //           // //   Styles.mohrehWined,
+    //           // //   Styles.lineWined
+    //           // // );
+    //           // ////zare_nk_050410_commented_end
+    //           // BtnsColor[index] = Styles.mohrehCliked;   
+    //           return (Styles.mohrehCliked);
+    //         } else {
+    //           // ////zare_nk_050410_commented_st
+    //           // // refForBtn.current[index]?.classList.add(Styles.mohreh);
+    //           // // refForBtn.current[index]?.classList.remove(
+    //           // //   Styles.mohrehCliked,
+    //           // //   Styles.mohrehWined,
+    //           // //   Styles.lineWined
+    //           // // );
+    //           // ////zare_nk_050410_commented_end
+    //           // BtnsColor[index] = Styles.mohreh;
+    //           return (Styles.mohreh);
+    //         }
+    //         // refForBtn.current[index].disabled="disabled";  //zare_nk_040120(baraye disable kardane dokmeha baraye entezar)  
+    //       });
+
+    //   await setBtnsColor(() => {
+    //     return (
+    //       tempArray   
+    //     )
+    //   });
+    //   console.log("050411-tempArray: " + tempArray)
+
+    //   // localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
+    //   localStorage.setItem("BtnsColor", JSON.stringify(tempArray));
+
+    //   console.log("winner nulle-xIsNextState: " + xIsNextState);
+
+    //   // status = (xIsNextState ? "X" : "O") + " : نوبت بازیکن ";  ////zare_nk_050410_commented
+    //   setStatus((xIsNextState ? "X" : "O") + " : نوبت بازیکن ");  ////zare_nk_050410_added
+    //   localStorage.setItem("status", JSON.stringify((xIsNextState ? "X" : "O") + " : نوبت بازیکن ")); ////zare_nk_050410_added
+
+    //   if (refForWinnerOrNobat.current) {
+    //     refForWinnerOrNobat.current.style.color = "inherit";
+    //   }
+    // }
+    ////zare_nk_050410_added_end
+
     setLastMove(true);
     localStorage.setItem("lastMove", JSON.stringify(true));
-    onPlay(nextSquares);
+    // onPlay(nextSquares);  ////zare_nk_050410_commented
+    onPlay(refFornextSquares.current);  ////zare_nk_050410_added
   }
 
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = winner[0] + " : برنده";
-    console.log(
-      "winner not nul-typeof(winner):" +
-      typeof winner +
-      "-winner.lenght: " +
-      winner.length +
-      "-winner: " +
-      JSON.stringify(winner) +
-      "---status: " +
-      status
-    );
-    const storedBtnsColor = localStorage.getItem("BtnsColor");
-    const jsonedBtnsColor = storedBtnsColor !== null ? JSON.parse(storedBtnsColor) : null;
-    winner.map((_, index) => {
-      if (index == 0) {
-        //khaneye avvale winner nobat ra taein mikone(X ya Y)
-        return;
-      }
-      if (
-        typeof winner[index] === "number" && // تضمین عدد بودن    
-        winner[index] != lastButton &&
-        refForBtn.current[winner[index]] != null
-      ) {
-        refForBtn.current[winner[index]]?.classList.add(Styles.lineWined);
-        BtnsColor[winner[index]] = Styles.lineWined;
-      } else if (
-        typeof winner[index] === "number" &&
-        winner[index] != lastButton &&
-        jsonedBtnsColor != null
-      ) {
-        BtnsColor[winner[index]] = Styles.lineWined;
-      } else if (
-        typeof winner[index] === "number" &&
-        winner[index] == lastButton &&
-        refForBtn.current[winner[index]] != null
-      ) {
-        refForBtn.current[winner[index]]?.classList.remove(
-          Styles.lineWined,
-          Styles.mohreh,
-          Styles.mohrehCliked
-        );
-        refForBtn.current[winner[index]]?.classList.add(Styles.mohrehWined);
-        BtnsColor[winner[index]] = Styles.mohrehWined;
-      } else if (
-        typeof winner[index] === "number" &&
-        winner[index] == lastButton &&
-        jsonedBtnsColor != null
-      ) {
-        BtnsColor[winner[index]] = Styles.mohrehWined;
-      }
-    });
-    localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
+  ////zare_nk_050410_added_st
+  useEffect(() => {
+    console.log('11111');
+    ////zare_nk_050410_added_st 
+    let winner = null;
+    if (refFornextSquares.current) {
+      winner = calculateWinner(refFornextSquares.current);
+    }
 
-    if (refForWinnerOrNobat.current) {
-      refForWinnerOrNobat.current.style.color = "blue";
+    // let status;  ////zare_nk_050410_commented(be jaye moteghayer az useState estefadeh shod)
+
+    if (winner) {
+      console.log('11111-winner');
+      let tempArray = null;
+      tempArray = [...Array(9)].map((item1, index1) => {
+        let thisStyles = Styles.mohreh;
+        winner.map((item, index2) => {
+          if (index2 == 0) {
+            //khaneye avvale winner nobat ra taein mikone(X ya Y)
+            return;
+          }
+          if (
+            typeof item === "number" && // تضمین عدد بودن  
+            item == index1 &&
+            item != lastButton// lastButton
+          ) {
+            console.log('1313-1-item: ' + item + '-lastButton: ' + lastButton + '-currentMove: ' + currentMove);
+            // BtnsColor[winner[index]] = Styles.lineWined;
+            // return(Styles.lineWined);
+            thisStyles = Styles.lineWined;
+          } else if (
+            typeof item === "number" && // تضمین عدد بودن  
+            item == index1 &&
+            item == lastButton //lastButton
+          ) {
+            console.log('1313-2-item: ' + item + '-lastButton: ' + lastButton + '-i: ' + currentMove);
+            // BtnsColor[winner[index]] = Styles.mohrehWined;
+            // return(Styles.mohrehWined);
+            thisStyles = Styles.mohrehWined;
+          }
+          // else{
+          //   thisStyles = Styles.mohreh;
+          // }                 
+        })
+        console.log("thisStyles oo: " + thisStyles);
+        return (thisStyles);
+      });
+
+      setBtnsColor(() => {
+        return (
+          tempArray
+        )
+      });
+
+      console.log("1212-tempArray2: " + JSON.stringify(tempArray))
+      localStorage.setItem("BtnsColor", JSON.stringify(tempArray));
+
+      // status = winner[0] + " : برنده";  ////zare_nk_050410_commented
+
+      setStatus(winner[0] + " : برنده");  ////zare_nk_050410_added
+      localStorage.setItem("status", JSON.stringify(winner[0] + " : برنده")); ////zare_nk_050410_added
+      setTimerDisplay("none");  ////zare_nk_050410_added
+      localStorage.setItem("timerDisplay", JSON.stringify("none"));  ////zare_nk_050410
+
+      console.log(
+        "winner not nul-typeof(winner):" +
+        typeof winner +
+        "-winner.lenght: " +
+        winner.length +
+        "-winner: " +
+        JSON.stringify(winner) +
+        "---status: " +
+        status
+      );
+
+      console.log(
+        "050411-storedBtnsColor is: " + localStorage.getItem("BtnsColor")
+      );
+
+      if (refForWinnerOrNobat.current) {
+        refForWinnerOrNobat.current.style.color = "blue";
+      }
     }
-  } else {
-    console.log("winner nulle-xIsNextState: " + xIsNextState);
-    status = (xIsNextState ? "X" : "O") + " : نوبت بازیکن ";
-    if (refForWinnerOrNobat.current) {
-      refForWinnerOrNobat.current.style.color = "inherit";
+    else {
+      console.log('11111-!!winner');
+      let tempArray = [...Array(9)].map((item, index) => {
+        if (index == currentMove) {
+          // ////zare_nk_050410_commented_st
+          // // refForBtn.current[index]?.classList.add(Styles.mohrehCliked);
+          // // refForBtn.current[index]?.classList.remove(
+          // //   Styles.mohreh,
+          // //   Styles.mohrehWined,
+          // //   Styles.lineWined
+          // // );
+          // ////zare_nk_050410_commented_end
+          // BtnsColor[index] = Styles.mohrehCliked;   
+          return (Styles.mohrehCliked);
+        } else {
+          // ////zare_nk_050410_commented_st
+          // // refForBtn.current[index]?.classList.add(Styles.mohreh);
+          // // refForBtn.current[index]?.classList.remove(
+          // //   Styles.mohrehCliked,
+          // //   Styles.mohrehWined,
+          // //   Styles.lineWined
+          // // );
+          // ////zare_nk_050410_commented_end
+          // BtnsColor[index] = Styles.mohreh;
+          return (Styles.mohreh);
+        }
+        // refForBtn.current[index].disabled="disabled";  //zare_nk_040120(baraye disable kardane dokmeha baraye entezar)  
+      });
+
+      setBtnsColor(() => {
+        return (
+          tempArray
+        )
+      });
+      console.log("050411-tempArray: " + tempArray)
+
+      // localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
+      localStorage.setItem("BtnsColor", JSON.stringify(tempArray));
+
+      console.log("winner nulle-xIsNextState: " + xIsNextState);
+
+      // status = (xIsNextState ? "X" : "O") + " : نوبت بازیکن ";  ////zare_nk_050410_commented
+      setStatus((xIsNextState ? "X" : "O") + " : نوبت بازیکن ");  ////zare_nk_050410_added
+      localStorage.setItem("status", JSON.stringify((xIsNextState ? "X" : "O") + " : نوبت بازیکن ")); ////zare_nk_050410_added
+
+      if (refForWinnerOrNobat.current) {
+        refForWinnerOrNobat.current.style.color = "inherit";
+      }
     }
-  }
+    ////zare_nk_050410_added_end
+    // }, [currentMove]);
+  }, [refFornextSquares.current]);
+  ////zare_nk_050410_added_end
+
+  // const winner = calculateWinner(squares);
+  // let status;
+  // if (winner) {
+  //   status = winner[0] + " : برنده";
+  //   console.log(
+  //     "winner not nul-typeof(winner):" +
+  //     typeof winner +
+  //     "-winner.lenght: " +
+  //     winner.length +
+  //     "-winner: " +
+  //     JSON.stringify(winner) +
+  //     "---status: " +
+  //     status
+  //   );
+
+  //   console.log(
+  //     "050411-storedBtnsColor is: " + localStorage.getItem("BtnsColor")
+  //   ); 
+
+  //   if (refForWinnerOrNobat.current) {
+  //     refForWinnerOrNobat.current.style.color = "blue";
+  //   }
+  // } else {
+  //   console.log("winner nulle-xIsNextState: " + xIsNextState);
+  //   status = (xIsNextState ? "X" : "O") + " : نوبت بازیکن ";
+  //   if (refForWinnerOrNobat.current) {
+  //     refForWinnerOrNobat.current.style.color = "inherit";
+  //   }
+  // }
 
   return (
     <>
@@ -362,78 +626,52 @@ function Board({
         >
           {status}
         </div>
-        <div
-          ref={refForTimerCont}
-          id="timermoveOpportunityCont"
-          style={{
-            display: timerDisplay,
-            flexFlow: "row",
-          }}
-        >
-          <div
-            ref={refForTimer}
-            id="timermoveOpportunity"
-            style={{ display: "flex", flexFlow: "row", color: "red" }}
-          >
-            {hToString != null && (
-              <>
-                <span
-                  style={{
-                    borderRadius: "5px",
-                    width: "30px",
-                    height: "30px",
-                    backgroundColor: "red",
-                    color: "white",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  {hToString}
-                </span>
-                <span
-                  style={{
-                    color: "red",
-                    padding: "0px 5px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  :
-                </span>
-              </>
-            )}
+        {timerDisplay == 'flex' &&
 
-            {mToString && (
-              <span
-                style={{
-                  borderRadius: "5px",
-                  width: "30px",
-                  height: "30px",
-                  backgroundColor: "red",
-                  color: "white",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                {mToString}
-              </span>
-            )}
-            {sToString && (
-              <>
-                <span
-                  style={{
-                    color: "red",
-                    padding: "0px 5px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  :
-                </span>
+          <div
+            ref={refForTimerCont}
+            id="timermoveOpportunityCont"
+            style={{
+              display: timerDisplay,
+              flexFlow: "row",
+            }}
+          >
+            <div
+              ref={refForTimer}
+              id="timermoveOpportunity"
+              style={{ display: "flex", flexFlow: "row", color: "red" }}
+            >
+              {hToString != null && (
+                <>
+                  <span
+                    style={{
+                      borderRadius: "5px",
+                      width: "30px",
+                      height: "30px",
+                      backgroundColor: "red",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {hToString}
+                  </span>
+                  <span
+                    style={{
+                      color: "red",
+                      padding: "0px 5px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    :
+                  </span>
+                </>
+              )}
+
+              {mToString && (
                 <span
                   style={{
                     borderRadius: "5px",
@@ -446,37 +684,66 @@ function Board({
                     alignItems: "center",
                   }}
                 >
-                  {sToString}
+                  {mToString}
                 </span>
-              </>
-            )}
-            {/* : <span style={{ borderRadius: '5px', width: '30px', height: '30px', backgroundColor: 'red', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              )}
+              {sToString && (
+                <>
+                  <span
+                    style={{
+                      color: "red",
+                      padding: "0px 5px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    :
+                  </span>
+                  <span
+                    style={{
+                      borderRadius: "5px",
+                      width: "30px",
+                      height: "30px",
+                      backgroundColor: "red",
+                      color: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {sToString}
+                  </span>
+                </>
+              )}
+              {/* : <span style={{ borderRadius: '5px', width: '30px', height: '30px', backgroundColor: 'red', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {mToString}
           </span>
           <span style={{ color: 'red', padding: '0px 5px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>:</span>
           <span style={{ borderRadius: '5px', width: '30px', height: '30px', backgroundColor: 'red', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             sToString
           </span> */}
-          </div>
+            </div>
 
-          <span
-            style={{
-              display: "flex",
-              flexFlow: "row",
-              alignItems: "center",
-              marginRight: "5px",
-              marginLeft: "5px",
-            }}
-          >
-            {" "}
-            :{" "}
-          </span>
-          <span
-            style={{ display: "flex", flexFlow: "row", alignItems: "center" }}
-          >
-            فرصت حرکت
-          </span>
-        </div>
+            <span
+              style={{
+                display: "flex",
+                flexFlow: "row",
+                alignItems: "center",
+                marginRight: "5px",
+                marginLeft: "5px",
+              }}
+            >
+              {" "}
+              :{" "}
+            </span>
+            <span
+              style={{ display: "flex", flexFlow: "row", alignItems: "center" }}
+            >
+              فرصت حرکت
+            </span>
+          </div>
+        }
       </div>
 
       <div
@@ -493,13 +760,30 @@ function Board({
         }}
       >
         {squares.map((_, index) => {
-          if (index == squares.length - 1) {
+          console.log('squares.length: ' + squares.length)
+          // if (index == squares.length - 1) {  ////zare_nk_050409_commented
+          if (index == squares.length - 1 || index == squares.length - 2) {  ////zare_nk_050409_added
             return;
           }
+
+          const storedBtnsColor = localStorage.getItem("BtnsColor");
+          let jsonedBtnsColor;
+          let buttonClassName = Styles.mohreh;
+          if (storedBtnsColor && storedBtnsColor != "undefined") {
+            console.log('storedBtnsColor iss: ' + storedBtnsColor)
+            jsonedBtnsColor = JSON.parse(storedBtnsColor);
+          } else {
+            jsonedBtnsColor = null; // یا مقدار پیش‌فرض دیگه
+          }
+          if (jsonedBtnsColor) {
+            buttonClassName = jsonedBtnsColor[index];
+          }
+
           return (
             <Square
               key={index}
-              className={Styles.tripleInRow}
+              buttonContClassName={Styles.tripleInRow}
+              buttonClassName={buttonClassName}
               value={squares[index]}
               onSquareClick={() => handleClick(index)}
               andis={index}
@@ -511,28 +795,37 @@ function Board({
     </>
   );
 }
-
+// SquareValue = "X" | "O" | null | number ; 
 export default function Game() {
   console.log("zare_nk_050126-Game called!!");
   const refForBtn = useRef<(HTMLButtonElement | null)[]>(Array(9).fill(null)); ////zare_nk_041015_nokteh(refForBtn yek useref ast ke arayeei az dokmehaye dooz ast)
-  const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);  ////zare_nk_040528_nokteh(arayehei 9 khanehi ke moadele range har dokmeye dooz ast)
+  // const BtnsColor: (string | null)[] = [...Array(9)].map(() => null);  ////zare_nk_050411_commented 
+  const [BtnsColor, setBtnsColor] = useState<(string | null)[]>([...Array(9)].map(() => null));  ////zare_nk_050411_added 
   const storedHistory = localStorage.getItem("history");
+  // console.log("ddddd-storedHistory: "+JSON.stringify(storedHistory))
   const [history, setHistory] = useState(
-    storedHistory !== null ? JSON.parse(storedHistory) : [Array(10).fill(null)]
+    // storedHistory !== null ? JSON.parse(storedHistory) : [Array(10).fill(null)]  ////zare
+    storedHistory !== null ? JSON.parse(storedHistory) : [Array(11).fill(null)]
   );
   console.log(
-    "zare_nk_040131-BtnsColor.len: " +
-    BtnsColor.length +
+    "zare_nk_040131-BtnsColor: " +
+    BtnsColor +
     "-history.len: " +
     history.length +
     "-history: " +
-    history
+    JSON.stringify(history)
   );
+  console.log(
+    "050410-history.len: " + history.length + "-history: " + JSON.stringify(history)
+  );
+
   const storedCurrentMove = localStorage.getItem("currentMove");
   const [currentMove, setCurrentMove] = useState(  ////zare_nk_040528_nokteh(shamele andise akhare arayeye history ast ke be vaziate feliye chineshe mohrehaye dooz eshare mikoneh)
     storedCurrentMove !== null ? JSON.parse(storedCurrentMove) : 0
   );
   const currentSquares = history[currentMove];
+  console.log("050410-storedHistory: " + JSON.stringify(storedHistory) + '-currentMove: ' + currentMove);
+  console.log("050410-currentSquares: " + JSON.stringify(currentSquares));
   const storedxIsNextState = localStorage.getItem("xIsNextState");
   const [xIsNextState, setXIsNextState] = useState(
     storedxIsNextState !== null ? JSON.parse(storedxIsNextState) : true
@@ -549,11 +842,17 @@ export default function Game() {
   );
 
   const intervalRef = useRef(null);
-  const [timerDisplay, setTimerDisplay] = useState("flex");
+
+  const storedTimerDisplay = localStorage.getItem("timerDisplay");
+  const [timerDisplay, setTimerDisplay] = useState(
+    storedTimerDisplay !== null ? JSON.parse(storedTimerDisplay) : "flex"
+  );
 
   const [hToString, setHToString] = useState<string | null>(null);
   const [mToString, setMToString] = useState<string | null>(null);
   const [sToString, setSToString] = useState<string | null>(null);
+
+  const refFornextSquares = useRef<SquareValue[]>(null);  ////zare_nk_050410_added
 
   const handlePlay = //useCallback(   
     (nextSquares: any) => {
@@ -563,13 +862,15 @@ export default function Game() {
       localStorage.setItem("history", JSON.stringify(nextHistory));
       setCurrentMove(nextHistory.length - 1);
       console.log("currentMove iss: " + currentMove);
-      localStorage.setItem("currentMove",JSON.stringify(nextHistory.length - 1));
+      localStorage.setItem("currentMove", JSON.stringify(nextHistory.length - 1));
     }
   //   , [history, currentMove]
   // );
 
-  function jumpTo(nextMove: number) {
+  async function jumpTo(nextMove: number) {
     setTimerDisplay("flex");
+    localStorage.setItem("timerDisplay", JSON.stringify("flex"));  ////zare_nk_050410
+
     console.log("zare_nk_040123-jumpTo called!!");
     // clearInterval(intervalRef.current);  //zare_nk_040214_commented(chon vaghti setTimer(5000) ma ra be useEffecte meghdardehiye intervalRef.current mibare va 
     // anja bad az setInterval dastore return clearInterval darim )
@@ -578,24 +879,53 @@ export default function Game() {
     setCurrentMove(nextMove);
     localStorage.setItem("currentMove", JSON.stringify(nextMove));
 
-    [...Array(9)].map((_, index) => {
-      refForBtn.current[index]?.classList.add(Styles.mohreh);
-      refForBtn.current[index]?.classList.remove(
-        Styles.mohrehCliked,
-        Styles.mohrehWined,
-        Styles.lineWined
-      );
-      BtnsColor[index] = Styles.mohreh;
+    refFornextSquares.current = history[nextMove].slice();   ////zare_nk_050410_added
+
+    let tempArray = null;
+    await setBtnsColor(() => {
+      return (
+        tempArray = [...Array(9)].map((item, index) => {
+          if (index == history[nextMove][history[nextMove].length - 1]) {
+            // ////zare_nk_050410_commented_st
+            // // refForBtn.current[index]?.classList.add(Styles.mohrehCliked);
+            // // refForBtn.current[index]?.classList.remove(
+            // //   Styles.mohreh,
+            // //   Styles.mohrehWined,
+            // //   Styles.lineWined
+            // // );
+            // ////zare_nk_050410_commented_end
+            // BtnsColor[index] = Styles.mohrehCliked;   
+            return (Styles.mohrehCliked);
+          } else {
+            // ////zare_nk_050410_commented_st
+            // // refForBtn.current[index]?.classList.add(Styles.mohreh);
+            // // refForBtn.current[index]?.classList.remove(
+            // //   Styles.mohrehCliked,
+            // //   Styles.mohrehWined,
+            // //   Styles.lineWined
+            // // );
+            // ////zare_nk_050410_commented_end
+            // BtnsColor[index] = Styles.mohreh;
+            return (Styles.mohreh);
+          }
+          // refForBtn.current[index].disabled="disabled";  //zare_nk_040120(baraye disable kardane dokmeha baraye entezar)  
+        })
+      )
     });
-    localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
+    console.log("050411-tempArray::: " + tempArray)
+    // localStorage.setItem("BtnsColor", JSON.stringify(BtnsColor));
+    localStorage.setItem("BtnsColor", JSON.stringify(tempArray));
+
     setLastMove(false);
     localStorage.setItem("lastMove", JSON.stringify(false));
     console.log(
       "zare_nk_040225-currentSquareee???: " +
-      JSON.stringify(history[nextMove][history[nextMove]])
+      // JSON.stringify(history[nextMove][history[nextMove]])
+      JSON.stringify(history[nextMove][history[nextMove].length - 1])
     );
 
-    if (history[nextMove][history[nextMove].length - 1] == "X") {
+    // if (history[nextMove][history[nextMove].length - 1] == "X") {   ////zare_nk_050409_commented(khaneye akhar marboot be akharin click va khaneye ghable akhar marboot be nobate x ya y hast)
+    if (history[nextMove][history[nextMove].length - 2] == "X") {   ////zare_nk_050409_added(khaneye akhar marboot be akharin click va khaneye ghable akhar marboot be nobate x ya y hast)
       setXIsNextState(false);
       localStorage.setItem("xIsNextState", JSON.stringify(false));
     } else {
@@ -610,7 +940,8 @@ export default function Game() {
     let mokhtasatInDescription = " ترتیب مهره های آرشیو : ";
     let SquareInHistory = history[move];
     SquareInHistory.map((square: string | null, index: number) => {
-      if (index == SquareInHistory.length - 1) {
+      // if (index == SquareInHistory.length - 1) {  ////zare_nk_050409_commented
+      if (index == SquareInHistory.length - 1 || index == SquareInHistory.length - 2) {  ////zare_nk_050409_added(khaneye akhar marboot be akharin click va khaneye ghable akhar marboot be nobate x ya y hast)
         return;
       }
       if (move == 0) {
@@ -678,7 +1009,9 @@ export default function Game() {
           xIsNextState={xIsNextState}
           setXIsNextState={setXIsNextState}
           setLastMove={setLastMove}
+          lastMove={lastMove}  ////zare_nk_050410_added
           BtnsColor={BtnsColor}
+          setBtnsColor={setBtnsColor}  ////zare_nk_050410_added
           intervalRef={intervalRef}
           timerDisplay={timerDisplay}
           setTimerDisplay={setTimerDisplay}
@@ -688,6 +1021,8 @@ export default function Game() {
           setMToString={setMToString}
           sToString={sToString}
           setSToString={setSToString}
+          currentMove={currentMove}    ////zare_nk_050410_added
+          refFornextSquares={refFornextSquares}   ////zare_nk_050410_added          
         />
       </div>
       <div className="game-info">

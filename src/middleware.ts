@@ -28,7 +28,7 @@ const publicPaths = [
   "/redirect-mobile", //zare_nk_040930_added_st_testi
   ////zare_nk_040522_added_st_movaghat(pak kardani)
   // "/ordersHistory",
-  // "/shoppingbasket",
+  "/shoppingbasket",  ////zare_nk_050415_added_movaghat
   ////zare_nk_040522_added_end_movaghat(pak kardani)
 ];
 

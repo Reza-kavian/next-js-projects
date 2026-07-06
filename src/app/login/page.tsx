@@ -52,7 +52,7 @@ function FirstPageComponent({
   setBackBtnCliked,
   handleGoogleLogin,
   children,
-}: FirstPageProps) {
+}: FirstPageProps) { 
   useEffect(() => {
     if (backBtnCliked == true) {
       if (refForMobileInput.current[0]) {
@@ -268,7 +268,7 @@ function SecondPageComponent({
         const fakeEvent = {
           target: input,
         } as React.ChangeEvent<HTMLInputElement>;
-        smsTxtChanged(fakeEvent); 
+        smsTxtChanged(fakeEvent);
       }
       setTimer(40000);
       setIsDisabledResendCode(true);
@@ -440,14 +440,25 @@ export default function Toolbar() {
     }
 
     try {
+      ////zare_nk_050325_nokteh_st(api tochikala)
       var ApiUrl = "https://api.tochikala.com/api/";
       const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
+      ////zare_nk_050325_nokteh_end(api tochikala)
+      ////zare_nk_050325_nokteh_st(api hamyar)
+      // var ApiUrl = "https://192.168.3.126:7265/api/v1/hyper/";
+      // var ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+      // const response = await fetch(ApiUrl + "Api_LoginUser1", {
+      ////zare_nk_050325_nokteh_end(api hamyar)
+      
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           //// Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({ Mobile: mobileVal }),
+        body: JSON.stringify({
+          Mobile: mobileVal,
+          IdShobeh: 12,
+        }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -522,6 +533,9 @@ export default function Toolbar() {
     // const token = getCookie("token");  //zare_nk_041125_commented(chon token null hast ke be login oomadim digeh!!) 
     let ApiUrl = "https://api.tochikala.com/api/";
     const response = await fetch(ApiUrl + "User/Api_LoginUser2", {
+    // var ApiUrl = "https://192.168.3.126:7265/api/v1/hyper/";
+    // var ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+    // const response = await fetch(ApiUrl + "Api_LoginUser2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -530,7 +544,8 @@ export default function Toolbar() {
       body: JSON.stringify({
         Mobile: mobileVal,
         SmsCode: smsVal,
-        Password: ""
+        Password: "",
+        IdShobeh: 12,
       }),
       // credentials: "include", //zare_nk_040202_commented
     });
@@ -543,7 +558,7 @@ export default function Toolbar() {
       // "data":{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjIwMTA5IiwiQ29kZU1vc2h0YXJpIjoiMjAxMDkiLCJNb2JpbGUiOiI5MzUxMDkxMjg3IiwiTmFtZU1vc2h0YXJpIjoiIiwibmJmIjoxNzQ2NzI1OTI4LCJleHAiOjE3NDczMzA3MjgsImlhdCI6MTc0NjcyNTkyOH0.9Jfv71v3D_s13gSyf3gXqgEfiXaV-lx93hDey4DSLM8"
       // },"errors":[]}
       if (data.status == 0) {
-        let token = data.data.token; 
+        let token = data.data.token;
         ////zare_nk_050119_added_st(rahe1_ke dar samte client javab nemideh va bayad comment she!)
         //  console.log("040530-03-process.env.JWT_SECRET_BASE64: " + process.env.JWT_SECRET_BASE64);  ////zare_nk_050119_nokteh(in undefined mideh!)
         //   const secretKey = Buffer.from(  ////zare_nk_050122_nokteh(in error mideh!-chon process.env.JWT_SECRET_BASE64 undefined hast, darvagheh dar samte client
@@ -567,7 +582,7 @@ export default function Toolbar() {
           // pas az haman sakhte va vakeshiye cookie haviye token ke name token ra behesh dadam baraye moshakhas kardane online shodan va estelame online boodaanesh estefadeh mikonam
           //va in kar ra dar methode verifyToken gonjandim)
 
-          //           let ApiUrl = "https://api.tochikala.com/api/";
+          // let ApiUrl = "https://api.tochikala.com/api/";
           // const responseValidationPost = await fetch(ApiUrl +"/User/ValidationPost", {
           //             method: "POST",
           //             headers: { "Content-Type": "application/json" },
@@ -645,6 +660,9 @@ export default function Toolbar() {
     try {
       var ApiUrl = "https://api.tochikala.com/api/";
       const response = await fetch(ApiUrl + "User/Api_LoginUser1", {
+      // var ApiUrl = "https://192.168.3.126:7265/api/v1/hyper/";
+      // var ApiUrl = "https://testotmapi.sarinmehr.com/api/v1/Hyper/";
+      // const response = await fetch(ApiUrl + "Api_LoginUser1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -776,11 +794,11 @@ export default function Toolbar() {
     setError("");
     var input = null;
     var vall = null;
-    if (event.target != undefined) { 
+    if (event.target != undefined) {
       //zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote karbar biaim dar methode smsTxtChanged)
       input = event.target;
       vall = input.value;
-    } else { 
+    } else {
       ////zare_nk_040224_nokteh(age ba taghire mohtavaye smsValTxt tavasote dokmeye mobileCheckBtn biaim dar methode smsTxtChanged)
       ////zare_nk_050119_nokteh(albateh ba estefadeh az tarfande evente fake hamvare be if balaei mirim yani event.target khahim dasht)
       input = refForSmsInput.current[0];
