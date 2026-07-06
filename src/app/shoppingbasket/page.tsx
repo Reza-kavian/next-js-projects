@@ -259,6 +259,7 @@ function MiddleCountTedadSefr({  //zare_nk_041127_added
                   border: "none",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
                   padding: "0",  ////zare_nk_050415_nokteh(baraye buttone web niaze ta az css haye dakheliye buttone web jologiri koneh )
                 }}
+                disabled={Boolean(Number(bishAzMaxTedadYaMojoodi))}
               // className="plussMinus card-linkk text-dangerr fa fa-plus"
               >
                 {/* <span
